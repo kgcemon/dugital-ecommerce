@@ -6,10 +6,13 @@
 
     <div class="container">
 
-        <div class="selection-panel" data-step="Info">
-            <div class="player-id-box">
-                <h2 class="selection-title">{{$product->name}}</h2>
-                <span class="payment-details">Only for Bangladesh region. Free Fire Top Up with bkash/nagad/rocket/Upay/OKwallet. এই প্রোডাক্টটি শুধুমাত্র বাংলাদেশ সার্ভারের জন্য।</span>
+        <div class="product-card">
+            <div class="product-thumb">
+                <img src="https://admin.gosizi.com/products/1755929287.png" alt="Uid Topup">
+            </div>
+            <div class="product-details">
+                <h3 class="title">{{$product->name}}</h3>
+                <span class="product-subtitle">{{$product->slug}}</span>
             </div>
         </div>
 
