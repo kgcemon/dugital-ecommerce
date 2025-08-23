@@ -9,6 +9,7 @@ class WebHooksController extends Controller
 {
     public function OrderUpdate(Request $request)
     {
+
         // Decode JSON as associative array
         $data = json_decode($request->getContent(), true);
 
