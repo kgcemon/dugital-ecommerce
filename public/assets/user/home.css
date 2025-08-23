@@ -93,7 +93,7 @@
 }
 
 /* Responsive for Home/Grid */
-/* @media (max-width: 1024px) {
+@media (max-width: 1024px) {
     .container { grid-template-columns: repeat(3, 1fr); }
     .header-title { font-size: 1.9rem; }
     .header-desc { font-size: 0.95rem; }
@@ -112,4 +112,4 @@
     .header-title { font-size: 1.4rem; }
     .header-desc { font-size: 0.85rem; }
     .card img { height: 120px; }
-} */
+}
