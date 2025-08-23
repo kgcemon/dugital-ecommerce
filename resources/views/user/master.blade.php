@@ -32,9 +32,9 @@
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('assets/user/header.css?v=127') }}">
+    <link rel="stylesheet" href="{{ asset('assets/user/header.css?v=129') }}">
     @if (Request::is('/'))
-        <link rel="stylesheet" href="{{ asset('assets/user/home.css?v=127') }}">
+        <link rel="stylesheet" href="{{ asset('assets/user/home.css?v=128') }}">
     @endif
 
     @if (Request::is('product*'))
