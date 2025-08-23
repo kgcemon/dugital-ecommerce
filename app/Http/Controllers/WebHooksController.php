@@ -9,9 +9,8 @@ class WebHooksController extends Controller
 {
     public function OrderUpdate(Request $request)
     {
-
         // Decode JSON as associative array
-        $data = json_decode($request->getContent(), true);
+        $data = $request->input();
 
         if (!$data || !isset($data['uid'])) {
             return response()->json(['status' => false, 'message' => 'Invalid data'], 400);
