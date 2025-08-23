@@ -8,7 +8,7 @@
 
         <div class="product-card">
             <div class="product-thumb">
-                <img src="https://admin.gosizi.com/products/1755929287.png" alt="Uid Topup">
+                <img src="{{$product->image}}" alt="Uid Topup">
             </div>
             <div class="product-details">
                 <h3 class="title">{{$product->name}}</h3>
