@@ -105,11 +105,11 @@
     .header-title { font-size: 1.6rem; }
     .header-desc { font-size: 0.9rem; }
     .banner { max-height: 140px; margin: 15px auto; }
-    .card img { height: 70px; }
+    .card img { height: 80px; }
 }
 
 @media (max-width: 400px) {
     .header-title { font-size: 1.4rem; }
     .header-desc { font-size: 0.85rem; }
-    .card img { height: 120px; }
+    .card img { height: 80px; }
 }
