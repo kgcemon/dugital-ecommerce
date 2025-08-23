@@ -34,7 +34,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('assets/user/header.css?v=123') }}">
     @if (Request::is('/'))
-        <link rel="stylesheet" href="{{ asset('assets/user/home.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/user/home.css?v=123') }}">
     @endif
 
     @if (Request::is('product*'))
