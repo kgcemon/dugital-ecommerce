@@ -12,7 +12,9 @@
             </div>
             <div class="product-details">
                 <h3 class="title">{{$product->name}}</h3>
-                <span class="product-subtitle">{{$product->slug}}</span>
+                <span class="product-subtitle">{{ "শুধু মাত্র " .$product->support_country. " সার্ভারে"}}</span>
+                <br>
+                <span class="product-subtitle">{{ "ডেলিভারি " .$product->delivery_system}}</span>
             </div>
         </div>
 
@@ -46,8 +48,8 @@
             </div>
             <div class="payment-details" id="paymentDetails"></div>
         </div>
-
         <button class="checkout-btn" id="checkoutBtn">Submit Order</button>
+        <div> <br> <br> <br></div>
     </div>
 @endsection
 

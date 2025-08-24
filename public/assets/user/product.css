@@ -12,7 +12,6 @@ body{
 .header{margin-bottom:30px}
 .product-subtitle{font-size:1rem;color:rgba(255,255,255,.85);margin-bottom:18px;font-weight:400}
 
-/* Section styling with step number */
 .selection-panel{
     background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.04));
     backdrop-filter:blur(20px);
@@ -41,20 +40,19 @@ body{
     font-size:1rem;
     transition:.3s;
 }
-/* Completed state */
+
 .selection-panel.completed::before{
     content:"✓";
     background:#10b981;
 }
 .selection-title{font-size:1rem;color:white;margin-bottom:15px;font-weight:600}
 
-/* Player ID box */
+
 .player-id-box label{color:white;display:block;margin-bottom:8px;font-weight:500;font-size:.9rem}
 .player-id-box input{width:100%;padding:12px 16px;border-radius:12px;border:2px solid rgba(255,255,255,.1);background:rgba(255,255,255,.1);color:white;font-size:.9rem;outline:none}
 .player-id-box input:focus{border-color:#00d4ff;box-shadow:0 0 12px rgba(0,212,255,.25)}
 .error-message{color:#ff6b6b;font-weight:500;font-size:.85rem;margin-top:8px;text-align:left}
 
-/* Diamond Packages grid */
 .diamond-options{
     display:grid;
     grid-template-columns:repeat(2,1fr);
@@ -63,26 +61,26 @@ body{
 .diamond-option{
     background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.03));
     border:2px solid rgba(255,255,255,.1);
-    border-radius:14px;
+    border-radius:8px;
     padding:12px 8px;
     cursor:pointer;
     transition:.3s;
     color:white;
     font-size:.7rem;
     font-weight:500;
-    display:flex;
-    justify-content:space-between;
+    justify-content:space-around;
     align-items:center;
     position:relative;
+    text-align: center;
 }
 .diamond-option .price{
     font-size:.5rem;
     font-weight:500;
     opacity:.85;
-    padding-bottom: 5px;
+    padding-bottom: -15px!important;
 }
 .diamond-option.selected{
-    background:linear-gradient(135deg,#00d4ff,#090979);
+    /*background:linear-gradient(135deg,#00d4ff,#090979);*/
     border-color:#00d4ff;
     animation:pulse 2s infinite;
 }
@@ -94,6 +92,11 @@ body{
     font-size:1rem;
     color:#10b981;
     font-weight:bold;
+    justify-content: left;
+}
+
+.price{
+    padding-bottom: 20px!important;
 }
 
 @keyframes pulse{0%,100%{box-shadow:0 0 15px rgba(0,212,255,.4)}50%{box-shadow:0 0 15px rgba(0,212,255,.6)}}
@@ -131,7 +134,6 @@ body{
 }
 
 .product-details {
-    display: flex;
     flex-direction: column;
     justify-content: center;
 }
@@ -150,10 +152,10 @@ body{
     }
     .product-thumb {
         flex: 0 0 80px;
-        height: 90px;
+        height: 80px;
     }
 
     .product-subtitle {
-        font-size: 0.75rem;
+        font-size: 0.6rem;
     }
 }
