@@ -38,7 +38,7 @@
     @endif
 
     @if (Request::is('product*'))
-    <link rel="stylesheet" href="{{ asset('assets/user/product.css?v=7') }}">
+    <link rel="stylesheet" href="{{ asset('assets/user/product.css?v=8') }}">
     @endif
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
