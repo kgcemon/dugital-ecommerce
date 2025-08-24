@@ -34,11 +34,11 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('assets/user/header.css?v=129') }}">
     @if (Request::is('/'))
-        <link rel="stylesheet" href="{{ asset('assets/user/home.css?v=128') }}">
+        <link rel="stylesheet" href="{{ asset('assets/user/home.css?v=129') }}">
     @endif
 
     @if (Request::is('product*'))
-    <link rel="stylesheet" href="{{ asset('assets/user/product.css?v=4') }}">
+    <link rel="stylesheet" href="{{ asset('assets/user/product.css?v=5') }}">
     @endif
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
