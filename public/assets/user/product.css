@@ -74,10 +74,12 @@ body{
     text-align: center;
 }
 .diamond-option .price{
-    font-size:.5rem;
+    font-size:.63rem;
     font-weight:500;
     opacity:.85;
-    padding-bottom: -15px!important;
+    position: relative;
+    top: -5px;
+    color: #00d4ff;
 }
 .diamond-option.selected{
     /*background:linear-gradient(135deg,#00d4ff,#090979);*/
@@ -95,9 +97,6 @@ body{
     justify-content: left;
 }
 
-.price{
-    padding-bottom: 20px!important;
-}
 
 @keyframes pulse{0%,100%{box-shadow:0 0 15px rgba(0,212,255,.4)}50%{box-shadow:0 0 15px rgba(0,212,255,.6)}}
 
