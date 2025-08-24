@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
+use App\Models\PaymentMethod;
 use App\Models\Product;
 use Illuminate\Support\Facades\Cache;
 
@@ -19,9 +20,10 @@ class SiteProductsScreenController extends Controller
 //            });
 
             $product = Product::with('items')->where('slug', $slug)->first();
+            $payment = PaymentMethod::all();
 
             if ($product) {
-                return view('user.product', compact('product'));
+                return view('user.product', compact('product', 'payment'));
             } else {
                 return response()->json([
                     'status' => false,
