@@ -22,7 +22,6 @@
             <div class="player-id-box">
                 <h2 class="selection-title">Player ID লিখুন</h2>
                 <input type="text" id="playerId" placeholder="Enter your Player ID">
-                <span class="mini-text">{{ " শুধু মাত্র " .$product->support_country. " সার্ভারে দিন"}}</span>
                 <div class="error-message" id="playerError"></div>
             </div>
         </div>
