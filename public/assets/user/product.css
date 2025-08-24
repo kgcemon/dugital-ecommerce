@@ -97,6 +97,10 @@ body{
     justify-content: left;
 }
 
+.mini-text{
+    font-size:.4rem;
+}
+
 
 @keyframes pulse{0%,100%{box-shadow:0 0 15px rgba(0,212,255,.4)}50%{box-shadow:0 0 15px rgba(0,212,255,.6)}}
 
