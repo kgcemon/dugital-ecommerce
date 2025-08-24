@@ -5,13 +5,12 @@
 @section('content')
 
     <div class="container">
-
         <div class="product-card">
             <div class="product-thumb">
                 <img src="{{$product->image}}" alt="Uid Topup">
             </div>
             <div class="product-details">
-                <h3 class="title">{{$product->name}}</h3>
+                <h1>{{$product->name}}</h1>
                 <span class="product-subtitle">{{ "শুধু মাত্র " .$product->support_country. " সার্ভারে"}}</span>
                 <br>
                 <span class="product-subtitle">{{ "ডেলিভারি " .$product->delivery_system}}</span>
@@ -27,7 +26,7 @@
         </div>
 
         <div class="selection-panel" data-step="2" id="step2">
-            <h2 class="selection-title">ডায়মন্ড প্যাকেজ নির্বাচন করুন</h2>
+            <h2 class="selection-title">প্যাকেজ নির্বাচন করুন</h2>
             <div class="diamond-options" id="diamondOptions">
                 @foreach($product['items'] as $item)
                     <div class="diamond-option" data-id="{{ $item['id'] }}">
@@ -49,8 +48,16 @@
             <div class="payment-details" id="paymentDetails"></div>
         </div>
         <button class="checkout-btn" id="checkoutBtn">Submit Order</button>
-        <div> <br> <br> <br></div>
+        <div> <br></div>
+        <div class="product-card">
+            <h2 class="selection-title">Rules & Conditions</h2>
+            {!! $product->description !!}
+        </div>
+
+        <div> <br> <br></div>
     </div>
+
+
 @endsection
 
 @push('scripts')

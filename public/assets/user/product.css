@@ -45,7 +45,7 @@ body{
     content:"✓";
     background:#10b981;
 }
-.selection-title{font-size:1rem;color:white;margin-bottom:15px;font-weight:600}
+.selection-title{font-size:1rem;color:white;margin-bottom:15px;font-weight:600;text-align: left!important;}
 
 
 .player-id-box label{color:white;display:block;margin-bottom:8px;font-weight:500;font-size:.9rem}
@@ -96,6 +96,12 @@ body{
     font-weight:bold;
     justify-content: left;
 }
+
+h1 {
+    font-size: 1rem !important;
+}
+
+
 
 
 @keyframes pulse{0%,100%{box-shadow:0 0 15px rgba(0,212,255,.4)}50%{box-shadow:0 0 15px rgba(0,212,255,.6)}}
