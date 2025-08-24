@@ -49,11 +49,9 @@
         </div>
         <button class="checkout-btn" id="checkoutBtn">Submit Order</button>
         <div> <br></div>
-        <div class="selection-panel">
+        <div class="des">
             <h2 class="selection-title">Rules & Conditions</h2>
-            {!! $product->description !!}
-        </div>
-
+            <div class="payment-details" {!! $product->description !!} </div>
         <div> <br> <br></div>
     </div>
 
