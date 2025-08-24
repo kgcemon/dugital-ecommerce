@@ -49,7 +49,7 @@
         </div>
         <button class="checkout-btn" id="checkoutBtn">Submit Order</button>
         <div> <br></div>
-        <div class="product-card">
+        <div class="selection-panel">
             <h2 class="selection-title">Rules & Conditions</h2>
             {!! $product->description !!}
         </div>
