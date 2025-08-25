@@ -1,10 +1,20 @@
 @extends('user.master')
 
-@section('title', "$product->name Top Up Bangladesh")
+@section('title', "$product->name")
 
 @section('content')
 
     <div class="container">
+
+        <!-- ✅ Order Response Box -->
+        <div id="orderResponse" style="display:none;" class="response-box"></div>
+
+        <!-- ✅ Loading Spinner -->
+        <div id="loadingSpinner" class="loading-spinner" style="display:none;">
+            <div class="spinner"></div>
+            <p>অর্ডার প্রক্রিয়াধীন...</p>
+        </div>
+
         <!-- Product Card -->
         <div class="product-card">
             <div class="product-thumb">
@@ -48,8 +58,8 @@
                 @foreach($payment as $method)
                     <div class="payment-option"
                          data-id="{{ $method->id }}"
-                         data-method="{{ $method->method }}"
                          data-number="{{ $method->number }}"
+                         data-method="{{ $method->method }}"
                          data-description="{{ $method->description }}">
                         <img src="{{ $method->icon }}" alt="{{ $method->method }}" style="height:25px; margin-right:5px;">
                         {{ $method->method }}
@@ -96,6 +106,20 @@
             document.getElementById("step3").classList.toggle("completed", !!selectedPayment);
         }
 
+        function showResponse(type, message){
+            const box = document.getElementById("orderResponse");
+            box.style.display = "block";
+            box.className = "response-box " + type;
+            box.innerHTML = message;
+            document.getElementById("loadingSpinner").style.display = "none";
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        function showLoading(){
+            document.getElementById("loadingSpinner").style.display = "flex";
+            document.getElementById("orderResponse").style.display = "none";
+        }
+
         function init(){
             // ✅ Diamond package selection
             diamondOptions.forEach(el=>{
@@ -108,7 +132,7 @@
                 }
             });
 
-            // ✅ Dynamic payment method selection
+            // ✅ Payment method selection
             const paymentOptions = document.querySelectorAll(".payment-option");
             paymentOptions.forEach(el=>{
                 el.onclick = () => {
@@ -124,10 +148,8 @@
 
                     document.getElementById("paymentDetails").innerHTML =
                         `<p><strong>${selectedPayment.method}</strong></p>
-                     <p>${selectedPayment.description}</p>
                      <p><strong>Number:</strong> ${selectedPayment.number}</p>
-                     <p>After payment, note TRX ID & Submit.</p>`;
-
+                     <br><p>${selectedPayment.description}</p><br>`;
                     updateSteps();
                 }
             });
@@ -159,7 +181,7 @@
                 }
 
                 if(!selectedPayment){
-                    alert("অনুগ্রহ করে পেমেন্ট মেথড নির্বাচন করুন!");
+                    showResponse("error", "❌ অনুগ্রহ করে পেমেন্ট মেথড নির্বাচন করুন!");
                     valid = false;
                 }
 
@@ -172,13 +194,74 @@
 
                 if(!valid) return;
 
-                const pkg = Array.from(diamondOptions).find(p => +p.dataset.id === selectedPackage);
+                const orderData = {
+                    product_id: "{{ $product->id }}",
+                    item_id: selectedPackage,
+                    customer_data: pid,
+                    payment_method: selectedPayment.method,
+                    transaction_id: trxId,
+                    payment_number: selectedPayment.number,
+                    _token: "{{ csrf_token() }}"
+                };
 
-                // ✅ Send data (AJAX or form submission)
-                alert(`✅ Order Submitted!\n\nPlayer ID: ${pid}\nPackage ID: ${selectedPackage}\nPayment Method ID: ${selectedPayment.id}\nPayment: ${selectedPayment.method}\nTRX ID: ${trxId}\nAmount: ${pkg.querySelector(".price").textContent}\nSend To: ${selectedPayment.number}`);
-            }
+                showLoading();
+
+                fetch("{{ route('addOrder') }}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    },
+                    body: JSON.stringify(orderData)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if(data.status){
+                            showResponse("success", "✅ অর্ডার সফলভাবে সম্পন্ন হয়েছে!<br>Order ID: " + data.order.id);
+                            setTimeout(()=> window.location.href="/my-orders", 2000);
+                        } else {
+                            showResponse("error", "❌ ব্যর্থ: " + data.message);
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        showResponse("error", "⚠️ সার্ভার এরর, আবার চেষ্টা করুন।");
+                    });
+            };
         }
 
         document.addEventListener("DOMContentLoaded", init);
     </script>
+
+    <style>
+        .response-box {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-align: center;
+        }
+        .response-box.success { background: #d1fae5; color: #065f46; border: 1px solid #10b981; }
+        .response-box.error { background: #fee2e2; color: #991b1b; border: 1px solid #ef4444; }
+
+        .loading-spinner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 15px 0;
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #ddd;
+            border-top: 4px solid #4f46e5;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 @endpush
