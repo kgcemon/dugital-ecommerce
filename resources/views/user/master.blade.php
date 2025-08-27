@@ -56,10 +56,10 @@
         <div class="auth-link">
             @auth
                 <a href="{{ url('/account') }}">My Account</a>
-                <form method="POST" action="{{ route('logout') }}" style="display:inline;">
-                    @csrf
-                    <button type="submit" style="background:none;border:none;color:white;cursor:pointer;">Logout</button>
-                </form>
+{{--                <form method="POST" action="{{ route('logout') }}" style="display:inline;">--}}
+{{--                    @csrf--}}
+{{--                    <button type="submit" style="background:none;border:none;color:white;cursor:pointer;">Logout</button>--}}
+{{--                </form>--}}
             @else
                 <a href="{{ url('/login') }}">Login</a>
             @endauth

@@ -68,7 +68,6 @@
 
         <!-- Page Header -->
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="h3 mb-0 text-white">Category Management</h1>
             <button class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#addModal">
                 <i class="fas fa-plus me-2"></i> Add New Category
             </button>
