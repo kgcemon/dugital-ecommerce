@@ -7,6 +7,7 @@ use App\Http\Controllers\api\HomePageController;
 use App\Http\Controllers\api\OrdersController;
 use App\Http\Controllers\api\PaymentMethodController;
 use App\Http\Controllers\api\ProductsController;
+use App\Http\Controllers\user\SiteProductsScreenController;
 use App\Http\Controllers\WebHooksController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +19,8 @@ Route::get('/user', function (Request $request) {
 
 Route::get('my-orders',[UserOrderController::class,'userOrder'])->middleware('auth:sanctum');
 Route::get('my-profile',[AuthController::class,'user'])->middleware('auth:sanctum');
+
+Route::post('add-order', [SiteProductsScreenController::class, 'addOrder'])->name('addOrder');
 
 
 //login register

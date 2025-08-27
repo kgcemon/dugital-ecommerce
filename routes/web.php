@@ -17,7 +17,7 @@ use App\Http\Controllers\ProfileController;
 
 Route::get('/', [SiteHomeScreenController::class, 'index'])->name('home');
 Route::get('/product/{slug}', [SiteProductsScreenController::class, 'index'] )->name('product');
-Route::post('add-order', [SiteProductsScreenController::class, 'addOrder'])->name('addOrder');
+
 
 // Authenticated Admin Routes
 Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
