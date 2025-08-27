@@ -232,9 +232,6 @@
             </div>
         </div>
     </div>
-@endsection
-
-@push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const editModal = document.getElementById('editModal');
@@ -281,4 +278,4 @@
             }
         });
     </script>
-@endpush
+@endsection
