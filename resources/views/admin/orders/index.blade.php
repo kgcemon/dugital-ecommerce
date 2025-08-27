@@ -145,23 +145,6 @@
         </div>
     </div>
 
-    @if(session('success') || session('error'))
-        @push('scripts')
-            <script>
-                Swal.fire({
-                    icon: '{{ session('success') ? 'success' : 'error' }}',
-                    title: '{{ session('success') ? 'Success!' : 'Error!' }}',
-                    text: '{{ session('success') ?? session('error') }}',
-                    confirmButtonColor: '{{ session('success') ? '#3085d6' : '#d33' }}',
-                    timer: 3000,
-                    timerProgressBar: true
-                });
-            </script>
-        @endpush
-    @endif
-@endsection
-
-@push('scripts')
     <script>
         // Select all checkbox toggle
         document.getElementById('selectAll').addEventListener('change', function() {
@@ -197,4 +180,19 @@
             }
         });
     </script>
-@endpush
+
+    @if(session('success') || session('error'))
+
+            <script>
+                Swal.fire({
+                    icon: '{{ session('success') ? 'success' : 'error' }}',
+                    title: '{{ session('success') ? 'Success!' : 'Error!' }}',
+                    text: '{{ session('success') ?? session('error') }}',
+                    confirmButtonColor: '{{ session('success') ? '#3085d6' : '#d33' }}',
+                    timer: 3000,
+                    timerProgressBar: true
+                });
+            </script>
+    @endif
+@endsection
+
