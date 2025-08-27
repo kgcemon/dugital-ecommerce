@@ -44,7 +44,6 @@ class SiteProductsScreenController extends Controller
 
     public function addOrder(Request $request)
     {
-        return "dddd";
 
         $validated = $request->validate([
             'product_id' => 'required',
