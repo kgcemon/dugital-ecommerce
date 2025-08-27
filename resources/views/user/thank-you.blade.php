@@ -1,0 +1,41 @@
+@extends('user.master')
+
+@section('title', "$product->name")
+
+@section('content')
+
+<div class="container">
+    <div class="header">
+        <h1>Thank You!</h1>
+        <p class="product-subtitle">Your order has been successfully placed.</p>
+    </div>
+
+    <div class="selection-panel completed" data-step="1">
+        <div class="selection-title">Order Summary</div>
+        <div class="des">
+            <p><strong>Order ID:</strong> #123456</p>
+            <p><strong>Items:</strong> 3 Products</p>
+            <p><strong>Total Paid:</strong> $89.99</p>
+        </div>
+    </div>
+
+    <div class="selection-panel completed" data-step="2">
+        <div class="selection-title">Shipping Details</div>
+        <div class="des">
+            <p><strong>Name:</strong> John Doe</p>
+            <p><strong>Address:</strong> 123 Main Street, City, Country</p>
+            <p><strong>Estimated Delivery:</strong> 3-5 Business Days</p>
+        </div>
+    </div>
+
+    <div class="selection-panel completed" data-step="3">
+        <div class="selection-title">Payment Method</div>
+        <div class="des">
+            <p>Credit/Debit Card (**** **** **** 1234)</p>
+        </div>
+    </div>
+
+    <button class="checkout-btn">Back to Home</button>
+</div>
+
+@endsection

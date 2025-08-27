@@ -84,11 +84,7 @@ class SiteProductsScreenController extends Controller
             $order->number = $request->input('payment_number');
             $order->save();
 
-            return response()->json([
-                'status' => true,
-                'message' => 'Order created successfully',
-                'order' => $order,
-            ]);
+            return view('user.thank-you', compact('order'));
 
         }else{
             return back()->with('error', 'Item not found');
