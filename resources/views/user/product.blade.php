@@ -218,7 +218,7 @@
                     .then(data => {
                         if(data.status){
                             showResponse("success", "✅ অর্ডার সফলভাবে সম্পন্ন হয়েছে!<br>Order ID: " + data.order.id);
-                            setTimeout(()=> window.location.href="/my-orders", 2000);
+                            setTimeout(()=> window.location.href="/thank-you", 2000);
                         } else {
                             showResponse("error", "❌ ব্যর্থ: " + data.message);
                         }

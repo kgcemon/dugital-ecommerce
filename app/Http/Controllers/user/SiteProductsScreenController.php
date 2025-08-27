@@ -95,4 +95,9 @@ class SiteProductsScreenController extends Controller
         }
 
     }
+
+    public function thankYouPage()
+    {
+        return view('user.thank-you');
+    }
 }
