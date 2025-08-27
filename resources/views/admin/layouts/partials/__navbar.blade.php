@@ -35,7 +35,7 @@
 {{--												<div class="avatar-lg"><img src="{{ Storage::url($generalSettings->favicon) }}" alt="image profile" class="avatar-img rounded"></div>--}}
 												<div class="u-text">
 													<h4>{{ auth()->user()->name }}</h4>
-													<p class="text-muted">{{ auth('admin')->user()->email }}</p><a href="{{route('admin.profile')}}" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+
 
 												</div>
 											</div>
