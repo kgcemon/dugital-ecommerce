@@ -21,7 +21,6 @@ Route::post('add-order', [SiteProductsScreenController::class, 'addOrder'])->nam
 
 // Authenticated Admin Routes
 Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
-
     // Dashboard
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
