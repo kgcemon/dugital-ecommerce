@@ -18,7 +18,7 @@
         <!-- Product Card -->
         <div class="product-card">
             <div class="product-thumb">
-                <img src="{{$product->image}}" alt="Uid Topup">
+                <img src="/{{$product->image}}" alt="Uid Topup">
             </div>
             <div class="product-details">
                 <h1>{{$product->name}}</h1>
