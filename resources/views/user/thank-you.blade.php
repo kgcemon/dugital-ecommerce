@@ -17,19 +17,11 @@
             <p><strong>Items:</strong> 3 Products</p>
             <p><strong>Total Paid:</strong> $89.99</p>
         </div>
-    </div>
-
-    <div class="selection-panel completed" data-step="2">
-        <div class="selection-title">Shipping Details</div>
         <div class="des">
             <p><strong>Name:</strong> John Doe</p>
             <p><strong>Address:</strong> 123 Main Street, City, Country</p>
             <p><strong>Estimated Delivery:</strong> 3-5 Business Days</p>
         </div>
-    </div>
-
-    <div class="selection-panel completed" data-step="3">
-        <div class="selection-title">Payment Method</div>
         <div class="des">
             <p>Credit/Debit Card (**** **** **** 1234)</p>
         </div>
