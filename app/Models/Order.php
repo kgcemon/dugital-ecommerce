@@ -17,7 +17,7 @@ class Order extends Model
 
     public function items()
     {
-       return $this->hasOne(Item::class, 'id', 'item_id');
+       return $this->hasOne(Item::class, 'item_id', 'item_id');
     }
 
     public function user(){
