@@ -37,7 +37,7 @@
         <link rel="stylesheet" href="{{ asset('assets/user/home.css?v=129') }}">
     @endif
 
-    @if (Request::is('product*'))
+    @if (Request::is('product*') || Request::is('thank-you*'))
     <link rel="stylesheet" href="{{ asset('assets/user/product.css?v=10') }}">
     @endif
 
