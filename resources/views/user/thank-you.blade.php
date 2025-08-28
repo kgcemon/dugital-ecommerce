@@ -5,13 +5,9 @@
 @section('content')
 
 <div class="container">
-    <div class="header">
-        <h1>Thank You!</h1>
-        <p class="product-subtitle">Your order has been successfully placed.</p>
-    </div>
-
     <div class="selection-panel completed" data-step="1">
-        <div class="selection-title">Order Summary</div>
+        <div class="selection-title"> Thank You!
+            <p class="product-subtitle">সব যদি ঠিক দিয়ে থাকেন ১ মিনিটের মধ্য ডেলিভারি পেয়ে যাবেন প্রয়োজনে একটি Screenshot রাখুন</p></div>
         <div class="des">
             <p><strong>Order ID:</strong> #123456</p>
             <p><strong>Items:</strong> 3 Products</p>
@@ -26,8 +22,6 @@
             <p>Credit/Debit Card (**** **** **** 1234)</p>
         </div>
     </div>
-
-    <button class="checkout-btn">Back to Home</button>
 </div>
 
 @endsection
