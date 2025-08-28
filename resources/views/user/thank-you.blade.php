@@ -1,6 +1,6 @@
 @extends('user.master')
 
-@section('title', "$product->name")
+@section('title', "Order Placed")
 
 @section('content')
 
