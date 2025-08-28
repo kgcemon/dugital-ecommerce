@@ -30,11 +30,11 @@ Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
     // Profile Page
     Route::get('profile', [ProfileController::class, 'show'])->name('profile');
 
-    // Order
-    Route::get('orders',[OrdersController::class,'index'])->name('orders');
-    Route::post('orders/bulk-action',[OrdersController::class,'bulkAction'])->name('orders.bulkAction');
-    Route::post('orders/update-single',[OrdersController::class,'updateSingle'])->name('orders.updateSingle');
-
+    // Orders
+    Route::get('orders', [OrdersController::class, 'index'])->name('orders');
+    Route::post('orders/status-update', [OrdersController::class, 'updateStatus'])->name('orders.updateStatus');
+    Route::get('orders/{id}/edit', [OrdersController::class, 'edit'])->name('orders.edit');
+    Route::delete('orders/{id}', [OrdersController::class, 'destroy'])->name('orders.destroy');
 
 
     Route::resource('variant', VariantController::class);
