@@ -39,6 +39,59 @@
 
     @if (Request::is('product*') || Request::is('thank-you*'))
     <link rel="stylesheet" href="{{ asset('assets/user/product.css?v=10') }}">
+        <style>
+            .btn-loading {
+                position: relative;
+                pointer-events: none;
+                opacity: 0.7;
+            }
+            .btn-loading::after {
+                content: "";
+                position: absolute;
+                right: 12px;
+                top: 50%;
+                width: 18px;
+                height: 18px;
+                margin-top: -9px;
+                border: 2px solid #fff;
+                border-top-color: transparent;
+                border-radius: 50%;
+                animation: spin 0.7s linear infinite;
+            }
+            @keyframes spin {
+                to { transform: rotate(360deg); }
+            }
+
+        .response-box {
+                padding: 15px;
+                border-radius: 8px;
+                margin-bottom: 15px;
+                font-weight: 600;
+                text-align: center;
+            }
+            .response-box.success { background: #d1fae5; color: #065f46; border: 1px solid #10b981; }
+            .response-box.error { background: #fee2e2; color: #991b1b; border: 1px solid #ef4444; }
+
+            .loading-spinner {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin: 15px 0;
+            }
+            .spinner {
+                width: 40px;
+                height: 40px;
+                border: 4px solid #ddd;
+                border-top: 4px solid #4f46e5;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+            }
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        </style>
     @endif
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -88,6 +141,6 @@
     </a>
 </div>
 
-@stack('scripts') <!-- Extra scripts -->
+@stack('scripts')
 </body>
 </html>

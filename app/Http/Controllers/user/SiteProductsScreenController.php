@@ -49,7 +49,7 @@ class SiteProductsScreenController extends Controller
             'product_id' => 'required',
             'item_id' => 'required',
             'customer_data' => 'required',
-            'payment_method' => 'required',
+            'payment_id' => 'required',
             'transaction_id' => 'required',
         ]);
 
@@ -81,7 +81,7 @@ class SiteProductsScreenController extends Controller
             $order->customer_data = $validated['customer_data'];
             $order->payment_method = 1;
             $order->transaction_id = $validated['transaction_id'];
-            $order->number = $request->input('payment_number');
+            $order->number = "01855555444";
             $order->save();
 
             return response()->json([
