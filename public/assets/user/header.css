@@ -5,6 +5,18 @@ body{
     min-height:100vh;overflow-x:hidden;position:relative;color:white;
 }
 
+.panelData{
+    background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.04));
+    backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:8px;
+    padding:25px 20px 20px 20px;
+    margin-bottom:25px;
+    text-align:center;
+    position:relative;
+    transition: .3s;
+}
+
 a {
     text-decoration: none;
     color: inherit;
