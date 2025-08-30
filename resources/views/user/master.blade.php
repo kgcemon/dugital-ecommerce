@@ -32,7 +32,7 @@
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('assets/user/header.css?v=129') }}">
+    <link rel="stylesheet" href="{{ asset('assets/user/header.css?v=130') }}">
     @if (Request::is('/'))
         <link rel="stylesheet" href="{{ asset('assets/user/home.css?v=129') }}">
     @endif
