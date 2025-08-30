@@ -31,10 +31,13 @@ Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
     Route::get('profile', [ProfileController::class, 'show'])->name('profile');
 
     // Orders
-    Route::get('orders', [OrdersController::class, 'index'])->name('orders');
-    Route::post('orders/status-update', [OrdersController::class, 'updateStatus'])->name('orders.updateStatus');
-    Route::get('orders/{id}/edit', [OrdersController::class, 'edit'])->name('orders.edit');
-    Route::delete('orders/{id}', [OrdersController::class, 'destroy'])->name('orders.destroy');
+    Route::get('orders', [\App\Http\Controllers\admin\OrdersController::class, 'index'])->name('orders.index');
+    Route::get('orders/{order}', [\App\Http\Controllers\admin\OrdersController::class, 'show'])->name('orders.show');
+    Route::put('orders/{order}', [\App\Http\Controllers\admin\OrdersController::class, 'update'])->name('orders.update');
+    Route::get('admin/orders/{order}', [\App\Http\Controllers\admin\OrdersController::class, 'show'])->name('admin.orders.show');
+    Route::post('admin/orders/update/{id}', [\App\Http\Controllers\admin\OrdersController::class, 'edit'])->name('orders.edits');
+    Route::get('admin/orders/edit/{id}', [\App\Http\Controllers\admin\OrdersController::class, 'editFrom'])->name('orders.edit');
+    Route::post('/admin/orders/bulk-action', [OrdersController::class, 'bulkAction'])->name('orders.bulkAction');
 
 
     Route::resource('variant', VariantController::class);
