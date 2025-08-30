@@ -20,6 +20,9 @@ Route::get('/product/{slug}', [SiteProductsScreenController::class, 'index'] )->
 Route::post('add-order', [SiteProductsScreenController::class, 'addOrder'])->name('addOrder');
 Route::get('thank-you', [SiteProductsScreenController::class, 'thankYouPage'])->name('thankYouPage');
 
+// Profile Page
+Route::get('profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile');
+
 // Authenticated Admin Routes
 Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
     // Dashboard
@@ -27,8 +30,6 @@ Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
 
     Route::resource('products', ProductController::class);
 
-    // Profile Page
-    Route::get('profile', [ProfileController::class, 'show'])->name('profile');
 
     // Orders
     Route::get('orders', [\App\Http\Controllers\admin\OrdersController::class, 'index'])->name('orders.index');

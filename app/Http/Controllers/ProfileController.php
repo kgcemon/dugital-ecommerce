@@ -11,6 +11,37 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+
+    public function show()
+    {
+        // Dummy data for profile dashboard
+        $totalOrders       = 25;
+        $completedOrders   = 18;
+        $pendingOrders     = 7;
+        $refIncome         = 1200; // in ৳
+        $totalReferrals    = 5;
+
+        // Recent transactions (dummy)
+        $recentTransactions = [
+            (object) ['type' => 'Order #101', 'amount' => 250],
+            (object) ['type' => 'Order #102', 'amount' => 180],
+            (object) ['type' => 'Order #103', 'amount' => 320],
+            (object) ['type' => 'Referral Bonus', 'amount' => 100],
+            (object) ['type' => 'Order #104', 'amount' => 150],
+        ];
+
+        return view('user.profile', compact(
+            'totalOrders',
+            'completedOrders',
+            'pendingOrders',
+            'refIncome',
+            'totalReferrals',
+            'recentTransactions'
+        ));
+    }
+
+
+
     /**
      * Display the user's profile form.
      */
