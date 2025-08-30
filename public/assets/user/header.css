@@ -9,7 +9,31 @@ a {
     text-decoration: none;
     color: inherit;
 }
+.account-row {
+    display: flex;
+    align-items: center;  /* vertical center */
+    gap: 10px;            /* space between icon, balance, image */
+    text-decoration: none;
+}
 
+.wallet-balance {
+    background-color: #28a745; /* green */
+    color: white;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+}
 /* Header & Navigation */
 header {
     width: 100%;
@@ -24,12 +48,10 @@ header {
 }
 
 .nav-container {
-    max-width: 1400px;
-    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 10px 15px;
 }
 
 .logo {
