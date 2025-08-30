@@ -106,7 +106,7 @@
         <a href="{{ url('/') }}" class="logo">{{ config('app.name', 'Codmshop') }}</a>
 
         <!-- Wallet + Balance + Profile -->
-        <a href="{{ url('/account') }}" class="account-row">
+        <a href="{{ url('/profile') }}" class="account-row">
 
             <!-- Wallet Balance -->
 
