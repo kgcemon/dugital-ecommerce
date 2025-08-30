@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div style="max-width: 400px; margin: 20px auto; padding: 20px; border-radius: 15px; background-color: #1e1e2f; color: #fff; font-family: Arial, sans-serif; rgba(0,0,0,0.3);">
+<div style="max-width: 400px; margin: 20px auto; padding: 20px; border-radius: 15px; background:linear-gradient(10deg,#0F0C29 0%,#302B63 50%,#24243e 100%); color: #fff; font-family: Arial, sans-serif; rgba(0,0,0,0.3);">
     <!-- Profile Header -->
     <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiU0_6Mf8AnR9ny0woh2-u7LcoB2oWrks8OpSQfhzA9xxfk9CL4oxNQnWjoxwkDJwwUnY&usqp=CAU"
