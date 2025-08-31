@@ -185,15 +185,17 @@
         /* Modal overlay */
         .google-login {
             display: none;
-            position: fixed;
-            top:0;
-            left:0;
-            width:100%;
-            height:100%;
+            position: fixed; /* eta thik ache */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: rgba(0,0,0,0.5);
             justify-content: center;
             align-items: center;
+            z-index: 1000; /* child card er z-index er niche thakbe */
         }
+
 
         /* Show modal */
         .google-login.show {
@@ -228,12 +230,6 @@
             width: 20px;
             height: 20px;
             margin-right: 8px;
-        }
-
-        .material-icons {
-            display: inline-block;
-            width: 24px;
-            height: 24px;
         }
     </style>
 
