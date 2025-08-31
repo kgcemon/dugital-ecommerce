@@ -32,9 +32,9 @@
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
 
-    <link rel="preload" href="{{ asset('assets/user/header.css?v=1') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="{{ asset('assets/user/header.css?v=2') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
-        <link rel="stylesheet" href="{{ asset('assets/user/header.css?v=1') }}">
+        <link rel="stylesheet" href="{{ asset('assets/user/header.css?v=2') }}">
     </noscript>
 
 
