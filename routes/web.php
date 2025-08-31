@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\UsersController;
 use App\Http\Controllers\admin\VariantController;
+use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\CronJobController;
 use App\Http\Controllers\user\SiteHomeScreenController;
 use App\Http\Controllers\user\SiteProductsScreenController;
@@ -14,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\OrdersController;
 use App\Http\Controllers\ProfileController;
+
+
+Route::get('/auth/google/redirect', [GoogleController::class, 'redirectToGoogle']);
+Route::get('/auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+
 
 Route::get('/', [SiteHomeScreenController::class, 'index'])->name('home');
 Route::get('/product/{slug}', [SiteProductsScreenController::class, 'index'] )->name('product');

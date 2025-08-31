@@ -7,7 +7,7 @@
 <div class="container">
     <div class="selection-panel completed" data-step="1">
         <div class="selection-title"> <h3>Thank You!</h3>
-            <strong>সব যদি ঠিক দিয়ে থাকেন ১ মিনিটের মধ্য ডেলিভারি পেয়ে যাবেন প্রয়োজনে একটি Screenshot রাখুন</strong></div>
+           </div>
         <div class="des">
             <p><strong>Order ID:</strong> #123456</p>
             <p><strong>Items:</strong> 3 Products</p>
