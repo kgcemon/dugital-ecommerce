@@ -30,6 +30,7 @@ class GoogleController extends Controller
                     'name' => $googleUser->getName(),
                     'email' => $googleUser->getEmail(),
                     'google_id' => $googleUser->getId(),
+                    'image' => $googleUser->getAvatar(),
                     'password' => bcrypt(uniqid()), // random password
                 ]);
             }
