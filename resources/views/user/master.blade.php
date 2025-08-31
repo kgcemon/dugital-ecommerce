@@ -7,7 +7,7 @@
     <!-- Viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- SEO Meta -->
+    <!-- Dynamic SEO -->
     <title>@yield('title', config('app.name', 'Codmshop'))</title>
     <meta name="description" content="@yield('meta_description', 'Best Free Fire Top Up & Gaming Shop in Bangladesh - Codmshop')">
     <meta name="keywords" content="@yield('meta_keywords', 'Free Fire Top Up, Codmshop, Gaming Shop, Diamond Recharge')">
@@ -15,7 +15,7 @@
     <link rel="canonical" href="{{ url()->current() }}">
     <meta name="robots" content="@yield('meta_robots', 'index, follow')">
 
-    <!-- Open Graph -->
+    <!-- Open Graph (Facebook / Social Sharing) -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="@yield('og_title', config('app.name', 'Codmshop'))">
     <meta property="og:description" content="@yield('og_description', 'Fast & Secure Free Fire Diamond Top Up in Bangladesh')">
@@ -32,27 +32,22 @@
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
 
-    <!-- Preload Critical CSS -->
-    <link rel="preload" href="{{ asset('assets/user/header.css?v=2') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="{{ asset('assets/user/header.css?v=1') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
-        <link rel="stylesheet" href="{{ asset('assets/user/header.css?v=2') }}">
+        <link rel="stylesheet" href="{{ asset('assets/user/header.css?v=1') }}">
     </noscript>
 
-    @if (Request::is('/'))
+
+@if (Request::is('/'))
         <link rel="preload" href="{{ asset('assets/user/home.css?v=129') }}" as="style" onload="this.rel='stylesheet'">
     @endif
 
     @if (Request::is('product*') || Request::is('thank-you*'))
-        <link rel="preload" href="{{ asset('assets/user/product.css?v=12') }}" as="style" onload="this.rel='stylesheet'">
-        <noscript>
-            <link rel="stylesheet" href="{{ asset('assets/user/product.css?v=12') }}">
-        </noscript>
+    <link rel="preload" href="{{ asset('assets/user/product.css?v=12') }}" as="style" onload="this.rel='stylesheet'">
     @endif
 
-    <!-- Google Fonts -->
     <link rel="preload" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" as="style" onload="this.rel='stylesheet'">
 
-    <!-- Optional Stack -->
     @stack('head')
 </head>
 <body>
@@ -72,6 +67,7 @@
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiU0_6Mf8AnR9ny0woh2-u7LcoB2oWrks8OpSQfhzA9xxfk9CL4oxNQnWjoxwkDJwwUnY&usqp=CAU" alt="user-profile-picture" class="profile-img">
             </a>
         @else
+            <!-- Login button for guests -->
             <div class="wallet-balance">
                 <a href="#" id="loginBtn">Login</a>
             </div>
@@ -79,25 +75,25 @@
     </div>
 </header>
 
+
 <!-- Modal -->
 <div id="loginModal" class="google-login">
     <div class="card">
         <a href="{{ url('/auth/google/redirect') }}" class="btn-google-login">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512" class="google-icon">
-                <path d="M3.88 10.78A5.54 5.54 0 0 1 3.58 9c0-.62.11-1.22.29-1.78L.96 4.96A9.008 9.008 0 0 0 0 9c0 1.45.35 2.82.96 4.04l2.92-2.26z" fill="#FBBC05"></path>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512" class="google-icon"><path data-v-67dc65cc="" d="M3.88 10.78A5.54 5.54 0 0 1 3.58 9c0-.62.11-1.22.29-1.78L.96 4.96A9.008 9.008 0 0 0 0 9c0 1.45.35 2.82.96 4.04l2.92-2.26z" fill="#FBBC05" data-v-8b45d494=""></path>
             </svg>
             Login with Google
         </a>
+
         <span id="closeModal" class="close-btn">&times;</span>
     </div>
 </div>
 
-<!-- Main Content -->
+
 <main>
     @yield('content')
 </main>
 
-<!-- Bottom Navigation Bar -->
 <div class="bottom-nav">
     <a href="{{ url('/') }}" class="nav-item">
         <span class="material-icons">home</span>
@@ -112,8 +108,6 @@
         <span class="nav-label">My Account</span>
     </a>
 </div>
-
-<!-- JS Scripts (Deferred) -->
 <script src="{{ asset('assets/user/loginModal.js') }}" defer></script>
 @stack('scripts')
 </body>
