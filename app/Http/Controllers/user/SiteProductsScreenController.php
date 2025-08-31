@@ -53,7 +53,7 @@ class SiteProductsScreenController extends Controller
             'transaction_id' => 'required',
         ]);
 
-        $user = auth('auth')->user();
+        $user = auth()->user();
         $product = Product::find($validated['product_id']);
         $items = Item::where('id', $validated['item_id'])->first();
         if ($items && $product ) {
