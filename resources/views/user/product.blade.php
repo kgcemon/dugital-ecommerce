@@ -56,6 +56,9 @@
             <h2 class="selection-title">পেমেন্ট পদ্ধতি নির্বাচন করুন</h2>
             <div class="payment-methods">
                 @foreach($payment as $method)
+                    @if(!Auth::check() && $method->method === 'Wallet')
+                        @continue {{-- Guest হলে Wallet skip করবে --}}
+                    @endif
                     <div class="payment-option"
                          data-id="{{ $method->id }}"
                          data-number="{{ $method->number }}"
@@ -66,6 +69,7 @@
                     </div>
                 @endforeach
             </div>
+
             <div class="payment-details" id="paymentDetails"></div>
 
             <!-- TRX ID input -->
@@ -75,6 +79,7 @@
                 <div class="error-message" id="trxError"></div>
             </div>
         </div>
+
 
         <!-- Submit Button -->
         <button class="checkout-btn" id="checkoutBtn">Submit Order</button>
