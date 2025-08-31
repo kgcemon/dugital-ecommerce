@@ -124,3 +124,9 @@
     .header-title { font-size: 1.4rem; }
     .header-desc { font-size: 0.85rem; }
 }
+img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* extra spacing কমানোর জন্য */
+}
+
