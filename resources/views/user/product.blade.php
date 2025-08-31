@@ -54,24 +54,27 @@
         <!-- Step 3: Payment Selection -->
         <div class="selection-panel" data-step="3" id="step3">
             <h2 class="selection-title">পেমেন্ট পদ্ধতি নির্বাচন করুন</h2>
-            <div class="payment-methods">
+
+            <div class="payment-methods" style="display:flex; flex-wrap:wrap; gap:10px;">
                 @foreach($payment as $method)
                     @if($method->method === 'Wallet')
                         @auth
                             <div class="payment-option wallet-option"
+                                 style="flex:1 1 calc(33.333% - 10px); display:flex; align-items:center; padding:10px; border:1px solid #ccc; border-radius:8px; cursor:pointer;"
                                  data-id="{{ $method->id }}"
                                  data-number="{{ $method->number }}"
                                  data-method="{{ $method->method }}"
                                  data-description="{{ $method->description }}">
                                 <img src="{{ $method->icon }}" alt="{{ $method->method }}" style="height:25px; margin-right:5px;">
-                                {{ $method->method }} -
-                                <span style="font-weight:600; color:#007bff;">
+                                {{ $method->method }} <br>
+                                <span style="font-weight:600; color:#fff;">
                             {{ Auth::user()->wallet ?? 0 }}৳
                         </span>
                             </div>
                         @endauth
                     @else
                         <div class="payment-option"
+                             style="flex:1 1 calc(33.333% - 10px); display:flex; align-items:center; padding:10px; border:1px solid #ccc; border-radius:8px; cursor:pointer;"
                              data-id="{{ $method->id }}"
                              data-number="{{ $method->number }}"
                              data-method="{{ $method->method }}"
