@@ -9,12 +9,6 @@
         <!-- ✅ Order Response Box -->
         <div id="orderResponse" style="display:none;" class="response-box"></div>
 
-        <!-- ✅ Loading Spinner -->
-        <div id="loadingSpinner" class="loading-spinner" style="display:none;">
-            <div class="spinner"></div>
-            <p>অর্ডার প্রক্রিয়াধীন...</p>
-        </div>
-
         <!-- Product Card -->
         <div class="product-card">
             <div class="product-thumb">
@@ -82,7 +76,13 @@
 
 
         <!-- Submit Button -->
-        <button class="checkout-btn" id="checkoutBtn">Submit Order</button>
+        <button class="checkout-btn" id="checkoutBtn">
+            <span class="btn-text">Submit Order</span>
+            <span class="btn-spinner" style="display:none;">
+        <div class="spinner"></div>
+        প্রক্রিয়াধীন...
+    </span>
+        </button>
 
         <div><br></div>
 
