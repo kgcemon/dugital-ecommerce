@@ -115,7 +115,7 @@
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiU0_6Mf8AnR9ny0woh2-u7LcoB2oWrks8OpSQfhzA9xxfk9CL4oxNQnWjoxwkDJwwUnY&usqp=CAU" alt="user-profile-picture" class="profile-img">
         </a>
         @else
-            <a href="{{ url('/login') }}" class="btn btn-warning px-3 fw-semibold">Login</a>
+           <div class="wallet-balance"><a href="{{ url('/login') }}" class="btn btn-warning px-3 fw-semibold">Login</a> </div>
         @endauth
     </div>
 </header>
