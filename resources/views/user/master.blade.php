@@ -38,60 +38,7 @@
     @endif
 
     @if (Request::is('product*') || Request::is('thank-you*'))
-    <link rel="stylesheet" href="{{ asset('assets/user/product.css?v=10') }}">
-        <style>
-            .btn-loading {
-                position: relative;
-                pointer-events: none;
-                opacity: 0.7;
-            }
-            .btn-loading::after {
-                content: "";
-                position: absolute;
-                right: 12px;
-                top: 50%;
-                width: 18px;
-                height: 18px;
-                margin-top: -9px;
-                border: 2px solid #fff;
-                border-top-color: transparent;
-                border-radius: 50%;
-                animation: spin 0.7s linear infinite;
-            }
-            @keyframes spin {
-                to { transform: rotate(360deg); }
-            }
-
-        .response-box {
-                padding: 15px;
-                border-radius: 8px;
-                margin-bottom: 15px;
-                font-weight: 600;
-                text-align: center;
-            }
-            .response-box.success { background: #d1fae5; color: #065f46; border: 1px solid #10b981; }
-            .response-box.error { background: #fee2e2; color: #991b1b; border: 1px solid #ef4444; }
-
-            .loading-spinner {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                margin: 15px 0;
-            }
-            .spinner {
-                width: 40px;
-                height: 40px;
-                border: 4px solid #ddd;
-                border-top: 4px solid #4f46e5;
-                border-radius: 50%;
-                animation: spin 1s linear infinite;
-            }
-            @keyframes spin {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-            }
-        </style>
+    <link rel="stylesheet" href="{{ asset('assets/user/product.css?v=11') }}">
     @endif
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -104,49 +51,24 @@
     <div class="nav-container">
         <!-- Logo -->
         <a href="{{ url('/') }}" class="logo">{{ config('app.name', 'Codmshop') }}</a>
-
         @auth
-            <!-- Profile Section -->
-            <a href="{{ url('/profile') }}" class="account-row d-flex align-items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="white" stroke-width="2"
-                     stroke-linecap="round" stroke-linejoin="round">
+        <!-- Wallet + Balance + Profile -->
+        <a href="{{ url('/profile') }}" class="account-row">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path>
                     <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path>
-                </svg>
-                ৳ {{ Auth::user()->wallet ?? 0 }}
-                <!-- Profile Image -->
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiU0_6Mf8AnR9ny0woh2-u7LcoB2oWrks8OpSQfhzA9xxfk9CL4oxNQnWjoxwkDJwwUnY&usqp=CAU"
-                     alt="user-profile-picture" class="profile-img rounded-circle" width="32" height="32">
-            </a>
+                </svg>৳ {{ Auth::user()->wallet ?? 0 }}
+
+            <!-- Profile Image -->
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiU0_6Mf8AnR9ny0woh2-u7LcoB2oWrks8OpSQfhzA9xxfk9CL4oxNQnWjoxwkDJwwUnY&usqp=CAU" alt="user-profile-picture" class="profile-img">
+        </a>
         @else
-            <!-- Login Button (Opens Modal) -->
             <div class="wallet-balance">
-                <button type="button" class="btn btn-warning px-3 fw-semibold" data-bs-toggle="modal" data-bs-target="#loginModal">
                     Login
-                </button>
             </div>
         @endauth
     </div>
 </header>
-
-<!-- Login Popup Modal -->
-<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content text-center">
-            <div class="modal-header border-0">
-                <h5 class="modal-title w-100 fw-bold" id="loginModalLabel">Sign In</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body py-4">
-                <a href="{{ url('auth/google') }}" class="btn btn-outline-danger w-100 d-flex align-items-center justify-content-center gap-2">
-                    <img src="https://www.svgrepo.com/show/355037/google.svg" width="20" alt="Google Logo">
-                    Continue with Google
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 
 
