@@ -14,16 +14,18 @@ class SiteProductsScreenController extends Controller
 {
     public function index($slug) {
         try {
-            // Cache key generate
+
             $cacheKey = 'product_'.$slug;
 
-            // Permanent cache try, update er somoy forget kora hobe
             $product = Cache::rememberForever($cacheKey, function() use ($slug) {
                 return Product::with('items')->where('slug', $slug)->first();
             });
 
-
-            $payment = PaymentMethod::all();
+            if (auth()->check()) {
+                $payment = PaymentMethod::all();
+            } else {
+                $payment = PaymentMethod::where('method', '!=', 'Wallet')->get();
+            }
 
             if ($product) {
                 return view('user.product', compact('product', 'payment'));
