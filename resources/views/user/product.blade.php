@@ -56,17 +56,30 @@
             <h2 class="selection-title">পেমেন্ট পদ্ধতি নির্বাচন করুন</h2>
             <div class="payment-methods">
                 @foreach($payment as $method)
-                    @if(!Auth::check() && $method->method === 'Wallet')
-                        @continue {{-- Guest হলে Wallet skip করবে --}}
+                    @if($method->method === 'Wallet')
+                        @auth
+                            <div class="payment-option wallet-option"
+                                 data-id="{{ $method->id }}"
+                                 data-number="{{ $method->number }}"
+                                 data-method="{{ $method->method }}"
+                                 data-description="{{ $method->description }}">
+                                <img src="{{ $method->icon }}" alt="{{ $method->method }}" style="height:25px; margin-right:5px;">
+                                {{ $method->method }} -
+                                <span style="font-weight:600; color:#007bff;">
+                            {{ Auth::user()->wallet ?? 0 }}৳
+                        </span>
+                            </div>
+                        @endauth
+                    @else
+                        <div class="payment-option"
+                             data-id="{{ $method->id }}"
+                             data-number="{{ $method->number }}"
+                             data-method="{{ $method->method }}"
+                             data-description="{{ $method->description }}">
+                            <img src="{{ $method->icon }}" alt="{{ $method->method }}" style="height:25px; margin-right:5px;">
+                            {{ $method->method }}
+                        </div>
                     @endif
-                    <div class="payment-option"
-                         data-id="{{ $method->id }}"
-                         data-number="{{ $method->number }}"
-                         data-method="{{ $method->method }}"
-                         data-description="{{ $method->description }}">
-                        <img src="{{ $method->icon }}" alt="{{ $method->method }}" style="height:25px; margin-right:5px;">
-                        {{ $method->method }}
-                    </div>
                 @endforeach
             </div>
 
@@ -79,6 +92,7 @@
                 <div class="error-message" id="trxError"></div>
             </div>
         </div>
+
 
 
         <!-- Submit Button -->
