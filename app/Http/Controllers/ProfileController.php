@@ -14,7 +14,12 @@ class ProfileController extends Controller
 
     public function show()
     {
-        // Dummy data for profile dashboard
+        $user = Auth::user();
+
+        if (!$user) {
+            return redirect()->route('login');
+        }
+
         $totalOrders       = 25;
         $completedOrders   = 18;
         $pendingOrders     = 7;
