@@ -114,13 +114,12 @@
                     <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path>
                 </svg>
                 ৳ {{ Auth::user()->wallet ?? 0 }}
-
                 <!-- Profile Image -->
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiU0_6Mf8AnR9ny0woh2-u7LcoB2oWrks8OpSQfhzA9xxfk9CL4oxNQnWjoxwkDJwwUnY&usqp=CAU"
                      alt="user-profile-picture" class="profile-img rounded-circle" width="32" height="32">
             </a>
         @else
-            <!-- Login Button (Triggers Modal) -->
+            <!-- Login Button (Opens Modal) -->
             <div class="wallet-balance">
                 <button type="button" class="btn btn-warning px-3 fw-semibold" data-bs-toggle="modal" data-bs-target="#loginModal">
                     Login
@@ -130,12 +129,12 @@
     </div>
 </header>
 
-<!-- Google Login Modal -->
+<!-- Login Popup Modal -->
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content text-center">
-            <div class="modal-header">
-                <h5 class="modal-title w-100" id="loginModalLabel">Sign In</h5>
+            <div class="modal-header border-0">
+                <h5 class="modal-title w-100 fw-bold" id="loginModalLabel">Sign In</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body py-4">
