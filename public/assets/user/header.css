@@ -194,3 +194,10 @@ nav ul li a:hover {
     height: 20px;
     margin-right: 8px;
 }
+
+.material-icons {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+

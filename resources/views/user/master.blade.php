@@ -32,22 +32,17 @@
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
 
-    <link rel="preload" href="{{ asset('assets/user/header.css?v=2') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-        <link rel="stylesheet" href="{{ asset('assets/user/header.css?v=2') }}">
-    </noscript>
+    <link rel="stylesheet" href="{{ asset('assets/user/header.css?v=2') }}">
 
 
 @if (Request::is('/'))
-        <link rel="preload" href="{{ asset('assets/user/home.css?v=129') }}" as="style" onload="this.rel='stylesheet'">
+        <link rel="stylesheet" href="{{ asset('assets/user/home.css?v=129') }}">
     @endif
 
     @if (Request::is('product*') || Request::is('thank-you*'))
-    <link rel="preload" href="{{ asset('assets/user/product.css?v=12') }}" as="style" onload="this.rel='stylesheet'">
+    <link rel="stylesheet" href="{{ asset('assets/user/product.css?v=12') }}" as="style" onload="this.rel='stylesheet'">
     @endif
-
-    <link rel="preload" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" as="style" onload="this.rel='stylesheet'">
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap">
     @stack('head')
 </head>
 <body>
