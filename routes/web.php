@@ -67,6 +67,10 @@ Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
 //});
 
 
+Route::get('/{any}', function(){
+    return view('layouts.master');
+})->where('any','^(?!css|js|images|manifest\.json|service-worker\.js).*$');
+
 
 //user Route
 
