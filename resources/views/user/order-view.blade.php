@@ -34,7 +34,7 @@
         <!-- Ordered Items -->
         <div class="items-section">
             <h3 class="section-title">Items</h3>
-            @foreach($order->items as $item)
+            @foreach($order->item as $item)
                 <div class="item-card">
                     <img src="{{ $item->product->image }}" alt="{{ $item->product->name }}">
                     <div class="item-info">
