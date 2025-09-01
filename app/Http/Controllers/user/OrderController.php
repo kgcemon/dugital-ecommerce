@@ -142,7 +142,7 @@ class OrderController extends Controller
         if (Auth::check()) {
             $user = Auth::user();
             $orders = Order::where('user_id',$user->id)->orderBy('id', 'desc')->paginate(10);
-            return view('user.orders', compact('orders'));
+            return view('user.my-order', compact('orders'));
         }
     }
 
