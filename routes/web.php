@@ -16,14 +16,6 @@ use App\Http\Controllers\admin\OrdersController;
 use App\Http\Controllers\ProfileController;
 
 
-// web.php
-Route::get('/{any}', function(){
-    return view('user.master');
-})->where('any','^(?!css|js|images|manifest\.json|service-worker\.js).*$');
-
-
-
-
 Route::get('/auth/google/redirect', [GoogleController::class, 'redirectToGoogle']);
 Route::get('/auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
