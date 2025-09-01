@@ -27,7 +27,7 @@ let deferredPrompt;
             gap: 12px;
         ">
             <!-- Logo -->
-            <img src="https://codmshop.com/logo.png" alt="logo" style="
+            <img src="https://codmshop.com/icon.png" alt="logo" style="
                 width: 48px;
                 height: 48px;
                 border-radius: 12px;
