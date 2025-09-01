@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Order;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,20 +21,14 @@ class ProfileController extends Controller
             return redirect()->route('login');
         }
 
-        $totalOrders       = 25;
-        $completedOrders   = 18;
-        $pendingOrders     = 7;
-        $refIncome         = 1200; // in ৳
-        $totalReferrals    = 5;
+        $totalOrders       = Order::where('user_id', $user->id)->count();
+        $completedOrders   = Order::where('user_id', $user->id)->where('status', 'delivered')->count();
+        $pendingOrders     = Order::where('user_id', $user->id)->where('status', 'hold')->count();;
+        $refIncome         = 0; // in ৳
+        $totalReferrals    = 0;
 
         // Recent transactions (dummy)
-        $recentTransactions = [
-            (object) ['type' => 'Order #101', 'amount' => 250],
-            (object) ['type' => 'Order #102', 'amount' => 180],
-            (object) ['type' => 'Order #103', 'amount' => 320],
-            (object) ['type' => 'Referral Bonus', 'amount' => 100],
-            (object) ['type' => 'Order #104', 'amount' => 150],
-        ];
+        $recentTransactions = Order::orderBy('id', 'desc')->take(5)->get();
 
         return view('user.profile', compact(
             'totalOrders',

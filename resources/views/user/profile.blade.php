@@ -47,8 +47,8 @@
         <div style="max-height: 200px; overflow-y: auto;">
             @foreach($recentTransactions as $txn)
                 <div class="panelData" style="display: flex; justify-content: space-between; padding: 8px 10px; margin-bottom: 5px; border-radius: 8px;">
-                    <span>{{ $txn->type ?? 'Order' }}</span>
-                    <span>{{ $txn->amount ?? 0 }}৳</span>
+                    <span>{{ $txn->id ?? 'Order' }}</span>
+                    <span>{{ $txn->status }}</span>
                 </div>
             @endforeach
         </div>
