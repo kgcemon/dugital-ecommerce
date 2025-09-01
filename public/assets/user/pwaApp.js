@@ -14,37 +14,49 @@ let deferredPrompt;
             transform: translateX(-50%);
             background: linear-gradient(135deg,#0F0C29,#302B63,#24243e);
             color: #fff;
-            padding: 16px 20px;
+            padding: 12px 15px;
             border-radius: 12px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.4);
             z-index: 2000;
-            width: 90%;
-            max-width: 350px;
-            text-align: center;
+            width: 95%;
+            max-width: 420px;
             font-family: 'Inter', sans-serif;
             animation: slideUp 0.4s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         ">
-            <h3 style="margin-bottom: 10px; font-size: 1rem;">Install Codmshop</h3>
-            <p style="font-size: 0.9rem; margin-bottom: 15px;">আমাদের App ডাউনলোড করুন</p>
-            <button id="installBtn" style="
-                background: #00d4ff;
-                border: none;
-                padding: 10px 18px;
-                border-radius: 8px;
-                font-weight: bold;
-                cursor: pointer;
-                color: #000;
-                margin-right: 10px;
-            ">Install</button>
-            <button id="closeBtn" style="
-                background: transparent;
-                border: 1px solid #fff;
-                padding: 10px 18px;
-                border-radius: 8px;
-                cursor: pointer;
-                color: #fff;
-            ">Later</button>
+            <!-- Logo -->
+            <img src="https://codmshop.com/logo.png" alt="logo" style="
+                width: 48px;
+                height: 48px;
+                border-radius: 12px;
+                object-fit: cover;
+                flex-shrink: 0;
+            ">
+
+            <!-- Title + Description -->
+            <div style="flex: 1; text-align: left;">
+                <h3 style="margin:0; font-size: 1rem; font-weight: 700;">Install Codmshop</h3>
+                <p style="margin:4px 0 0; font-size: 0.85rem; opacity: 0.9;">আমাদের App ডাউনলোড করুন</p>
+            </div>
+
+            <!-- Actions -->
+            <div style="display: flex; flex-direction: column; gap: 4px; text-align: right;">
+                <span id="installBtn" style="
+                    cursor: pointer;
+                    font-size: 0.9rem;
+                    font-weight: 600;
+                    color: #00d4ff;
+                ">Install</span>
+                <span id="closeBtn" style="
+                    cursor: pointer;
+                    font-size: 0.8rem;
+                    opacity: 0.8;
+                ">Later</span>
+            </div>
         </div>
+
         <style>
         @keyframes slideUp {
             from { transform: translate(-50%, 100%); opacity: 0; }
@@ -68,3 +80,4 @@ let deferredPrompt;
     popup.remove();
 });
 });
+

@@ -30,5 +30,5 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('assets/user/pwa.js') }}" defer></script>
+    <script src="{{ asset('assets/user/pwaApp.js') }}" defer></script>
 @endpush
