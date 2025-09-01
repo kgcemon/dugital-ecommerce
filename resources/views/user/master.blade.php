@@ -9,7 +9,7 @@
 
     <!-- PWA -->
     <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#007bff">
+    <meta name="theme-color" content="#131031">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="apple-touch-icon" href="https://codmshop.com/logo.png">
 
