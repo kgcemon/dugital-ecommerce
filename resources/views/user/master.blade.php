@@ -235,12 +235,12 @@
 
 
 @if (Request::is('/'))
-        <link rel="stylesheet" href="{{ asset('assets/user/home.css?v=132') }}" media="print" onload="this.media='all'">
-        <noscript><link rel="stylesheet" href="{{ asset('assets/user/home.css?v=132') }}"></noscript>
+        <link rel="stylesheet" href="{{ asset('assets/user/home.css?v=133') }}" media="print" onload="this.media='all'">
+        <noscript><link rel="stylesheet" href="{{ asset('assets/user/home.css?v=133') }}"></noscript>
     @endif
 
     @if (Request::is('product*') || Request::is('thank-you*'))
-    <link rel="stylesheet" href="{{ asset('assets/user/product.css?v=13') }}" as="style" onload="this.rel='stylesheet'">
+    <link rel="stylesheet" href="{{ asset('assets/user/product.css?v=14') }}" as="style" onload="this.rel='stylesheet'">
     @endif
     @stack('head')
 </head>
