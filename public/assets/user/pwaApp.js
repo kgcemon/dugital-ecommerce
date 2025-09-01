@@ -49,11 +49,6 @@ let deferredPrompt;
                     font-weight: 600;
                     color: #00d4ff;
                 ">Install</span>
-                <span id="closeBtn" style="
-                    cursor: pointer;
-                    font-size: 0.8rem;
-                    opacity: 0.8;
-                ">Later</span>
             </div>
         </div>
 
