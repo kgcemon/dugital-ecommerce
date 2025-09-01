@@ -17,9 +17,9 @@ use App\Http\Controllers\ProfileController;
 
 
 // web.php
-Route::get('/{any}', function () {
+Route::get('/{any}', function(){
     return view('user.master');
-})->where('any', '.*');
+})->where('any','^(?!css|js|images|manifest\.json|service-worker\.js).*$');
 
 
 
