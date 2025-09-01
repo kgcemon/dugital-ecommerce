@@ -29,6 +29,15 @@
     <meta name="twitter:description" content="@yield('twitter_description', 'Buy Free Fire Diamonds & Game Credits use Codmshop')">
     <meta name="twitter:image" content="@yield('twitter_image', asset('assets/images/twitter-default.png'))">
 
+
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#007bff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="apple-touch-icon" href="/logo.png">
+
+
+
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
 
@@ -320,6 +329,15 @@
 </div>
 
 <script src="{{ asset('assets/user/loginModal.js') }}" defer></script>
+<script>
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function() {
+            navigator.serviceWorker.register("/service-worker.js")
+                .then(reg => console.log("Service Worker registered!", reg))
+                .catch(err => console.log("Service Worker failed:", err));
+        });
+    }
+</script>
 @stack('scripts')
 </body>
 </html>
