@@ -345,7 +345,7 @@
     @endauth
 </div>
 
-<script src="{{ asset('assets/user/loginModal.js') }}" defer></script>
+<script src="{{ asset('assets/user/loginModals.js') }}" defer></script>
 @stack('scripts')
 </body>
 </html>

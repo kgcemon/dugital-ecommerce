@@ -1,20 +1,20 @@
 const loginBtns = document.querySelectorAll('.loginBtn');
-const loginModal = document.getElementById('loginModal');
+const loginModals = document.getElementById('loginModals');
 const closeModal = document.getElementById('closeModal');
 
 loginBtns.forEach(btn => {
     btn.addEventListener('click', function(e) {
         e.preventDefault();
-        loginModal.classList.add('show');
+        loginModals.classList.add('show');
     });
 });
 
 closeModal.addEventListener('click', function() {
-    loginModal.classList.remove('show');
+    loginModals.classList.remove('show');
 });
 
 window.addEventListener('click', function(e) {
-    if(e.target === loginModal){
-        loginModal.classList.remove('show');
+    if(e.target === loginModals){
+        loginModals.classList.remove('show');
     }
 });
