@@ -51,8 +51,6 @@
 
     </div>
 @endsection
-
-@push('styles')
     <style>
         .order-history {
             overflow-x: auto;
@@ -115,4 +113,3 @@
             background: #0056b3;
         }
     </style>
-@endpush
