@@ -19,23 +19,23 @@
 
     <!-- Summary Stats -->
     <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">
-        <div class="panelData" style="flex: 1 1 45%; padding: 10px; border-radius: 10px; text-align: center;">
+        <div class="panelData" style="flex: 1 1 45%; padding: 2px; border-radius: 10px; text-align: center;">
             <div style="font-size: 14px; color: #ccc;">Total Orders</div>
             <div style="font-weight: 600; font-size: 16px;">{{ $totalOrders ?? 0 }}</div>
         </div>
-        <div class="panelData" style="flex: 1 1 45%;  padding: 10px; border-radius: 10px; text-align: center;">
+        <div class="panelData" style="flex: 1 1 45%;  padding: 2px; border-radius: 10px; text-align: center;">
             <div style="font-size: 14px; color: #ccc;">Completed Orders</div>
             <div style="font-weight: 600; font-size: 16px;">{{ $completedOrders ?? 0 }}</div>
         </div>
-        <div class="panelData" style="flex: 1 1 45%; padding: 10px; border-radius: 10px; text-align: center;">
+        <div class="panelData" style="flex: 1 1 45%; padding: 2px; border-radius: 10px; text-align: center;">
             <div style="font-size: 14px; color: #ccc;">Pending Orders</div>
             <div style="font-weight: 600; font-size: 16px;">{{ $pendingOrders ?? 0 }}</div>
         </div>
-        <div class="panelData" style="flex: 1 1 45%; padding: 10px; border-radius: 10px; text-align: center;">
+        <div class="panelData" style="flex: 1 1 45%; padding: 2px; border-radius: 10px; text-align: center;">
             <div style="font-size: 14px; color: #ccc;">Referral Income</div>
             <div style="font-weight: 600; font-size: 16px;">{{ $refIncome ?? 0 }}৳</div>
         </div>
-        <div class="panelData" style="flex: 1 1 100%; padding: 10px; border-radius: 10px; text-align: center;">
+        <div class="panelData" style="flex: 1 1 100%; padding: 2px; border-radius: 10px; text-align: center;">
             <div style="font-size: 14px; color: #ccc;">Total Referrals</div>
             <div style="font-weight: 600; font-size: 16px;">{{ $totalReferrals ?? 0 }}</div>
         </div>
@@ -47,7 +47,7 @@
         <div style="max-height: 200px; overflow-y: auto;">
             @foreach($recentTransactions as $txn)
                 <div class="panelData" style="display: flex; justify-content: space-between; padding: 8px 10px; margin-bottom: 5px; border-radius: 8px;">
-                    <span>{{ $txn->id ?? 'Order' }}</span>
+                    <span>{{ '#'. $txn->id}}</span>
                     <span>{{ $txn->status }}</span>
                 </div>
             @endforeach
