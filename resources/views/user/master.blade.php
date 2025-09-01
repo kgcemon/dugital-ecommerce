@@ -12,6 +12,8 @@
     <meta name="theme-color" content="#131031">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="apple-touch-icon" href="https://codmshop.com/logo.png">
+    <meta name="msapplication-navbutton-color" content="#131031">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- Dynamic SEO -->
     <title>@yield('title', config('app.name', 'Codmshop'))</title>
