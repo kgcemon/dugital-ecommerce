@@ -31,7 +31,7 @@
             <div style="font-size: 14px; color: #ccc;">Referral Income</div>
             <div style="font-weight: 600; font-size: 16px;">{{ $refIncome ?? 0 }}৳</div>
         </div>
-        <div class="panelData" style="flex: 1 1 100%; padding: 10px; border-radius: 10px; text-align: center;">
+        <div class="panelData" style="flex: 1 1 45%; padding: 10px; border-radius: 10px; text-align: center;">
             <div style="font-size: 14px; color: #ccc;">Total Referrals</div>
             <div style="font-weight: 600; font-size: 16px;">{{ $totalReferrals ?? 0 }}</div>
         </div>
