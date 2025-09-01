@@ -35,12 +35,12 @@
         <div class="items-section">
             <h3 class="section-title">Items</h3>
                 <div class="item-card">
-                    <img src="{{ $item->product->image }}" alt="{{ $item->product->name }}">
+                    <img src="{{ $order->product->image }}" alt="{{ $order->product->name }}">
                     <div class="item-info">
-                        <span class="item-name">{{ $item->product->name }}</span>
-                        <span class="item-qty">Qty: {{ $item->quantity }}</span>
+                        <span class="item-name">{{ $order->$item->name }}</span>
+                        <span class="item-qty">Qty: {{ $order->$item->quantity }}</span>
                     </div>
-                    <div class="item-price">{{ number_format($item->price,2) }} ৳</div>
+                    <div class="item-price">{{ number_format($order->$item->price,2) }} ৳</div>
                 </div>
         </div>
 
