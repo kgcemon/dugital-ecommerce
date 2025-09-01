@@ -52,12 +52,13 @@ class SiteProductsScreenController extends Controller
             'item_id' => 'required',
             'customer_data' => 'required',
             'payment_id' => 'required',
-            'transaction_id' => 'required',
+            'transaction_id' => 'sometimes|unique:orders',
         ]);
 
         $user = auth()->user();
         $product = Product::find($validated['product_id']);
         $items = Item::where('id', $validated['item_id'])->first();
+        $paymentMethod = PaymentMethod::where('id', $validated['payment_id'])->first();
         if ($items && $product ) {
             $order = (object) new Order();
             $checkDuplicate = $order->where('transaction_id', $validated['transaction_id'])->count();
@@ -81,9 +82,20 @@ class SiteProductsScreenController extends Controller
             $order->product_id = $validated['product_id'];
             $order->item_id   = $validated['item_id'];
             $order->customer_data = $validated['customer_data'];
+            if ($paymentMethod->method == 'Wallet') {
+                if ($user->wallet < $product->price) {
+                    return response()->json([
+                        'status' => false,
+                        'message' => "আপনার ওয়ালেটে যথেস্ট টাকা নেই দয়া করে টাকা এড করে আবার চেস্টা করুন",
+                    ]);
+                }
+                $user->wallet -= $product->price;
+                $user->save();
+            }else{
+                $order->transaction_id = $validated['transaction_id'];
+                $order->number = "01855555444";
+            }
             $order->payment_method = 1;
-            $order->transaction_id = $validated['transaction_id'];
-            $order->number = "01855555444";
             $order->save();
 
             return response()->json([

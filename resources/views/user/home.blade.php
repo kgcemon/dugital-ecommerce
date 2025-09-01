@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="banner">
-        <img src="https://admin.gosizi.com/notices/1745317224_home_page_footer_thumbnail.png"
+        <img src="https://dl.dir.freefiremobile.com/common/web_event/official2.ff.garena.all/202210/aa959aa3d8790d3a44f7f20f16adfa01.jpg"
              alt="Premium Banner">
     </div>
 
