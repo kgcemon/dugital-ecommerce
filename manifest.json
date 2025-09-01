@@ -4,7 +4,7 @@
     "start_url": "/",
     "display": "standalone",
     "background_color": "#131031",
-    "theme_color": "#007bff",
+    "theme_color": "#131031",
     "description": "Fast & Secure Free Fire Diamond Top Up in Bangladesh",
     "icons": [
         { "src": "/images/icons/icon-192x192.png", "sizes": "192x192", "type": "image/png" },
