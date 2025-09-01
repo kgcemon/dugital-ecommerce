@@ -3,9 +3,9 @@ const ASSETS = [
     '/',
     '/css/app.css',
     '/js/app.js',
-    '/logo.png',
-    '/logo.png',
-    '/logo.png'
+    '/icon.png',
+    '/icon.png',
+    '/icon.png'
 ];
 
 self.addEventListener('install', e => {
