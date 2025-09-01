@@ -60,7 +60,7 @@ class SiteProductsScreenController extends Controller
         $items = Item::where('id', $validated['item_id'])->first();
         $paymentMethod = PaymentMethod::where('id', $validated['payment_id'])->first();
         if ($items && $product ) {
-            $order = (object) new Order();
+            $order = new Order();
             $checkDuplicate = $order->where('transaction_id', $validated['transaction_id'])->count();
             if ($checkDuplicate > 0) {
                 return response()->json([
@@ -83,13 +83,13 @@ class SiteProductsScreenController extends Controller
             $order->item_id   = $validated['item_id'];
             $order->customer_data = $validated['customer_data'];
             if ($paymentMethod->method == 'Wallet') {
-                if ($user->wallet < $product->price) {
+                if ($user->wallet < $items->price) {
                     return response()->json([
                         'status' => false,
                         'message' => "আপনার ওয়ালেটে যথেস্ট টাকা নেই দয়া করে টাকা এড করে আবার চেস্টা করুন",
                     ]);
                 }
-                $user->wallet -= $product->price;
+                $user->wallet -= $items->price;
                 $user->save();
             }else{
                 $order->transaction_id = $validated['transaction_id'];
