@@ -5,12 +5,6 @@
 @section('content')
     <div class="container py-4">
 
-        <!-- Page Title -->
-        <div class="page-header mb-4 text-center">
-            <h2 class="fw-bold text-white">My Orders</h2>
-            <p class="text-muted">Your recent orders and their statuses</p>
-        </div>
-
         <!-- Orders Table -->
         <div class="order-history">
             <table class="order-table">
