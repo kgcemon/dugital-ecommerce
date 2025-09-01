@@ -60,7 +60,7 @@
                     @if($method->method === 'Wallet')
                         @auth
                             <div class="payment-option wallet-option"
-                                 style="flex:1 1 calc(33.333% - 10px); display:flex; align-items:center; padding:10px; border:1px solid #ccc; border-radius:8px; cursor:pointer;"
+                                 style="flex:1 1 calc(33.333% - 10px); padding:10px; border:1px solid #ccc; border-radius:8px; cursor:pointer;"
                                  data-id="{{ $method->id }}"
                                  data-number="{{ $method->number }}"
                                  data-method="{{ $method->method }}"
@@ -68,13 +68,13 @@
                                 <img src="{{ $method->icon }}" alt="{{ $method->method }}" style="height:25px; margin-right:5px;">
                                 {{ $method->method }} <br>
                                 <span style="font-weight:600; color:#fff;">
-                            {{ Auth::user()->wallet ?? 0 }}৳
-                        </span>
+                                {{ Auth::user()->wallet ?? 0 }}৳
+                            </span>
                             </div>
                         @endauth
                     @else
                         <div class="payment-option"
-                             style="flex:1 1 calc(33.333% - 10px); display:flex; align-items:center; padding:10px; border:1px solid #ccc; border-radius:8px; cursor:pointer;"
+                             style="flex:1 1 calc(33.333% - 10px); padding:10px; border:1px solid #ccc; border-radius:8px; cursor:pointer;"
                              data-id="{{ $method->id }}"
                              data-number="{{ $method->number }}"
                              data-method="{{ $method->method }}"
@@ -88,15 +88,20 @@
 
             <div class="payment-details" id="paymentDetails"></div>
 
-            <!-- TRX ID input -->
-            <div class="player-id-box">
+            <!-- Transaction ID input (hidden by default for Wallet) -->
+            <div id="trxBox" class="player-id-box" style="display:none;">
                 <h2 class="selection-title">Transaction ID লিখুন</h2>
                 <input type="text" id="trxId" placeholder="Enter Transaction ID">
                 <div class="error-message" id="trxError"></div>
             </div>
+
+            <!-- Payment Number input (hidden by default, only shown if needed) -->
+            <div id="paymentNumberBox" class="player-id-box" style="display:none;">
+                <h2 class="selection-title">Payment Number লিখুন</h2>
+                <input type="text" id="paymentNumber" placeholder="Enter Payment Number">
+                <div class="error-message" id="paymentNumberError"></div>
+            </div>
         </div>
-
-
 
         <!-- Submit Button -->
         <button class="checkout-btn" id="checkoutBtn">Submit Order</button>
@@ -125,50 +130,40 @@
             const paymentOptions = document.querySelectorAll(".payment-option");
 
             const playerIdInput = document.getElementById("playerId");
+            const trxBox = document.getElementById("trxBox");
             const trxIdInput = document.getElementById("trxId");
+            const paymentNumberBox = document.getElementById("paymentNumberBox");
+            const paymentNumberInput = document.getElementById("paymentNumber");
 
             const checkoutBtn = document.getElementById("checkoutBtn");
-
             const orderResponse = document.getElementById("orderResponse");
             const loadingSpinner = document.getElementById("loadingSpinner");
 
-            // ✅ Step updater
-            function updateSteps() {
-                const pid = playerIdInput.value.trim();
-                document.getElementById("step1").classList.toggle("completed", pid.length >= 6 && pid.length <= 13);
-                document.getElementById("step2").classList.toggle("completed", !!selectedPackage);
-                document.getElementById("step3").classList.toggle("completed", !!selectedPayment);
-            }
-
-            // ✅ Response box
             function showResponse(type, message) {
                 orderResponse.style.display = "block";
                 orderResponse.className = "response-box " + type;
                 orderResponse.innerHTML = message;
                 loadingSpinner.style.display = "none";
-                checkoutBtn.classList.remove("btn-loading"); // reset button
                 checkoutBtn.disabled = false;
                 window.scrollTo({ top: 0, behavior: "smooth" });
             }
 
-            // ✅ Loading spinner (main section)
             function showLoading() {
                 loadingSpinner.style.display = "flex";
                 orderResponse.style.display = "none";
             }
 
-            // ✅ Package selection
+            // Package selection
             diamondOptions.forEach(el => {
                 el.addEventListener("click", () => {
                     diamondOptions.forEach(o => o.classList.remove("selected"));
                     el.classList.add("selected");
                     selectedPackage = parseInt(el.dataset.id, 10);
                     document.getElementById("packageError").textContent = "";
-                    updateSteps();
                 });
             });
 
-            // ✅ Payment method selection
+            // Payment method selection
             paymentOptions.forEach(el => {
                 el.addEventListener("click", () => {
                     paymentOptions.forEach(o => o.classList.remove("selected"));
@@ -182,35 +177,31 @@
                     };
 
                     document.getElementById("paymentDetails").innerHTML = `
-                    <p><strong>${selectedPayment.method}</strong></p>
-                    <p><strong>Number:</strong> ${selectedPayment.number}</p>
-                    <br><p>${selectedPayment.description}</p><br>
-                `;
+                <p><strong>${selectedPayment.method}</strong></p>
+                <p><strong>Number:</strong> ${selectedPayment.number}</p>
+                <br><p>${selectedPayment.description}</p><br>
+            `;
 
-                    updateSteps();
+                    // Wallet হলে কোনো trx input লাগবে না
+                    if (selectedPayment.method === "Wallet") {
+                        trxBox.style.display = "none";
+                        paymentNumberBox.style.display = "none";
+                    } else {
+                        trxBox.style.display = "block";
+                    }
                 });
             });
 
-            // ✅ Auto-select first payment option
-            if (paymentOptions.length > 0) {
-                paymentOptions[0].click();
-            }
-
-            // ✅ Live validation
-            playerIdInput.addEventListener("input", updateSteps);
-
-            // ✅ Submit Order
             checkoutBtn.addEventListener("click", () => {
                 const pid = playerIdInput.value.trim();
                 const trxId = trxIdInput.value.trim();
+                const payNumber = paymentNumberInput.value.trim();
                 let valid = true;
 
                 if (!(pid.length >= 6 && pid.length <= 13)) {
                     document.getElementById("playerError").textContent = "Player ID must be 6-13 digits!";
                     valid = false;
-                } else {
-                    document.getElementById("playerError").textContent = "";
-                }
+                } else document.getElementById("playerError").textContent = "";
 
                 if (!selectedPackage) {
                     document.getElementById("packageError").textContent = "অনুগ্রহ করে প্যাকেজ নির্বাচন করুন!";
@@ -222,11 +213,11 @@
                     valid = false;
                 }
 
-                if (trxId.length < 5) {
-                    document.getElementById("trxError").textContent = "Valid Transaction ID দিন!";
-                    valid = false;
-                } else {
-                    document.getElementById("trxError").textContent = "";
+                if (selectedPayment && selectedPayment.method !== "Wallet") {
+                    if (trxId.length < 5) {
+                        document.getElementById("trxError").textContent = "Valid Transaction ID দিন!";
+                        valid = false;
+                    } else document.getElementById("trxError").textContent = "";
                 }
 
                 if (!valid) return;
@@ -237,20 +228,16 @@
                     payment_id: selectedPayment.id,
                     customer_data: pid,
                     transaction_id: trxId,
+                    payment_number: payNumber,
                     _token: "{{ csrf_token() }}"
                 };
 
-                // ✅ Button loading effect
-                checkoutBtn.classList.add("btn-loading");
                 checkoutBtn.disabled = true;
                 showLoading();
 
                 fetch("{{ route('addOrder') }}", {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                    },
+                    headers: { "Content-Type": "application/json", "X-CSRF-TOKEN": "{{ csrf_token() }}" },
                     body: JSON.stringify(orderData)
                 })
                     .then(res => res.json())
@@ -260,9 +247,13 @@
                             setTimeout(() => window.location.href = "/thank-you", 2000);
                         } else {
                             showResponse("error", "❌ ব্যর্থ: " + data.message);
+                            if (data.message.includes("Transaction ID and payment number")) {
+                                trxBox.style.display = "block";
+                                paymentNumberBox.style.display = "block";
+                            }
                         }
                     })
-                    .catch(err => {
+                    .catch(() => {
                         showResponse("error", "⚠️ সার্ভার এরর, আবার চেষ্টা করুন।");
                     });
             });

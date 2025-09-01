@@ -7,10 +7,9 @@ use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\UsersController;
 use App\Http\Controllers\admin\VariantController;
 use App\Http\Controllers\Auth\GoogleController;
-use App\Http\Controllers\CronJobController;
+use App\Http\Controllers\user\OrderController;
 use App\Http\Controllers\user\SiteHomeScreenController;
 use App\Http\Controllers\user\SiteProductsScreenController;
-use App\Http\Controllers\WebHooksController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\OrdersController;
@@ -23,8 +22,8 @@ Route::get('/auth/google/callback', [GoogleController::class, 'handleGoogleCallb
 
 Route::get('/', [SiteHomeScreenController::class, 'index'])->name('home');
 Route::get('/product/{slug}', [SiteProductsScreenController::class, 'index'] )->name('product');
-Route::post('add-order', [SiteProductsScreenController::class, 'addOrder'])->name('addOrder');
-Route::get('thank-you', [SiteProductsScreenController::class, 'thankYouPage'])->name('thankYouPage');
+Route::post('add-order', [OrderController::class, 'addOrder'])->name('addOrder');
+Route::get('thank-you', [OrderController::class, 'thankYouPage'])->name('thankYouPage');
 
 // Profile Page
 Route::get('profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile');
