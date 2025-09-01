@@ -37,7 +37,7 @@
                         </span>
                         </td>
                         <td>
-                            <a href="{{ route('orders.show', $order->id) }}" class="btn-view">View</a>
+{{--                            <a href="{{ route('orders.show', $order->id) }}" class="btn-view">View</a>--}}
                         </td>
                     </tr>
                 @empty
