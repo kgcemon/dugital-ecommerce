@@ -28,10 +28,6 @@
             <div style="font-weight: 600; font-size: 16px;">{{ $completedOrders ?? 0 }}</div>
         </div>
         <div class="panelData" style="flex: 1 1 45%; padding: 10px; border-radius: 10px; text-align: center;">
-            <div style="font-size: 14px; color: #ccc;">Pending Orders</div>
-            <div style="font-weight: 600; font-size: 16px;">{{ $pendingOrders ?? 0 }}</div>
-        </div>
-        <div class="panelData" style="flex: 1 1 45%; padding: 10px; border-radius: 10px; text-align: center;">
             <div style="font-size: 14px; color: #ccc;">Referral Income</div>
             <div style="font-weight: 600; font-size: 16px;">{{ $refIncome ?? 0 }}৳</div>
         </div>
