@@ -146,6 +146,17 @@ class OrderController extends Controller
         }
     }
 
+    public function orderView($id){
+        if (Auth::check()) {
+            $user = Auth::user();
+            $order = Order::where('user_id',$user->id)->where('id',$id)->first();
+            if ($order) {
+                return view('user.order-view', compact('order'));
+            }
+            return view('errors.404');
+        }
+    }
+
 
     public function thankYouPage()
     {
