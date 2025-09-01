@@ -6,8 +6,8 @@
 
     <div class="container">
 
-        <!-- ✅ Order Response Box -->
-        <div id="orderResponse" style="display:none;" class="response-box"></div>
+        <!-- ✅ Toast Container -->
+        <div id="toastContainer" class="toast-container"></div>
 
         <!-- ✅ Loading Spinner -->
         <div id="loadingSpinner" class="loading-spinner" style="display:none;">
@@ -33,7 +33,6 @@
             <div class="player-id-box">
                 <h2 class="selection-title">Player ID লিখুন</h2>
                 <input type="text" id="playerId" placeholder="Enter your Player ID">
-                <div class="error-message" id="playerError"></div>
             </div>
         </div>
 
@@ -48,7 +47,6 @@
                     </div>
                 @endforeach
             </div>
-            <div class="error-message" id="packageError"></div>
         </div>
 
         <!-- Step 3: Payment Selection -->
@@ -88,18 +86,16 @@
 
             <div class="payment-details" id="paymentDetails"></div>
 
-            <!-- Transaction ID input (hidden by default for Wallet) -->
+            <!-- Transaction ID input -->
             <div id="trxBox" class="player-id-box" style="display:none;">
                 <h2 class="selection-title">Transaction ID লিখুন</h2>
                 <input type="text" id="trxId" placeholder="Enter Transaction ID">
-                <div class="error-message" id="trxError"></div>
             </div>
 
-            <!-- Payment Number input (hidden by default, only shown if needed) -->
+            <!-- Payment Number input -->
             <div id="paymentNumberBox" class="player-id-box" style="display:none;">
                 <h2 class="selection-title">Payment Number লিখুন</h2>
                 <input type="text" id="paymentNumber" placeholder="Enter Payment Number">
-                <div class="error-message" id="paymentNumberError"></div>
             </div>
         </div>
 
@@ -121,6 +117,37 @@
 @endsection
 
 @push('scripts')
+    <style>
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 50px;
+        }
+        .toast {
+            min-width: 220px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 14px;
+            animation: fadeInOut 4s forwards;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+        }
+        .toast.success { background: #28a745; }
+        .toast.error { background: #dc3545; }
+        .toast.info { background: #007bff; }
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateX(100%); }
+            10% { opacity: 1; transform: translateX(0); }
+            90% { opacity: 1; transform: translateX(0); }
+            100% { opacity: 0; transform: translateX(100%); }
+        }
+    </style>
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             let selectedPackage = null;
@@ -136,21 +163,20 @@
             const paymentNumberInput = document.getElementById("paymentNumber");
 
             const checkoutBtn = document.getElementById("checkoutBtn");
-            const orderResponse = document.getElementById("orderResponse");
             const loadingSpinner = document.getElementById("loadingSpinner");
 
-            function showResponse(type, message) {
-                orderResponse.style.display = "block";
-                orderResponse.className = "response-box " + type;
-                orderResponse.innerHTML = message;
-                loadingSpinner.style.display = "none";
-                checkoutBtn.disabled = false;
-                window.scrollTo({ top: 0, behavior: "smooth" });
+            // ✅ Toast Function
+            function showToast(type, message) {
+                const container = document.getElementById("toastContainer");
+                const toast = document.createElement("div");
+                toast.className = "toast " + type;
+                toast.textContent = message;
+                container.appendChild(toast);
+                setTimeout(() => toast.remove(), 4000);
             }
 
             function showLoading() {
                 loadingSpinner.style.display = "flex";
-                orderResponse.style.display = "none";
             }
 
             // Package selection
@@ -159,7 +185,6 @@
                     diamondOptions.forEach(o => o.classList.remove("selected"));
                     el.classList.add("selected");
                     selectedPackage = parseInt(el.dataset.id, 10);
-                    document.getElementById("packageError").textContent = "";
                 });
             });
 
@@ -182,7 +207,6 @@
                 <br><p>${selectedPayment.description}</p><br>
             `;
 
-                    // Wallet হলে কোনো trx input লাগবে না
                     if (selectedPayment.method === "Wallet") {
                         trxBox.style.display = "none";
                         paymentNumberBox.style.display = "none";
@@ -199,25 +223,27 @@
                 let valid = true;
 
                 if (!(pid.length >= 6 && pid.length <= 13)) {
-                    document.getElementById("playerError").textContent = "Player ID must be 6-13 digits!";
+                    showToast("error","Player ID must be 6-13 digits!");
+                    playerIdInput.focus();
                     valid = false;
-                } else document.getElementById("playerError").textContent = "";
+                }
 
                 if (!selectedPackage) {
-                    document.getElementById("packageError").textContent = "অনুগ্রহ করে প্যাকেজ নির্বাচন করুন!";
+                    showToast("error","অনুগ্রহ করে প্যাকেজ নির্বাচন করুন!");
                     valid = false;
                 }
 
                 if (!selectedPayment) {
-                    showResponse("error", "❌ অনুগ্রহ করে পেমেন্ট মেথড নির্বাচন করুন!");
+                    showToast("error","অনুগ্রহ করে পেমেন্ট মেথড নির্বাচন করুন!");
                     valid = false;
                 }
 
                 if (selectedPayment && selectedPayment.method !== "Wallet") {
                     if (trxId.length < 5) {
-                        document.getElementById("trxError").textContent = "Valid Transaction ID দিন!";
+                        showToast("error","Valid Transaction ID দিন!");
+                        trxIdInput.focus();
                         valid = false;
-                    } else document.getElementById("trxError").textContent = "";
+                    }
                 }
 
                 if (!valid) return;
@@ -242,19 +268,24 @@
                 })
                     .then(res => res.json())
                     .then(data => {
+                        checkoutBtn.disabled = false;
+                        loadingSpinner.style.display = "none";
                         if (data.status) {
-                            showResponse("success", "✅ অর্ডার সফলভাবে সম্পন্ন হয়েছে!<br>Order ID: " + data.order.id);
+                            showToast("success","✅ অর্ডার সফলভাবে সম্পন্ন হয়েছে! Order ID: " + data.order.id);
                             setTimeout(() => window.location.href = "/thank-you", 2000);
                         } else {
-                            showResponse("error", "❌ ব্যর্থ: " + data.message);
+                            showToast("error","❌ ব্যর্থ: " + data.message);
                             if (data.message.includes("Transaction ID and payment number")) {
                                 trxBox.style.display = "block";
                                 paymentNumberBox.style.display = "block";
+                                paymentNumberInput.focus({preventScroll:true});
                             }
                         }
                     })
                     .catch(() => {
-                        showResponse("error", "⚠️ সার্ভার এরর, আবার চেষ্টা করুন।");
+                        checkoutBtn.disabled = false;
+                        loadingSpinner.style.display = "none";
+                        showToast("error","⚠️ সার্ভার এরর, আবার চেষ্টা করুন।");
                     });
             });
         });
