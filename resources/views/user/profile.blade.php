@@ -18,7 +18,7 @@
 
 
     <!-- Summary Stats -->
-    <div style="display: flex; flex-wrap: wrap; gap: 3px; margin-bottom: 20px;">
+    <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px;">
         <div class="panelData" style="flex: 1 1 45%; padding: 10px; border-radius: 10px; text-align: center;">
             <div style="font-size: 14px; color: #ccc;">Total Orders</div>
             <div style="font-weight: 600; font-size: 16px;">{{ $totalOrders ?? 0 }}</div>
