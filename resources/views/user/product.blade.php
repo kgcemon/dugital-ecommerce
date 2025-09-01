@@ -126,7 +126,7 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-            padding: 50px;
+            padding-top: 155px;
         }
         .toast {
             min-width: 220px;
