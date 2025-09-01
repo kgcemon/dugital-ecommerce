@@ -312,21 +312,37 @@
         <span class="nav-label">Home</span>
     </a>
 
-    <a href="{{ url('/orders') }}" class="nav-item">
-        <!-- Shopping Bag SVG -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M6 2h12l1 4H5l1-4zm0 6h14v14H6V8z"/>
-        </svg>
-        <span class="nav-label">My Orders</span>
-    </a>
+    @auth
+        <!-- Logged in -->
+        <a href="{{ route('myOrders') }}" class="nav-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M6 2h12l1 4H5l1-4zm0 6h14v14H6V8z"/>
+            </svg>
+            <span class="nav-label">My Orders</span>
+        </a>
 
-    <a href="{{ url('/profile') }}" class="nav-item">
-        <!-- Person SVG -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 12c2.7 0 4.9-2.2 4.9-4.9S14.7 2.2 12 2.2 7.1 4.4 7.1 7.1 9.3 12 12 12zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
-        </svg>
-        <span class="nav-label">My Account</span>
-    </a>
+        <a href="{{ url('/profile') }}" class="nav-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 12c2.7 0 4.9-2.2 4.9-4.9S14.7 2.2 12 2.2 7.1 4.4 7.1 7.1 9.3 12 12 12zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
+            </svg>
+            <span class="nav-label">My Account</span>
+        </a>
+    @else
+        <!-- Guest -->
+        <a href="javascript:void(0)" class="nav-item" id="loginBtnNavOrders">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M6 2h12l1 4H5l1-4zm0 6h14v14H6V8z"/>
+            </svg>
+            <span class="nav-label">My Orders</span>
+        </a>
+
+        <a href="javascript:void(0)" class="nav-item" id="loginBtnNavProfile">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 12c2.7 0 4.9-2.2 4.9-4.9S14.7 2.2 12 2.2 7.1 4.4 7.1 7.1 9.3 12 12 12zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
+            </svg>
+            <span class="nav-label">My Account</span>
+        </a>
+    @endauth
 </div>
 
 <script src="{{ asset('assets/user/loginModal.js') }}" defer></script>

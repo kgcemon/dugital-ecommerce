@@ -27,6 +27,7 @@ Route::get('thank-you', [OrderController::class, 'thankYouPage'])->name('thankYo
 
 // Profile Page
 Route::get('profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile');
+Route::get('my-orders', [OrderController::class, 'myOrders'])->middleware('auth')->name('myOrders');
 
 // Authenticated Admin Routes
 Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
