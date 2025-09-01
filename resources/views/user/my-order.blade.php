@@ -7,7 +7,7 @@
 
         <!-- Page Title -->
         <div class="page-header mb-4 text-center">
-            <h2 class="fw-bold">My Orders</h2>
+            <h2 class="fw-bold text-white">My Orders</h2>
             <p class="text-muted">Your recent orders and their statuses</p>
         </div>
 
@@ -16,10 +16,9 @@
             <table class="order-table">
                 <thead>
                 <tr>
-                    <th>#</th>
                     <th>Order ID</th>
                     <th>Date</th>
-                    <th>Total</th>
+                    <th>Product</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -27,17 +26,16 @@
                 <tbody>
                 @forelse($orders as $index => $order)
                     <tr>
-                        <td>{{ $index + 1 }}</td>
                         <td>#{{ $order->id }}</td>
                         <td>{{ $order->created_at->format('d M Y') }}</td>
-                        <td>{{ number_format($order->total, 2) }} ৳</td>
+                        <td>{{$order->item->name}}</td>
                         <td>
                         <span class="status {{ strtolower($order->status) }}">
                             {{ ucfirst($order->status) }}
                         </span>
                         </td>
                         <td>
-{{--                            <a href="{{ route('orders.show', $order->id) }}" class="btn-view">View</a>--}}
+                            {{-- <a href="{{ route('orders.show', $order->id) }}" class="btn-view">View</a> --}}
                         </td>
                     </tr>
                 @empty
@@ -51,65 +49,93 @@
 
     </div>
 @endsection
-    <style>
-        .order-history {
-            overflow-x: auto;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-        .order-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .order-table thead {
-            background: #f8f9fa;
-        }
+
+<style>
+    .order-history {
+        overflow-x: auto;
+        background: linear-gradient(145deg, #1e1b38, #252250);
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        padding: 15px;
+    }
+    .order-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .order-table thead {
+        background: #2c2a4a;
+    }
+    .order-table th, .order-table td {
+        padding: 14px 16px;
+        text-align: center;
+        font-size: 14px;
+        border-bottom: 1px solid #3a3960;
+    }
+    .order-table th {
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 13px;
+        color: #ccc;
+    }
+    .order-table td {
+        color: #fff;
+    }
+    .status {
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 500;
+        display: inline-block;
+    }
+    .status.pending {
+        background: #ffc10733;
+        color: #ffc107;
+    }
+    .status.completed {
+        background: #28a74533;
+        color: #28a745;
+    }
+    .status.cancelled {
+        background: #dc354533;
+        color: #dc3545;
+    }
+    .btn-view {
+        display: inline-block;
+        padding: 6px 14px;
+        font-size: 13px;
+        font-weight: 500;
+        border-radius: 6px;
+        background: #00d4ff;
+        color: #000;
+        text-decoration: none;
+        transition: 0.2s;
+    }
+    .btn-view:hover {
+        background: #00a6cc;
+        color: #fff;
+    }
+
+    /* Scrollbar dark theme */
+    .order-history::-webkit-scrollbar {
+        height: 8px;
+    }
+    .order-history::-webkit-scrollbar-thumb {
+        background: rgba(255,255,255,0.2);
+        border-radius: 4px;
+    }
+    .order-history::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
         .order-table th, .order-table td {
-            padding: 14px 16px;
-            text-align: center;
-            border-bottom: 1px solid #eee;
-            font-size: 14px;
-        }
-        .order-table th {
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 13px;
-            color: #555;
-        }
-        .order-table td {
-            color: #333;
+            font-size: 12px;
+            padding: 10px 8px;
         }
         .status {
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 500;
+            font-size: 11px;
+            padding: 3px 8px;
         }
-        .status.pending {
-            background: #fff3cd;
-            color: #856404;
-        }
-        .status.completed {
-            background: #d4edda;
-            color: #155724;
-        }
-        .status.cancelled {
-            background: #f8d7da;
-            color: #721c24;
-        }
-        .btn-view {
-            display: inline-block;
-            padding: 6px 14px;
-            font-size: 13px;
-            font-weight: 500;
-            border-radius: 6px;
-            background: #007bff;
-            color: #fff;
-            text-decoration: none;
-            transition: 0.2s;
-        }
-        .btn-view:hover {
-            background: #0056b3;
-        }
-    </style>
+    }
+</style>
