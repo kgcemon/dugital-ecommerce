@@ -40,7 +40,7 @@
 
 
     <!-- Favicon -->
-    <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('/logo.png') }}" type="image/x-icon">
 
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
