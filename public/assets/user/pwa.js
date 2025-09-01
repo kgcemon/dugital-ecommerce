@@ -25,9 +25,9 @@ let deferredPrompt;
             animation: slideUp 0.4s ease;
         ">
             <h3 style="margin-bottom: 10px; font-size: 1rem;">Install Codmshop</h3>
-            <p style="font-size: 0.9rem; margin-bottom: 15px;">আমাদের App Download করুন</p>
+            <p style="font-size: 0.9rem; margin-bottom: 15px;">আমাদের App ডাউনলোড করুন</p>
             <button id="installBtn" style="
-                background: #00d4ff;
+                background: forestgreen;
                 border: none;
                 padding: 10px 18px;
                 border-radius: 8px;
