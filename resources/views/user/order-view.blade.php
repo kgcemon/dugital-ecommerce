@@ -165,6 +165,22 @@
         color: #dc3545;
     }
 
+
+    .status.Pending {
+        background: #ffc10733;
+        color: #ffc107;
+    }
+
+
+    .status.Paid {
+        background: #28a74533;
+        color: #28a745;
+    }
+    .status.Unpaid {
+        background: #dc354533;
+        color: #dc3545;
+    }
+
     /* Items Section */
     .items-section {
         display: flex;
