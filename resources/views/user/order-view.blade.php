@@ -43,7 +43,7 @@
         </div>
         <br>
         <br>
-        <div class=" status processing">
+        <div class="items-section">
             <div class="item-card">
                 <svg xmlns="http://www.w3.org/2000/svg"
                      width="24" height="24"
@@ -64,12 +64,12 @@
         <div class="items-section">
             <h3 class="section-title">Payment</h3>
             <div class="item-card">
-                <img src="{{ $order->paymentMethod->icon }}" alt="{{ $order->paymentMethod->method }}">
+                <img src="{{ $order->paymentMethod->icon }}" alt="{{ $order->paymentMethod->method }}" height="40" width="40">
                 <div class="item-info">
                     <span class="item-name">{{ $order->paymentMethod->method }}</span>
                     <span class="item-qty">{{ $order->transaction_id ." " . $order->number }}</span>
                 </div>
-                <span class="value status {{ strtolower($order->status) }}">{{ ucfirst($order->status) }}</span>
+                <span class="value status {{ strtolower($order->status) }}">{{ ucfirst($order->status) == 'hold' }}</span>
             </div>
         </div>
 
