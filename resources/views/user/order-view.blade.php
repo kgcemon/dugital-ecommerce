@@ -75,7 +75,7 @@
                             $paymentStatus = 'Pending';
                             break;
 
-                        case 'progressing':
+                        case 'processing':
                         case 'Delivery Running':
                         case 'delivered':
                             $paymentStatus = 'Paid';
