@@ -114,9 +114,9 @@
                     </div>
                 </form>
 
-                <div class="mt-3 d-flex justify-content-center">
-                    {{ $orders->appends(request()->query())->links() }}
-                </div>
+                    <div class="mt-3 d-flex justify-content-center">
+                        {{ $orders->appends(request()->query())->links() }}
+                    </div>
             </div>
         </div>
     </div>
