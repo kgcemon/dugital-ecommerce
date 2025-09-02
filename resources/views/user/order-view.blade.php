@@ -41,8 +41,8 @@
                     <div class="item-price">{{ number_format($order->item->price,2) }} ৳</div>
                 </div>
         </div>
-
-
+        <br>
+        <br>
         <div class="items-section">
             <div class="item-card">
                 <svg xmlns="http://www.w3.org/2000/svg"
