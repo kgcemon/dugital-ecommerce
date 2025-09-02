@@ -38,6 +38,9 @@ Route::get('thank-you', [OrderController::class, 'thankYouPage'])->name('thankYo
 Route::get('profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile');
 Route::get('my-orders', [OrderController::class, 'myOrders'])->middleware('auth')->name('myOrders');
 Route::get('order/{id}', [OrderController::class, 'orderView'])->middleware('auth')->name('orderView');
+Route::post('deposit', function () {
+    return "fgfwer";
+})->middleware('auth')->name('deposit');
 
 // Authenticated Admin Routes
 Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
