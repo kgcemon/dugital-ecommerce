@@ -69,7 +69,32 @@
                     <span class="item-name">{{ $order->paymentMethod->method }}</span>
                     <span class="item-qty">{{ $order->transaction_id ." " . $order->number }}</span>
                 </div>
-                <span class="value status {{ strtolower($order->status) }}">{{ ucfirst($order->status) == 'hold' }}</span>
+                @php
+                    switch ($order->status) {
+                        case 'hold':
+                            $paymentStatus = 'Pending';
+                            break;
+
+                        case 'progressing':
+                        case 'Delivery Running':
+                        case 'delivered':
+                            $paymentStatus = 'Paid';
+                            break;
+
+                        case 'cancelled':
+                            $paymentStatus = 'Unpaid';
+                            break;
+
+                        default:
+                            $paymentStatus = ucfirst($order->status);
+                            break;
+                    }
+                @endphp
+
+                <span class="value status {{ strtolower($paymentStatus) }}">
+    {{ $paymentStatus }}
+</span>
+
             </div>
         </div>
 
