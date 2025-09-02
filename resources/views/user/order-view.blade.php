@@ -60,6 +60,19 @@
             </div>
         </div>
 
+
+        <div class="items-section">
+            <h3 class="section-title">Payment</h3>
+            <div class="item-card">
+                <img src="{{ $order->payment_method->icon }}" alt="{{ $order->payment_method->method }}">
+                <div class="item-info">
+                    <span class="item-name">{{ $order->transaction_id }}</span>
+                    <span class="item-qty">Qty: {{ $order->number }}</span>
+                </div>
+                <span class="value status {{ strtolower($order->status) }}">{{ ucfirst($order->status) }}</span>
+            </div>
+        </div>
+
     </div>
 @endsection
 
