@@ -43,7 +43,7 @@
         </div>
         <br>
         <br>
-        <div class="items-section">
+        <div class="items-section status processing">
             <div class="item-card">
                 <svg xmlns="http://www.w3.org/2000/svg"
                      width="24" height="24"
