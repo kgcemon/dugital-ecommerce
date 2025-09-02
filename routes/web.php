@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\UsersController;
 use App\Http\Controllers\admin\VariantController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\user\OrderController;
 use App\Http\Controllers\user\SiteHomeScreenController;
@@ -14,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\OrdersController;
 use App\Http\Controllers\ProfileController;
+
+//admin
+Route::middleware('guest')->group(function () {
+    Route::get('login', [AuthenticatedSessionController::class, 'create'])
+        ->name('login');
+    Route::post('login', [AuthenticatedSessionController::class, 'store']);
+    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+});
 
 
 Route::get('/auth/google/redirect', [GoogleController::class, 'redirectToGoogle']);
@@ -70,11 +79,9 @@ Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
 
 
 Route::get('/{any}', function(){
-    return view('layouts.master');
+    return view('user.master');
 })->where('any','^(?!css|js|images|manifest\.json|service-worker\.js).*$');
 
 
 //user Route
 
-// Authentication Routes
-require __DIR__ . '/auth.php';
