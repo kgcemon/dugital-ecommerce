@@ -44,10 +44,15 @@
 
 
         <div class="items-section">
-            <h3 class="section-title">Message From Admin</h3>
+            <h3 class="section-title" style="padding-top: 7px;">Message From Admin</h3>
             <div class="item-card">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 12c2.7 0 4.9-2.2 4.9-4.9S14.7 2.2 12 2.2 7.1 4.4 7.1 7.1 9.3 12 12 12zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="24" height="24"
+                     fill="white"
+                     viewBox="0 0 24 24">
+                    <path d="M20 2H4C2.9 2 2 2.9 2 4v14c0
+           1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2zm-2
+           12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
                 </svg>
                 <div class="item-info">
                     <span class="item-qty">{{ $order->order_note ?? "No message" }}</span>
