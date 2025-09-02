@@ -115,7 +115,7 @@
                 </form>
 
                     <div class="mt-3">
-                        {{ $users->links('admin.layouts.partials.__pagination') }}
+                        {{ $orders->links('admin.layouts.partials.__pagination') }}
                     </div>
             </div>
         </div>
