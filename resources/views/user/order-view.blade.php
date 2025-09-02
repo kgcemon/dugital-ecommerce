@@ -64,7 +64,7 @@
         <div class="items-section">
             <h3 class="section-title">Payment</h3>
             <div class="item-card">
-                <img src="{{ $order->payment_method->paymentMethod->icon }}" alt="{{ $order->payment_method->paymentMethod->method }}">
+                <img src="{{ $order->paymentMethod->icon }}" alt="{{ $order->paymentMethod->method }}">
                 <div class="item-info">
                     <span class="item-name">{{ $order->number }}</span>
                     <span class="item-qty">TrxID: {{ $order->transaction_id }}</span>
