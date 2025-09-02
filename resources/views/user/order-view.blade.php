@@ -5,12 +5,6 @@
 @section('content')
     <div class="container py-3">
 
-        <!-- Page Header -->
-        <div class="page-header mb-3 text-center">
-            <h2 class="fw-bold text-white">Order #{{ $order->id }}</h2>
-            <p class="text-muted">Order details and items</p>
-        </div>
-
         <!-- Order Info Card -->
         <div class="order-detail-card">
             <div class="order-row">
@@ -38,7 +32,7 @@
                     <img src="/{{ $order->product->image }}" alt="{{ $order->product->name }}">
                     <div class="item-info">
                         <span class="item-name">{{ $order->item->name }}</span>
-                        <span class="item-qty">Qty: {{ $order->item->quantity }}</span>
+                        <span class="item-qty">Qty: {{ $order->quantity }}</span>
                     </div>
                     <div class="item-price">{{ number_format($order->item->price,2) }} ৳</div>
                 </div>
@@ -64,6 +58,8 @@
         padding: 15px 20px;
         color: #fff;
         margin-bottom: 20px;
+        margin-left: 5px;
+        margin-right: 5px;
     }
 
     .order-row {
