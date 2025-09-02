@@ -40,7 +40,9 @@
                 </tbody>
             </table>
         </div>
-
+        <div class="mt-3">
+            {{ $orders->links('admin.layouts.partials.__pagination') }}
+        </div>
     </div>
 @endsection
 
