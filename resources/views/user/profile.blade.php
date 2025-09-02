@@ -60,7 +60,7 @@
         <!-- Recent Transactions -->
         <div>
             <div style="font-weight: 600; font-size: 17px; margin-bottom: 12px;">Recent Transactions</div>
-            <div style="max-height: 220px; overflow-y: auto;">
+            <div style="overflow-y: auto;">
                 @forelse($recentTransactions as $txn)
                     <div class="panelData" style="
                     display: flex;
