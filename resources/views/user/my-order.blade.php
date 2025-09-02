@@ -45,15 +45,12 @@
 @endsection
 
 <style>
-    .container{
-        padding: 10px;
-    }
     .order-history {
         overflow-x: auto;
         background: linear-gradient(145deg, #1e1b38, #252250);
         border-radius: 5px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-        padding: 15px;
+        padding: 10px;
     }
     .order-table {
         width: 100%;
