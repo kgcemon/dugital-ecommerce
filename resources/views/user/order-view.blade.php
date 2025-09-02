@@ -50,7 +50,7 @@
                     <path d="M12 12c2.7 0 4.9-2.2 4.9-4.9S14.7 2.2 12 2.2 7.1 4.4 7.1 7.1 9.3 12 12 12zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
                 </svg>
                 <div class="item-info">
-                    <span class="item-name">{{ $order->item->order_note ?? "No message" }}</span>
+                    <span class="item-name">{{ $order->order_note ?? "No message" }}</span>
                 </div>
 
             </div>
@@ -103,12 +103,17 @@
         text-align: center;
     }
 
-    .status.pending {
+    .status.hold {
         background: #ffc10733;
         color: #ffc107;
     }
 
-    .status.completed {
+    .status.processing {
+        background: #28a74533;
+        color: #28a745;
+    }
+
+    .status.delivered {
         background: #28a74533;
         color: #28a745;
     }
