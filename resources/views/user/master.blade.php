@@ -169,6 +169,10 @@
             color: #00d4ff;
         }
 
+        .actv{
+            color: #00d4ff;
+        }
+
         .bottom-nav .material-icons {
             font-size: 24px;
             margin-bottom: 2px;
@@ -314,7 +318,7 @@
 
     @auth
         <!-- Logged in -->
-        <a href="{{ route('myOrders') }}" class="nav-item">
+        <a href="{{ route('myOrders') }}" class="nav-item {{request('/my-orders') ? 'actv' : '' }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M6 2h12l1 4H5l1-4zm0 6h14v14H6V8z"/>
             </svg>
