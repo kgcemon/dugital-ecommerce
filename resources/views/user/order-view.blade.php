@@ -44,7 +44,6 @@
 
 
         <div class="items-section">
-            <h3 class="section-title" style="padding-top: 7px;">Message From Admin</h3>
             <div class="item-card">
                 <svg xmlns="http://www.w3.org/2000/svg"
                      width="24" height="24"
