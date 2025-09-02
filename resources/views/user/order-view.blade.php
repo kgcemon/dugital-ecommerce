@@ -33,7 +33,7 @@
         <div class="items-section">
             <h3 class="section-title">Items</h3>
                 <div class="item-card">
-                    <img src="/{{ $order->product->image }}:" alt="{{ $order->product->name }}">
+                    <img src="/{{ $order->product->image }}" alt="{{ $order->product->name }}">
                     <div class="item-info">
                         <span class="item-name">{{ $order->item->name }}</span>
                         <span class="item-qty">Qty: {{ $order->quantity }}</span>
@@ -46,7 +46,7 @@
         <div class="items-section">
             <h3 class="section-title">Message</h3>
             <div class="item-card">
-                <img src="/{{ $order->product->image }}:" alt="{{ $order->product->name }}">
+                <img src="/{{ $order->product->image }}" alt="{{ $order->product->name }}">
                 <div class="item-info">
                     <span class="item-name">{{ $order->item->order_note }}</span>
                 </div>
