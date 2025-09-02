@@ -16,6 +16,10 @@
                 <span class="value">{{ $order->created_at->format('d M Y, H:i') }}</span>
             </div>
             <div class="order-row">
+                <span class="label">{{$order->product->input_name}}</span>
+                <span class="value">{{ $order->customer_data }}</span>
+            </div>
+            <div class="order-row">
                 <span class="label">Total:</span>
                 <span class="value">{{ number_format($order->total,2) }} ৳</span>
             </div>
@@ -57,9 +61,7 @@
         border-radius: 15px;
         padding: 15px 20px;
         color: #fff;
-        margin-bottom: 20px;
-        margin-left: 5px;
-        margin-right: 5px;
+        margin: 10px 0;
     }
 
     .order-row {
