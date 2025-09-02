@@ -3,7 +3,7 @@
 @section('title', "Profile")
 
 @section('content')
-    <div style="max-width: 420px; margin: 20px auto; padding: 20px; border-radius: 18px;
+    <div style="max-width: 420px; margin: 0px auto; padding: 20px; border-radius: 0px;
     background: rgba(48,43,99,0.9);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255,255,255,0.1);
