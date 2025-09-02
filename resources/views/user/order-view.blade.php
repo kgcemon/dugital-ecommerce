@@ -58,7 +58,7 @@
         background: rgba(255,255,255,0.05);
         backdrop-filter: blur(12px);
         border: 1px solid rgba(255,255,255,0.15);
-        border-radius: 15px;
+        border-radius: 5px;
         padding: 15px 20px;
         color: #fff;
         margin: 10px 0;
