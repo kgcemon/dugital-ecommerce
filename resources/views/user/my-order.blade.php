@@ -40,7 +40,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="mt-3">
+        <div class="order-history">
             {{ $orders->links('admin.layouts.partials.__pagination') }}
         </div>
     </div>
