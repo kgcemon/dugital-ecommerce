@@ -298,20 +298,21 @@
 
 
 <!-- Modal -->
-<div id="loginModal" class="google-login">
-    <div class="card">
-        <a href="{{ url('/auth/google/redirect') }}" class="btn-google-login">
-            <svg class="google-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 533.5 544.3" width="20" height="20">
-                <path fill="#4285F4" d="M533.5 278.4c0-18.4-1.5-36.1-4.3-53.4H272v101h146.9c-6.4 34.5-25.3 63.8-54 83.5v69.4h87.1c50.8-46.8 80.5-115.9 80.5-200.5z"/>
-                <path fill="#34A853" d="M272 544.3c73.3 0 134.9-24.2 179.8-65.7l-87.1-69.4c-24.2 16.2-55.1 25.7-92.7 25.7-71 0-131-47.9-152.3-112.3H30.9v70.9C75.7 485.3 167.2 544.3 272 544.3z"/>
-                <path fill="#FBBC05" d="M119.7 320.6c-10.6-31.3-10.6-64.6 0-95.9V153.8H30.9c-43.7 87.2-43.7 190.1 0 277.3l88.8-70.5z"/>
-                <path fill="#EA4335" d="M272 107.7c39.9-.6 77.8 14 106.7 40.4l80.1-80.1C406.8 24.7 345.3 0 272 0 167.2 0 75.7 58.9 30.9 153.8l88.8 70.9c21.3-64.4 81.3-112.3 152.3-116.9z"/>
-            </svg>
+<div id="depositModal" class="google-login">
+    <div class="card" style="position:relative; background:#1c1b2d; padding:25px; border-radius:12px; max-width:400px; width:90%; color:white; text-align:center;">
+        <span id="depositClose" class="close-btn">&times;</span>
+        <h2 style="margin-bottom:15px;">💳 Deposit Money</h2>
 
-            Login with Google
-        </a>
-
-        <span id="closeModal" class="close-btn">&times;</span>
+        <form id="depositForm">
+            <input type="number" id="depositAmount" name="amount"
+                   placeholder="Enter amount (৳)"
+                   style="width:100%; padding:12px; border-radius:8px; border:none; outline:none; margin-bottom:5px; font-size:16px;">
+            <div id="depositError" style="color:#ff4d4f; font-size:14px; text-align:left; margin-bottom:10px;"></div>
+            <button type="submit"
+                    style="width:100%; padding:12px; border:none; border-radius:8px; background:#00d4ff; color:#fff; font-weight:bold; font-size:16px; cursor:pointer; transition:.3s;">
+                Deposit Now
+            </button>
+        </form>
     </div>
 </div>
 
@@ -388,38 +389,79 @@
     const walletTrigger = document.getElementById("walletTrigger");
     const depositClose = document.getElementById("depositClose");
     const depositForm = document.getElementById("depositForm");
+    const depositAmount = document.getElementById("depositAmount");
+    const depositError = document.getElementById("depositError");
 
-    // Open modal on profile pic click
+    // Open modal
     walletTrigger.addEventListener("click", () => {
         depositModal.classList.add("show");
+        depositError.innerText = "";
+        depositAmount.value = "";
     });
 
     // Close modal
-    depositClose.addEventListener("click", () => {
-        depositModal.classList.remove("show");
-    });
+    depositClose.addEventListener("click", () => depositModal.classList.remove("show"));
 
-    // Close when clicking outside card
+    // Close on outside click
     window.addEventListener("click", (e) => {
-        if (e.target === depositModal) {
+        if(e.target === depositModal){
             depositModal.classList.remove("show");
         }
     });
 
-    // Handle form submit
+    // Handle deposit submit
     depositForm.addEventListener("submit", function(e){
         e.preventDefault();
-        let amount = document.getElementById("depositAmount").value;
-        if(amount <= 0){
-            alert("Please enter a valid deposit amount!");
+        depositError.innerText = ""; // clear previous error
+
+        let amount = depositAmount.value;
+
+        // simple front-end validation
+        if(!amount || amount <= 0){
+            depositError.innerText = "Please enter a valid amount.";
             return;
         }
-        // এখানে আপনি AJAX/PHP দিয়ে deposit request পাঠাতে পারেন
-        alert("Deposit request submitted: ৳" + amount);
-        depositModal.classList.remove("show");
-        depositForm.reset();
+
+        // AJAX POST
+        fetch("{{ url('/deposit') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+            },
+            body: JSON.stringify({
+                type: 'deposit',
+                amount: amount
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                if(data.errors && data.errors.amount){
+                    depositError.innerText = data.errors.amount[0];
+                } else if(data.success){
+                    depositModal.classList.remove("show");
+                    depositAmount.value = "";
+                    depositError.innerText = "";
+                    // Optional: update wallet balance live
+                    const walletText = document.querySelector('#walletTrigger');
+                    if(walletText){
+                        walletText.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path>
+                        <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path>
+                    </svg> ৳ ${data.wallet}
+                    <img src="{{ Auth::user()->image}}" alt="user-profile-picture" class="profile-img">
+                `;
+                    }
+                }
+            })
+            .catch(err => {
+                depositError.innerText = "Something went wrong. Please try again.";
+                console.error(err);
+            });
     });
 </script>
+
 
 
 <script src="{{ asset('assets/user/loginModal1.js') }}" defer></script>
