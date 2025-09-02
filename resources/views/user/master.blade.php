@@ -385,7 +385,6 @@
             depositModal.classList.remove("show");
         });
 
-        // বাইরের ক্লিক করলে Modal বন্ধ
         window.addEventListener("click", (e) => {
             if (e.target === depositModal) {
                 depositModal.classList.remove("show");

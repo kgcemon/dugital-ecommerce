@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\UsersController;
 use App\Http\Controllers\admin\VariantController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\user\DepositController;
 use App\Http\Controllers\user\OrderController;
 use App\Http\Controllers\user\SiteHomeScreenController;
 use App\Http\Controllers\user\SiteProductsScreenController;
@@ -38,9 +39,7 @@ Route::get('thank-you', [OrderController::class, 'thankYouPage'])->name('thankYo
 Route::get('profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile');
 Route::get('my-orders', [OrderController::class, 'myOrders'])->middleware('auth')->name('myOrders');
 Route::get('order/{id}', [OrderController::class, 'orderView'])->middleware('auth')->name('orderView');
-Route::post('deposit', function () {
-    return "fgfwer";
-})->middleware('auth')->name('deposit');
+Route::post('deposit',[DepositController::class, 'deposit'])->middleware('auth')->name('deposit');
 
 // Authenticated Admin Routes
 Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
