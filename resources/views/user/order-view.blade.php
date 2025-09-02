@@ -48,7 +48,7 @@
             <div class="item-card">
                 <img src="/{{ $order->product->image }}" alt="{{ $order->product->name }}">
                 <div class="item-info">
-                    <span class="item-name">{{ $order->item->order_note }}</span>
+                    <span class="item-name">{{ $order->item->order_note ?? "No message" }}</span>
                 </div>
 
             </div>
