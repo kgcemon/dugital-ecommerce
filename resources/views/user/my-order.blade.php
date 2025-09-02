@@ -83,11 +83,15 @@
         font-weight: 500;
         display: inline-block;
     }
-    .status.pending {
+    .status.hold {
         background: #ffc10733;
         color: #ffc107;
     }
-    .status.completed {
+    .status.processing {
+        background: #28a74533;
+        color: #28a745;
+    }
+    .status.delivered {
         background: #28a74533;
         color: #28a745;
     }
