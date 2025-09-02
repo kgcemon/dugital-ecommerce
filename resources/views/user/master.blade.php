@@ -265,13 +265,13 @@
 
         @auth
             <!-- Wallet + Balance + Profile -->
-            <a href="{{ url('/profile') }}" class="account-row">
+            <div class="account-row" id="walletTrigger" style="cursor:pointer;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path>
                     <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path>
-                </svg>৳ {{ Auth::user()->wallet ?? 0 }}
+                </svg> ৳ {{ Auth::user()->wallet ?? 0 }}
                 <img src="{{ Auth::user()->image}}" alt="user-profile-picture" class="profile-img">
-            </a>
+            </div>
         @else
             <!-- Login button for guests -->
             <div class="wallet-balance">
@@ -281,23 +281,24 @@
     </div>
 </header>
 
-
-<!-- Modal -->
-<div id="loginModal" class="google-login">
-    <div class="card">
-        <a href="{{ url('/auth/google/redirect') }}" class="btn-google-login">
-            <svg class="google-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 533.5 544.3" width="20" height="20">
-                <path fill="#4285F4" d="M533.5 278.4c0-18.4-1.5-36.1-4.3-53.4H272v101h146.9c-6.4 34.5-25.3 63.8-54 83.5v69.4h87.1c50.8-46.8 80.5-115.9 80.5-200.5z"/>
-                <path fill="#34A853" d="M272 544.3c73.3 0 134.9-24.2 179.8-65.7l-87.1-69.4c-24.2 16.2-55.1 25.7-92.7 25.7-71 0-131-47.9-152.3-112.3H30.9v70.9C75.7 485.3 167.2 544.3 272 544.3z"/>
-                <path fill="#FBBC05" d="M119.7 320.6c-10.6-31.3-10.6-64.6 0-95.9V153.8H30.9c-43.7 87.2-43.7 190.1 0 277.3l88.8-70.5z"/>
-                <path fill="#EA4335" d="M272 107.7c39.9-.6 77.8 14 106.7 40.4l80.1-80.1C406.8 24.7 345.3 0 272 0 167.2 0 75.7 58.9 30.9 153.8l88.8 70.9c21.3-64.4 81.3-112.3 152.3-116.9z"/>
-            </svg>
-            Login with Google
-        </a>
-        <span id="closeModal" class="close-btn">&times;</span>
+@guest()
+    <!-- Modal -->
+    <div id="loginModal" class="google-login">
+        <div class="card">
+            <a href="{{ url('/auth/google/redirect') }}" class="btn-google-login">
+                <svg class="google-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 533.5 544.3" width="20" height="20">
+                    <path fill="#4285F4" d="M533.5 278.4c0-18.4-1.5-36.1-4.3-53.4H272v101h146.9c-6.4 34.5-25.3 63.8-54 83.5v69.4h87.1c50.8-46.8 80.5-115.9 80.5-200.5z"/>
+                    <path fill="#34A853" d="M272 544.3c73.3 0 134.9-24.2 179.8-65.7l-87.1-69.4c-24.2 16.2-55.1 25.7-92.7 25.7-71 0-131-47.9-152.3-112.3H30.9v70.9C75.7 485.3 167.2 544.3 272 544.3z"/>
+                    <path fill="#FBBC05" d="M119.7 320.6c-10.6-31.3-10.6-64.6 0-95.9V153.8H30.9c-43.7 87.2-43.7 190.1 0 277.3l88.8-70.5z"/>
+                    <path fill="#EA4335" d="M272 107.7c39.9-.6 77.8 14 106.7 40.4l80.1-80.1C406.8 24.7 345.3 0 272 0 167.2 0 75.7 58.9 30.9 153.8l88.8 70.9c21.3-64.4 81.3-112.3 152.3-116.9z"/>
+                </svg>
+                Login with Google
+            </a>
+            <span id="closeModal" class="close-btn">&times;</span>
+        </div>
     </div>
-</div>
 
+@endguest
 
 <main>
     @yield('content')
@@ -345,7 +346,56 @@
     @endauth
 </div>
 
-<script src="{{ asset('assets/user/loginModal1.js') }}" defer></script>
+@auth
+    <!-- Deposit Modal -->
+    <div id="depositModal" class="google-login">
+        <div class="card">
+            <span id="closeDeposit" class="close-btn">&times;</span>
+            <h3 style="margin-bottom:15px;">Deposit Money</h3>
+
+            <form action="{{ url('/deposit') }}" method="POST">
+                @csrf
+                <input type="number" name="amount" placeholder="Enter Amount" required
+                       style="width:100%;padding:10px;margin-bottom:10px;border:1px solid #ccc;border-radius:5px;">
+                <button type="submit"
+                        style="width:100%;padding:10px;background:#28a745;color:#fff;border:none;border-radius:5px;font-weight:bold;cursor:pointer;">
+                    Deposit Now
+                </button>
+            </form>
+        </div>
+    </div>
+@endauth
+
+
+@guest()
+    <script src="{{ asset('assets/user/loginModal1.js') }}" defer></script>
+@endguest
+
+@auth
+    <script>
+        const walletTrigger = document.getElementById("walletTrigger");
+        const depositModal = document.getElementById("depositModal");
+        const closeDeposit = document.getElementById("closeDeposit");
+
+        walletTrigger.addEventListener("click", () => {
+            depositModal.classList.add("show");
+        });
+
+        closeDeposit.addEventListener("click", () => {
+            depositModal.classList.remove("show");
+        });
+
+        // বাইরের ক্লিক করলে Modal বন্ধ
+        window.addEventListener("click", (e) => {
+            if (e.target === depositModal) {
+                depositModal.classList.remove("show");
+            }
+        });
+    </script>
+@endauth
+
+
+
 @stack('scripts')
 </body>
 </html>
