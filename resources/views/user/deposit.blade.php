@@ -10,6 +10,7 @@
 
 </style>
 <!-- Step 3: Payment Selection -->
+<br>
 <div class="selection-panel body" data-step="3" id="step3">
     <h2 class="selection-title">পেমেন্ট পদ্ধতি নির্বাচন করুন</h2>
 

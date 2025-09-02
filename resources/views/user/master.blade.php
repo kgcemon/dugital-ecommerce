@@ -251,7 +251,7 @@
         <noscript><link rel="stylesheet" href="{{ asset('assets/user/home.css?v=133') }}"></noscript>
     @endif
 
-    @if (Request::is('product*') || Request::is('thank-you*'))
+    @if (Request::is('product*') || Request::is('thank-you*') || Request::is('deposit*'))
     <link rel="stylesheet" href="{{ asset('assets/user/product.css?v=14') }}" as="style" onload="this.rel='stylesheet'">
     @endif
     @stack('head')
