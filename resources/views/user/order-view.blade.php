@@ -60,14 +60,15 @@
             </div>
         </div>
 
-
+        <br>
+        <br>
         <div class="items-section">
             <h3 class="section-title">Payment</h3>
             <div class="item-card">
                 <img src="{{ $order->paymentMethod->icon }}" alt="{{ $order->paymentMethod->method }}">
                 <div class="item-info">
-                    <span class="item-name">{{ $order->number }}</span>
-                    <span class="item-qty">TrxID: {{ $order->transaction_id }}</span>
+                    <span class="item-name">{{ $order->paymentMethod->method }}</span>
+                    <span class="item-qty">{{ $order->transaction_id .'\n' . $order->number }}</span>
                 </div>
                 <span class="value status {{ strtolower($order->status) }}">{{ ucfirst($order->status) }}</span>
             </div>
