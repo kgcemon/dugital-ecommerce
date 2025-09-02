@@ -308,7 +308,7 @@
 </main>
 
 <div class="bottom-nav">
-    <a href="{{ url('/') }}" class="nav-item">
+    <a href="{{ url('/') }}" class="nav-item {{ Request::is('/') ? 'active' : '' }}">
         <!-- Home SVG -->
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
             <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
@@ -325,7 +325,7 @@
             <span class="nav-label">My Orders</span>
         </a>
 
-        <a href="{{ url('/profile') }}" class="nav-item">
+        <a href="{{ url('/profile') }}" class="nav-item {{ Request::is('/profile')? 'active' : '' }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 12c2.7 0 4.9-2.2 4.9-4.9S14.7 2.2 12 2.2 7.1 4.4 7.1 7.1 9.3 12 12 12zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
             </svg>
