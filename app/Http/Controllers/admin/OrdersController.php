@@ -41,33 +41,58 @@ class OrdersController extends Controller
     }
 
 
-
     public function update(Request $request, Order $order)
     {
         try {
-            $request->validate([
+            // ✅ Validate request
+            $validated = $request->validate([
                 'status' => 'required|in:hold,processing,Delivery Running,delivered,cancelled,refunded',
+                'order_note' => 'nullable|string|max:500',
             ]);
 
-            if($request->input('order_note')) $order->order_note = $request->input('order_note');
+            // পুরানো status store করা হলো condition check করার জন্য
+            $previousStatus = $order->status;
 
-            $order->status = $request->status;
-            if ($order->product->name == 'Wallet' && $request->status == 'delivered' && $order->status == 'hold' || $order->status == 'processing') {
-                $user = User::where('id',$order->user_id)->first();
-                $user->wallet += $order->total;
-                $user->save();
-            }elseif ($order->product->name == 'Wallet' && $request->status == 'refunded' && $order->status == 'processing' || $order->status == 'Delivery Running') {
-                $user = User::where('id',$order->user_id)->first();
-                $user->wallet += $order->total;
-                $user->save();
+            // ✅ Order note update
+            if (!empty($validated['order_note'])) {
+                $order->order_note = $validated['order_note'];
             }
+
+            // ✅ Update status
+            $order->status = $validated['status'];
+
+            // ✅ Wallet handling
+            $user = User::find($order->user_id);
+
+            if ($order->product->name === 'Wallet') {
+                // Wallet type order → Add balance only when moving to delivered
+                if ($previousStatus === 'hold' || $previousStatus === 'processing') {
+                    if ($validated['status'] === 'delivered') {
+                        $user->increment('wallet', $order->total);
+                    }
+                }
+            } else {
+                // Non-wallet product → Refund case
+                if ($previousStatus === 'processing' || $previousStatus === 'Delivery Running') {
+                    if ($validated['status'] === 'refunded') {
+                        $user->increment('wallet', $order->total);
+                    }
+                }
+            }
+
+            // ✅ Save order
             $order->save();
-            return redirect()->route('admin.orders.index')
+
+            return redirect()
+                ->route('admin.orders.index')
                 ->with('success', 'Order status updated successfully.');
-        }catch (\Exception $exception){
-            return back()->with('error', $exception->getMessage());
+
+        } catch (\Throwable $exception) {
+
+            return back()->with('error', 'Failed to update order: ' . $exception->getMessage());
         }
     }
+
 
     public function editFrom($id){
 
