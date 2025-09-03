@@ -15,9 +15,15 @@
 
     <!-- Payment Selection -->
     <br>
+
+
+    <div class="selection-panel body">
+        {{$amount}}
+    </div>
+
+
     <div class="selection-panel body" id="step3">
         <h2 class="selection-title">পেমেন্ট পদ্ধতি নির্বাচন করুন</h2>
-
         <div class="payment-methods" style="display:flex; flex-wrap:wrap; gap:10px;">
             @foreach($payment as $method)
                 <div class="payment-option
