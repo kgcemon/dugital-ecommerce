@@ -18,17 +18,7 @@
 
 
     <div class="selection-panel body">
-        @foreach($payment as $method)
-            <div class="payment-option"
-                 style="flex:1 1 calc(33.333% - 10px); padding:10px; border:1px solid #ccc; border-radius:8px; cursor:pointer;">
-
-                {{ $method->method }}
-                @if($method->method === 'Wallet' )
-                    <img src="{{ $method->icon }}" alt="{{ $method->method }}" style="height:25px; margin-right:5px;">
-                    {{$amount}}৳
-                @endif
-            </div>
-        @endforeach
+        <img src="/wallet.png" alt="wallet" style="height:25px; margin-right:5px;"> {{$amount}}
     </div>
     <br>
     <div class="selection-panel body" id="step3">
