@@ -46,13 +46,17 @@ class OrdersController extends Controller
     {
         try {
             $request->validate([
-                'status' => 'required|in:hold,processing,Delivery Running,delivered,cancelled',
+                'status' => 'required|in:hold,processing,Delivery Running,delivered,cancelled,refunded',
             ]);
 
             if($request->input('order_note')) $order->order_note = $request->input('order_note');
 
             $order->status = $request->status;
-            if ($order->product->name == 'Wallet' && $request->status == 'delivered') {
+            if ($order->product->name == 'Wallet' && $request->status == 'delivered' && $order->status == 'hold' || $order->status == 'processing') {
+                $user = User::where('id',$order->user_id)->first();
+                $user->wallet += $order->total;
+                $user->save();
+            }elseif ($order->product->name == 'Wallet' && $request->status == 'refunded' && $order->status == 'processing' || $order->status == 'Delivery Running') {
                 $user = User::where('id',$order->user_id)->first();
                 $user->wallet += $order->total;
                 $user->save();

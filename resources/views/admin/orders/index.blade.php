@@ -137,6 +137,7 @@
                                 <option value="delivered">Completed</option>
                                 <option value="Delivery Running">Delivery Running</option>
                                 <option value="cancelled">Cancelled</option>
+                                <option value="refunded">Refunded</option>
                             </select>
                         </div>
                         <div class="mb-3">
