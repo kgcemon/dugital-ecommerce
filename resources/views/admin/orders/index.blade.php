@@ -76,14 +76,18 @@
                                     <td style="font-size: 10px">{{ $order->created_at ? $order->created_at->diffForHumans() : 'N/A' }}</td>
                                     <td>
                                         <div class="d-flex justify-content-center gap-2">
-                                            <button class="btn btn-sm btn-warning p-2"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#updateStatusModal"
-                                                    data-id="{{ $order->id }}"
-                                                    data-status="{{ $order->status }}"
-                                                    data-note="{{ $order->order_note }}">
-                                                <i class="bi bi-pencil-square"></i> Update
-                                            </button>
+                                          @if($order->status != 'delivered' || $order->status != 'processing' || $order->status != 'cancelled')
+
+                                                <button class="btn btn-sm btn-warning p-2"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#updateStatusModal"
+                                                        data-id="{{ $order->id }}"
+                                                        data-status="{{ $order->status }}"
+                                                        data-note="{{ $order->order_note }}">
+                                                    <i class="bi bi-pencil-square"></i> Update
+                                                </button>
+
+                                          @endif
 
                                             <a href="{{ route('admin.orders.show', $order->id) }}" class="btn btn-sm btn-info p-2">
                                                 <i class="bi bi-eye"></i> View
