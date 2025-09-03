@@ -59,8 +59,8 @@
                                         <input type="checkbox" name="order_ids[]" value="{{ $order->id }}" class="orderCheckbox">
                                     </td>
                                     <td>{{$order->id}}</td>
-                                    <td>{{ $order->product->name. '\n' . $order->item->name ?? '' }}</td>
-                                    <td>{{ $order->product->input_name. '\n' . $order->customer_data ?? '' }}</td>
+                                    <td>{{$order->product->name . '\n' . $order->item->name ?? '' }}</td>
+                                    <td>{{$order->product->input_name . '\n' . $order->customer_data ?? '' }}</td>
                                     <td>{{ number_format($order->total, 2) }}</td>
                                     <td>
                                         @php
