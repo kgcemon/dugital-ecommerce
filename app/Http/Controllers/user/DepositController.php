@@ -27,22 +27,30 @@ class DepositController extends Controller
             'transaction_id' => 'required',
             'payment_number' => 'sometimes|nullable|numeric',
         ]);
-        $user = $request->user();
-        $product = Product::where('name', 'Wallet')->first();
-        $amount = (integer)$request->input("amount");
-        if(!$product){
-            return back()->with('error', 'Deposit temporarily unavailable');
+        try {
+            $user = $request->user();
+            $product = Product::where('name', 'Wallet')->first();
+            $amount = (integer)$request->input("amount");
+            if(!$product){
+                return back()->with('error', 'Deposit temporarily unavailable');
+            }
+           $order =  Order::create([
+                'user_id' => $user->id,
+                'product_id' => $product->id,
+                'quantity' => 1,
+                'total' => $amount,
+                'customer_data' => "Deposit $amount",
+                'payment_method' => $request->input("payment_method"),
+                'transaction_id' => $request->input("transaction_id"),
+                'number' => $request->input("number"),
+            ]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Deposit successful',
+                'data' => $order,
+            ]);
+        }catch (\Exception $exception){
+            return response()->json(['error' => $exception->getMessage()]);
         }
-        Order::create([
-            'user_id' => $user->id,
-            'product_id' => $product->id,
-            'quantity' => 1,
-            'total' => $amount,
-            'customer_data' => "Deposit $amount",
-            'payment_method' => $request->input("payment_method"),
-            'transaction_id' => $request->input("transaction_id"),
-            'number' => $request->input("number"),
-        ]);
-        return view('user.thank-you');
     }
 }
