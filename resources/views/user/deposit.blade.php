@@ -21,7 +21,7 @@
         <img src="wallet.png" alt="wallet" style="height:25px; margin-right:5px;"> {{$amount}}
     </div>
     <br>
-    <div class="card body">
+    <div class="selection-panel body">
         @if (session('error'))
             {{ session('error') }}
         @endif
@@ -39,7 +39,6 @@
                      data-method="{{ $method->method }}"
                      data-description="{{ $method->description }}">
                     <img src="{{ $method->icon }}" alt="{{ $method->method }}" style="height:25px; margin-right:5px;">
-                    {{ $method->method }}
                 </div>
             @endforeach
         </div>
