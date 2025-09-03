@@ -129,7 +129,7 @@
                 }
 
                 // POST request
-                fetch("{{ url('/deposit') }}", {
+                fetch("{{ url('/add-money') }}", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
