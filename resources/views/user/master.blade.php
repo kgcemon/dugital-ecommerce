@@ -353,7 +353,7 @@
             <span id="closeDeposit" class="close-btn">&times;</span>
             <h3 style="margin-bottom:15px;">Deposit Money</h3>
 
-            <form action="{{ url('/deposit') }}" method="POST">
+            <form action="{{ url('/deposit') }}" method="GET">
                 @csrf
                 <input type="number" name="amount" placeholder="Enter Amount" required
                        style="width:100%;padding:10px;margin-bottom:10px;border:1px solid #ccc;border-radius:5px;">
