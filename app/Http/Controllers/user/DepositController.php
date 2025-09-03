@@ -34,7 +34,7 @@ class DepositController extends Controller
             if(!$product){
                 return back()->with('error', 'Deposit temporarily unavailable');
             }
-           $order =  Order::create([
+            Order::create([
                 'user_id' => $user->id,
                 'product_id' => $product->id,
                 'quantity' => 1,
@@ -45,12 +45,14 @@ class DepositController extends Controller
                 'number' => $request->input("number"),
             ]);
             return response()->json([
-                'success' => true,
+                'status' => true,
                 'message' => 'Deposit successful',
-                'data' => $order,
             ]);
         }catch (\Exception $exception){
-            return response()->json(['error' => $exception->getMessage()]);
+            return response()->json([
+                'status' => false,
+                'message' => $exception->getMessage(),
+            ]);
         }
     }
 }
