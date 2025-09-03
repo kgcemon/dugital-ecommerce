@@ -36,6 +36,17 @@ class DepositController extends Controller
 
             $status = 'hold';
 
+            // Duplicate trxID চেক (only if provided)
+            if (!empty($validate['transaction_id'])) {
+                $checkDuplicate = Order::where('transaction_id', $validate['transaction_id'])->count();
+                if ($checkDuplicate > 0) {
+                    return response()->json([
+                        'status'  => false,
+                        'message' => 'This transaction ID is already used.',
+                    ], 409);
+                }
+            }
+
             $paySMS = null;
             if (!empty($validate['transaction_id'])) {
                 $paySMS = PaymentSms::where('trxID', $validate['transaction_id'])
