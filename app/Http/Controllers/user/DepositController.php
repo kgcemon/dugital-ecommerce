@@ -11,7 +11,7 @@ class DepositController extends Controller
 {
     public function deposit(Request $request){
         $payment = PaymentMethod::where('method', '!=', 'Wallet')->get();
-        $amount = $request->input("amount");
+        $amount = $request->amount;
         return view('user.deposit',compact('payment','amount'));
     }
 }
