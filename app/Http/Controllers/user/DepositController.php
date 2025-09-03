@@ -28,7 +28,7 @@ class DepositController extends Controller
             'amount'         => 'required|numeric|min:10',
             'payment_id'     => 'required|integer',
             'transaction_id' => 'required|string|min:5',
-            'payment_number' => 'sometimes|regex:/^(01)[3-9]\d{8}$/',
+            'payment_number' => 'nullable|string|min:10',
         ]);
 
         try {
