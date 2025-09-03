@@ -191,8 +191,6 @@
                         }
 
                         if (res.status === 409) {
-                            paymentNumberBox.style.display = "block";
-                            paymentNumberInput.focus();
                             showToast("This transaction ID is already used.", "error");
                             return;
                         }
