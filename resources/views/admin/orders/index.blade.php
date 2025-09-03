@@ -60,7 +60,7 @@
                                     </td>
                                     <td>{{$order->id}}</td>
                                     <td>{{$order->product->name }}</td>
-                                    <td>{{$order->product->input_name }}</td>
+                                    <td>{{$order->product->input_name }} <br> {{ $order->item->name ?? '' }}</td>
                                     <td>{{ number_format($order->total, 2) }}</td>
                                     <td>
                                         @php
