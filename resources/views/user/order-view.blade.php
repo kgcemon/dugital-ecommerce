@@ -38,7 +38,7 @@
                         <span class="item-name">{{ $order->item->name ?? $order->product->name }}</span>
                         <span class="item-qty">Qty: {{ $order->quantity }}</span>
                     </div>
-                    <div class="item-price">{{ number_format($order->item->price,2) ?? $order->total }} ৳</div>
+                    <div class="item-price">{{ $order->item->price ?? $order->total }} ৳</div>
                 </div>
         </div>
         <br>
