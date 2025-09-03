@@ -17,15 +17,15 @@
     <br>
 
 
-    <div class="card body">
+    <div class="selection-panel body">
         <img src="wallet.png" alt="wallet" style="height:25px; margin-right:5px;"> {{$amount}}
     </div>
     <br>
-    <div class="selection-panel body">
+
         @if (session('error'))
-            {{ session('error') }}
+            <div class=" body">  {{ session('error') }} </div>
         @endif
-    </div>
+
     <br>
     <div class="selection-panel body" id="step3">
         <h2 class="selection-title">পেমেন্ট পদ্ধতি নির্বাচন করুন</h2>
