@@ -70,7 +70,7 @@
                         <tr>
                             <td>1</td>
                             <td>{{ $order->product->name }}</td>
-                            <td>{{ $order->item->name }}</td>
+                            <td>{{ $order->item->name ??  $order->product->name }}</td>
                             <td>{{ $order->customer_data }}</td>
                             <td>{{ $order->quantity }}</td>
                             <td>{{ number_format($order->total, 2) }}</td>
