@@ -40,12 +40,6 @@
                      data-description="{{ $method->description }}">
                     <img src="{{ $method->icon }}" alt="{{ $method->method }}" style="height:25px; margin-right:5px;">
                     {{ $method->method }}
-                    @if($method->method === 'Wallet' && Auth::check())
-                        <br>
-                        <span style="font-weight:600; color:#28a745;">
-                            {{ Auth::user()->wallet ?? 0 }}৳
-                        </span>
-                    @endif
                 </div>
             @endforeach
         </div>
