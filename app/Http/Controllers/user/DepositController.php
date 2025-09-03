@@ -20,39 +20,49 @@ class DepositController extends Controller
         return view('user.deposit',compact('payment','amount','product'));
     }
 
-    public function depositStore(Request $request){
+    public function depositStore(Request $request)
+    {
         $validate = $request->validate([
-            'amount' => 'required',
-            'payment_id' => 'required',
-            'transaction_id' => 'required',
-            'payment_number' => 'sometimes|nullable|numeric',
+            'amount'         => 'required|numeric|min:1',
+            'payment_id'     => 'required|integer',
+            'transaction_id' => 'required|string|min:5',
+            'payment_number' => 'nullable|numeric',
         ]);
+
         try {
             $user = $request->user();
+
             $product = Product::where('name', 'Wallet')->first();
-            $amount = (integer)$request->input("amount");
-            if(!$product){
-                return back()->with('error', 'Deposit temporarily unavailable');
+            if (!$product) {
+                return response()->json([
+                    'status'  => false,
+                    'message' => 'Deposit temporarily unavailable',
+                ]);
             }
+
+            $amount = (int) $request->input("amount");
+
             Order::create([
-                'user_id' => $user->id,
-                'product_id' => $product->id,
-                'quantity' => 1,
-                'total' => $amount,
-                'customer_data' => "Deposit $amount",
-                'payment_method' => $request->input("payment_method"),
+                'user_id'        => $user->id,
+                'product_id'     => $product->id,
+                'quantity'       => 1,
+                'total'          => $amount,
+                'customer_data'  => "Deposit $amount",
+                'payment_method' => $request->input("payment_id"), // payment_id থেকে method নিলে adjust করুন
                 'transaction_id' => $request->input("transaction_id"),
-                'number' => '010000000',
+                'number'         => $request->input("payment_number") ?? 'N/A',
             ]);
+
             return response()->json([
-                'status' => true,
+                'status'  => true,
                 'message' => 'Deposit successful',
             ]);
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return response()->json([
-                'status' => false,
+                'status'  => false,
                 'message' => $exception->getMessage(),
             ]);
         }
     }
+
 }

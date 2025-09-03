@@ -61,7 +61,7 @@
     </div>
 @endsection
 
-@push('scripts')
+    @push('scripts')
         <script>
             document.addEventListener("DOMContentLoaded", () => {
                 let selectedPayment = null;
@@ -72,6 +72,9 @@
                 const paymentNumberBox = document.getElementById("paymentNumberBox");
                 const paymentNumberInput = document.getElementById("paymentNumber");
                 const checkoutBtn = document.getElementById("checkoutBtn");
+
+                // hidden input থেকে amount নিব
+                const depositAmount = "{{ $amount }}";
 
                 // পেমেন্ট সিলেক্ট হলে UI সেট করব
                 function selectPayment(el) {
@@ -130,6 +133,7 @@
 
                     // ✅ FormData ব্যবহার করব
                     const formData = new FormData();
+                    formData.append("amount", depositAmount);
                     formData.append("payment_id", selectedPayment.id);
                     formData.append("transaction_id", trxId);
                     formData.append("payment_number", payNumber);
@@ -165,5 +169,4 @@
                 });
             });
         </script>
-
-@endpush
+    @endpush
