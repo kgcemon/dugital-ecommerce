@@ -10,11 +10,12 @@ use Illuminate\Support\Facades\Request;
 class DepositController extends Controller
 {
     public function deposit(Request $request){
-        $payment = PaymentMethod::where('method', '!=', 'Wallet')->get();
-        return route('addMoney',compact('payment'));
+        $amount = $request->input('amount');
+        return route('addMoney/'.$amount);
     }
 
-    public function addMoney(Request $request){
-
+    public function addMoney($amount){
+        $payment = PaymentMethod::where('method', '!=', 'Wallet')->get();
+        return view('user.deposit', compact('amount', 'payment'));
     }
 }
