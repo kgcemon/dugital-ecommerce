@@ -40,7 +40,7 @@ Route::get('profile', [ProfileController::class, 'show'])->middleware('auth')->n
 Route::get('my-orders', [OrderController::class, 'myOrders'])->middleware('auth')->name('myOrders');
 Route::get('order/{id}', [OrderController::class, 'orderView'])->middleware('auth')->name('orderView');
 Route::post('deposit',[DepositController::class, 'deposit'])->middleware('auth')->name('deposit');
-Route::get('deposit',[DepositController::class, 'deposit'])->middleware('auth')->name('deposits');
+Route::get('deposit-page',[DepositController::class, 'addMoney'])->middleware('auth')->name('addMoney');
 
 // Authenticated Admin Routes
 Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
