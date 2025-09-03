@@ -22,7 +22,7 @@
                     <tr>
                         <td>#{{ $order->id }}</td>
                         <td>{{ $order->created_at->format('d M Y') }}</td>
-                        <td>{{$order->item->name}}</td>
+                        <td>{{$order->item->name ?? $order->product->name}}</td>
                         <td>
                         <span class="status {{ strtolower($order->status) }}">
                             {{ ucfirst($order->status) }}

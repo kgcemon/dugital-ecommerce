@@ -35,7 +35,7 @@
                 <div class="item-card">
                     <img src="/{{ $order->product->image }}" alt="{{ $order->product->name }}">
                     <div class="item-info">
-                        <span class="item-name">{{ $order->item->name }}</span>
+                        <span class="item-name">{{ $order->item->name ?? $order->product->name }}</span>
                         <span class="item-qty">Qty: {{ $order->quantity }}</span>
                     </div>
                     <div class="item-price">{{ number_format($order->item->price,2) }} ৳</div>
