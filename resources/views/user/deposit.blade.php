@@ -55,6 +55,7 @@
             <input type="text" id="paymentNumber" placeholder="Enter Payment Number">
         </div>
         <br>
+        <input type="hidden" name="amount" value="{{$amount}}">
         <!-- Submit Button -->
         <button class="checkout-btn" id="checkoutBtn">Submit Order</button>
     </div>

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('phone',14)->nullable();
             $table->string('email',70)->nullable();
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
-            $table->unsignedInteger('item_id');
+            $table->unsignedInteger('item_id')->nullable();
             $table->integer('quantity');
             $table->float('total');
             $table->string('customer_data');
