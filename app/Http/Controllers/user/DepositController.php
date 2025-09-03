@@ -44,6 +44,8 @@ class DepositController extends Controller
 
             Order::create([
                 'user_id'        => $user->id,
+                'name'           => $user->name,
+                'email'          => $user->email,
                 'product_id'     => $product->id,
                 'quantity'       => 1,
                 'total'          => $amount,
