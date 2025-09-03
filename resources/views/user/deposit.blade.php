@@ -17,7 +17,7 @@
     <br>
 
 
-    <div class="selection-panel body">
+    <div class="card body">
         <img src="/wallet.png" alt="wallet" style="height:25px; margin-right:5px;"> {{$amount}}
     </div>
     <br>
