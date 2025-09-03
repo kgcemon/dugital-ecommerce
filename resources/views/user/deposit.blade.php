@@ -4,7 +4,7 @@
 
 @section('content')
     <style>
-        .body{
+        .body {
             margin: 15px;
         }
         .payment-option.selected {
@@ -20,32 +20,22 @@
 
         <div class="payment-methods" style="display:flex; flex-wrap:wrap; gap:10px;">
             @foreach($payment as $method)
-                @if($method->method === 'Wallet')
-                    @auth
-                        <div class="payment-option wallet-option"
-                             style="flex:1 1 calc(33.333% - 10px); padding:10px; border:1px solid #ccc; border-radius:8px; cursor:pointer;"
-                             data-id="{{ $method->id }}"
-                             data-number="{{ $method->number }}"
-                             data-method="{{ $method->method }}"
-                             data-description="{{ $method->description }}">
-                            <img src="{{ $method->icon }}" alt="{{ $method->method }}" style="height:25px; margin-right:5px;">
-                            {{ $method->method }} <br>
-                            <span style="font-weight:600; color:#28a745;">
+                <div class="payment-option
+                     @if($loop->first) selected @endif"
+                     style="flex:1 1 calc(33.333% - 10px); padding:10px; border:1px solid #ccc; border-radius:8px; cursor:pointer;"
+                     data-id="{{ $method->id }}"
+                     data-number="{{ $method->number }}"
+                     data-method="{{ $method->method }}"
+                     data-description="{{ $method->description }}">
+                    <img src="{{ $method->icon }}" alt="{{ $method->method }}" style="height:25px; margin-right:5px;">
+                    {{ $method->method }}
+                    @if($method->method === 'Wallet' && Auth::check())
+                        <br>
+                        <span style="font-weight:600; color:#28a745;">
                             {{ Auth::user()->wallet ?? 0 }}৳
                         </span>
-                        </div>
-                    @endauth
-                @else
-                    <div class="payment-option"
-                         style="flex:1 1 calc(33.333% - 10px); padding:10px; border:1px solid #ccc; border-radius:8px; cursor:pointer;"
-                         data-id="{{ $method->id }}"
-                         data-number="{{ $method->number }}"
-                         data-method="{{ $method->method }}"
-                         data-description="{{ $method->description }}">
-                        <img src="{{ $method->icon }}" alt="{{ $method->method }}" style="height:25px; margin-right:5px;">
-                        {{ $method->method }}
-                    </div>
-                @endif
+                    @endif
+                </div>
             @endforeach
         </div>
 
@@ -57,7 +47,7 @@
             <input type="text" id="trxId" placeholder="Enter Transaction ID">
         </div>
 
-        <!-- Payment Number input -->
+        <!-- Payment Number input (শুধু status==false এ show হবে) -->
         <div id="paymentNumberBox" class="player-id-box" style="display:none;">
             <h2 class="selection-title">Payment Number লিখুন</h2>
             <input type="text" id="paymentNumber" placeholder="Enter Payment Number">
@@ -66,7 +56,6 @@
         <!-- Submit Button -->
         <button class="checkout-btn" id="checkoutBtn">Submit Order</button>
     </div>
-
 @endsection
 
 @push('scripts')
@@ -81,35 +70,44 @@
             const paymentNumberInput = document.getElementById("paymentNumber");
             const checkoutBtn = document.getElementById("checkoutBtn");
 
-            // Payment method selection
+            // ফাংশন: পেমেন্ট সিলেক্ট হলে UI সেট করব
+            function selectPayment(el) {
+                paymentOptions.forEach(o => o.classList.remove("selected"));
+                el.classList.add("selected");
+
+                selectedPayment = {
+                    id: parseInt(el.dataset.id, 10),
+                    method: el.dataset.method,
+                    number: el.dataset.number,
+                    description: el.dataset.description
+                };
+
+                document.getElementById("paymentDetails").innerHTML = `
+            <p><strong>${selectedPayment.method}</strong></p>
+            <p><strong>Number:</strong> ${selectedPayment.number}</p>
+            <br><p>${selectedPayment.description}</p><br>
+        `;
+
+                if (selectedPayment.method === "Wallet") {
+                    trxBox.style.display = "none";
+                    paymentNumberBox.style.display = "none";
+                } else {
+                    trxBox.style.display = "block";
+                    paymentNumberBox.style.display = "none"; // ডিফল্টে hide
+                }
+            }
+
+            // Auto select first payment method
+            if (paymentOptions.length > 0) {
+                selectPayment(paymentOptions[0]);
+            }
+
+            // যখন ইউজার অন্য অপশন ক্লিক করবে
             paymentOptions.forEach(el => {
-                el.addEventListener("click", () => {
-                    paymentOptions.forEach(o => o.classList.remove("selected"));
-                    el.classList.add("selected");
-
-                    selectedPayment = {
-                        id: parseInt(el.dataset.id, 10),
-                        method: el.dataset.method,
-                        number: el.dataset.number,
-                        description: el.dataset.description
-                    };
-
-                    document.getElementById("paymentDetails").innerHTML = `
-                <p><strong>${selectedPayment.method}</strong></p>
-                <p><strong>Number:</strong> ${selectedPayment.number}</p>
-                <br><p>${selectedPayment.description}</p><br>
-            `;
-
-                    if (selectedPayment.method === "Wallet") {
-                        trxBox.style.display = "none";
-                        paymentNumberBox.style.display = "none";
-                    } else {
-                        trxBox.style.display = "block";
-                        paymentNumberBox.style.display = "block";
-                    }
-                });
+                el.addEventListener("click", () => selectPayment(el));
             });
 
+            // Submit
             checkoutBtn.addEventListener("click", () => {
                 if (!selectedPayment) {
                     alert("অনুগ্রহ করে একটি পেমেন্ট মেথড নির্বাচন করুন!");
@@ -123,11 +121,6 @@
                     if (trxId.length < 5) {
                         alert("Valid Transaction ID দিন!");
                         trxIdInput.focus();
-                        return;
-                    }
-                    if (payNumber.length < 5) {
-                        alert("Valid Payment Number দিন!");
-                        paymentNumberInput.focus();
                         return;
                     }
                 }
@@ -151,7 +144,9 @@
                             alert("✅ ডিপোজিট সফল হয়েছে!");
                             window.location.href = "/thank-you";
                         } else {
-                            alert("❌ ব্যর্থ: " + data.message);
+                            // যদি ব্যর্থ হয় (status == false) তখন Payment Number চাইবে
+                            paymentNumberBox.style.display = "block";
+                            alert("❌ ব্যর্থ: " + data.message + " | অনুগ্রহ করে Payment Number দিন");
                         }
                     })
                     .catch(() => alert("⚠️ সার্ভার এরর, আবার চেষ্টা করুন।"));
