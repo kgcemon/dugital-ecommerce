@@ -42,11 +42,8 @@
                             <tr>
                                 <th><input type="checkbox" id="selectAll"></th>
                                 <th>#</th>
-                                <th>Customer</th>
-                                <th>Phone</th>
-                                <th>Product ID</th>
-                                <th>Item ID</th>
-                                <th>Quantity</th>
+                                <th>Product</th>
+                                <th>User Data</th>
                                 <th>Total (৳)</th>
                                 <th>Status</th>
                                 <th>Transaction ID</th>
@@ -61,12 +58,9 @@
                                     <td>
                                         <input type="checkbox" name="order_ids[]" value="{{ $order->id }}" class="orderCheckbox">
                                     </td>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $order->name }}</td>
-                                    <td>{{ $order->phone }}</td>
-                                    <td>{{ $order->product_id }}</td>
-                                    <td>{{ $order->item_id }}</td>
-                                    <td>{{ $order->quantity }}</td>
+                                    <td>{{ $loop->id }}</td>
+                                    <td>{{ $order->product->name. '\n' . $order->item->name ?? '' }}</td>
+                                    <td>{{ $order->product->input_name. '\n' . $order->customer_data ?? '' }}</td>
                                     <td>{{ number_format($order->total, 2) }}</td>
                                     <td>
                                         @php
