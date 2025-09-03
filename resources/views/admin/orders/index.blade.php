@@ -25,7 +25,7 @@
                 {{-- ✅ Bulk Action Form --}}
                 <form action="{{ route('admin.orders.bulkAction') }}" method="POST" id="bulkActionForm">
                     @csrf
-                    <div class="d-flex mb-3">
+                    <div class="d-flex mb-3 align-content-center">
                         <select name="action" class="form-select me-2" style="max-width:200px;" required>
                             <option value="">Bulk Actions</option>
                             <option value="delivered">Mark as Completed</option>
@@ -47,7 +47,6 @@
                                 <th>Total (৳)</th>
                                 <th>Status</th>
                                 <th>TrxID</th>
-                                <th>Note</th>
                                 <th>Placed</th>
                                 <th>Actions</th>
                             </tr>
@@ -74,7 +73,6 @@
                                         <span class="{{ $statusClass }}">{{ ucfirst($order->status) }}</span>
                                     </td>
                                     <td>{{ $order->transaction_id ?? '-' }}</td>
-                                    <td>{{ $order->order_note ?? '-' }}</td>
                                     <td style="font-size: 10px">{{ $order->created_at ? $order->created_at->diffForHumans() : 'N/A' }}</td>
                                     <td>
                                         <div class="d-flex justify-content-center gap-2">
