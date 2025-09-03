@@ -76,8 +76,7 @@
                                     <td style="font-size: 10px">{{ $order->created_at ? $order->created_at->diffForHumans() : 'N/A' }}</td>
                                     <td>
                                         <div class="d-flex justify-content-center gap-2">
-                                          @if($order->status != 'delivered' || $order->status != 'processing' || $order->status != 'cancelled')
-
+                                          @if($order->status != 'delivered')
                                                 <button class="btn btn-sm btn-warning p-2"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#updateStatusModal"
