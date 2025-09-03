@@ -46,8 +46,8 @@
                                 <th>User Data</th>
                                 <th>Total (৳)</th>
                                 <th>Status</th>
-                                <th>Transaction ID</th>
-                                <th>Order Note</th>
+                                <th>TrxID</th>
+                                <th>Note</th>
                                 <th>Placed</th>
                                 <th>Actions</th>
                             </tr>
