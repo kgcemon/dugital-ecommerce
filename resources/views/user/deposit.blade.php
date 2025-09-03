@@ -190,6 +190,13 @@
                             return;
                         }
 
+                        if (res.status === 409) {
+                            paymentNumberBox.style.display = "block";
+                            paymentNumberInput.focus();
+                            showToast("This transaction ID is already used.", "error");
+                            return;
+                        }
+
                         if (data.status) {
                             showToast("✅ ডিপোজিট সফল হয়েছে!", "success");
                             window.location.href = "/thank-you";
