@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
@@ -51,8 +52,12 @@ class OrdersController extends Controller
             if($request->input('order_note')) $order->order_note = $request->input('order_note');
 
             $order->status = $request->status;
+            if ($order->product->name == 'Wallet' && $request->status == 'delivered') {
+                $user = User::where('id',$order->user_id)->first();
+                $user->wallet += $order->total;
+                $user->save();
+            }
             $order->save();
-
             return redirect()->route('admin.orders.index')
                 ->with('success', 'Order status updated successfully.');
         }catch (\Exception $exception){
