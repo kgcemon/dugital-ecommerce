@@ -48,12 +48,14 @@ class DepositController extends Controller
                 // Auto match with PaymentSms
                 $paySMS = PaymentSms::where('trxID', $validated['transaction_id'])
                     ->where('amount', '>=', $amount)
-                    ->first();
+                    ->where('status', 0)->first();
 
                 if ($paySMS) {
                     $status        = 'delivered';
                     $trxID         = $paySMS->trxID;
                     $user->wallet += $amount;
+                    $paySMS->status = 1;
+                    $paySMS->save();
                     $user->save();
                 }else {
                     if (empty($validated['transaction_id']) || empty($validated['payment_number'])) {
