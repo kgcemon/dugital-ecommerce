@@ -153,7 +153,7 @@
                         <tbody>
                         <tr>
                             <td>{{ $order->product->name }}</td>
-                            <td>{{ $order->item->name }}</td>
+                            <td>{{ $order->item->name  ?? $order->product->name }}</td>
                             <td>{{ $order->quantity }}</td>
                             <td>{{ number_format($order->total, 2) }}</td>
                         </tr>
