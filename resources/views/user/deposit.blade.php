@@ -62,98 +62,108 @@
 @endsection
 
 @push('scripts')
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            let selectedPayment = null;
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                let selectedPayment = null;
 
-            const paymentOptions = document.querySelectorAll(".payment-option");
-            const trxBox = document.getElementById("trxBox");
-            const trxIdInput = document.getElementById("trxId");
-            const paymentNumberBox = document.getElementById("paymentNumberBox");
-            const paymentNumberInput = document.getElementById("paymentNumber");
-            const checkoutBtn = document.getElementById("checkoutBtn");
+                const paymentOptions = document.querySelectorAll(".payment-option");
+                const trxBox = document.getElementById("trxBox");
+                const trxIdInput = document.getElementById("trxId");
+                const paymentNumberBox = document.getElementById("paymentNumberBox");
+                const paymentNumberInput = document.getElementById("paymentNumber");
+                const checkoutBtn = document.getElementById("checkoutBtn");
 
-            // ফাংশন: পেমেন্ট সিলেক্ট হলে UI সেট করব
-            function selectPayment(el) {
-                paymentOptions.forEach(o => o.classList.remove("selected"));
-                el.classList.add("selected");
+                // পেমেন্ট সিলেক্ট হলে UI সেট করব
+                function selectPayment(el) {
+                    paymentOptions.forEach(o => o.classList.remove("selected"));
+                    el.classList.add("selected");
 
-                selectedPayment = {
-                    id: parseInt(el.dataset.id, 10),
-                    method: el.dataset.method,
-                    number: el.dataset.number,
-                    description: el.dataset.description
-                };
+                    selectedPayment = {
+                        id: parseInt(el.dataset.id, 10),
+                        method: el.dataset.method,
+                        number: el.dataset.number,
+                        description: el.dataset.description
+                    };
 
-                document.getElementById("paymentDetails").innerHTML = `
-            <p><strong>${selectedPayment.method}</strong></p>
-            <p><strong>Number:</strong> ${selectedPayment.number}</p>
-            <br><p>${selectedPayment.description}</p><br>
-        `;
+                    document.getElementById("paymentDetails").innerHTML = `
+                    <p><strong>${selectedPayment.method}</strong></p>
+                    <p><strong>Number:</strong> ${selectedPayment.number}</p>
+                    <br><p>${selectedPayment.description}</p><br>
+                `;
 
-                if (selectedPayment.method === "Wallet") {
-                    trxBox.style.display = "none";
-                    paymentNumberBox.style.display = "none";
-                } else {
-                    trxBox.style.display = "block";
-                    paymentNumberBox.style.display = "none"; // ডিফল্টে hide
-                }
-            }
-
-            // Auto select first payment method
-            if (paymentOptions.length > 0) {
-                selectPayment(paymentOptions[0]);
-            }
-
-            // যখন ইউজার অন্য অপশন ক্লিক করবে
-            paymentOptions.forEach(el => {
-                el.addEventListener("click", () => selectPayment(el));
-            });
-
-            // Submit
-            checkoutBtn.addEventListener("click", () => {
-                if (!selectedPayment) {
-                    alert("অনুগ্রহ করে একটি পেমেন্ট মেথড নির্বাচন করুন!");
-                    return;
-                }
-
-                const trxId = trxIdInput.value.trim();
-                const payNumber = paymentNumberInput.value.trim();
-
-                if (selectedPayment.method !== "Wallet") {
-                    if (trxId.length < 5) {
-                        alert("Valid Transaction ID দিন!");
-                        trxIdInput.focus();
-                        return;
+                    if (selectedPayment.method === "Wallet") {
+                        trxBox.style.display = "none";
+                        paymentNumberBox.style.display = "none";
+                    } else {
+                        trxBox.style.display = "block";
+                        paymentNumberBox.style.display = "none";
                     }
                 }
 
-                // POST request
-                fetch("{{ url('/add-money') }}", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                    },
-                    body: JSON.stringify({
-                        payment_id: selectedPayment.id,
-                        transaction_id: trxId,
-                        payment_number: payNumber
-                    })
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.status) {
-                            alert("✅ ডিপোজিট সফল হয়েছে!");
-                            window.location.href = "/thank-you";
-                        } else {
-                            // যদি ব্যর্থ হয় (status == false) তখন Payment Number চাইবে
-                            paymentNumberBox.style.display = "block";
-                            alert("❌ ব্যর্থ: " + data.message + " | অনুগ্রহ করে Payment Number দিন");
+                // Auto select first payment method
+                if (paymentOptions.length > 0) {
+                    selectPayment(paymentOptions[0]);
+                }
+
+                // অন্য অপশন ক্লিক করলে
+                paymentOptions.forEach(el => {
+                    el.addEventListener("click", () => selectPayment(el));
+                });
+
+                // Submit
+                checkoutBtn.addEventListener("click", () => {
+                    if (!selectedPayment) {
+                        alert("অনুগ্রহ করে একটি পেমেন্ট মেথড নির্বাচন করুন!");
+                        return;
+                    }
+
+                    const trxId = trxIdInput.value.trim();
+                    const payNumber = paymentNumberInput.value.trim();
+
+                    if (selectedPayment.method !== "Wallet") {
+                        if (trxId.length < 5) {
+                            alert("Valid Transaction ID দিন!");
+                            trxIdInput.focus();
+                            return;
                         }
+                    }
+
+                    // ✅ FormData ব্যবহার করব
+                    const formData = new FormData();
+                    formData.append("payment_id", selectedPayment.id);
+                    formData.append("transaction_id", trxId);
+                    formData.append("payment_number", payNumber);
+
+                    checkoutBtn.disabled = true;
+                    checkoutBtn.innerText = "Processing...";
+
+                    fetch("{{ url('/add-money') }}", {
+                        method: "POST",
+                        headers: {
+                            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                        },
+                        body: formData
                     })
-                    .catch(() => alert("⚠️ সার্ভার এরর, আবার চেষ্টা করুন।"));
+                        .then(res => res.json())
+                        .then(data => {
+                            checkoutBtn.disabled = false;
+                            checkoutBtn.innerText = "Submit Order";
+
+                            if (data.status) {
+                                alert("✅ ডিপোজিট সফল হয়েছে!");
+                                window.location.href = "/thank-you";
+                            } else {
+                                paymentNumberBox.style.display = "block";
+                                alert("❌ ব্যর্থ: " + data.message + " | অনুগ্রহ করে Payment Number দিন");
+                            }
+                        })
+                        .catch(() => {
+                            checkoutBtn.disabled = false;
+                            checkoutBtn.innerText = "Submit Order";
+                            alert("⚠️ সার্ভার এরর, আবার চেষ্টা করুন।");
+                        });
+                });
             });
-        });
-    </script>
+        </script>
+
 @endpush
