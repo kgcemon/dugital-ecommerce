@@ -34,7 +34,7 @@ class DepositController extends Controller
         try {
             $user = $request->user();
 
-            $status = null;
+            $status = 'hold';
 
             $paySMS = null;
             if (!empty($validate['transaction_id'])) {
