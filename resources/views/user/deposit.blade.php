@@ -18,10 +18,19 @@
 
 
     <div class="selection-panel body">
-        {{$amount}}
+        @foreach($payment as $method)
+            <div class="payment-option"
+                 style="flex:1 1 calc(33.333% - 10px); padding:10px; border:1px solid #ccc; border-radius:8px; cursor:pointer;">
+
+                {{ $method->method }}
+                @if($method->method === 'Wallet' )
+                    <img src="{{ $method->icon }}" alt="{{ $method->method }}" style="height:25px; margin-right:5px;">
+                    {{$amount}}৳
+                @endif
+            </div>
+        @endforeach
     </div>
-
-
+    <br>
     <div class="selection-panel body" id="step3">
         <h2 class="selection-title">পেমেন্ট পদ্ধতি নির্বাচন করুন</h2>
         <div class="payment-methods" style="display:flex; flex-wrap:wrap; gap:10px;">
