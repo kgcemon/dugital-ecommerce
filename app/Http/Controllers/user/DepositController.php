@@ -11,6 +11,6 @@ class DepositController extends Controller
 {
     public function deposit(Request $request){
         $payment = PaymentMethod::where('method', '!=', 'Wallet')->get();
-        return route('deposit',$payment);
+        return route('deposits',$payment);
     }
 }
