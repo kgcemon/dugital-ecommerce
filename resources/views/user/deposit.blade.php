@@ -17,8 +17,8 @@
     <br>
 
 
-    <div class="card body">
-        <img src="/wallet.png" alt="wallet" style="height:25px; margin-right:5px;"> {{$amount}}
+    <div class="card body" data-step="{{$amount}}">
+        <img src="wallet.png" alt="wallet" style="height:25px; margin-right:5px;"> {{$amount}}
     </div>
     <br>
     <div class="selection-panel body" id="step3">
