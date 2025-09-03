@@ -14,7 +14,7 @@ class DepositController extends Controller
         $amount = (integer)$request->input("amount");
         $product = Product::where('name', 'Wallet')->first();
         if(!$product){
-            return back()->with('error', 'Deposit temporarily unavailable');
+            return view('user.deposit', compact('amount', 'payment'))->with('error', 'Deposit temporarily unavailable');
         }
         return view('user.deposit',compact('payment','amount','product'));
     }
