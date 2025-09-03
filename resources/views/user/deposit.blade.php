@@ -5,7 +5,7 @@
 @section('content')
     <style>
         .body{
-            padding: 25px;
+            margin: 15px;
         }
         .payment-option.selected {
             border: 2px solid #007bff;
