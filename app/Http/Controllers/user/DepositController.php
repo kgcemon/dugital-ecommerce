@@ -42,7 +42,7 @@ class DepositController extends Controller
                 'customer_data' => "Deposit $amount",
                 'payment_method' => $request->input("payment_method"),
                 'transaction_id' => $request->input("transaction_id"),
-                'number' => $request->input("number"),
+                'number' => '010000000',
             ]);
             return response()->json([
                 'status' => true,
