@@ -5,6 +5,7 @@ namespace App\Http\Controllers\user;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\PaymentMethod;
+use App\Models\PaymentSms;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -29,8 +30,31 @@ class DepositController extends Controller
             'payment_number' => 'nullable|numeric',
         ]);
 
+
         try {
             $user = $request->user();
+
+            $status = null;
+
+            $paySMS = null;
+            if (!empty($validated['transaction_id'])) {
+                $paySMS = PaymentSms::where('trxID', $validated['transaction_id'])
+                    ->where('amount', '>=', $request->input('amount'))
+                    ->first();
+            }
+
+            if ($paySMS) {
+                $status         = 'delivered';
+                $user->wallet += $validate['amount'];
+                $user->save();
+            } else {
+                if (empty($validated['transaction_id']) || empty($validated['payment_number'])) {
+                    return response()->json([
+                        'status'  => false,
+                        'message' => 'Transaction ID and payment number are required for this payment method.',
+                    ], 422);
+                }
+            }
 
             $product = Product::where('name', 'Wallet')->first();
             if (!$product) {
@@ -53,6 +77,7 @@ class DepositController extends Controller
                 'payment_method' => $request->input("payment_id"),
                 'transaction_id' => $request->input("transaction_id"),
                 'number'         => $request->input("payment_number") ?? 'N/A',
+                'status'         => $status,
             ]);
 
             return response()->json([
