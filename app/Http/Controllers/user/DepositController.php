@@ -37,8 +37,8 @@ class DepositController extends Controller
             $status = null;
 
             $paySMS = null;
-            if (!empty($validated['transaction_id'])) {
-                $paySMS = PaymentSms::where('trxID', $validated['transaction_id'])
+            if (!empty($validate['transaction_id'])) {
+                $paySMS = PaymentSms::where('trxID', $validate['transaction_id'])
                     ->where('amount', '>=', $request->input('amount'))
                     ->first();
             }
@@ -48,7 +48,7 @@ class DepositController extends Controller
                 $user->wallet += $validate['amount'];
                 $user->save();
             } else {
-                if (empty($validated['transaction_id']) || empty($validated['payment_number'])) {
+                if (empty($validate['transaction_id']) || empty($validate['payment_number'])) {
                     return response()->json([
                         'status'  => false,
                         'message' => 'Transaction ID and payment number are required for this payment method.',
