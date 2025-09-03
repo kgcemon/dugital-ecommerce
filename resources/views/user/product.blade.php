@@ -64,7 +64,6 @@
                                  data-method="{{ $method->method }}"
                                  data-description="{{ $method->description }}">
                                 <img src="{{ $method->icon }}" alt="{{ $method->method }}" style="height:25px; margin-right:5px;">
-                                {{ $method->method }} <br>
                                 <span style="font-weight:600; color:#fff;">
                                 {{ Auth::user()->wallet ?? 0 }}৳
                             </span>
