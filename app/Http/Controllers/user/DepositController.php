@@ -48,7 +48,7 @@ class DepositController extends Controller
                 'quantity'       => 1,
                 'total'          => $amount,
                 'customer_data'  => "Deposit $amount",
-                'payment_method' => $request->input("payment_id"), // payment_id থেকে method নিলে adjust করুন
+                'payment_method' => $request->input("payment_id"),
                 'transaction_id' => $request->input("transaction_id"),
                 'number'         => $request->input("payment_number") ?? 'N/A',
             ]);
