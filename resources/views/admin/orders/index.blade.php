@@ -59,9 +59,9 @@
                                         <input type="checkbox" name="order_ids[]" value="{{ $order->id }}" class="orderCheckbox">
                                     </td>
                                     <td>{{$order->id}}</td>
-                                    <td>{{$order->product->name }} <br> {{ $order->item->name ?? '' }} </td>
+                                    <td>{{ $order->item->name ?? '' }} </td>
                                     <td>{{$order->product->input_name . ':' }} <br> {{ $order->customer_data ?? '' }} </td>
-                                    <td>{{ number_format($order->total, 2) }}</td>
+                                    <td>{{ number_format($order->total, 2) }}৳</td>
                                     <td>
                                         @php
                                             $statusClass = match($order->status) {
@@ -75,7 +75,7 @@
                                     </td>
                                     <td>{{ $order->transaction_id ?? '-' }}</td>
                                     <td>{{ $order->order_note ?? '-' }}</td>
-                                    <td>{{ $order->created_at ? $order->created_at->diffForHumans() : 'N/A' }}</td>
+                                    <td style="font-size: 10px">{{ $order->created_at ? $order->created_at->diffForHumans() : 'N/A' }}</td>
                                     <td>
                                         <div class="d-flex justify-content-center gap-2">
                                             <button class="btn btn-sm btn-warning p-2"
