@@ -61,10 +61,7 @@
                         @auth
                             <div class="payment-option wallet-option"
                                  style="flex:1 1 calc(33.333% - 10px); padding:10px; border:1px solid #ccc; border-radius:8px; cursor:pointer;"
-                                 data-id="{{ $method->id }}"
-                                 data-number="{{ $method->number }}"
-                                 data-method="{{ $method->method }}"
-                                 data-description="{{ $method->description }}">
+                                 data-id="{{ $method->id }}">
                                 <img src="{{ $method->icon }}" alt="{{ $method->method }}" style="height:25px; margin-right:5px;">
                                 <span style="font-weight:600; color:#fff;">
                                 {{ Auth::user()->wallet ?? 0 }}৳
@@ -72,17 +69,15 @@
                             </div>
                         @endauth
                     @else
-                      @if($method->method != 'Wallet')
-                            <div class="payment-option"
-                                 style="flex:1 1 calc(33.333% - 10px); padding:10px; border:1px solid #ccc; border-radius:8px; cursor:pointer;"
-                                 data-id="{{ $method->id }}"
-                                 data-number="{{ $method->number }}"
-                                 data-method="{{ $method->method }}"
-                                 data-description="{{ $method->description }}">
-                                <img src="{{ $method->icon }}" alt="{{ $method->method }}" style="height:25px; margin-right:5px;">
-                                {{ $method->method }}
-                            </div>
-                      @endif
+                        <div class="payment-option"
+                             style="flex:1 1 calc(33.333% - 10px); padding:10px; border:1px solid #ccc; border-radius:8px; cursor:pointer;"
+                             data-id="{{ $method->id }}"
+                             data-number="{{ $method->number }}"
+                             data-method="{{ $method->method }}"
+                             data-description="{{ $method->description }}">
+                            <img src="{{ $method->icon }}" alt="{{ $method->method }}" style="height:25px; margin-right:5px;">
+                            {{ $method->method }}
+                        </div>
                     @endif
                 @endforeach
             </div>
