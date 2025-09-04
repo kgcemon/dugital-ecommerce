@@ -14,7 +14,7 @@
             <p><strong>Total Paid:</strong>{{$order->total}}৳</p>
         </div>
         <div class="des">
-            <p><strong>{{$order->product->input_name}}</strong>{{$order->customer_data}}</p>
+            <p><strong>{{$order->product->input_name}}:  </strong>  {{$order->customer_data}}</p>
         </div>
         <div class="des">
             <p><strong>Method:</strong>{{$order->paymentMethod->method}}</p>
