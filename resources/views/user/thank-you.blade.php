@@ -41,7 +41,7 @@
 
         {{-- Product Row --}}
         <div class="summary-row selection-panel completed">
-            <img src="/{{$order->product->image}}" alt="Product Image">
+            <img src="/{{$order->product->image}}" alt="Product Image" height="80" width="80">
             <div class="summary-info">
                 <p><strong>Order ID:</strong> {{$order->id}}</p>
                 <p><strong>Items:</strong> {{$order->item->name ?? $order->product->name}}</p>
@@ -50,14 +50,14 @@
         </div>
 
         {{-- Customer Info --}}
-        <div class="summary-row">
+        <div class="summary-row selection-panel hold">
             <div class="summary-info">
                 <p><strong>{{$order->product->input_name}}:</strong> {{$order->customer_data}}</p>
             </div>
         </div>
 
         {{-- Payment Row --}}
-        <div class="summary-row">
+        <div class="summary-row selection-panel completed">
             <img src="{{$order->paymentMethod->icon}}" alt="{{$order->paymentMethod->method}}">
             <div class="summary-info">
                 <p><strong>Method:</strong> {{$order->paymentMethod->method}}</p>
