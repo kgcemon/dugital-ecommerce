@@ -60,7 +60,7 @@ class Order extends Model
     public static function generateUid(): string
     {
         do {
-            $code = strtoupper(substr(md5(uniqid(mt_rand(), true)), 0, 6));
+            $code = strtoupper(substr(md5(uniqid(mt_rand(), true)), 0, 15));
         } while (self::where('uid', $code)->exists());
 
         return $code;
