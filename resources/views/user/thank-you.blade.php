@@ -40,7 +40,7 @@
         </div>
 
         {{-- Product Row --}}
-        <div class="summary-row">
+        <div class="summary-row selection-panel completed">
             <img src="/{{$order->product->image}}" alt="Product Image">
             <div class="summary-info">
                 <p><strong>Order ID:</strong> {{$order->id}}</p>
