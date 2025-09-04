@@ -59,14 +59,14 @@
                                     <button class="btn btn-sm btn-warning"
                                             data-bs-toggle="modal"
                                             data-bs-target="#editMethodModal{{ $method->id }}">
-                                        <i class="bi bi-pencil-square"></i>
+                                        <i class="bi bi-pencil-square">Edit</i>
                                     </button>
 
                                     <!-- Delete -->
                                     <button class="btn btn-sm btn-danger"
                                             data-bs-toggle="modal"
                                             data-bs-target="#deleteMethodModal{{ $method->id }}">
-                                        <i class="bi bi-trash"></i>
+                                        <i class="bi bi-trash">Delete</i>
                                     </button>
                                 </td>
                             </tr>
