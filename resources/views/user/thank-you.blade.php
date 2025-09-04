@@ -5,14 +5,6 @@
 @section('content')
 
     <style>
-        .order-summary {
-            background: #fff;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            max-width: 650px;
-            margin: 20px auto;
-        }
         .summary-row {
             display: flex;
             align-items: center;
@@ -29,31 +21,31 @@
         .summary-info p {
             margin: 4px 0;
             font-size: 15px;
-            color: #333;
+            color: white;
         }
         .summary-info strong {
-            color: #000;
+            color: white;
         }
         .selection-title h3 {
             text-align: center;
             font-size: 22px;
             margin-bottom: 18px;
-            color: #2d2d2d;
+            color: white;
         }
     </style>
 
-    <div class="order-summary">
+    <div class="container">
         <div class="selection-title">
             <h3>Thank You!</h3>
         </div>
 
         {{-- Product Row --}}
         <div class="summary-row">
-            <img src="{{$order->product->image ?? 'default.png'}}" alt="Product Image">
+            <img src="/{{$order->product->image}}" alt="Product Image">
             <div class="summary-info">
                 <p><strong>Order ID:</strong> {{$order->id}}</p>
                 <p><strong>Items:</strong> {{$order->item->name ?? $order->product->name}}</p>
-                <p><strong>Total Paid:</strong> {{$order->total}}৳</p>
+                <p><strong>Total:</strong> {{$order->total}}৳</p>
             </div>
         </div>
 
@@ -66,7 +58,7 @@
 
         {{-- Payment Row --}}
         <div class="summary-row">
-            <img src="{{ asset('images/payment/'.$order->paymentMethod->icon) }}" alt="{{$order->paymentMethod->method}}">
+            <img src="{{$order->paymentMethod->icon}}" alt="{{$order->paymentMethod->method}}">
             <div class="summary-info">
                 <p><strong>Method:</strong> {{$order->paymentMethod->method}}</p>
                 <p><strong>Number:</strong> {{$order->transaction_id ?? ''}}</p>
