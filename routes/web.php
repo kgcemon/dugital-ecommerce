@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\admin\CategoriesController;
 use App\Http\Controllers\admin\CodesController;
+use App\Http\Controllers\admin\PaymentMethodSettingController;
+use App\Http\Controllers\admin\PaymentSMSController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\UsersController;
@@ -72,6 +74,17 @@ Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
     //codes
     Route::resource('codes', CodesController::class);
     Route::get('codes/{id}', [CodesController::class, 'code'])->name('code');
+
+
+    //payment Setting
+    Route::resource('payment-methods', PaymentMethodSettingController::class);
+    Route::post('payment-methods/{id}/toggle-status', [PaymentMethodSettingController::class, 'toggleStatus'])->name('payment-methods.toggleStatus');
+    Route::post('payment-methods/{id}/copy', [PaymentMethodSettingController::class, 'copyNumber'])->name('payment-methods.copy');
+
+
+    //paymentSMS
+    Route::get('payment-sms',[PaymentSMSController::class, 'index'])->name('payment-sms');
+    Route::get('payment-sms',[PaymentSMSController::class, 'search'])->name('sms-search');
 
 });
 
