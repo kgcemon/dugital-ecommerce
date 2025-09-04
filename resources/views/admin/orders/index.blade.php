@@ -132,12 +132,14 @@
                         <div class="mb-3">
                             <label for="orderStatus" class="form-label">Status</label>
                             <select name="status" id="orderStatus" class="form-select">
-                                {{$order->status == 'hold' ?? '<option value="hold">Hold</option>'}}
-                                <option value="processing">Processing</option>
-                                <option value="delivered">Completed</option>
-                                <option value="Delivery Running">Delivery Running</option>
-                                <option value="cancelled">Cancelled</option>
-                                <option value="refunded">Refunded</option>
+                                @if($order)
+                                    {{$order->status == 'hold' ?? '<option value="hold">Hold</option>'}}
+                                    <option value="processing">Processing</option>
+                                    <option value="delivered">Completed</option>
+                                    <option value="Delivery Running">Delivery Running</option>
+                                    <option value="cancelled">Cancelled</option>
+                                    <option value="refunded">Refunded</option>
+                                @endif
                             </select>
                         </div>
                         <div class="mb-3">
