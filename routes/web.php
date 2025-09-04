@@ -35,7 +35,7 @@ Route::get('/auth/google/callback', [GoogleController::class, 'handleGoogleCallb
 Route::get('/', [SiteHomeScreenController::class, 'index'])->name('home');
 Route::get('/product/{slug}', [SiteProductsScreenController::class, 'index'] )->name('product');
 Route::post('add-order', [OrderController::class, 'addOrder'])->name('addOrder');
-Route::get('thank-you', [OrderController::class, 'thankYouPage'])->name('thankYouPage');
+Route::get('thank-you/{uid}', [OrderController::class, 'thankYouPage'])->name('thankYouPage');
 
 // Profile Page
 Route::get('profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile');
