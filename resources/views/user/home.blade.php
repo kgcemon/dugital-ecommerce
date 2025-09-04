@@ -5,8 +5,10 @@
 @section('content')
 
     <div class="banner">
-        <img src="/{{$images->images_url ?? ''}}"
-             alt="Premium Banner">
+       <a href="{{$images->link ?? ''}}">
+           <img src="/{{$images->images_url ?? ''}}"
+                alt="Premium Banner">
+       </a>
     </div>
 
     @foreach ($products as $category)
