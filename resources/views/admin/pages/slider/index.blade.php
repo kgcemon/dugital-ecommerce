@@ -20,7 +20,6 @@
             <tr>
                 <th>ID</th>
                 <th>Image</th>
-                <th>Link</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -29,7 +28,6 @@
                 <tr>
                     <td>{{ $slider->id }}</td>
                     <td><img src="{{ url("$slider->images_url") }}" width="60" alt=""></td>
-                    <td>{{ $slider->link }}</td>
                     <td>
                         <!-- Edit -->
                         <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal{{ $slider->id }}">Edit</button>
