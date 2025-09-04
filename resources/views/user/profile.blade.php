@@ -74,7 +74,6 @@
                 border-left: 4px solid {{ $txn->type == 'credit' ? '#28a745' : '#dc3545' }};
             ">
                         <div style="flex:1;">
-                            <div style="font-weight: 600; font-size: 15px;">#{{ $txn->id }} - {{ ucfirst($txn->type) }}</div>
                             <div style="font-size: 13px; color: #aaa;">{{ $txn->description }}</div>
                             <div style="font-size: 12px; color: #888;">{{ $txn->created_at->format('d M Y, h:i A') }}</div>
                         </div>
