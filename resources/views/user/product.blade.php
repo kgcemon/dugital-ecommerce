@@ -211,6 +211,7 @@
                  }
 
                     if (selectedPayment.method === "Wallet") {
+                        document.getElementById("paymentDetails").innerHTML = ``;
                         trxBox.style.display = "none";
                         paymentNumberBox.style.display = "none";
 
