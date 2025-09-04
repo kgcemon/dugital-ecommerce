@@ -202,15 +202,18 @@
                         description: el.dataset.description
                     };
 
-                    document.getElementById("paymentDetails").innerHTML = `
+                 if(selectedPayment.method !== "Wallet"){
+                     document.getElementById("paymentDetails").innerHTML = `
                 <p><strong>${selectedPayment.method}</strong></p>
                 <p><strong>Number:</strong> ${selectedPayment.number}</p>
                 <br><p>${selectedPayment.description}</p><br>
             `;
+                 }
 
                     if (selectedPayment.method === "Wallet") {
                         trxBox.style.display = "none";
                         paymentNumberBox.style.display = "none";
+
                     } else {
                         trxBox.style.display = "block";
                     }
