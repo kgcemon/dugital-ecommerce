@@ -131,7 +131,11 @@ class OrderController extends Controller
 
                 $order->save();
 
-                return view('user.thank-you', compact('order'));
+                return response()->json([
+                    'status'  => true,
+                    'message' => 'Order created successfully',
+                    'order'   => $order,
+                ], 201);
 
             });
 
