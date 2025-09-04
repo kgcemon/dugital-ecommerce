@@ -60,29 +60,42 @@
         <!-- Recent Transactions -->
         <div>
             <div style="font-weight: 600; font-size: 17px; margin-bottom: 12px;">Recent Transactions</div>
-            <div style="overflow-y: auto;">
+            <div style="overflow-y: auto; max-height: 400px;">
                 @forelse($recentTransactions as $txn)
                     <div class="panelData" style="
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    padding: 10px 12px;
-                    margin-bottom: 8px;
-                    border-radius: 10px;
-                    background: rgba(255,255,255,0.06);
-                    transition: all .3s;">
-                        <span style="font-weight: 600;">#{{ $txn->id }}</span>
-                        <span style="font-size: 14px;
-                                 color: {{ $txn->status == 'completed' ? '#28a745' : '#ff9800' }};
-                                 font-weight: 600;">
-                        {{ ucfirst($txn->status) }}
-                    </span>
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px 14px;
+                margin-bottom: 10px;
+                border-radius: 12px;
+                background: rgba(255,255,255,0.05);
+                transition: all .3s;
+                border-left: 4px solid {{ $txn->type == 'credit' ? '#28a745' : '#dc3545' }};
+            ">
+                        <div style="flex:1;">
+                            <div style="font-weight: 600; font-size: 15px;">#{{ $txn->id }} - {{ ucfirst($txn->type) }}</div>
+                            <div style="font-size: 13px; color: #aaa;">{{ $txn->description }}</div>
+                            <div style="font-size: 12px; color: #888;">{{ $txn->created_at->format('d M Y, h:i A') }}</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-weight: 700; font-size: 15px;
+                                color: {{ $txn->type == 'credit' ? '#28a745' : '#dc3545' }};">
+                                {{ $txn->type == 'credit' ? '+' : '-' }}{{ number_format($txn->amount, 2) }}
+                            </div>
+                            <div style="font-size: 13px;
+                                color: {{ $txn->status == 'completed' ? '#28a745' : '#ff9800' }};
+                                font-weight: 600;">
+                                {{ ucfirst($txn->status) }}
+                            </div>
+                        </div>
                     </div>
                 @empty
                     <p style="color: #bbb; font-size: 14px; text-align:center;">No recent transactions found.</p>
                 @endforelse
             </div>
         </div>
+
     </div>
 
     <!-- Small CSS animations -->

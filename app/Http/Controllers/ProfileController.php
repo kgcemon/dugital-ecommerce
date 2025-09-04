@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Order;
+use App\Models\WalletTransaction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +29,7 @@ class ProfileController extends Controller
         $totalReferrals    = 0;
 
         // Recent transactions (dummy)
-        $recentTransactions = Order::orderBy('id', 'desc')->take(5)->get();
+        $recentTransactions = WalletTransaction::where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(10);
 
         return view('user.profile', compact(
             'totalOrders',
