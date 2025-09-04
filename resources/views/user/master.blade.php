@@ -231,8 +231,8 @@
             justify-content: center;
             margin-top: 20px;
             padding: 10px 16px;
-            background: #DB4437;
-            color: white;
+            background: white;
+            color: black;
             border-radius: 4px;
             text-decoration: none;
         }
