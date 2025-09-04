@@ -2,10 +2,9 @@
 
 @section('content')
     <div class="container-fluid">
-
+        <br>
         <!-- Page Header -->
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h4 class="fw-bold mb-0">Payment Methods</h4>
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMethodModal">
                 <i class="bi bi-plus-circle me-1"></i> Add New
             </button>
