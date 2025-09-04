@@ -1,6 +1,8 @@
 @extends('user.master')
 
-@section('title', "$product->name")
+@section('title', $product->seo_title ?? $product->name)
+@section('meta_description', $product->seo_description ?? $product->short_description)
+@section('meta_keywords', $product->seo_keywords ?? $product->name)
 
 @section('content')
 

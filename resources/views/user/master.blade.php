@@ -12,11 +12,11 @@
     <meta name="theme-color" content="#131031">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="apple-touch-icon" href="https://codmshop.com/logo.png">
-    <meta name="msapplication-navbutton-color" content="#131031">
+    <meta name="msapplication-navbutton-color" content="#131031">  
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- Dynamic SEO -->
-    <title>@yield('title', config('app.name', 'Codmshop'))</title>
+    <title>@yield('title', config('app.name', 'Codmshop')) | Free Fire Top Up in Bangladesh</title>
     <meta name="description" content="@yield('meta_description', 'Best Free Fire Top Up & Gaming Shop in Bangladesh - Codmshop')">
     <meta name="keywords" content="@yield('meta_keywords', 'Free Fire Top Up, Codmshop, Gaming Shop, Diamond Recharge')">
     <meta name="author" content="Codmshop">

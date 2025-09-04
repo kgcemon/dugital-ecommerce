@@ -30,10 +30,7 @@ class SiteProductsScreenController extends Controller
             if ($product) {
                 return view('user.product', compact('product', 'payment'));
             } else {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'Product not found',
-                ]);
+                return view('errors.404');
             }
 
         } catch (\Exception $exception) {
