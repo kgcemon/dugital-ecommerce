@@ -133,7 +133,7 @@
                             <label for="orderStatus" class="form-label">Status</label>
                             <select name="status" id="orderStatus" class="form-select">
                                 @if($orders)
-                                    {{$order->status == 'hold' ?? '<option value="hold">Hold</option>'}}
+                                   <option value="hold">Hold</option>
                                     <option value="processing">Processing</option>
                                     <option value="delivered">Completed</option>
                                     <option value="Delivery Running">Delivery Running</option>
