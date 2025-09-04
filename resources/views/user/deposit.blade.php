@@ -197,7 +197,7 @@
 
                         if (data.status) {
                             showToast("✅ ডিপোজিট সফল হয়েছে!", "success");
-                            window.location.href = "/thank-you/"+ data.order.uid;
+                            window.location.href = "/thank-you/"+order.uid;
                         } else {
                             paymentNumberBox.style.display = "block";
                             paymentNumberInput.focus();
