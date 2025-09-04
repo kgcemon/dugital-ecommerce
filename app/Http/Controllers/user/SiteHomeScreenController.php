@@ -4,6 +4,7 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use App\Models\Categorie;
+use App\Models\SliderImages;
 
 class SiteHomeScreenController extends Controller
 {
@@ -13,7 +14,8 @@ class SiteHomeScreenController extends Controller
             ->select('name', 'id')
             ->orderBy('sort')
             ->paginate(50);
-        return view('user.home', compact('products'));
+        $images = SliderImages::first();
+        return view('user.home', compact('products','images'));
     }
 
 
