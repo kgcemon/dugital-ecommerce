@@ -88,7 +88,7 @@ class OrdersController extends Controller
                             'user_id'   => $user->id,
                             'amount'    => $order->total,
                             'type'      => 'credit',
-                            'description' => 'Refund to Wallet' . $order->id,
+                            'description' => 'Refund to Wallet Order id: ' . $order->id,
                             'status'    => 1,
                         ]);
                     }
