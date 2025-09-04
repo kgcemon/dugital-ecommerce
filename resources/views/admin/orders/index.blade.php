@@ -58,8 +58,8 @@
                                         <input type="checkbox" name="order_ids[]" value="{{ $order->id }}" class="orderCheckbox">
                                     </td>
                                     <td>{{$order->id}}</td>
-                                    <td>{{ $order->item->name ?? '' }} </td>
-                                    <td>{{$order->product->input_name . ':' }} <br> {{ $order->customer_data ?? '' }} </td>
+                                    <td>{{ $order->item->name ?? $order->product->input_name }} </td>
+                                    <td>{{ $order->customer_data ?? '' }} </td>
                                     <td>{{ number_format($order->total, 2) }}৳</td>
                                     <td>
                                         @php
