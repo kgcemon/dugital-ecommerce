@@ -84,7 +84,7 @@ class DepositController extends Controller
                 }
 
                 // Order create
-                Order::create([
+               $order =  Order::create([
                     'user_id'        => $user->id,
                     'name'           => $user->name,
                     'email'          => $user->email,
@@ -103,6 +103,7 @@ class DepositController extends Controller
                     'message' => $status === 'delivered'
                         ? 'Deposit successful and added to wallet.'
                         : 'Deposit request submitted. Waiting for confirmation.',
+                    'order'    => $order,
                 ]);
             });
         } catch (\Exception $exception) {
