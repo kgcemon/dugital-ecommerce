@@ -57,7 +57,7 @@
         </div>
 
         {{-- Payment Row --}}
-        <div class="summary-row selection-panel {{$order->status == 'delivered' ? 'completed' : 'pending' }}">
+        <div class="summary-row selection-panel {{$order->status == 'delivered'  || $order->status == 'processing' ? 'completed' : 'pending' }}">
             <img src="{{$order->paymentMethod->icon}}" alt="{{$order->paymentMethod->method}}">
             <div class="summary-info">
                 <p><strong>Method:</strong> {{$order->paymentMethod->method}}</p>
