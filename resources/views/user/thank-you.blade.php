@@ -9,17 +9,14 @@
         <div class="selection-title"> <h3>Thank You!</h3>
            </div>
         <div class="des">
-            <p><strong>Order ID:</strong> #123456</p>
-            <p><strong>Items:</strong> 3 Products</p>
-            <p><strong>Total Paid:</strong> $89.99</p>
+            <p><strong>Order ID:</strong> {{$order->id}}</p>
+            <p><strong>Items:</strong> {{$order->item->name ?? $order->product->name}}</p>
+            <p><strong>Total Paid:</strong>{{$order->total}}৳</p>
         </div>
         <div class="des">
-            <p><strong>Name:</strong> John Doe</p>
-            <p><strong>Address:</strong> 123 Main Street, City, Country</p>
-            <p><strong>Estimated Delivery:</strong> 3-5 Business Days</p>
-        </div>
-        <div class="des">
-            <p>Credit/Debit Card (**** **** **** 1234)</p>
+            <p><strong>Method:</strong>{{$order->paymentMethod->method}}</p>
+            <p><strong>Number:</strong> {{$order->transaction_id ?? ''}}</p>
+            <p><strong>TrxID: </strong> {{$order->number ?? ''}}</p>
         </div>
     </div>
 </div>
