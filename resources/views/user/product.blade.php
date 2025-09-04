@@ -72,7 +72,7 @@
                             </div>
                         @endauth
                     @else
-                      @if($method->$method != 'Wallet')
+                      @if($method->method != 'Wallet')
                             <div class="payment-option"
                                  style="flex:1 1 calc(33.333% - 10px); padding:10px; border:1px solid #ccc; border-radius:8px; cursor:pointer;"
                                  data-id="{{ $method->id }}"
