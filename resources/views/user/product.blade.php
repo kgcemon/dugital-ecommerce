@@ -277,7 +277,7 @@
                         loadingSpinner.style.display = "none";
                         if (data.status) {
                             showToast("success","✅ অর্ডার সফলভাবে সম্পন্ন হয়েছে! Order ID: " + data.order.id);
-                            setTimeout(() => window.location.href = "/thank-you", 2000);
+                            setTimeout(() => window.location.href = "/thank-you/{{$data}}", 2000);
                         } else {
                             showToast("error","❌ ব্যর্থ: " + data.message);
                             if (data.message.includes("Transaction ID and payment number")) {
