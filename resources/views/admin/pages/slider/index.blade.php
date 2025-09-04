@@ -15,7 +15,7 @@
         @endif
 
         <!-- Table -->
-        <table class="table table-bordered text-center align-middle">
+        <table class="table-responsive table table-bordered text-center align-middle">
             <thead class="table-dark">
             <tr>
                 <th>ID</th>
