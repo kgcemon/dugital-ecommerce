@@ -168,8 +168,12 @@ class OrderController extends Controller
     }
 
 
-    public function thankYouPage()
+    public function thankYouPage($uid)
     {
-        return view('user.thank-you');
+        $order = Order::where('uid',$uid)->first();
+        if ($order) {
+            return view('user.thank-you',compact('order'));
+        }
+        return view('user.home');
     }
 }
