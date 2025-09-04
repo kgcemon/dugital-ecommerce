@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="banner">
-        <img src="{{$images}}"
+        <img src="/{{$images->images_url ?? ''}}"
              alt="Premium Banner">
     </div>
 
