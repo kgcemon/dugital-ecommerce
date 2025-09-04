@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\PaymentMethod;
 use App\Models\PaymentSms;
 use App\Models\Product;
+use App\Models\WalletTransaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -55,6 +56,13 @@ class DepositController extends Controller
                     $trxID         = $paySMS->trxID;
                     $user->wallet += $amount;
                     $paySMS->status = 1;
+                    WalletTransaction::create([
+                        'user_id'   => $user->id,
+                        'amount'    => $amount,
+                        'type'      => 'credit',
+                        'description' => 'Deposit to Wallet' . $trxID,
+                        'status'    => 1,
+                    ]);
                     $paySMS->save();
                     $user->save();
                 }else {
@@ -104,7 +112,6 @@ class DepositController extends Controller
             ], 500);
         }
     }
-
 
 
 

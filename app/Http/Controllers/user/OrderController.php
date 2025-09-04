@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\PaymentMethod;
 use App\Models\PaymentSms;
 use App\Models\Product;
+use App\Models\WalletTransaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -89,6 +90,13 @@ class OrderController extends Controller
                     }
 
                     $user->wallet -= $item->price;
+                    WalletTransaction::create([
+                        'user_id'   => $user->id,
+                        'amount'    => $item->price,
+                        'type'      => 'debit',
+                        'description' => "Order for $item->name",
+                        'status'    => 1,
+                    ]);
                     $user->save();
                     $order->status = 'processing';
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\User;
+use App\Models\WalletTransaction;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
@@ -69,6 +70,13 @@ class OrdersController extends Controller
                 if ($previousStatus === 'hold' || $previousStatus === 'processing') {
                     if ($validated['status'] === 'delivered') {
                         $user->increment('wallet', $order->total);
+                        WalletTransaction::create([
+                            'user_id'   => $user->id,
+                            'amount'    => $order->total,
+                            'type'      => 'credit',
+                            'description' => 'Deposit to Wallet order ID' . $order->id,
+                            'status'    => 1,
+                        ]);
                     }
                 }
             } else {
@@ -76,6 +84,13 @@ class OrdersController extends Controller
                 if ($previousStatus === 'processing' || $previousStatus === 'Delivery Running') {
                     if ($validated['status'] === 'refunded') {
                         $user->increment('wallet', $order->total);
+                        WalletTransaction::create([
+                            'user_id'   => $user->id,
+                            'amount'    => $order->total,
+                            'type'      => 'credit',
+                            'description' => 'Refund to Wallet' . $order->id,
+                            'status'    => 1,
+                        ]);
                     }
                 }
             }
