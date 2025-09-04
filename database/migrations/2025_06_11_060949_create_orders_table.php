@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('user_id')->nullable();
-            $table->string('uid')->unique();
             $table->string('name',20)->nullable();
             $table->string('phone',14)->nullable();
             $table->string('email',70)->nullable();
@@ -29,7 +28,7 @@ return new class extends Migration
             $table->unsignedInteger('payment_method');
             $table->string('transaction_id')->unique()->nullable();
             $table->string('number')->nullable();
-            $table->string('uid')->unique()->nullable();
+            $table->string('uid')->unique();
             $table->timestamps();
         });
     }
