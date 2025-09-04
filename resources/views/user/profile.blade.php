@@ -83,11 +83,6 @@
                                 color: {{ $txn->type == 'credit' ? '#28a745' : '#dc3545' }};">
                                 {{ $txn->type == 'credit' ? '+' : '-' }}{{ number_format($txn->amount, 2) }}
                             </div>
-                            <div style="font-size: 13px;
-                                color: {{ $txn->status == 'completed' ? '#28a745' : '#ff9800' }};
-                                font-weight: 600;">
-                                {{ ucfirst($txn->status) }}
-                            </div>
                         </div>
                     </div>
                 @empty
@@ -97,6 +92,8 @@
         </div>
 
     </div>
+    <br>
+    <br>
 
     <!-- Small CSS animations -->
     <style>
