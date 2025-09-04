@@ -35,9 +35,7 @@ class ProductController extends Controller
                 'description'       => 'nullable|string',
                 'short_description' => 'nullable|string|max:200',
                 'tags'              => 'nullable|string',
-                'seo_keywords'      => 'nullable|string',
-                'seo_title'         => 'nullable|string',
-                'seo_description'   => 'nullable|string',
+                'keywords'          => 'nullable|string',
                 'input_name'        => 'required|string|max:255',
                 'input_others'      => 'nullable|string|max:255',
                 'total_input'       => 'required|integer|min:1',
@@ -57,9 +55,7 @@ class ProductController extends Controller
                 'description'       => $request->description,
                 'short_description' => $request->short_description,
                 'tags'              => $request->tags,
-                'seo_keywords'      => $request->seo_keywords,
-                'seo_title'         => $request->seo_title,
-                'seo_description'   => $request->seo_description,
+                'keywords'          => $request->keywords,
                 'input_name'        => $request->input_name,
                 'input_others'      => $request->input_others,
                 'total_input'       => $request->total_input,
@@ -138,6 +134,9 @@ class ProductController extends Controller
             'stock'             => $request->stock,
             'support_country'   => $request->support_country,
             'delivery_system'   => $request->delivery_system,
+            'seo_title'         => $request->seo_title,
+            'seo_description'   => $request->seo_description,
+            'seo_keywords'     =>  $request->seo_keywords
         ]);
 
         return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
