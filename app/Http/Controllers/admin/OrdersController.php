@@ -65,6 +65,7 @@ class OrdersController extends Controller
             // ✅ Wallet handling
             $user = User::find($order->user_id);
 
+
             if ($order->product->name === 'Wallet') {
                 // Wallet type order → Add balance only when moving to delivered
                 if ($previousStatus === 'hold' || $previousStatus === 'processing') {
@@ -79,10 +80,9 @@ class OrdersController extends Controller
                         ]);
                     }
                 }
-            } else {
+            } else if ($validated['status'] === 'refunded' && $order->user->id != null) {
                 // Non-wallet product → Refund case
                 if ($previousStatus === 'processing' || $previousStatus === 'Delivery Running') {
-                    if ($validated['status'] === 'refunded') {
                         $user->increment('wallet', $order->total);
                         WalletTransaction::create([
                             'user_id'   => $user->id,
@@ -91,7 +91,6 @@ class OrdersController extends Controller
                             'description' => 'Refund to Wallet Order id: ' . $order->id,
                             'status'    => 1,
                         ]);
-                    }
                 }
             }
 
