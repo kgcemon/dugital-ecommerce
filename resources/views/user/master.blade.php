@@ -378,7 +378,7 @@
 @auth
     <!-- Deposit Modal -->
     <div id="depositModal" class="google-login">
-        <div class="bottom-nav">
+        <div class="card" style="background: black">
             <span id="closeDeposit" class="close-btn">&times;</span>
             <h3 style="margin-bottom:15px;">Deposit Money</h3>
 
