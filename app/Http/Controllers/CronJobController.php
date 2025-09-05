@@ -15,16 +15,13 @@ class CronJobController extends Controller
         try {
             foreach ($orders as $order) {
                 $code = Code::where('item_id', $order->item_id)->where('status', 'unused')->first();
-                dd($order->item->denom);
                 if (!$code) {
                     continue;
                 }
 
-                if($order->item->denom == null){
+                if(!$order->item->denom){
                     continue;
                 }
-
-                dd($order->item->denom);
 
                 $type = (Str::startsWith($code->code, 'UPBD') ? 1 : Str::startsWith($code, 'BDMB')) ? 2 : 1;
                 $order->order_note = 'Delivery Running';
