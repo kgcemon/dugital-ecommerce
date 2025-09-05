@@ -61,7 +61,7 @@
             <img src="{{$order->paymentMethod->icon}}" alt="{{$order->paymentMethod->method}}">
             <div class="summary-info">
                 <p><strong>Method:</strong> {{$order->paymentMethod->method}}</p>
-                @if(!$order->paymentMethod->method == 'Wallet')
+                @if($order->paymentMethod->method != 'Wallet')
                     <p><strong>Number:</strong> {{$order->transaction_id ?? ''}}</p>
                     <p><strong>TrxID:</strong> {{$order->number ?? ''}}</p>
                 @endif
