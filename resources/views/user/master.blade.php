@@ -308,7 +308,7 @@
 
 @guest()
     <!-- Modal -->
-    <div id="loginModal" class="google-login">
+    <div id="loginModal" class="google-login nav-container">
         <div class="card">
             লগ-ইন করুন
             <a href="{{ url('/auth/google/redirect') }}" class="btn-google-login">
@@ -377,7 +377,7 @@
 
 @auth
     <!-- Deposit Modal -->
-    <div id="depositModal" class="google-login">
+    <div id="depositModal" class="google-login nav-container">
         <div class="card">
             <span id="closeDeposit" class="close-btn">&times;</span>
             <h3 style="margin-bottom:15px;">Deposit Money</h3>
