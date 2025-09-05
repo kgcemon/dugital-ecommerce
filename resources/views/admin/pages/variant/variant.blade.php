@@ -24,6 +24,7 @@
                         <th>Name</th>
                         <th>Price (৳)</th>
                         <th>Sort</th>
+                        <th>Denom</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -34,6 +35,7 @@
                             <td>{{ $variant->name }}</td>
                             <td>{{ $variant->price }}৳</td>
                             <td>{{ $variant->sort }}</td>
+                            <td>{{ $variant->denom }}</td>
                             <td>
 
                                 <button
@@ -132,6 +134,10 @@
                             <input type="number" class="form-control" id="editVariantSort" name="sort" required>
                         </div>
                         <div class="mb-3">
+                            <label for="editVariantDenom" class="form-label">Denom</label>
+                            <input type="text" class="form-control" id="editVariantDenom" name="denom">
+                        </div>
+                        <div class="mb-3">
                             <label for="editVariantDes" class="form-label">Description</label>
                             <input type="text" class="form-control" id="editVariantDes" name="description">
                         </div>
@@ -193,6 +199,7 @@
                 const priceInput = document.getElementById('editVariantPrice');
                 const sorts = document.getElementById('editVariantSort');
                 const des = document.getElementById('editVariantDes');
+                const denom = document.getElementById('editVariantDenom');
 
                 form.action = `/admin/variant/${id}`;
 
