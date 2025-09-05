@@ -39,7 +39,7 @@ class SitemapController extends Controller
 
 
         // XML তৈরি করা
-        $content = view('sitemap.index', compact('urls'));
+        $content = view('sitemap', compact('urls'));
 
         return response($content, 200)
             ->header('Content-Type', 'application/xml');
