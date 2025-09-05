@@ -15,7 +15,7 @@ class CronJobController extends Controller
         try {
             foreach ($orders as $order) {
                 $code = Code::where('item_id', $order->item_id)->where('status', 'unused')->first();
-                dd($code);
+                dd($order->item->denom);
                 if (!$code) {
                     continue;
                 }
