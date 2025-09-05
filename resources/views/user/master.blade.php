@@ -248,7 +248,7 @@
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(255,255,255,0.8);
+            background: rgba(45, 34, 34, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
