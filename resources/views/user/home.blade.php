@@ -24,7 +24,7 @@
                         <div class="card">
                             <img src="{{ asset($product['image']) }}"
                                  alt="{{ $product['name'] }}"
-                                 width="150" height="150"
+                                 width="150" height="80"
                                  loading="lazy">
                             <div class="card-title">{{ $product['name'] }}</div>
                         </div>
