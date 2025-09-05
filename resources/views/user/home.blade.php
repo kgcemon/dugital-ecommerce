@@ -50,7 +50,7 @@
         <div class="card-title"><p>
                 Call: 01828861788 <br>
                 whatsApp: 01828861788 <br>
-                facebook : <a href="">https://m.me/codmshop</a>
+                facebook : <a href="https://m.me/codmshop">Codmshop</a>
             </p></div>
     </div>
     <br>
