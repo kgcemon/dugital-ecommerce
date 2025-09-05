@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\UsersController;
 use App\Http\Controllers\admin\VariantController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\CronJobController;
 use App\Http\Controllers\user\DepositController;
 use App\Http\Controllers\user\OrderController;
 use App\Http\Controllers\user\SiteHomeScreenController;
@@ -18,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\OrdersController;
 use App\Http\Controllers\ProfileController;
+
+Route::get('auto-top-up-cron',[CronJobController::class,'freeFireAutoTopUpJob']);
 
 //admin
 Route::middleware('guest')->group(function () {
