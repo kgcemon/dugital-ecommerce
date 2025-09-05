@@ -12,7 +12,7 @@ use Illuminate\View\View;
 class AuthenticatedSessionController extends Controller
 {
     /**
-     * Display the login view.
+     * Display the admin login view.
      */
     public function create(): View
     {
@@ -20,28 +20,35 @@ class AuthenticatedSessionController extends Controller
     }
 
     /**
-     * Handle an incoming authentication request.
+     * Handle an incoming admin authentication request.
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        // এখানে admin guard ব্যবহার করতে হবে
+        if (Auth::guard('admin')->attempt(
+            $request->only('email', 'password'),
+            $request->boolean('remember')
+        )) {
+            $request->session()->regenerate();
 
-        $request->session()->regenerate();
+            return redirect()->intended(route('admin.dashboard'));
+        }
 
-        return redirect()->intended(route('admin.dashboard', absolute: false));
+        return back()->withErrors([
+            'email' => 'Invalid admin credentials.',
+        ]);
     }
 
     /**
-     * Destroy an authenticated session.
+     * Destroy an authenticated admin session.
      */
     public function destroy(Request $request): RedirectResponse
     {
-        Auth::guard('web')->logout();
+        Auth::guard('admin')->logout();
 
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect()->route('admin.login');
     }
 }

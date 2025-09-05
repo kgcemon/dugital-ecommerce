@@ -44,14 +44,14 @@ Route::post('add-order', [OrderController::class, 'addOrder'])->name('addOrder')
 Route::get('thank-you/{uid}', [OrderController::class, 'thankYouPage'])->name('thankYouPage');
 
 // Profile Page
-Route::get('profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile');
-Route::get('my-orders', [OrderController::class, 'myOrders'])->middleware('auth')->name('myOrders');
-Route::get('order/{id}', [OrderController::class, 'orderView'])->middleware('auth')->name('orderView');
-Route::get('deposit',[DepositController::class, 'deposit'])->middleware('auth')->name('deposit');
-Route::post('add-money',[DepositController::class, 'depositStore'])->middleware('auth');
+Route::get('profile', [ProfileController::class, 'show'])->middleware('auth:web')->name('profile');
+Route::get('my-orders', [OrderController::class, 'myOrders'])->middleware('auth:web')->name('myOrders');
+Route::get('order/{id}', [OrderController::class, 'orderView'])->middleware('auth:web')->name('orderView');
+Route::get('deposit',[DepositController::class, 'deposit'])->middleware('auth:web')->name('deposit');
+Route::post('add-money',[DepositController::class, 'depositStore'])->middleware('auth:web');
 
 // Authenticated Admin Routes
-Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
+Route::middleware('auth:admin')->prefix('admin')->as('admin.')->group(function () {
     // Dashboard
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
