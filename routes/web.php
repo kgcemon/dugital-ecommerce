@@ -11,6 +11,7 @@ use App\Http\Controllers\admin\VariantController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\CronJobController;
+use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\user\DepositController;
 use App\Http\Controllers\user\OrderController;
 use App\Http\Controllers\user\SiteHomeScreenController;
@@ -21,6 +22,8 @@ use App\Http\Controllers\admin\OrdersController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('auto-top-up-cron',[CronJobController::class,'freeFireAutoTopUpJob']);
+
+Route::get('/sitemap.xml', [SitemapController::class, 'index']);
 
 //admin
 Route::middleware('guest')->group(function () {
