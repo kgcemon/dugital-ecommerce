@@ -80,21 +80,21 @@
                                 <div class="card card-body">
                                     <div class="col-md-6">
                                         <label>SEO Title</label>
-                                        <input type="text" name="seo_title" class="form-control @error('seo_title') is-invalid @enderror" value="{{ old('seo_title', $product->seo_title) }}">
+                                        <input type="text" name="seo_title" class="form-control @error('seo_title') is-invalid @enderror" value="{{ old('seo_title') }}">
                                         @error('keywords')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col-md-6">
                                         <label>SEO Description</label>
-                                        <input type="text" name="seo_description" class="form-control @error('seo_title') is-invalid @enderror" value="{{ old('seo_title', $product->seo_description) }}">
+                                        <input type="text" name="seo_description" class="form-control @error('seo_title') is-invalid @enderror" value="{{ old('seo_title') }}">
                                         @error('keywords')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col-md-6">
                                         <label>Keywords</label>
-                                        <input type="text" name="seo_keywords" class="form-control @error('keywords') is-invalid @enderror" value="{{ old('keywords', $product->seo_keywords) }}">
+                                        <input type="text" name="seo_keywords" class="form-control @error('keywords') is-invalid @enderror" value="{{ old('keywords') }}">
                                         @error('keywords')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
