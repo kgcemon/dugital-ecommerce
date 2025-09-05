@@ -309,7 +309,7 @@
 @guest()
     <!-- Modal -->
     <div id="loginModal" class="google-login ">
-        <div class="bottom-nav">
+        <div class="card" style="background: black; padding: 10px">
             লগ-ইন করুন
             <a href="{{ url('/auth/google/redirect') }}" class="btn-google-login">
                 <svg class="google-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 533.5 544.3" width="20" height="20">
