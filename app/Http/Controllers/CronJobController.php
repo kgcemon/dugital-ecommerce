@@ -19,9 +19,6 @@ class CronJobController extends Controller
                     continue;
                 }
 
-                if(!$order->item->denom){
-                    continue;
-                }
 
                 $type = (Str::startsWith($code->code, 'UPBD') ? 1 : Str::startsWith($code, 'BDMB')) ? 2 : 1;
                 $order->order_note = 'Delivery Running';
