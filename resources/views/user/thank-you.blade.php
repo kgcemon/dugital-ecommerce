@@ -61,11 +61,13 @@
             <img src="{{$order->paymentMethod->icon}}" alt="{{$order->paymentMethod->method}}">
             <div class="summary-info">
                 <p><strong>Method:</strong> {{$order->paymentMethod->method}}</p>
-                <p><strong>Number:</strong> {{$order->transaction_id ?? ''}}</p>
-                <p><strong>TrxID:</strong> {{$order->number ?? ''}}</p>
+                @if(!$order->paymentMethod->method == 'Wallet')
+                    <p><strong>Number:</strong> {{$order->transaction_id ?? ''}}</p>
+                    <p><strong>TrxID:</strong> {{$order->number ?? ''}}</p>
+                @endif
             </div>
         </div>
-        <div class="card" style="margin: 15px">
+        <div class="selection-panel" style="margin: 15px">
             <h2>Support</h2>
             <div class="card-title"><p>
                     Call: 01828861788 <br>
