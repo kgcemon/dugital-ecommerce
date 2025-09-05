@@ -22,7 +22,7 @@ class CronJobController extends Controller
 
                 $type = (Str::startsWith($code->code, 'UPBD') ? 1 : Str::startsWith($code, 'BDMB')) ? 2 : 1;
                 $order->order_note = 'Delivery Running';
-                $denom = (integer)$order->item->denom;
+                $denom = (string)$order->item->denom;
                 $response = Http::withHeaders([
                         'Content-Type' => 'application/json',
                         'Accept' => 'application/json',
