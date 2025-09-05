@@ -194,6 +194,17 @@
             nav ul li a { font-size: 0.85rem; }
         }
 
+        /* Close button */
+        .close-btn {
+            position: absolute;
+            top:10px;
+            right:15px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+
         /* Modal overlay */
         .google-login {
             display: none;
@@ -208,20 +219,9 @@
             z-index: 1000; /* child card er z-index er niche thakbe */
         }
 
-
         /* Show modal */
         .google-login.show {
             display: flex;
-        }
-
-        /* Close button */
-        .close-btn {
-            position: absolute;
-            top:10px;
-            right:15px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 20px;
         }
 
         /* Google login button */
@@ -248,13 +248,12 @@
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(45, 34, 34, 0.2);
+            background: rgba(255,255,255,0.8);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 99999;
         }
-
         #pageLoader .spinner {
             width: 40px;
             height: 40px;
