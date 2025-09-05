@@ -11,7 +11,7 @@ class CronJobController extends Controller
 {
     public function freeFireAutoTopUpJob()
     {
-        $orders = Order::where('status', 'processing')->where('order_note', null)->whereHas('product', function ($query) {$query->where('is_auto', 1);})->get();
+        $orders = Order::where('status', 'processing')->where('order_note', null)->whereHas('product', function ($query) {$query->where('is_auto', 1);})->limit(4)->get();
         try {
             foreach ($orders as $order) {
                 $code = Code::where('item_id', $order->item_id)->where('status', 'unused')->first();
