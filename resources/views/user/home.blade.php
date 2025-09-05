@@ -22,7 +22,10 @@
                 @foreach ($category['products'] as $product)
                     <a href="{{ url('/product/' . $product['slug']) }}">
                         <div class="card">
-                            <img src="{{ asset($product['image']) }}" alt="{{ $product['name'] }}">
+                            <img src="{{ asset($product['image']) }}"
+                                 alt="{{ $product['name'] }}"
+                                 width="150" height="150"
+                                 loading="lazy">
                             <div class="card-title">{{ $product['name'] }}</div>
                         </div>
                     </a>
