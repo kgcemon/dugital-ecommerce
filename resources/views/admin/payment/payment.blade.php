@@ -3,8 +3,27 @@
 @section('content')
     <div class="container-fluid">
         <br>
+
+        {{-- Success Message --}}
+        @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Success!</strong> {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
+        {{-- Error Message --}}
+        @if(session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Error!</strong> {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
+
         <!-- Page Header -->
         <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="fw-bold mb-0">Payment Methods</h4>
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMethodModal">
                 <i class="bi bi-plus-circle me-1"></i> Add New
             </button>
@@ -59,14 +78,14 @@
                                     <button class="btn btn-sm btn-warning"
                                             data-bs-toggle="modal"
                                             data-bs-target="#editMethodModal{{ $method->id }}">
-                                        <i class="bi bi-pencil-square">Edit</i>
+                                        <i class="bi bi-pencil-square"></i>
                                     </button>
 
                                     <!-- Delete -->
                                     <button class="btn btn-sm btn-danger"
                                             data-bs-toggle="modal"
                                             data-bs-target="#deleteMethodModal{{ $method->id }}">
-                                        <i class="bi bi-trash">Delete</i>
+                                        <i class="bi bi-trash"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -75,7 +94,7 @@
                             <div class="modal fade" id="editMethodModal{{ $method->id }}" tabindex="-1" aria-hidden="true">
                                 <div class="modal-dialog modal-lg modal-dialog-centered">
                                     <div class="modal-content">
-                                        <form action="{{ route('admin.payment-methods.update', $method->id) }}" method="POST">
+                                        <form action="{{ route('admin.payment-methods.update', $method->id) }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             @method('PUT')
                                             <div class="modal-header bg-warning text-dark">
@@ -84,8 +103,8 @@
                                             </div>
                                             <div class="modal-body row g-3">
                                                 <div class="col-md-6">
-                                                    <label class="form-label">Icon URL</label>
-                                                    <input type="text" name="icon" class="form-control" value="{{ $method->icon }}">
+                                                    <label class="form-label">Icon</label>
+                                                    <input type="file" name="icon" class="form-control" value="{{ $method->icon }}">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="form-label">Method</label>
@@ -151,7 +170,9 @@
     <div class="modal fade" id="addMethodModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
-                <form action="{{ route('admin.payment-methods.store') }}" method="POST">
+                <form action="{{ route('admin.payment-methods.store') }}"
+                      method="POST"
+                      enctype="multipart/form-data"> <!-- এখানে যুক্ত করা হলো -->
                     @csrf
                     <div class="modal-header bg-primary text-white">
                         <h5 class="modal-title">Add Payment Method</h5>
@@ -159,8 +180,8 @@
                     </div>
                     <div class="modal-body row g-3">
                         <div class="col-md-6">
-                            <label class="form-label">Icon URL</label>
-                            <input type="text" name="icon" class="form-control" required>
+                            <label class="form-label">Icon</label>
+                            <input type="file" name="icon" class="form-control" required>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Method</label>
@@ -190,6 +211,7 @@
             </div>
         </div>
     </div>
+
 
     <!-- JS for Copy -->
     <script>

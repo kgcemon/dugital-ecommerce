@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\PaymentMethod;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PaymentMethodSettingController extends Controller
 {
@@ -19,38 +20,75 @@ class PaymentMethodSettingController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'icon' => 'required|url',
+            'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'method' => 'required|string|max:100',
             'description' => 'nullable|string',
             'number' => 'required|string|max:50',
         ]);
 
-        PaymentMethod::create([
-            'icon' => $request->icon,
-            'method' => $request->input('method'),
-            'description' => $request->description,
-            'number' => $request->number,
-            'status' => 1,
-        ]);
+        try {
+            $iconUrl = null;
+            if ($request->hasFile('icon')) {
+                // ফাইলকে storage/app/public/payment_methods এ সেভ করবে
+                $path = $request->file('icon')->store('payment_methods', 'public');
 
-        return back()->with('success', 'Payment method added successfully!');
+                // full URL তৈরি হবে
+                $iconUrl = asset('storage/' . $path);
+            }
+
+            PaymentMethod::create([
+                'icon' => $iconUrl, // এখানে full URL save হবে
+                'method' => $request->input('method'),
+                'description' => $request->input('description'),
+                'number' => $request->input('number'),
+                'status' => 1,
+            ]);
+
+            return back()->with('success', 'Payment method added successfully!');
+        }catch (\Exception $exception){
+            return back()->with('error', $exception->getMessage());
+        }
     }
 
-    // ✅ Update Payment Method
+
     public function update(Request $request, $id)
     {
         $request->validate([
-            'icon' => 'required|url',
+            'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'method' => 'required|string|max:100',
             'description' => 'nullable|string',
             'number' => 'required|string|max:50',
+            'status' => 'nullable|in:0,1',
         ]);
 
         $method = PaymentMethod::findOrFail($id);
-        $method->update($request->only('icon','method','description','number','status'));
+
+        $iconUrl = $method->icon; // পুরোনো ইমেজ ধরে রাখা হলো
+
+        if ($request->hasFile('icon')) {
+            // পুরোনো ইমেজ ডিলিট
+            if ($method->icon && str_contains($method->icon, '/storage/')) {
+                $oldPath = str_replace(asset('storage') . '/', '', $method->icon);
+                Storage::disk('public')->delete($oldPath);
+            }
+
+            // নতুন ইমেজ আপলোড
+            $path = $request->file('icon')->store('payment_methods', 'public');
+            $iconUrl = asset('storage/' . $path);
+        }
+
+        // ডাটাবেজ আপডেট
+        $method->update([
+            'icon' => $iconUrl,
+            'method' => $request->input('method'),
+            'description' => $request->input('description'),
+            'number' => $request->input('number'),
+            'status' => $request->input('status', 1),
+        ]);
 
         return back()->with('success', 'Payment method updated successfully!');
     }
+
 
     // ✅ Delete Payment Method
     public function destroy($id)
