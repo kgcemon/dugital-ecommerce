@@ -67,7 +67,7 @@
                 @endif
             </div>
         </div>
-        <div class="selection-panel" style="margin: 15px">
+        <div class="selection-panel">
             <h2>Support</h2>
             <div class="card-title"><p>
                     Call: 01828861788 <br>
