@@ -30,7 +30,7 @@
             </div>
         @endif
     @endforeach
-    <div> <br> <br></div>
+
     <div class="card" style="margin: 15px">
         <h1>Why choice top up use Codmshop?</h1>
         <div class="card-title"><p>
