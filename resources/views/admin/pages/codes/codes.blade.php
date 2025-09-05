@@ -167,6 +167,14 @@
                             </select>
                         </div>
 
+                        <div class="mb-3">
+                            <label for="editVariantItem" class="form-label">Select Item</label>
+                            <select class="form-select" id="editVariantItem" name="item_id" required>
+                         <option value="0">unused</option>
+                         <option value="0">used</option>
+                            </select>
+                        </div>
+
                         <!-- Code Input -->
                         <div class="mb-3">
                             <label for="editCodeText" class="form-label">Code</label>
