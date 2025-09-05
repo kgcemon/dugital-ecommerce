@@ -26,7 +26,7 @@ class WebHooksController extends Controller
             if ($status) {
                 $order->status = 'delivered';
             } else {
-                $order->status = 'processing';
+                $order->status = 'Delivery Running';
             }
 
             if ($message !== null) {
