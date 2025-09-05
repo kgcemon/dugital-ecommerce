@@ -22,6 +22,7 @@ class CronJobController extends Controller
 
                 $type = (Str::startsWith($code->code, 'UPBD') ? 1 : Str::startsWith($code, 'BDMB')) ? 2 : 1;
                 $order->order_note = 'Delivery Running';
+                $denom = $order->item->denom;
                 $response = Http::withHeaders([
                         'Content-Type' => 'application/json',
                         'Accept' => 'application/json',
@@ -29,7 +30,7 @@ class CronJobController extends Controller
                     ]
                 )->post('https://autonow.codmshopbd.com/topup', [
                     "playerId" => $order->customer_data,
-                    "denom" => $order->item->denom,
+                    "denom" => $denom,
                     "type" => $type,
                     "voucherCode" => $code->code,
                     "webhook" => "https://codmshop.com/api/auto-webhooks"
@@ -42,6 +43,8 @@ class CronJobController extends Controller
                     $code->order_id = $order->id;
                     $code->save();
                     $order->save();
+                }else{
+                    return response()->json();
                 }
             }
             return 'Cron job run successfully';
