@@ -1,6 +1,8 @@
 @extends('user.master')
 
-@section('title', 'Home - Codmshop')
+@section('title', "Codmshop | Free Fire Top Up in Bangladesh ")
+@section('meta_description', 'codmshop is a gaming credit top up system website from bangladesh top up popular games Like Free Fire Diamonds use bkash')
+@section('meta_keywords', 'codmshop,ff top up, top up, codm shop bd')
 
 @section('content')
 
@@ -28,7 +30,20 @@
             </div>
         @endif
     @endforeach
-    <div> <br> <br> <br></div>
+    <div> <br> <br></div>
+    <div class="container">
+        <h1>Why choice top up use Codmshop?</h1>
+        <div class="card-title"><p>
+                <strong>Codmshop</strong> is a must old and popular rop up shop in bangladesh we have many customers review in social media & we sell bangladesh best low prices Free Fire <strong>Diamonds</strong>
+            </p></div>
+    </div>
+    <br>
+    <div class="container">
+        <h2>Delivery Time</h2>
+        <div class="card-title"><p>
+                <strong>Free Fire Top Up </strong> is intent delivery 1/10 second times need to delivery no need extra charge
+            </p></div>
+    </div>
 @endsection
 
 @push('scripts')
