@@ -31,19 +31,31 @@
         @endif
     @endforeach
     <div> <br> <br></div>
-    <div class="card" style="margin: 10px">
+    <div class="card" style="margin: 15px">
         <h1>Why choice top up use Codmshop?</h1>
         <div class="card-title"><p>
                 <strong>Codmshop</strong> is a must old and popular rop up shop in bangladesh we have many customers review in social media & we sell bangladesh best low prices Free Fire <strong>Diamonds</strong>
             </p></div>
     </div>
-    <br>
-    <div class="card" style="margin: 10px">
+
+    <div class="card" style="margin: 15px">
         <h2>Delivery Time</h2>
         <div class="card-title"><p>
                 <strong>Free Fire Top Up </strong> is intent delivery 1/10 second times need to delivery no need extra charge
             </p></div>
     </div>
+
+    <div class="card" style="margin: 15px">
+        <h2>Support</h2>
+        <div class="card-title"><p>
+                Call: 01828861788 <br>
+                whatsApp: 01828861788 <br>
+                facebook : <a href="">https://m.me/codmshop</a>
+            </p></div>
+    </div>
+    <br>
+    <br>
+
 @endsection
 
 @push('scripts')
