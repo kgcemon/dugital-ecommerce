@@ -27,7 +27,7 @@ class SitemapController extends Controller
         ];
 
         // Example: Products
-        $products = Product::where('method', '!=', 'Wallet')->get();
+        $products = Product::where('name', '!=', 'Wallet')->get();
         foreach ($products as $product) {
             $urls[] = [
                 'loc' => url('/product/' . $product->slug),
