@@ -8,7 +8,7 @@
 
     <div class="banner">
        <a href="{{$images->link ?? ''}}">
-           <img src="/{{$images->images_url ?? ''}}"
+           <img src="/{{$images->images_url ?? ''}}" width="1200" height="400"
                 alt="Premium Banner">
        </a>
     </div>
@@ -22,7 +22,10 @@
                 @foreach ($category['products'] as $product)
                     <a href="{{ url('/product/' . $product['slug']) }}">
                         <div class="card">
-                            <img src="{{ asset($product['image']) }}" alt="{{ $product['name'] }}">
+                            <img src="{{ asset($product['image']) }}"
+                                 alt="{{ $product['name'] }}"
+                                 width="300" height="300"
+                                 loading="lazy">
                             <div class="card-title">{{ $product['name'] }}</div>
                         </div>
                     </a>
