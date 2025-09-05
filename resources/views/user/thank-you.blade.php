@@ -65,6 +65,13 @@
                 <p><strong>TrxID:</strong> {{$order->number ?? ''}}</p>
             </div>
         </div>
+        <div class="card" style="margin: 15px">
+            <h2>Support</h2>
+            <div class="card-title"><p>
+                    Call: 01828861788 <br>
+                    facebook : <a href="https://m.me/codmshop">Codmshop</a>
+                </p></div>
+        </div>
     </div>
 
 @endsection
