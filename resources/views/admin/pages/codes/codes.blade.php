@@ -168,12 +168,13 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="editVariantItem" class="form-label">Select Item</label>
-                            <select class="form-select" id="editVariantItem" name="item_id" required>
-                         <option value="0">unused</option>
-                         <option value="0">used</option>
+                            <label for="editVariantItem" class="form-label">Status</label>
+                            <select class="form-select" id="editVariantItem" name="status" required>
+                                <option value="0" {{ $variant->status == 0 ? 'selected' : '' }}>unused</option>
+                                <option value="1" {{ $variant->status == 1 ? 'selected' : '' }}>used</option>
                             </select>
                         </div>
+
 
                         <!-- Code Input -->
                         <div class="mb-3">

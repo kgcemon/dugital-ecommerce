@@ -86,6 +86,7 @@ class CodesController extends Controller
         $code->update([
             'code' => $request->input('code'),
             'item_id' => $request->input('item_id'),
+            'status' => $request->input('status'),
         ]);
 
         return back()->with('success', 'Product updated successfully.');
