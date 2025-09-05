@@ -44,7 +44,7 @@ class CronJobController extends Controller
                     $code->save();
                     $order->save();
                 }else{
-                    return response()->json();
+                    return $data;
                 }
             }
             return 'Cron job run successfully';
