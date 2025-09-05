@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $generalSettings->app_name ?? 'GM PAPA Admin panel' }}</title>
+    <title>{{ $generalSettings->app_name ?? 'Admin panel' }}</title>
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
@@ -124,7 +124,7 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('login') }}">
+    <form method="POST" action="{{ route('adminLogin') }}">
         @csrf
         <div class="form-field">
             <i class="fa fa-envelope"></i>

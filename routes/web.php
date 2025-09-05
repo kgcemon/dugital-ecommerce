@@ -29,7 +29,7 @@ Route::get('/sitemap.xml', [SitemapController::class, 'index']);
 Route::middleware('guest')->group(function () {
     Route::get('admin/login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');
-    Route::post('login', [AuthenticatedSessionController::class, 'store']);
+    Route::post('login', [AuthenticatedSessionController::class, 'store'])->name('adminLogin');
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
 
