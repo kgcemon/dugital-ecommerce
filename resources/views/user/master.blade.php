@@ -272,8 +272,7 @@
 
 
 @if (Request::is('/'))
-        <link rel="stylesheet" href="{{ asset('assets/user/home.css?v=133') }}" media="print" onload="this.media='all'">
-        <noscript><link rel="stylesheet" href="{{ asset('assets/user/home.css?v=137') }}"></noscript>
+        <link rel="stylesheet" href="{{ asset('assets/user/home.css?v=133') }}">
     @endif
 
     @if (Request::is('product*') || Request::is('thank-you*') || Request::is('deposit*'))
