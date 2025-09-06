@@ -60,6 +60,11 @@ return [
             'report' => false,
         ],
 
+        'export' => [
+            'driver' => 'local',
+            'root' => public_path('export'), // public/export
+        ],
+
     ],
 
     /*
