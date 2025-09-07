@@ -87,16 +87,31 @@ class UsersController extends Controller
 
         $user->name = $validatedData['name'];
         $user->email = $validatedData['email'];
+        $oldBalance = $user->wallet;
         if (isset($validatedData['wallet'])) {
+
             $amount = $validatedData['wallet'];
-            $user->increment('wallet', $amount);
-            WalletTransaction::create([
-                'user_id'   => $user->id,
-                'amount'    => $amount,
-                'type'      => 'credit',
-                'description' => 'Admin added manually',
-                'status'    => 1,
-            ]);
+
+            $user->wallet = $amount;
+
+           if($oldBalance > $amount) {
+               $user->wallet = $oldBalance;
+               WalletTransaction::create([
+                   'user_id'   => $user->id,
+                   'amount'    => $oldBalance - $amount,
+                   'type'      => 'debit',
+                   'description' => 'Admin added menualy your',
+                   'status'    => 1,
+               ]);
+           }else{
+               WalletTransaction::create([
+                   'user_id'   => $user->id,
+                   'amount'    => $amount-$oldBalance,
+                   'type'      => 'credit',
+                   'description' => 'Admin added menualy your',
+                   'status'    => 1,
+               ]);
+           }
         }
 
         if (!empty($validatedData['password'])) {
