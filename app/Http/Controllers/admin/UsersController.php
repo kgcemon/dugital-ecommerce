@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\WalletTransaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -86,7 +87,17 @@ class UsersController extends Controller
 
         $user->name = $validatedData['name'];
         $user->email = $validatedData['email'];
-        $user->wallet += $validatedData['wallet'] ?? $user->wallet;
+        if (isset($validatedData['wallet'])) {
+            $amount = $validatedData['wallet'];
+            $user->increment('wallet', $amount);
+            WalletTransaction::create([
+                'user_id'   => $user->id,
+                'amount'    => $amount,
+                'type'      => 'credit',
+                'description' => 'Admin added manually',
+                'status'    => 1,
+            ]);
+        }
 
         if (!empty($validatedData['password'])) {
             $user->password = Hash::make($validatedData['password']);

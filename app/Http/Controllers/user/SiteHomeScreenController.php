@@ -26,7 +26,4 @@ class SiteHomeScreenController extends Controller
         return view('user.home', compact('products','images'));
     }
 
-
-
-
 }
