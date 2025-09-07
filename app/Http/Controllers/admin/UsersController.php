@@ -95,12 +95,11 @@ class UsersController extends Controller
             $user->wallet = $amount;
 
            if($oldBalance > $amount) {
-               $user->wallet = $oldBalance;
                WalletTransaction::create([
                    'user_id'   => $user->id,
                    'amount'    => $oldBalance - $amount,
                    'type'      => 'debit',
-                   'description' => 'Admin added menualy your',
+                   'description' => 'Admin debit balance',
                    'status'    => 1,
                ]);
            }else{
