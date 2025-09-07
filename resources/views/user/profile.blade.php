@@ -26,7 +26,7 @@
         </div>
 
         <!-- Summary Stats -->
-        <div style="display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; margin-bottom: 20px;">
+        <div style="display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; margin-bottom: 10px;">
             <div class="panelData" style="padding: 14px; border-radius: 12px;
              background: rgba(255,255,255,0.05);
              text-align: center;
