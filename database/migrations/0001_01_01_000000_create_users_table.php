@@ -22,6 +22,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('wallet')->default(0);
+            $table->string('refer_code')->unique();
+            $table->integer('refer_by');
+            $table->boolean('status')->default(true);
             $table->rememberToken();
             $table->timestamps();
         });

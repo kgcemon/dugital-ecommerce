@@ -1,8 +1,10 @@
 const CACHE_NAME = 'codmshop-cache-v2';
 const ASSETS = [
     '/',
-    '/css/app.css',
-    '/js/app.js',
+    '/assets/user/product.css',
+    '/assets/user/header.css',
+    '/assets/user/product.css',
+    '/assets/user/loginModal1.js',
     '/icon.png',
     '/icon.png',
     '/icon.png'
