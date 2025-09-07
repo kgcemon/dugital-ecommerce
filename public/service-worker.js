@@ -6,8 +6,6 @@ const ASSETS = [
     '/assets/user/product.css',
     '/assets/user/loginModal1.js',
     '/icon.png',
-    '/icon.png',
-    '/icon.png'
 ];
 
 self.addEventListener('install', e => {
