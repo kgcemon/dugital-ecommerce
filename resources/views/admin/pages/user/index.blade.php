@@ -77,7 +77,7 @@
 
                 {{-- Pagination Links --}}
                 <div class="mt-3 d-flex justify-content-center">
-                    {{ $orders->links('admin.layouts.partials.__pagination') }}
+                    {{ $users->links('admin.layouts.partials.__pagination') }}
                 </div>
             </div>
         </div>
