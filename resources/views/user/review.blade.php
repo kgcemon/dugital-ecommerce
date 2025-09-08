@@ -63,12 +63,14 @@
             font-size: 1rem;
             margin-bottom: 6px; /* spacing between stars and text */
             display: block;
+            text-align: left!important;
         }
 
         .review-text {
             font-size: 0.85rem;
             color: rgba(255,255,255,.9);
             line-height: 1.4;
+            text-align: left!important;
         }
     </style>
 
