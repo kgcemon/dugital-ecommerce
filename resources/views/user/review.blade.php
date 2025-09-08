@@ -152,10 +152,10 @@
                 <div class="review-content">
                     <div class="review-header">
                         <span class="review-name">{{$review->user->name}}</span>
-                        <span class="review-date">{{$review->create_at}}</span>
+                        <span class="review-date">{{$review->created_at}}</span>
                     </div>
                     <div class="review-body">
-                        <div class="review-stars">⭐ ⭐ ⭐ ⭐ ⭐</div>
+                        <div class="review-stars">⭐ ⭐ ⭐ ⭐ ⭐</div><br>
                         <p class="review-text">{{$review->review}}</p>
                     </div>
                 </div>
