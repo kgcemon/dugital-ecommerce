@@ -26,7 +26,9 @@
                 <h1>{{$product->name}}</h1>
                 <span class="product-subtitle">{{ "শুধু মাত্র " .$product->support_country. " সার্ভারে"}}</span>
                 <br>
-               <a href="{{route('review')}}"> <span class="product-subtitle">⭐⭐⭐(10)</span></a>
+                <a href="{{ route('review', ['id' => $product->id]) }}">
+                    <span class="product-subtitle">⭐⭐⭐(10)</span>
+                </a>
             </div>
         </div>
 

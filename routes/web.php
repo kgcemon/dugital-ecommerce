@@ -14,18 +14,18 @@ use App\Http\Controllers\CronJobController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\user\DepositController;
 use App\Http\Controllers\user\OrderController;
+use App\Http\Controllers\user\ReviewController;
 use App\Http\Controllers\user\SiteHomeScreenController;
 use App\Http\Controllers\user\SiteProductsScreenController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\OrdersController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ReviewController;
 
 Route::get('auto-top-up-cron',[CronJobController::class,'freeFireAutoTopUpJob']);
 
 Route::get('/sitemap.xml', [SitemapController::class, 'index']);
-Route::get('/review', [ReviewController::class, 'index'])->name('review');
+Route::get('/review/{id}', [ReviewController::class, 'reviewByProduct'])->name('review');
 
 //admin
 Route::middleware('guest')->group(function () {
