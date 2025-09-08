@@ -10,7 +10,7 @@ class ReviewController extends Controller
 {
     public function reviewByProduct($id)
     {
-        $reviews = Review::where('product_id', $id)->orderBy('creation_date', 'desc')->paginate(20);
+        $reviews = Review::where('product_id', $id)->orderBy('create_at', 'desc')->paginate(20);
         return view('user.review', compact('reviews'));
     }
 }
