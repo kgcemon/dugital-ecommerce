@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categorie;
 use App\Models\Product;
 use Carbon\Carbon;
 

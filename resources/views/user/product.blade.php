@@ -26,7 +26,7 @@
                 <h1>{{$product->name}}</h1>
                 <span class="product-subtitle">{{ "শুধু মাত্র " .$product->support_country. " সার্ভারে"}}</span>
                 <br>
-                <span class="product-subtitle">{{ "ডেলিভারি " .$product->delivery_system}}</span>
+               <a href="{{route('review')}}"> <span class="product-subtitle">⭐⭐⭐(10)</span></a>
             </div>
         </div>
 

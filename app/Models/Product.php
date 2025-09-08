@@ -42,5 +42,9 @@ class Product extends Model
     {
         return $this->belongsTo(Categorie::class, 'category_id','id')->select(['id', 'name']);
     }
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'product_id')->orderBy('creation_date', 'desc')->paginate(20);
+    }
 
 }

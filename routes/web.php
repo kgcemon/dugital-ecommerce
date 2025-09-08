@@ -20,10 +20,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\OrdersController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReviewController;
 
 Route::get('auto-top-up-cron',[CronJobController::class,'freeFireAutoTopUpJob']);
 
 Route::get('/sitemap.xml', [SitemapController::class, 'index']);
+Route::get('/review', [ReviewController::class, 'index'])->name('review');
 
 //admin
 Route::middleware('guest')->group(function () {
