@@ -42,9 +42,9 @@ class Product extends Model
     {
         return $this->belongsTo(Categorie::class, 'category_id','id')->select(['id', 'name']);
     }
-    public function reviewCount()
+    public function reviews()
     {
-        return $this->hasMany(Review::class, 'product_id')->count();
+        return $this->hasMany(Review::class, 'product_id');
     }
 
 }

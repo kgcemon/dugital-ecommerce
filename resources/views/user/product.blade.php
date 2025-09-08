@@ -27,7 +27,7 @@
                 <span class="product-subtitle">{{ "শুধু মাত্র " .$product->support_country. " সার্ভারে"}}</span>
                 <br>
                 <a href="{{ route('review', ['id' => $product->id]) }}">
-                    <span class="product-subtitle">⭐⭐⭐({{$product->reviewCount}})</span>
+                    <span class="product-subtitle">⭐⭐⭐({{$product->reviews()->count()}})</span>
                 </a>
             </div>
         </div>
