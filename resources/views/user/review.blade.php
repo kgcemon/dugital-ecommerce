@@ -18,50 +18,10 @@
         .container{max-width:500px;margin:0 auto;padding:25px 18px;text-align:center;position:relative;z-index:1}
         .header{margin-bottom:30px}
         .product-subtitle{font-size:1rem;color:rgba(255,255,255,.85);margin-bottom:18px;font-weight:400}
-        h1 {
-            font-size: 1rem !important;
-        }
+        h1 { font-size: 1rem !important; }
 
-        @keyframes pulse{0%,100%{box-shadow:0 0 15px rgba(0,212,255,.4)}50%{box-shadow:0 0 15px rgba(0,212,255,.6)}}
-
-        /* Checkout button */
         .checkout-btn{width:100%;padding:14px;border:none;border-radius:16px;background:linear-gradient(135deg,#10b981,#059669);color:white;font-weight:600;cursor:pointer;font-size:1rem;transition:.3s}
         .checkout-btn:hover{background:linear-gradient(135deg,#059669,#047857)}
-
-        .product-thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: fill;
-            border-radius: 10px;
-        }
-
-        .product-subtitle {
-            font-size: 0.85rem;
-            color: white;
-            margin-top: 3px;
-        }
-
-        .product-subtitle {
-            font-size: 0.6rem;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .loading-spinner .spinner {
-            border: 6px solid #f3f3f3;
-            border-top: 6px solid #3498db;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            animation: spin 1s linear infinite;
-            margin-bottom: 10px;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
 
         .review-card {
             display: flex;
@@ -84,15 +44,9 @@
             border: 2px solid rgba(255,255,255,.3);
         }
 
-        .review-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .review-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
-        .review-content {
-            flex: 1;
-        }
+        .review-content { flex: 1; }
 
         .review-header {
             display: flex;
@@ -101,27 +55,14 @@
             margin-bottom: 6px;
         }
 
-        .review-name {
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: #fff;
-        }
-
-        .review-date {
-            font-size: 0.75rem;
-            color: rgba(255,255,255,.6);
-        }
-
-        .review-body {
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-        }
+        .review-name { font-weight: 600; font-size: 0.95rem; color: #fff; }
+        .review-date { font-size: 0.75rem; color: rgba(255,255,255,.6); }
 
         .review-stars {
             color: gold;
             font-size: 1rem;
-            flex-shrink: 0;
+            margin-bottom: 6px; /* spacing between stars and text */
+            display: block;
         }
 
         .review-text {
@@ -132,7 +73,6 @@
     </style>
 
     <body>
-    <!-- Glow Orbs -->
     <div class="glow-orb glow-orb-1"></div>
     <div class="glow-orb glow-orb-2"></div>
 
@@ -154,10 +94,8 @@
                         <span class="review-name">{{$review->user->name}}</span>
                         <span class="review-date">{{$review->created_at}}</span>
                     </div>
-                    <div class="review-body">
-                        <div class="review-stars">⭐ ⭐ ⭐ ⭐ ⭐</div><br>
-                        <p class="review-text">{{$review->review}}</p>
-                    </div>
+                    <div class="review-stars">⭐ ⭐ ⭐ ⭐ ⭐</div>
+                    <p class="review-text">{{$review->review}}</p>
                 </div>
             </div>
         @endforeach
