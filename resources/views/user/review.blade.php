@@ -94,7 +94,7 @@
                 <div class="review-content">
                     <div class="review-header">
                         <span class="review-name">{{$review->user->name}}</span>
-                        <span class="review-date">{{$review->created_at}}</span>
+                        <span class="review-date">{{ \Carbon\Carbon::parse($review->created_at)->diffForHumans() }}</span>
                     </div>
                     <div class="review-stars">⭐ ⭐ ⭐ ⭐ ⭐</div>
                     <p class="review-text">{{$review->review}}</p>
