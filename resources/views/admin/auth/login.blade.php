@@ -104,7 +104,7 @@
 <body>
 <div class="login-wrapper">
     <div class="logo">
-        <img src="logo.png" alt="Logo">
+        <img src="/logo.png" alt="Logo">
     </div>
     <h2>Admin Login</h2>
 
