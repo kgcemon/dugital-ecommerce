@@ -76,6 +76,7 @@
                                     data-id="{{ $code->id }}"
                                     data-code="{{ $code->code }}"
                                     data-denom="{{ $code->denom }}"
+                                    data-status="{{ $code->status }}"
                                     data-item_id="{{ $code->item_id }}"
                                 >Edit</button>
 
@@ -180,11 +181,12 @@
                             <input type="text" class="form-control" id="editCodeDenom" name="denom" required>
                         </div>
                         <div class="mb-3">
-                            <label for="editVariantItem" class="form-label">Select Item</label>
+                            <label for="editCodestatus" class="form-label">Status</label>
                             <select class="form-select" id="editVariantItem" name="status" required>
-                                <option value="used">used</option>
-                                <option value="unused">Unused</option>
+                                <option value="used" {{ $data->status == 'used' ? 'selected' : '' }}>Used</option>
+                                <option value="unused" {{ $data->status == 'unused' ? 'selected' : '' }}>Unused</option>
                             </select>
+
                         </div>
                     </div>
 
@@ -240,6 +242,7 @@
                 const id = button.getAttribute('data-id');
                 const code = button.getAttribute('data-code');
                 const eDenom = button.getAttribute('data-denom');
+                const estatus = button.getAttribute('data-status');
                 const itemId = button.getAttribute('data-item_id');
 
 
@@ -247,10 +250,12 @@
                 const codeInput = document.getElementById('editCodeText');
                 const itemSelect = document.getElementById('editVariantItem');
                 const denom = document.getElementById('editCodeDenom');
+                const status = document.getElementById('editCodestatus');
 
                 form.action = `/admin/codes/${id}`; // Route must match your update route
                 codeInput.value = code;
                 denom.value = eDenom;
+                status.value = estatus;
 
                 // Set selected item
                 [...itemSelect.options].forEach(option => {
