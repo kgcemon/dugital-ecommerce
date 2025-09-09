@@ -59,7 +59,7 @@ class PaymentSMSController extends Controller
         if ((in_array($sender, $bkashNumbers) || strcasecmp($sender, "bKash") === 0)
             && str_contains($sms, "You have received")
             && preg_match('/You have received Tk ([\d,]+(?:\.\d{2})?) from (\d+).*TrxID (\w+)/', $sms, $matches)) {
-            $amount = str_replace(',', '', $matches[1]);
+            $amount = str_replace(',', '.', str_replace('.', '', $matches[1])); // careful with thousands
             $number = $matches[2];
             $txn_id = $matches[3];
             $is_valid_sms = true;
