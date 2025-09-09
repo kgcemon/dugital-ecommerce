@@ -182,12 +182,12 @@
                         </div>
                         <div class="mb-3">
                             <label for="editCodestatus" class="form-label">Status</label>
-                            <select class="form-select" id="editVariantItem" name="status" required>
-                                <option value="used" {{ $data->status == 'used' ? 'selected' : '' }}>Used</option>
-                                <option value="unused" {{ $data->status == 'unused' ? 'selected' : '' }}>Unused</option>
+                            <select class="form-select" id="editCodestatus" name="status" required>
+                                <option value="used">Used</option>
+                                <option value="unused">Unused</option>
                             </select>
-
                         </div>
+
                     </div>
 
 
