@@ -16,9 +16,9 @@ class ReviewController extends Controller
         return view('user.review', compact('reviews'));
     }
 
-    public function store($slug){
-
-        return view('user.add-review');
+    public function show($slug){
+        $product = Product::where('slug', $slug)->first();
+        return view('user.add-review', compact('product'));
     }
 
 }

@@ -285,12 +285,11 @@
     <!-- Product Card -->
     <div class="product-card">
         <div class="product-thumb">
-            <img src="https://via.placeholder.com/100x100.png?text=Item" alt="Product">
+            <img src="/{{$product->image}}" alt="Product">
         </div>
         <div class="product-details">
-            <h3>Gaming Headset</h3>
-            <p class="product-subtitle">High-quality surround sound</p>
-            <p class="product-subtitle">$59.99</p>
+            <h3>{{$product->name}}</h3>
+            <p class="product-subtitle">{{$product->seo_description}}</p>
         </div>
     </div>
 
