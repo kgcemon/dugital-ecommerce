@@ -42,9 +42,9 @@
                             <td>{{ $order->number }}</td>
                             <td>{{ $order->trxID }}</td>
                             <td>
-                                @if($order->status == 'pending')
+                                @if($order->status == 0)
                                     <span class="badge bg-warning text-dark">Pending</span>
-                                @elseif($order->status == 'completed')
+                                @elseif($order->status == 1)
                                     <span class="badge bg-success">Completed</span>
                                 @else
                                     <span class="badge bg-danger">Failed</span>
