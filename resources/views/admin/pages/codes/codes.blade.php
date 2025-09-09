@@ -176,7 +176,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="editCodeText" class="form-label">Denom</label>
-                            <input type="text" class="form-control" id="editCodeText" name="denom" required>
+                            <input type="text" class="form-control" id="editCodeDenom" name="denom" required>
                         </div>
                         <div class="mb-3">
                             <label for="editVariantItem" class="form-label">Select Item</label>
@@ -189,7 +189,7 @@
 
 
                     <div class="modal-footer">
-                        <input type="hidden" name="code_id" value="{{ $code->id ?? 5555555 }}">
+                        <input type="hidden" name="code_id" value="{{ $code->id }}">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                         <button type="submit" class="btn btn-primary">Update Code</button>
                     </div>
@@ -238,14 +238,18 @@
 
                 const id = button.getAttribute('data-id');
                 const code = button.getAttribute('data-code');
+                const eDenom = button.getAttribute('data-denom');
                 const itemId = button.getAttribute('data-item_id');
+
 
                 const form = document.getElementById('editVariantForm');
                 const codeInput = document.getElementById('editCodeText');
                 const itemSelect = document.getElementById('editVariantItem');
+                const denom = document.getElementById('editCodeDenom');
 
                 form.action = `/admin/codes/${id}`; // Route must match your update route
                 codeInput.value = code;
+                denom.value = eDenom;
 
                 // Set selected item
                 [...itemSelect.options].forEach(option => {
