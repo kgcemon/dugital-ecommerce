@@ -85,8 +85,9 @@
             <p class="product-subtitle">What people are saying about this product</p>
         </div>
 
-        <a href="/add-review.blade.php"> <button class="checkout-btn" style="margin-top:15px;">Add a Review </button> </a>
-
+        <a href="/add-review"> <button class="checkout-btn" style="margin-top:15px;">Add a Review </button> </a>
+        <br>
+        <br>
         <!-- Reviews -->
         @foreach($reviews as $review)
             <div class="review-card">

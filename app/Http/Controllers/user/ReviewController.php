@@ -13,4 +13,9 @@ class ReviewController extends Controller
         $reviews = Review::where('product_id', $id)->orderBy('created_at', 'desc')->paginate(20);
         return view('user.review', compact('reviews'));
     }
+
+    public function store(Request $request){
+        return view('user.add-review');
+    }
+
 }
