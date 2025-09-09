@@ -115,7 +115,7 @@ class PaymentSMSController extends Controller
             ]);
         } catch (\Exception $e) {
             \Log::error("PaymentSms Insert Error: " . $e->getMessage());
-            return $sendResponse(false, 'Database insert error', 500);
+            return $sendResponse(false, $e->getMessage());
         }
 
         return $sendResponse(true, 'Payment SMS processed and stored successfully', 200);
