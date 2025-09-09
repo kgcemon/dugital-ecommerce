@@ -25,7 +25,6 @@ class SitemapController extends Controller
             'priority' => '0.8'
         ];
 
-        // Example: Products
         $products = Product::where('name', '!=', 'Wallet')->get();
         foreach ($products as $product) {
             $urls[] = [
@@ -37,7 +36,6 @@ class SitemapController extends Controller
         }
 
 
-        // XML তৈরি করা
         $content = view('sitemap', compact('urls'));
 
         return response($content, 200)
