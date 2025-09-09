@@ -178,15 +178,15 @@
                             <label for="editCodeText" class="form-label">Denom</label>
                             <input type="text" class="form-control" id="editCodeText" name="denom" required>
                         </div>
+                        <div class="mb-3">
+                            <label for="editVariantItem" class="form-label">Select Item</label>
+                            <select class="form-select" id="editVariantItem" name="status" required>
+                                <option value="used">used</option>
+                                <option value="unused">Unused</option>
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="editVariantItem" class="form-label">Select Item</label>
-                        <select class="form-select" id="editVariantItem" name="status" required>
-                                <option value="used">used</option>
-                                <option value="used">used</option>
-                        </select>
-                    </div>
 
                     <div class="modal-footer">
                         <input type="hidden" name="code_id" value="{{ $code->id ?? 5555555 }}">
