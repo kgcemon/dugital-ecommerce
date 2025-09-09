@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Models\Review;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,8 @@ class ReviewController extends Controller
 {
     public function reviewByProduct($slug)
     {
-        $reviews = Review::where('slug', $slug)->orderBy('created_at', 'desc')->paginate(20);
+        $product = Product::where('slug', $slug)->first();
+        $reviews = Review::where('slug', $product->id)->orderBy('created_at', 'desc')->paginate(20);
         return view('user.review', compact('reviews'));
     }
 
