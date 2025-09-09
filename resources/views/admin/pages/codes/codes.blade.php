@@ -17,32 +17,6 @@
             <div class="alert alert-danger" role="alert">{{ session('error') }}</div>
         @endif
 
-        <div class="container py-1">
-            <div class="row">
-                @forelse($unusedCodesCountPerVariant as $row)
-                    <div class="col-4 col-lg-2 mb-3 align-content-center">
-                        <div class="card shadow-sm rounded-3 border-0">
-                            <div class="card-body p-2">
-                                <h6 class="card-title mb-1" style="font-size: 0.9rem;">{{ $row->variant->name ?? 'Unknown Variant' }}</h6>
-                                <p class="card-text mb-0" style="font-size: 0.85rem;">
-                                    <strong class="{{ $row->total_unused < 3 ? 'text-danger' : '' }}">
-                                        {{ $row->total_unused }}
-                                    </strong> unused code{{ $row->total_unused > 1 ? 's' : '' }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                @empty
-                    <div class="col-12">
-                        <div class="alert alert-info text-center">
-                            No unused codes found.
-                        </div>
-                    </div>
-                @endforelse
-            </div>
-        </div>
-
-
 
         {{-- Variants Table --}}
         <div class="card shadow-sm border-0">
@@ -106,6 +80,46 @@
                 </div>
             </div>
         </div>
+
+
+
+        <div class="container py-1">
+            <div class="card shadow-sm border-0">
+                <div class="card-body table-responsive">
+                    <table class="table table-bordered table-striped text-center align-middle">
+                        <thead class="table-dark">
+                        <tr>
+                            <th>Variant</th>
+                            <th>Unused Codes</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @forelse($unusedCodesCountPerVariant as $row)
+                            <tr>
+                                <td>{{ $row->variant->name ?? 'Unknown Variant' }}</td>
+                                <td>
+                                    <strong class="{{ $row->total_unused < 3 ? 'text-danger' : '' }}">
+                                        {{ $row->total_unused }}
+                                    </strong>
+                                    unused code{{ $row->total_unused > 1 ? 's' : '' }}
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="2" class="text-center text-muted">
+                                    No unused codes found.
+                                </td>
+                            </tr>
+                        @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+
     </div>
 
     <!-- Add Code Modal -->
