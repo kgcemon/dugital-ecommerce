@@ -39,8 +39,6 @@ class PaymentSMSController extends Controller
 
         $sender       = $request->input('sender');
         $sms          = $request->input('sms');
-        $order_number = $request->input('order_number', null);
-        $date_time    = $request->input('date_time', now()->format('Y-m-d H:i:s'));
 
         if (!$sender || !$sms) {
             return $sendResponse(false, 'Missing required fields', 400);
@@ -104,7 +102,6 @@ class PaymentSMSController extends Controller
 
         try {
             PaymentSms::create([
-                'order_number' => $order_number,
                 'sender'       => $sender,
                 'number'       => $number,
                 'trxID'        => $txn_id,
