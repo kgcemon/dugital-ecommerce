@@ -60,7 +60,7 @@ class PaymentSMSController extends Controller
             && str_contains($sms, "You have received")
             && preg_match('/You have received Tk ([\d,]+(?:\.\d{2})?) from (\d+).*TrxID (\w+)/', $sms, $matches)) {
             $rawAmount = $matches[1];
-            dd($rawAmount);
+
             if (str_contains($rawAmount, '.')) {
                 $amount = str_replace(',', '', $rawAmount);
             }
