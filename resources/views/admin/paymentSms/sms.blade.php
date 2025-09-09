@@ -36,7 +36,7 @@
                     <tbody>
                     @forelse($data as $order)
                         <tr>
-                            <td>{{ $loop->iteration + ($data->currentPage() - 1) * $orders->perPage() }}</td>
+                            <td>{{ $loop->iteration + ($data->currentPage() - 1) * $data->perPage() }}</td>
                             <td>{{ $order->order_number }}</td>
                             <td>{{ $order->sender }}</td>
                             <td>{{ $order->number }}</td>
