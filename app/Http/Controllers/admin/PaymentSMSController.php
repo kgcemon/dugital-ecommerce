@@ -106,7 +106,6 @@ class PaymentSMSController extends Controller
                 'number'       => $number,
                 'trxID'        => $txn_id,
                 'amount'       => $amount,
-                'status'       => 0,
                 'created_at'   => now(),
                 'updated_at'   => now(),
             ]);
