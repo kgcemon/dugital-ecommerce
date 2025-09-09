@@ -85,9 +85,14 @@
             <p class="product-subtitle">What people are saying about this product</p>
         </div>
 
-        <a href="/add-review"> <button class="checkout-btn" style="margin-top:15px;">Add a Review </button> </a>
-        <br>
-        <br>
+        @auth()
+            <a href="/add-review/{{ request()->segment(2) }}">
+                <button class="checkout-btn" style="margin-top:15px;">Add a Review</button>
+            </a>
+            <br>
+            <br>
+        @endauth
+
         <!-- Reviews -->
         @foreach($reviews as $review)
             <div class="review-card">

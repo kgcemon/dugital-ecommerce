@@ -25,8 +25,8 @@ use App\Http\Controllers\ProfileController;
 Route::get('auto-top-up-cron',[CronJobController::class,'freeFireAutoTopUpJob']);
 
 Route::get('/sitemap.xml', [SitemapController::class, 'index']);
-Route::get('/review/{id}', [ReviewController::class, 'reviewByProduct'])->name('review');
-Route::get('/add-review', [ReviewController::class, 'store']);
+Route::get('/review/{slug}', [ReviewController::class, 'reviewByProduct'])->name('review');
+Route::get('/add-review/{slug}', [ReviewController::class, 'store']);
 
 //admin
 Route::middleware('guest')->group(function () {
