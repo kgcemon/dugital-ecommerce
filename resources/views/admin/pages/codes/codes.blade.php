@@ -75,7 +75,7 @@
                                     data-bs-target="#editVariantModal"
                                     data-id="{{ $code->id }}"
                                     data-code="{{ $code->code }}"
-                                    data-data-denom="{{ $code->denom }}"
+                                    data-denom="{{ $code->denom }}"
                                     data-item_id="{{ $code->item_id }}"
                                 >Edit</button>
 
