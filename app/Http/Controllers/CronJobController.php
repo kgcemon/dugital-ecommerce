@@ -12,7 +12,7 @@ class CronJobController extends Controller
 {
     public function freeFireAutoTopUpJob()
     {
-        $orders = Order::where('status', 'processing')->whereNull('order_note')->whereHas('product', function ($query) {$query->where('is_auto', 1);})->limit(4)->get();
+        $orders = Order::where('status', 'processing')->whereNull('order_note')->limit(4)->get();
 
         try {
             foreach ($orders as $order) {
@@ -25,18 +25,7 @@ class CronJobController extends Controller
                     continue;
                 }
 
-                $code = Code::where('item_id', $order->item_id)
-                    ->where('status', 'unused')
-                    ->lockForUpdate()
-                    ->first();
-
-                if (!$code) {
-                    DB::rollBack();
-                    continue;
-                }
-
-                $type = (Str::startsWith($code->code, 'UPBD')) ? 1 : ((Str::startsWith($code->code, 'BDMB')) ? 2 : 1);
-                $denom = (string) $order->item->denom;
+                $denom = (string) $order->item->denom ?? '';
 
                 if (empty($denom)) {
                     DB::rollBack();
@@ -45,22 +34,50 @@ class CronJobController extends Controller
 
                 $denoms = explode(',', $denom);
 
-                foreach ($denoms as $d) {
-                    $response = Http::withHeaders([
-                        'Content-Type' => 'application/json',
-                        'Accept' => 'application/json',
-                        'RA-SECRET-KEY' => 'kpDvM4m9AOTl0+4Gcnvm7a+VgLJFjSNvuDVC9Jl6wH/RxXJqqCb0RQ==',
-                    ])->post('https://autonow.codmshopbd.com/topup', [
-                        "playerId"   => $order->customer_data,
-                        "denom"      => $d,
-                        "type"       => $type,
-                        "voucherCode"=> $code->code,
-                        "webhook"    => "https://codmshop.com/api/auto-webhooks"
-                    ]);
+                $foundCodes = Code::whereIn('denom', $denoms)
+                    ->where('status', 'unused')
+                    ->pluck('denom')
+                    ->toArray();
 
+
+                $allExist = count($foundCodes) === count($denoms);
+
+                if (!$allExist) {
+                    DB::rollBack();
+                    continue;
+                }
+
+                foreach ($denoms as $d) {
+
+                    $code = Code::where('denom', $d)
+                        ->where('status', 'unused')
+                        ->lockForUpdate()
+                        ->first();
+
+                    if (!$code) {
+                        DB::rollBack();
+                        continue;
+                    }
+                    $type = (Str::startsWith($code->code, 'UPBD')) ? 1 : ((Str::startsWith($code->code, 'BDMB')) ? 2 : 1);
+
+                    try {
+                        $response = Http::withHeaders([
+                            'Content-Type' => 'application/json',
+                            'Accept' => 'application/json',
+                            'RA-SECRET-KEY' => 'kpDvM4m9AOTl0+4Gcnvm7a+VgLJFjSNvuDVC9Jl6wH/RxXJqqCb0RQ==',
+                        ])->post('https://autonow.codmshopbd.com/topup', [
+                            "playerId"   => $order->customer_data,
+                            "denom"      => $d,
+                            "type"       => $type,
+                            "voucherCode"=> $code->code,
+                            "webhook"    => "https://codmshop.com/api/auto-webhooks"
+                        ]);
+
+                    }catch (\Exception $exception){
+                        $order->order_note = 'server error';
+                    }
                         $data = $response->json();
 
-                        // SUCCESS হলে order update করব
                         $order->status = 'Delivery Running';
                         $order->order_note = $data['uid'] ?? 'running';
                         $order->save();
