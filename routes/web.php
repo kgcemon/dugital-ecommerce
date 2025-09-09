@@ -27,6 +27,7 @@ Route::get('auto-top-up-cron',[CronJobController::class,'freeFireAutoTopUpJob'])
 Route::get('/sitemap.xml', [SitemapController::class, 'index']);
 Route::get('/review/{slug}', [ReviewController::class, 'reviewByProduct'])->name('review');
 Route::get('/add-review/{slug}', [ReviewController::class, 'show']);
+Route::post('/add-review/{slug}', [ReviewController::class, 'store']);
 
 //admin
 Route::middleware('guest')->group(function () {
