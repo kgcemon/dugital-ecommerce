@@ -122,7 +122,7 @@ class PaymentSMSController extends Controller
         if ($exists) {
             return $sendResponse(true, 'Transaction ID already exists', 200);
         }
-
+        dd($amount);
         try {
             PaymentSms::create([
                 'sender'     => $sender,
