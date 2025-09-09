@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\PaymentSMSController;
 use App\Http\Controllers\api\auth\AuthController;
 use App\Http\Controllers\api\auth\UserOrderController;
 use App\Http\Controllers\api\CategoriesController;
@@ -47,3 +48,6 @@ Route::get('help-line',[HomePageController::class,'helpLine']);
 
 //webhooks
 Route::post('auto-webhooks',[WebHooksController::class,'OrderUpdate']);
+
+//receiveSMSWhook
+Route::post('store-sms',[PaymentSMSController::class,'SmsWhooks']);
