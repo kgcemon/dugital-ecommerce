@@ -53,6 +53,7 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Code</th>
+                        <th>Denom</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -63,6 +64,7 @@
                             <td>{{ $code->id }}</td>
                             <td>{{ $code->variant->name }}</td>
                             <td>{{ $code->code }}</td>
+                            <td>{{ $code->denom ?? '-' }}</td>
                             <td>{{ $code->status }}</td>
                             <td>
                                 {{-- 1. The Edit Button with data-* attributes to hold the row's data --}}
@@ -172,6 +174,18 @@
                             <label for="editCodeText" class="form-label">Code</label>
                             <input type="text" class="form-control" id="editCodeText" name="code" required>
                         </div>
+                        <div class="mb-3">
+                            <label for="editCodeText" class="form-label">Denom</label>
+                            <input type="text" class="form-control" id="editCodeText" name="denom" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="editVariantItem" class="form-label">Select Item</label>
+                        <select class="form-select" id="editVariantItem" name="status" required>
+                                <option value="used">used</option>
+                                <option value="used">used</option>
+                        </select>
                     </div>
 
                     <div class="modal-footer">

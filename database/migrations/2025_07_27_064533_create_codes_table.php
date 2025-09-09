@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('code',120)->unique();
             $table->enum('status',['used','unused'])->default('unused');
             $table->string('order_id')->nullable();
+            $table->integer('denom')->nullable();
             $table->boolean('active')->default(true);
             $table->timestamps();
         });

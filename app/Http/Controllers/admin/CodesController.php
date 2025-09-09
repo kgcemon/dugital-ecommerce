@@ -36,6 +36,7 @@ class CodesController extends Controller
 
         try {
             $lines = preg_split('/\r\n|\r|\n/', $validatedData['codes']);
+            $item = Item::where('product_id', $validatedData['product_id'])->first() ?? null;
 
             foreach ($lines as $line) {
                 $code = trim($line);
@@ -45,6 +46,7 @@ class CodesController extends Controller
                         'product_id' => $request->input('product_id'),
                         'item_id' => $request->input('item_id'),
                         'code' => $code,
+                        'denom' => $item->denom ?? null,
                     ]);
                 }
             }
@@ -87,6 +89,7 @@ class CodesController extends Controller
             'code' => $request->input('code'),
             'item_id' => $request->input('item_id'),
             'status' => $request->input('status'),
+            'denom' => $request->input('denom'),
         ]);
 
         return back()->with('success', 'Product updated successfully.');
