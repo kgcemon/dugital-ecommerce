@@ -338,6 +338,10 @@
         <p>Submitting your review...</p>
     </div>
 
+    <br>
+    <br>
+    <br>
+
     <script>
         const stars = document.querySelectorAll('#rating-stars span');
         const ratingInput = document.getElementById('rating');
