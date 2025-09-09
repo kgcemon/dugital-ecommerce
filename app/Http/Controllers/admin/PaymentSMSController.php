@@ -37,8 +37,8 @@ class PaymentSMSController extends Controller
             ], $code);
         };
 
-        $sender       = $request->input('sender');
-        $sms          = $request->input('sms');
+        $sender = $request->input('sender');
+        $sms    = $request->input('sms');
 
         if (!$sender || !$sms) {
             return $sendResponse(false, 'Missing required fields', 400);
@@ -53,37 +53,47 @@ class PaymentSMSController extends Controller
         $number = '';
         $is_valid_sms = false;
 
+        // ------------------------------
         // bKash Type 1
+        // ------------------------------
         if ((in_array($sender, $bkashNumbers) || strcasecmp($sender, "bKash") === 0)
             && str_contains($sms, "You have received")
-            && preg_match('/You have received Tk ([\d,]+(?:\.\d{2})?) from (\d+).* TrxID (\w+)/', $sms, $matches)) {
+            && preg_match('/You have received Tk ([\d,]+(?:\.\d{2})?) from (\d+).*TrxID (\w+)/', $sms, $matches)) {
             $amount = str_replace(',', '', $matches[1]);
             $number = $matches[2];
             $txn_id = $matches[3];
             $is_valid_sms = true;
         }
+        // ------------------------------
         // bKash Type 2
+        // ------------------------------
         elseif ((in_array($sender, $bkashNumbers) || strcasecmp($sender, "bKash") === 0)
             && str_contains($sms, "Cash In")
-            && preg_match('/Cash In Tk ([\d,]+(?:\.\d{2})?) from (\d+).* TrxID (\w+)/', $sms, $matches)) {
+            && preg_match('/Cash In Tk ([\d,]+(?:\.\d{2})?) from (\d+).*TrxID (\w+)/', $sms, $matches)) {
             $amount = str_replace(',', '', $matches[1]);
             $number = $matches[2];
             $txn_id = $matches[3];
             $is_valid_sms = true;
         }
+        // ------------------------------
         // Nagad
-        elseif ((in_array($sender, $nagadNumbers) || strcasecmp($sender, "NAGAD") === 0)
-            && (preg_match('/Amount: Tk ([\d,]+(?:\.\d{2})?).*Sender: (\d+).*TxnID: (\w+).*Balance: Tk ([\d,]+\.\d{2})/s', $sms, $matches)
-                || preg_match('/Amount: Tk ([\d,]+(?:\.\d{2})?).*Uddokta: (\d+).*TxnID: (\w+).*Balance: ([\d,]+\.\d{2})/s', $sms, $matches))) {
-            $amount = str_replace(',', '', $matches[1]);
-            $number = $matches[2];
-            $txn_id = $matches[3];
-            $is_valid_sms = true;
+        // ------------------------------
+        elseif ((in_array($sender, $nagadNumbers) || strcasecmp($sender, "NAGAD") === 0)) {
+            if (preg_match('/Amount: Tk ([\d,]+(?:\.\d{2})?).*Sender: (\d+).*TxnID: (\w+).*Balance: Tk ([\d,]+\.\d{2})/s', $sms, $matches)
+                || preg_match('/Amount: Tk ([\d,]+(?:\.\d{2})?).*Uddokta: (\d+).*TxnID: (\w+).*Balance: ([\d,]+\.\d{2})/s', $sms, $matches)) {
+                $amount = str_replace(',', '', $matches[1]);
+                $number = $matches[2];
+                $txn_id = $matches[3];
+                $balance = str_replace(',', '', $matches[4]);
+                $is_valid_sms = true;
+            }
         }
+        // ------------------------------
         // Rocket
+        // ------------------------------
         elseif ((in_array($sender, $rocketNumbers) || strcasecmp($sender, "Rocket") === 0)
             && str_contains($sms, "received from")
-            && preg_match('/Tk([\d,]+(?:\.\d{2})?) received from A\/C:\**\*(\d+).* TxnId:(\d+)/', $sms, $matches)) {
+            && preg_match('/Tk([\d,]+(?:\.\d{2})?) received from A\/C:\**\*(\d+).*TxnId:(\d+)/', $sms, $matches)) {
             $amount = str_replace(',', '', $matches[1]);
             $number = $matches[2];
             $txn_id = $matches[3];
@@ -102,12 +112,12 @@ class PaymentSMSController extends Controller
 
         try {
             PaymentSms::create([
-                'sender'       => $sender,
-                'number'       => $number,
-                'trxID'        => $txn_id,
-                'amount'       => $amount,
-                'created_at'   => now(),
-                'updated_at'   => now(),
+                'sender'     => $sender,
+                'number'     => $number,
+                'trxID'      => $txn_id,
+                'amount'     => $amount,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         } catch (\Exception $e) {
             \Log::error("PaymentSms Insert Error: " . $e->getMessage());
@@ -116,5 +126,6 @@ class PaymentSMSController extends Controller
 
         return $sendResponse(true, 'Payment SMS processed and stored successfully', 200);
     }
+
 
 }
