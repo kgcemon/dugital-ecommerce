@@ -101,15 +101,15 @@ class OrderController extends Controller
                     $order->status = 'processing';
 
                 } else {
-                    // ✅ Non-wallet payment
                     $paySMS = null;
                     if (!empty($validated['transaction_id'])) {
                         $paySMS = PaymentSms::where('trxID', $validated['transaction_id'])
                             ->where('amount', '>=', $item->price)
-                            ->where('status', 0)->first();
+                            ->where('status', 0)
+                            ->first();
                     }
 
-                    if ($paySMS) {
+                    if ($paySMS != null) {
                         $order->transaction_id = $paySMS->trxID;
                         $order->number         = $paySMS->number;
                         $paySMS->status = 1;
