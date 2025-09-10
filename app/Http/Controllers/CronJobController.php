@@ -26,7 +26,6 @@ class CronJobController extends Controller
                 }
 
                 $denom = (string) $order->item->denom ?? '';
-                dd($denom);
 
                 if (empty($denom)) {
                     DB::rollBack();
@@ -39,7 +38,7 @@ class CronJobController extends Controller
                     ->where('status', 'unused')
                     ->pluck('denom')
                     ->toArray();
-
+                dd($foundCodes);
 
                 $allExist = count($foundCodes) === count($denoms);
 
