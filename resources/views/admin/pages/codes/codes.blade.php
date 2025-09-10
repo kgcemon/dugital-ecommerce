@@ -28,6 +28,7 @@
                         <th>Name</th>
                         <th>Code</th>
                         <th>Denom</th>
+                        <th>Order Number</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -39,6 +40,7 @@
                             <td>{{ $code->variant->name }}</td>
                             <td>{{ $code->code }}</td>
                             <td>{{ $code->denom ?? '-' }}</td>
+                            <td>{{ $code->order_id ?? '-' }}</td>
                             <td>{{ $code->status }}</td>
                             <td>
                                 {{-- 1. The Edit Button with data-* attributes to hold the row's data --}}
