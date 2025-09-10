@@ -108,7 +108,7 @@ class OrderController extends Controller
                             ->where('status', 0)
                             ->first();
                     }
-                        return $paySMS;
+                        return $validated['transaction_id'];
                     if ($paySMS != null) {
                         $order->transaction_id = $paySMS->trxID;
                         $order->number         = $paySMS->number;
