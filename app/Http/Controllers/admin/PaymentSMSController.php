@@ -8,19 +8,47 @@ use Illuminate\Http\Request;
 
 class PaymentSMSController extends Controller
 {
-    public function index(){
-        $data = PaymentSMS::orderBy('id', 'desc')->paginate(10);
+    public function index()
+    {
+        $data = PaymentSms::orderBy('id', 'desc')->paginate(10);
         return view('admin.paymentSms.sms', compact('data'));
     }
 
-
+    // Search by trxID or number
     public function search(Request $request)
     {
         $keywords = $request->get('search');
-        $data = PaymentSms::where('trxID', 'like', '%' . $keywords . '%')->orderBy('id', 'desc')->paginate(10);
+        $data = PaymentSms::where('trxID', 'like', '%' . $keywords . '%')
+            ->orWhere('number', 'like', '%' . $keywords . '%')
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+
         return view('admin.paymentSms.sms', compact('data'));
     }
 
+    // Update status
+    public function updateStatus(Request $request)
+    {
+        $request->validate([
+            'id'     => 'required|exists:payment_sms,id',
+            'status' => 'required|in:0,1,2', // Pending, Completed, Failed
+        ]);
+
+        $sms = PaymentSms::find($request->id);
+        $sms->status = $request->status;
+        $sms->save();
+
+        return redirect()->back()->with('success', 'Status updated successfully.');
+    }
+
+    // Delete SMS
+    public function destroy($id)
+    {
+        $sms = PaymentSms::findOrFail($id);
+        $sms->delete();
+
+        return redirect()->back()->with('success', 'Payment SMS deleted successfully.');
+    }
 
     public function SmsWhooks(Request $request)
     {

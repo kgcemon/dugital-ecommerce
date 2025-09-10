@@ -2,23 +2,15 @@
 
 @section('content')
     <div class="container mt-4">
+        <div class="d-flex justify-content-between mb-2">
+            <h4>Orders</h4>
+            <!-- Add Order Button -->
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addOrderModal">
+                Add Order
+            </button>
+        </div>
+
         <div class="card shadow-sm border-0">
-            <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white">
-                <h5 class="mb-0">Payment SMS</h5>
-                <form action="{{ route('admin.sms-search') }}" method="GET" class="d-flex" style="gap: 8px;">
-                    <input type="text" name="search" value="{{ request('search') }}"
-                           class="form-control form-control-sm"
-                           placeholder="Search by TrxID or Number">
-                    <button type="submit" class="btn btn-sm btn-light">Search</button>
-                </form>
-            </div>
-
-            @if(session('success'))
-                <div class="alert alert-success m-3">{{ session('success') }}</div>
-            @elseif(session('error'))
-                <div class="alert alert-danger m-3">{{ session('error') }}</div>
-            @endif
-
             <div class="card-body table-responsive">
                 <table class="table table-hover table-bordered align-middle text-center">
                     <thead class="table-dark">
@@ -50,16 +42,23 @@
                             </td>
                             <td>{{ $order->created_at ? $order->created_at->format('d M Y, h:i A') : 'N/A' }}</td>
                             <td>
-                                <button class="btn btn-sm btn-primary view-btn"
-                                        data-amount="{{ $order->amount }}"
-                                        data-sender="{{ $order->sender }}"
-                                        data-number="{{ $order->number }}"
-                                        data-trx="{{ $order->trxID }}"
-                                        data-order="{{ $order->order_number }}"
-                                        data-status="{{ $statusText }}"
-                                        data-created="{{ $order->created_at ? $order->created_at->format('d M Y, h:i A') : 'N/A' }}">
-                                    View
+                                <!-- Edit Status Button -->
+                                <button class="btn btn-sm btn-primary edit-btn"
+                                        data-id="{{ $order->id }}"
+                                        data-status="{{ $order->status }}"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#editStatusModal">
+                                    Edit
                                 </button>
+
+                                <!-- Delete Form -->
+                                <form action="{{ route('admin.orders.delete', $order->id) }}" method="POST" class="d-inline-block">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">
+                                        Delete
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @empty
@@ -77,57 +76,107 @@
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+    <!-- Add Order Modal -->
+    <div class="modal fade" id="addOrderModal" tabindex="-1" aria-labelledby="addOrderLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="orderModalLabel">Order Details</h5>
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="addOrderLabel">Add Order</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body" id="orderDetails">
-                    <!-- Dynamic content will be injected here -->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
+                <form action="{{ route('admin.orders.add') }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">Product</label>
+                            <select name="product_id" class="form-control" required>
+                                @foreach(App\Models\Product::all() as $product)
+                                    <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Item</label>
+                            <select name="item_id" class="form-control" required>
+                                @foreach(App\Models\Item::all() as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Customer Data</label>
+                            <input type="text" name="customer_data" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Payment Method</label>
+                            <select name="payment_id" class="form-control" required>
+                                @foreach(App\Models\PaymentMethod::all() as $payment)
+                                    <option value="{{ $payment->id }}">{{ $payment->method }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Transaction ID</label>
+                            <input type="text" name="transaction_id" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Payment Number</label>
+                            <input type="text" name="payment_number" class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Add Order</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+
+    <!-- Edit Status Modal -->
+    <div class="modal fade" id="editStatusModal" tabindex="-1" aria-labelledby="editStatusLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="editStatusLabel">Edit Status</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <form action="{{ route('admin.orders.update-status') }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="order_id" id="editOrderId">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">Status</label>
+                            <select name="status" id="editStatusSelect" class="form-control" required>
+                                <option value="0">Pending</option>
+                                <option value="1">Completed</option>
+                                <option value="2">Failed</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Update Status</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @push('scripts')
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const buttons = document.querySelectorAll(".view-btn");
-            const modal = new bootstrap.Modal(document.getElementById('orderModal'));
-            const orderDetails = document.getElementById("orderDetails");
+        document.addEventListener("DOMContentLoaded", function() {
+            const editButtons = document.querySelectorAll(".edit-btn");
+            const editOrderId = document.getElementById("editOrderId");
+            const editStatusSelect = document.getElementById("editStatusSelect");
 
-            buttons.forEach(btn => {
-                btn.addEventListener("click", function () {
-                    const amount = this.dataset.amount;
-                    const sender = this.dataset.sender;
-                    const number = this.dataset.number;
-                    const trx = this.dataset.trx;
-                    const status = this.dataset.status;
-                    const order = this.dataset.order;
-                    const created = this.dataset.created;
-
-                    orderDetails.innerHTML = `
-                <div class="table-responsive">
-                    <table class="table table-bordered text-start">
-                        <tr><th>Amount</th><td>${amount}</td></tr>
-                        <tr><th>Sender</th><td>${sender}</td></tr>
-                        <tr><th>Number</th><td>${number}</td></tr>
-                        <tr><th>Transaction ID</th><td>${trx}</td></tr>
-                        <tr><th>Order</th><td>${order}</td></tr>
-                        <tr><th>Status</th><td>${status}</td></tr>
-                        <tr><th>Created At</th><td>${created}</td></tr>
-                    </table>
-                </div>
-            `;
-
-                    modal.show();
+            editButtons.forEach(btn => {
+                btn.addEventListener("click", function() {
+                    editOrderId.value = this.dataset.id;
+                    editStatusSelect.value = this.dataset.status;
                 });
             });
         });
