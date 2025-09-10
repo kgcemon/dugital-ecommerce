@@ -41,6 +41,7 @@
                             <td>{{ $order->sender }}</td>
                             <td>{{ $order->number }}</td>
                             <td>{{ $order->trxID }}</td>
+                            <td>{{ $order->order_number }}</td>
                             <td>
                                 @if($order->status == 0)
                                     <span class="badge bg-warning text-dark">Pending</span>
@@ -52,8 +53,10 @@
                             </td>
                             <td>{{ $order->created_at ? $order->created_at->format('d M Y, h:i A') : 'N/A' }}</td>
                             <td>
-                                <a href="{{ route('admin.orders.show', $order->id) }}"
-                                   class="btn btn-sm btn-primary">View</a>
+                                <button class="btn btn-sm btn-primary view-btn"
+                                        data-id="{{ $order->id }}">
+                                    View
+                                </button>
                             </td>
                         </tr>
                     @empty
@@ -70,4 +73,71 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="orderModalLabel">Order Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="orderDetails" class="text-center py-3">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const buttons = document.querySelectorAll(".view-btn");
+            const modal = new bootstrap.Modal(document.getElementById('orderModal'));
+            const orderDetails = document.getElementById("orderDetails");
+
+            buttons.forEach(btn => {
+                btn.addEventListener("click", function () {
+                    let orderId = this.dataset.id;
+
+                    orderDetails.innerHTML = `
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                `;
+
+                    modal.show();
+
+                    fetch(`/admin/orders/${orderId}`)
+                        .then(res => res.json())
+                        .then(data => {
+                            orderDetails.innerHTML = `
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <tr><th>Amount</th><td>${data.amount}</td></tr>
+                                    <tr><th>Sender</th><td>${data.sender}</td></tr>
+                                    <tr><th>Number</th><td>${data.number}</td></tr>
+                                    <tr><th>Transaction ID</th><td>${data.trxID}</td></tr>
+                                    <tr><th>Status</th><td>${data.status_text}</td></tr>
+                                    <tr><th>Status</th><td>${data.order_number}</td></tr>
+                                    <tr><th>Created At</th><td>${data.created_at}</td></tr>
+                                </table>
+                            </div>
+                        `;
+                        })
+                        .catch(err => {
+                            orderDetails.innerHTML = `<div class="alert alert-danger">Failed to load order details.</div>`;
+                        });
+                });
+            });
+        });
+    </script>
+@endpush
