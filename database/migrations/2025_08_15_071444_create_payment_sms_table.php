@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('payment_sms', function (Blueprint $table) {
             $table->id();
-            $table->string('order_number',30);
+            $table->string('order_number',30)->nullable();
             $table->string('sender',30);
             $table->string('number',15);
             $table->string('trxID',30)->unique();

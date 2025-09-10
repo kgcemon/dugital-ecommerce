@@ -115,6 +115,7 @@ class OrderController extends Controller
                         $paySMS->status = 1;
                         $paySMS->save();
                         $order->status         = 'processing';
+                        dd($paySMS);
                     } else {
                         if (empty($validated['transaction_id']) || empty($validated['payment_number'])) {
                             return response()->json([
