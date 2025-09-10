@@ -34,12 +34,12 @@ class CronJobController extends Controller
 
                 $denoms = explode(',', $denom);
 
+                dd($denoms);
+
                 $foundCodes = Code::whereIn('denom', $denoms)
                     ->where('status', 'unused')
                     ->pluck('denom')
                     ->toArray();
-                dd($foundCodes);
-
                 $allExist = count($foundCodes) === count($denoms);
 
                 if (!$allExist) {
