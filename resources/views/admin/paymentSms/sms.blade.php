@@ -41,20 +41,23 @@
                             <td>{{ $order->sender }}</td>
                             <td>{{ $order->number }}</td>
                             <td>{{ $order->trxID }}</td>
-                            <td>{{ $order->order_number }}</td>
                             <td>
-                                @if($order->status == 0)
-                                    <span class="badge bg-warning text-dark">Pending</span>
-                                @elseif($order->status == 1)
-                                    <span class="badge bg-success">Completed</span>
-                                @else
-                                    <span class="badge bg-danger">Failed</span>
-                                @endif
+                                @php
+                                    $statusText = $order->status == 0 ? 'Pending' : ($order->status == 1 ? 'Completed' : 'Failed');
+                                    $statusClass = $order->status == 0 ? 'bg-warning text-dark' : ($order->status == 1 ? 'bg-success' : 'bg-danger');
+                                @endphp
+                                <span class="badge {{ $statusClass }}">{{ $statusText }}</span>
                             </td>
                             <td>{{ $order->created_at ? $order->created_at->format('d M Y, h:i A') : 'N/A' }}</td>
                             <td>
                                 <button class="btn btn-sm btn-primary view-btn"
-                                        data-id="{{ $order->id }}">
+                                        data-amount="{{ $order->amount }}"
+                                        data-sender="{{ $order->sender }}"
+                                        data-number="{{ $order->number }}"
+                                        data-trx="{{ $order->trxID }}"
+                                        data-order="{{ $order->order_number }}"
+                                        data-status="{{ $statusText }}"
+                                        data-created="{{ $order->created_at ? $order->created_at->format('d M Y, h:i A') : 'N/A' }}">
                                     View
                                 </button>
                             </td>
@@ -82,12 +85,8 @@
                     <h5 class="modal-title" id="orderModalLabel">Order Details</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body">
-                    <div id="orderDetails" class="text-center py-3">
-                        <div class="spinner-border text-primary" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                    </div>
+                <div class="modal-body" id="orderDetails">
+                    <!-- Dynamic content will be injected here -->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -106,36 +105,29 @@
 
             buttons.forEach(btn => {
                 btn.addEventListener("click", function () {
-                    let orderId = this.dataset.id;
+                    const amount = this.dataset.amount;
+                    const sender = this.dataset.sender;
+                    const number = this.dataset.number;
+                    const trx = this.dataset.trx;
+                    const status = this.dataset.status;
+                    const order = this.dataset.order;
+                    const created = this.dataset.created;
 
                     orderDetails.innerHTML = `
-                    <div class="spinner-border text-primary" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                `;
+                <div class="table-responsive">
+                    <table class="table table-bordered text-start">
+                        <tr><th>Amount</th><td>${amount}</td></tr>
+                        <tr><th>Sender</th><td>${sender}</td></tr>
+                        <tr><th>Number</th><td>${number}</td></tr>
+                        <tr><th>Transaction ID</th><td>${trx}</td></tr>
+                        <tr><th>Order</th><td>${order}</td></tr>
+                        <tr><th>Status</th><td>${status}</td></tr>
+                        <tr><th>Created At</th><td>${created}</td></tr>
+                    </table>
+                </div>
+            `;
 
                     modal.show();
-
-                    fetch(`/admin/orders/${orderId}`)
-                        .then(res => res.json())
-                        .then(data => {
-                            orderDetails.innerHTML = `
-                            <div class="table-responsive">
-                                <table class="table table-bordered">
-                                    <tr><th>Amount</th><td>${data.amount}</td></tr>
-                                    <tr><th>Sender</th><td>${data.sender}</td></tr>
-                                    <tr><th>Number</th><td>${data.number}</td></tr>
-                                    <tr><th>Transaction ID</th><td>${data.trxID}</td></tr>
-                                    <tr><th>Status</th><td>${data.status_text}</td></tr>
-                                    <tr><th>Status</th><td>${data.order_number}</td></tr>
-                                    <tr><th>Created At</th><td>${data.created_at}</td></tr>
-                                </table>
-                            </div>
-                        `;
-                        })
-                        .catch(err => {
-                            orderDetails.innerHTML = `<div class="alert alert-danger">Failed to load order details.</div>`;
-                        });
                 });
             });
         });
