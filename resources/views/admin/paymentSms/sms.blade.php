@@ -24,7 +24,7 @@
                     <thead class="table-dark">
                     <tr>
                         <th>#</th>
-                        <th>Order Number</th>
+                        <th>Amount</th>
                         <th>Sender</th>
                         <th>Number</th>
                         <th>Transaction ID</th>
@@ -37,7 +37,7 @@
                     @forelse($data as $order)
                         <tr>
                             <td>{{ $loop->iteration + ($data->currentPage() - 1) * $data->perPage() }}</td>
-                            <td>{{ $order->order_number }}</td>
+                            <td>{{ $order->amount }}</td>
                             <td>{{ $order->sender }}</td>
                             <td>{{ $order->number }}</td>
                             <td>{{ $order->trxID }}</td>
