@@ -101,14 +101,11 @@ class OrderController extends Controller
                     $order->status = 'processing';
 
                 } else {
-                    $paySMS = null;
                     if (!empty($validated['transaction_id'])) {
                         $paySMS = PaymentSms::where('trxID', $validated['transaction_id'])
                             ->where('amount', '>=', $item->price)
                             ->where('status', 0)
                             ->first();
-                        dd($paySMS);
-                    }
 
                     if ($paySMS != null) {
                         $order->transaction_id = $paySMS->trxID;
@@ -116,8 +113,9 @@ class OrderController extends Controller
                         $paySMS->status = 1;
                         $paySMS->save();
                         $order->status         = 'processing';
-                    } else {
-                        if (empty($validated['transaction_id']) || empty($validated['payment_number'])) {
+                    }
+                    }else {
+                        if (empty($validated['payment_number'])) {
                             return response()->json([
                                 'status'  => false,
                                 'message' => 'Transaction ID and payment number are required for this payment method.',
