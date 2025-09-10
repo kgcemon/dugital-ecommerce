@@ -34,15 +34,25 @@ class CronJobController extends Controller
 
                 $denoms = explode(',', $denom);
 
-                dd($denoms);
+                // Count input requirements (কতবার কোন denom দরকার)
+                $counts = array_count_values($denoms);
 
-                $foundCodes = Code::whereIn('denom', $denoms)
-                    ->where('status', 'unused')
-                    ->pluck('denom')
-                    ->toArray();
-                $allExist = count($foundCodes) === count($denoms);
+                $missing = [];
 
-                if (!$allExist) {
+                foreach ($counts as $value => $needed) {
+                    $available = Code::where('denom', $value)
+                        ->where('status', 'unused')
+                        ->count();
+
+                    if ($available < $needed) {
+                        $missing[$value] = [
+                            'needed'    => $needed,
+                            'available' => $available
+                        ];
+                    }
+                }
+
+                if ($missing) {
                     DB::rollBack();
                     continue;
                 }
