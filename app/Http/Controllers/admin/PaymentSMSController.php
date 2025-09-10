@@ -14,40 +14,44 @@ class PaymentSMSController extends Controller
         return view('admin.paymentSms.sms', compact('data'));
     }
 
-    // Search by trxID or number
-    public function search(Request $request)
+    // Add new SMS
+    public function addSms(Request $request)
     {
-        $keywords = $request->get('search');
-        $data = PaymentSms::where('trxID', 'like', '%' . $keywords . '%')
-            ->orWhere('number', 'like', '%' . $keywords . '%')
-            ->orderBy('id', 'desc')
-            ->paginate(10);
+        $request->validate([
+            'amount' => 'required|numeric',
+            'sender' => 'required|string',
+            'number' => 'required|string',
+            'trxID' => 'required|string|unique:payment_sms,trxID',
+            'status' => 'required|in:0,1,2',
+        ]);
 
-        return view('admin.paymentSms.sms', compact('data'));
+        PaymentSms::create($request->all());
+
+        return redirect()->back()->with('success', 'SMS added successfully');
     }
 
-    // Update status
+    // Update SMS status
     public function updateStatus(Request $request)
     {
         $request->validate([
-            'id'     => 'required|exists:payment_sms,id',
-            'status' => 'required|in:0,1,2', // Pending, Completed, Failed
+            'sms_id' => 'required|exists:payment_sms,id',
+            'status' => 'required|in:0,1,2',
         ]);
 
-        $sms = PaymentSms::find($request->id);
+        $sms = PaymentSms::findOrFail($request->sms_id);
         $sms->status = $request->status;
         $sms->save();
 
-        return redirect()->back()->with('success', 'Status updated successfully.');
+        return redirect()->back()->with('success', 'SMS status updated successfully');
     }
 
     // Delete SMS
-    public function destroy($id)
+    public function delete($id)
     {
         $sms = PaymentSms::findOrFail($id);
         $sms->delete();
 
-        return redirect()->back()->with('success', 'Payment SMS deleted successfully.');
+        return redirect()->back()->with('success', 'SMS deleted successfully');
     }
 
     public function SmsWhooks(Request $request)
