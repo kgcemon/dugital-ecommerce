@@ -93,7 +93,7 @@ Route::middleware('auth:admin')->prefix('admin')->as('admin.')->group(function (
 
 
     //paymentSMS
-    Route::get('/sms', [PaymentSmsController::class, 'index'])->name('sms');
+    Route::get('/payment-sms', [PaymentSmsController::class, 'index'])->name('sms');
     Route::post('/sms/add', [PaymentSmsController::class, 'addSms'])->name('sms.add');
     Route::put('/sms/update-status', [PaymentSmsController::class, 'updateStatus'])->name('sms.update-status');
     Route::delete('/sms/{id}', [PaymentSmsController::class, 'delete'])->name('sms.delete');
