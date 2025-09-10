@@ -68,7 +68,7 @@ class CronJobController extends Controller
                         DB::rollBack();
                         continue;
                     }
-                    $type = (Str::startsWith($code->code, 'UPBD')) ? 1 : ((Str::startsWith($code->code, 'BDMB')) ? 2 : 1);
+                    $type = (Str::startsWith($code->code, 'UPBD')) ? 2 : ((Str::startsWith($code->code, 'BDMB')) ? 1 : 1);
                     return $type;
 
                     try {
