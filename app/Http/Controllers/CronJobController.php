@@ -69,7 +69,7 @@ class CronJobController extends Controller
                         continue;
                     }
                     $type = (Str::startsWith($code->code, 'UPBD')) ? 1 : ((Str::startsWith($code->code, 'BDMB')) ? 2 : 1);
-                    dd($type);
+                    return $type;
 
                     try {
                         $response = Http::withHeaders([
