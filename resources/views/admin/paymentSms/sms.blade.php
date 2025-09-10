@@ -3,10 +3,10 @@
 @section('content')
     <div class="container mt-4">
         <div class="d-flex justify-content-between mb-2">
-            <h4>Orders</h4>
-            <!-- Add Order Button -->
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addOrderModal">
-                Add Order
+            <h4>Payment SMS</h4>
+            <!-- Add SMS Button -->
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addSmsModal">
+                Add SMS
             </button>
         </div>
 
@@ -26,33 +26,33 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @forelse($data as $order)
+                    @forelse($data as $sms)
                         <tr>
                             <td>{{ $loop->iteration + ($data->currentPage() - 1) * $data->perPage() }}</td>
-                            <td>{{ $order->amount }}</td>
-                            <td>{{ $order->sender }}</td>
-                            <td>{{ $order->number }}</td>
-                            <td>{{ $order->trxID }}</td>
+                            <td>{{ $sms->amount }}</td>
+                            <td>{{ $sms->sender }}</td>
+                            <td>{{ $sms->number }}</td>
+                            <td>{{ $sms->trxID }}</td>
                             <td>
                                 @php
-                                    $statusText = $order->status == 0 ? 'Pending' : ($order->status == 1 ? 'Completed' : 'Failed');
-                                    $statusClass = $order->status == 0 ? 'bg-warning text-dark' : ($order->status == 1 ? 'bg-success' : 'bg-danger');
+                                    $statusText = $sms->status == 0 ? 'Pending' : ($sms->status == 1 ? 'Completed' : 'Failed');
+                                    $statusClass = $sms->status == 0 ? 'bg-warning text-dark' : ($sms->status == 1 ? 'bg-success' : 'bg-danger');
                                 @endphp
                                 <span class="badge {{ $statusClass }}">{{ $statusText }}</span>
                             </td>
-                            <td>{{ $order->created_at ? $order->created_at->format('d M Y, h:i A') : 'N/A' }}</td>
+                            <td>{{ $sms->created_at ? $sms->created_at->format('d M Y, h:i A') : 'N/A' }}</td>
                             <td>
                                 <!-- Edit Status Button -->
                                 <button class="btn btn-sm btn-primary edit-btn"
-                                        data-id="{{ $order->id }}"
-                                        data-status="{{ $order->status }}"
+                                        data-id="{{ $sms->id }}"
+                                        data-status="{{ $sms->status }}"
                                         data-bs-toggle="modal"
                                         data-bs-target="#editStatusModal">
                                     Edit
                                 </button>
 
                                 <!-- Delete Form -->
-                                <form action="{{ route('admin.orders.delete', $order->id) }}" method="POST" class="d-inline-block">
+                                <form action="{{ route('admin.sms.delete', $sms->id) }}" method="POST" class="d-inline-block">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">
@@ -63,7 +63,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8" class="text-muted">No orders found.</td>
+                            <td colspan="8" class="text-muted">No SMS found.</td>
                         </tr>
                     @endforelse
                     </tbody>
@@ -76,56 +76,44 @@
         </div>
     </div>
 
-    <!-- Add Order Modal -->
-    <div class="modal fade" id="addOrderModal" tabindex="-1" aria-labelledby="addOrderLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
+    <!-- Add SMS Modal -->
+    <div class="modal fade" id="addSmsModal" tabindex="-1" aria-labelledby="addSmsLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-success text-white">
-                    <h5 class="modal-title" id="addOrderLabel">Add Order</h5>
+                    <h5 class="modal-title" id="addSmsLabel">Add SMS</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <form action="{{ route('admin.orders.add') }}" method="POST">
+                <form action="{{ route('admin.sms.add') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label class="form-label">Product</label>
-                            <select name="product_id" class="form-control" required>
-                                @foreach(App\Models\Product::all() as $product)
-                                    <option value="{{ $product->id }}">{{ $product->name }}</option>
-                                @endforeach
-                            </select>
+                            <label class="form-label">Amount</label>
+                            <input type="text" name="amount" class="form-control" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Item</label>
-                            <select name="item_id" class="form-control" required>
-                                @foreach(App\Models\Item::all() as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                @endforeach
-                            </select>
+                            <label class="form-label">Sender</label>
+                            <input type="text" name="sender" class="form-control" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Customer Data</label>
-                            <input type="text" name="customer_data" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Payment Method</label>
-                            <select name="payment_id" class="form-control" required>
-                                @foreach(App\Models\PaymentMethod::all() as $payment)
-                                    <option value="{{ $payment->id }}">{{ $payment->method }}</option>
-                                @endforeach
-                            </select>
+                            <label class="form-label">Number</label>
+                            <input type="text" name="number" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Transaction ID</label>
-                            <input type="text" name="transaction_id" class="form-control">
+                            <input type="text" name="trxID" class="form-control" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Payment Number</label>
-                            <input type="text" name="payment_number" class="form-control">
+                            <label class="form-label">Status</label>
+                            <select name="status" class="form-control" required>
+                                <option value="0">Pending</option>
+                                <option value="1">Completed</option>
+                                <option value="2">Failed</option>
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Add Order</button>
+                        <button type="submit" class="btn btn-success">Add SMS</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </form>
@@ -141,10 +129,10 @@
                     <h5 class="modal-title" id="editStatusLabel">Edit Status</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <form action="{{ route('admin.orders.update-status') }}" method="POST">
+                <form action="{{ route('admin.sms.update-status') }}" method="POST">
                     @csrf
                     @method('PUT')
-                    <input type="hidden" name="order_id" id="editOrderId">
+                    <input type="hidden" name="sms_id" id="editSmsId">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label">Status</label>
@@ -170,12 +158,12 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const editButtons = document.querySelectorAll(".edit-btn");
-            const editOrderId = document.getElementById("editOrderId");
+            const editSmsId = document.getElementById("editSmsId");
             const editStatusSelect = document.getElementById("editStatusSelect");
 
             editButtons.forEach(btn => {
                 btn.addEventListener("click", function() {
-                    editOrderId.value = this.dataset.id;
+                    editSmsId.value = this.dataset.id;
                     editStatusSelect.value = this.dataset.status;
                 });
             });
