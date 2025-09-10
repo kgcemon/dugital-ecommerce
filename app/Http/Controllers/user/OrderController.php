@@ -107,6 +107,7 @@ class OrderController extends Controller
                             ->where('amount', '>=', $item->price)
                             ->where('status', 0)
                             ->first();
+                        dd($paySMS);
                     }
 
                     if ($paySMS != null) {
