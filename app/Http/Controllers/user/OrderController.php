@@ -42,8 +42,8 @@ class OrderController extends Controller
         }
 
         try {
-
             return DB::transaction(function () use ($validated, $user, $product, $item, $paymentMethod, $request) {
+                $paySMS = null;
 
                 // Duplicate trxID চেক (only if provided)
                 if (!empty($validated['transaction_id'])) {
@@ -101,7 +101,7 @@ class OrderController extends Controller
                     $order->status = 'processing';
 
                 } else {
-                    $paySMS = null;
+
                     if (!empty($validated['transaction_id'])) {
                         $paySMS = PaymentSms::where('trxID', $validated['transaction_id'])
                             ->where('amount', '>=', $item->price)
