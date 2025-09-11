@@ -1,6 +1,9 @@
 @extends('admin.layouts.app')
 
 @section('content')
+    {{-- CSRF Token meta tag --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <div class="container p-3" style="padding: 15px!important;">
         <h2 class="mb-4">🎉 অফার ইমেইল পাঠান</h2>
 
@@ -33,6 +36,7 @@
     </div>
 @endsection
 
+@section('scripts')
     <script>
         document.getElementById('offerForm').addEventListener('submit', function(e){
             e.preventDefault();
@@ -45,7 +49,7 @@
                 method: "POST",
                 body: formData,
                 headers: {
-                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
                 }
             })
                 .then(async res => {
@@ -70,3 +74,4 @@
                 });
         });
     </script>
+@endsection
