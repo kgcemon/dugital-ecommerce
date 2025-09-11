@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderDeliveredMail;
 use App\Models\Order;
 use App\Models\User;
 use App\Models\WalletTransaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OrdersController extends Controller
 {
@@ -91,6 +93,18 @@ class OrdersController extends Controller
                             'description' => 'Refund to Wallet Order id: ' . $order->id,
                             'status'    => 1,
                         ]);
+                }
+            }
+
+            if ($validated['status'] === 'delivered') {
+                if ($user){
+                    Mail::to($user->email)->send(new OrderDeliveredMail(
+                        $user->name,
+                        $order->id,
+                        now(),
+                        $order->total,
+                        url('/thank-you/'.$order->uid)
+                    ));
                 }
             }
 

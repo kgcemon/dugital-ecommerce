@@ -76,7 +76,7 @@
                                     <td style="font-size: 10px">{{ $order->created_at ? $order->created_at->diffForHumans() : 'N/A' }}</td>
                                     <td>
                                         <div class="d-flex justify-content-center gap-2">
-                                          @if($order->status != 'delivered')
+                                          @if($order->status != 'delivered' || $order->status != 'refunded')
                                                 <button class="btn btn-sm btn-warning p-2"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#updateStatusModal"
@@ -129,19 +129,30 @@
                     </div>
                     <div class="modal-body">
                         <input type="hidden" name="id" id="updateOrderId">
+
                         <div class="mb-3">
                             <label for="orderStatus" class="form-label">Status</label>
                             <select name="status" id="orderStatus" class="form-select">
-                                @if($orders)
-                                   <option value="hold">Hold</option>
-                                    <option value="processing">Processing</option>
-                                    <option value="delivered">Completed</option>
-                                    <option value="Delivery Running">Delivery Running</option>
-                                    <option value="cancelled">Cancelled</option>
-                                    <option value="refunded">Refunded</option>
-                                @endif
+                                @php
+                                    $statuses = [
+                                        'hold' => 'Hold',
+                                        'processing' => 'Processing',
+                                        'delivered' => 'Completed',
+                                        'Delivery Running' => 'Delivery Running',
+                                        'cancelled' => 'Cancelled',
+                                        'refunded' => 'Refunded',
+                                    ];
+                                    $currentStatus = $order->status ?? null;
+                                @endphp
+
+                                @foreach($statuses as $value => $label)
+                                    @if($currentStatus !== $value)
+                                        <option value="{{ $value }}">{{ $label }}</option>
+                                    @endif
+                                @endforeach
                             </select>
                         </div>
+
                         <div class="mb-3">
                             <label for="orderNote" class="form-label">Order Note</label>
                             <input type="text" name="order_note" id="orderNote" class="form-control">
@@ -155,6 +166,7 @@
             </form>
         </div>
     </div>
+
 
     <script>
         // ✅ Select All Checkbox
