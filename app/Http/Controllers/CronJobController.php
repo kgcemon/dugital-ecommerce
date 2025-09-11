@@ -13,6 +13,7 @@ class CronJobController extends Controller
     public function freeFireAutoTopUpJob()
     {
         $orders = Order::where('status', 'processing')->whereNull('order_note')->limit(4)->get();
+        dd($orders);
 
         try {
             foreach ($orders as $order) {
@@ -36,7 +37,6 @@ class CronJobController extends Controller
 
                 // Count input requirements (কতবার কোন denom দরকার)
                 $counts = array_count_values($denoms);
-                dd($counts);
 
                 $missing = [];
 
