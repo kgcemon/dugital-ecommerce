@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Mail\OrderDeliveredMail;
+use App\Mail\OrderRefundMail;
+use App\Models\Code;
 use App\Models\Order;
 use App\Models\User;
+use App\Models\WalletTransaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -24,11 +27,11 @@ class WebHooksController extends Controller
         $uid = $data['uid'];
 
         $order = Order::where('order_note', $uid)->first();
+        $user = User::find($order->user_id);
 
         if ($order) {
             if ($status) {
                 $order->status = 'delivered';
-                $user = User::find($order->user_id);
                 if ($user) {
                     try {
                         Mail::to($user->email)->send(new OrderDeliveredMail(
@@ -48,6 +51,34 @@ class WebHooksController extends Controller
 
             if ($message !== null) {
                 $order->order_note = $message;
+               if ($message == 'ffd'){
+                   if ($user) {
+                       $user->wallet += $order->total;
+                       $user->save();
+                       $user->increment('wallet', $order->total);
+                       WalletTransaction::create([
+                           'user_id'   => $user->id,
+                           'amount'    => $order->total,
+                           'type'      => 'credit',
+                           'description' => 'Refund to Wallet Order id: ' . $order->id,
+                           'status'    => 1,
+                       ]);
+                       Code::where('order_id', $order->id)->where('denom',$order->item->denom)->update([
+                           'order_id' => null,
+                           'status'  => "unused",
+                       ]);
+                       try {
+                           Mail::to($user->email)->send(new OrderRefundMail(
+                               $user->name,
+                               $order->id,
+                               now()->format('d M Y, h:i A'),
+                               $order->total,
+                               url('/order/'.$order->uid)
+                           ));
+
+                       }catch (\Exception $e) {}
+                   }
+               }
             }
 
             $order->save();
