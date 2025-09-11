@@ -109,16 +109,19 @@ class OrdersController extends Controller
                         $order->customer_data ?? "",
                     ));
                 } catch (\Exception $e) {}
-            }elseif ($validated['status'] === 'cancelled' && $user) {
+            }
+            if ($validated['status'] === 'cancelled' && $user) {
                 try {
                     Mail::to($user->email)->send(new OrderFailedMail(
                         $user->name,
                         $order->id,
                         now()->format('d M Y, h:i A'),
                         $order->total,
-                        url()
+                        url('/')
                     ));
-                }catch (\Exception $e) {}
+                }catch (\Exception $e) {
+                    back()->with('error', $e->getMessage());
+                }
             }
 
 
