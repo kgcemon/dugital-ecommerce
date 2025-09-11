@@ -33,7 +33,7 @@ class CronJobController extends Controller
                 }
 
                 $denoms = explode(',', $denom);
-                dd($denoms);
+
 
                 // Count input requirements (কতবার কোন denom দরকার)
                 $counts = array_count_values($denoms);
