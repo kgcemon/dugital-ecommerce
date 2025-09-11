@@ -36,6 +36,7 @@ class CronJobController extends Controller
 
                 // Count input requirements (কতবার কোন denom দরকার)
                 $counts = array_count_values($denoms);
+                dd($counts);
 
                 $missing = [];
 
@@ -51,9 +52,6 @@ class CronJobController extends Controller
                         ];
                     }
                 }
-
-                dd($missing);
-                dd($denom);
 
                 if ($missing) {
                     DB::rollBack();
