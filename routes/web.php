@@ -11,6 +11,7 @@ use App\Http\Controllers\admin\VariantController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\CronJobController;
+use App\Http\Controllers\OfferController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\user\DepositController;
 use App\Http\Controllers\user\OrderController;
@@ -97,6 +98,13 @@ Route::middleware('auth:admin')->prefix('admin')->as('admin.')->group(function (
     Route::post('/sms/add', [PaymentSmsController::class, 'addSms'])->name('sms.add');
     Route::put('/sms/update-status', [PaymentSmsController::class, 'updateStatus'])->name('sms.update-status');
     Route::delete('/sms/{id}', [PaymentSmsController::class, 'delete'])->name('sms.delete');
+
+
+    //offer
+    // routes/web.php
+    Route::get('/send-offer', [OfferController::class, 'index'])->name('offer.index');
+    Route::post('/send-offer', [OfferController::class, 'send'])->name('offer.send');
+
 
 });
 
