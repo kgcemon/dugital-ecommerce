@@ -53,9 +53,8 @@ class WebHooksController extends Controller
                 $order->order_note = $message;
                if ($message == 'Invalid Player ID'){
                    if ($user) {
-                       $user->wallet += $order->total;
-                       $user->save();
                        $user->increment('wallet', $order->total);
+                       $user->save();
                        WalletTransaction::create([
                            'user_id'   => $user->id,
                            'amount'    => $order->total,
