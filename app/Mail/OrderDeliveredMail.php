@@ -28,6 +28,6 @@ class OrderDeliveredMail extends Mailable
     public function build()
     {
         return $this->subject('Your Order #' . $this->orderId . ' has been Delivered 🎉')
-            ->view('emails.order-delivered');
+            ->view('mail.delivery');
     }
 }
