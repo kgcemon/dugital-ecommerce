@@ -59,8 +59,7 @@ class CronJobController extends Controller
 
                 foreach ($denoms as $d) {
 
-                    $code = Code::where('denom', $d)->where('order_id', $order->id)
-                        ->where('status', 'unused')
+                    $code = Code::where('denom', $d)->where('status', 'unused')
                         ->lockForUpdate()
                         ->first();
 
