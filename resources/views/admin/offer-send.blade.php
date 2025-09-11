@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    <div class="container mt-5 p-3" style="padding: 15px">
+    <div class="container p-3" style="padding: 15px!important;">
         <h2 class="mb-4">🎉 অফার ইমেইল পাঠান</h2>
 
         <form id="offerForm">
