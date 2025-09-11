@@ -26,7 +26,6 @@ class CronJobController extends Controller
                 }
 
                 $denom = (string) $order->item->denom ?? '';
-                dd($denom);
 
                 if (empty($denom)) {
                     DB::rollBack();
@@ -34,6 +33,7 @@ class CronJobController extends Controller
                 }
 
                 $denoms = explode(',', $denom);
+                dd($denoms);
 
                 // Count input requirements (কতবার কোন denom দরকার)
                 $counts = array_count_values($denoms);
