@@ -20,14 +20,13 @@ class CronJobController extends Controller
 
                 $order = Order::lockForUpdate()->find($order->id);
 
-                dd($order);
-
                 if ($order->status !== 'processing' || $order->order_note !== null) {
                     DB::rollBack();
                     continue;
                 }
 
                 $denom = (string) $order->item->denom ?? '';
+                dd($denom);
 
                 if (empty($denom)) {
                     DB::rollBack();
