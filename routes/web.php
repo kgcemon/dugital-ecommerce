@@ -101,7 +101,6 @@ Route::middleware('auth:admin')->prefix('admin')->as('admin.')->group(function (
 
 
     //offer
-    // routes/web.php
     Route::get('/send-offer', [OfferController::class, 'index'])->name('offer.index');
     Route::post('/send-offer', [OfferController::class, 'send'])->name('offer.sends');
 

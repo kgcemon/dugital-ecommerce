@@ -33,7 +33,6 @@
     </div>
 @endsection
 
-@section('scripts')
     <script>
         document.getElementById('offerForm').addEventListener('submit', function(e){
             e.preventDefault();
@@ -42,14 +41,20 @@
 
             document.getElementById('progressBox').style.display = 'block';
 
-            fetch({{route('admin.offer.sends')}}, {
+            fetch("{{ route('admin.offer.sends') }}", {
                 method: "POST",
                 body: formData,
                 headers: {
                     'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
                 }
             })
-                .then(res => res.json())
+                .then(async res => {
+                    if (!res.ok) {
+                        let errorText = await res.text();
+                        throw new Error(errorText || "Request failed");
+                    }
+                    return res.json();
+                })
                 .then(data => {
                     document.getElementById('total').innerText = data.total;
                     document.getElementById('success').innerText = data.success;
@@ -60,8 +65,8 @@
                     document.getElementById('progressBar').innerText = Math.round(percent) + "%";
                 })
                 .catch(err => {
-                    alert("Error: " + err);
+                    alert("❌ Error: " + err.message);
+                    document.getElementById('progressBox').style.display = 'none';
                 });
         });
     </script>
-@endsection
