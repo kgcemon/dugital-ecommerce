@@ -42,7 +42,7 @@
 
             document.getElementById('progressBox').style.display = 'block';
 
-            fetch("{{ route('admin.offer.send') }}", {
+            fetch("/send-offer", {
                 method: "POST",
                 body: formData,
                 headers: {
