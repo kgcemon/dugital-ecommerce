@@ -33,14 +33,14 @@
 
     <div class="card" style="margin: 15px">
         <h1>Why choice top up use Codmshop?</h1>
-        <div class="card-title"><p>
+        <div class=""><p>
                 <strong>Codmshop</strong> is a must old and popular rop up shop in bangladesh we have many customers review in social media & we sell bangladesh best low prices Free Fire <strong>Diamonds</strong>
             </p></div>
     </div>
 
     <div class="card" style="margin: 15px">
         <h2>Delivery Time</h2>
-        <div class="card-title"><p>
+        <div class=""><p>
                 <strong>Free Fire Top Up </strong> is intent delivery 1/10 second times need to delivery no need extra charge
             </p></div>
     </div>
