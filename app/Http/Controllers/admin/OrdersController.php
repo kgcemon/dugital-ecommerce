@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Mail\OrderDeliveredMail;
+use App\Mail\OrderFailedMail;
 use App\Models\Order;
 use App\Models\User;
 use App\Models\WalletTransaction;
@@ -108,6 +109,16 @@ class OrdersController extends Controller
                         $order->customer_data ?? "",
                     ));
                 } catch (\Exception $e) {}
+            }elseif ($validated['status'] === 'cancelled' && $user) {
+                try {
+                    Mail::to($user->email)->send(new OrderFailedMail(
+                        $user->name,
+                        $order->id,
+                        now()->format('d M Y, h:i A'),
+                        $order->total,
+                        url()
+                    ));
+                }catch (\Exception $e) {}
             }
 
 
