@@ -27,11 +27,12 @@ class WebHooksController extends Controller
         $uid = $data['uid'];
 
         $order = Order::where('order_note', $uid)->first();
-        $user = User::find($order->user_id);
+        $user = $order ? User::find($order->user_id) : null;
 
         if ($order) {
-            if ($status) {
+            if ($status == 'true') {
                 $order->status = 'delivered';
+                $order->save();
                 if ($user) {
                     try {
                         Mail::to($user->email)->send(new OrderDeliveredMail(
