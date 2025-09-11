@@ -187,6 +187,13 @@
                     </div>
                 </li>
 
+                <li class="nav-item {{ request()->is('admin/send-offer') ? 'active' : '' }}">
+                    <a href="{{route('admin.offer.index')}}">
+                        <i class="fas fa-broadcast-tower"></i>
+                        <p>Send Offer Email</p>
+                    </a>
+                </li>
+
             </ul>
         </div>
     </div>
