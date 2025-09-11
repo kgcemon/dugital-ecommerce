@@ -29,12 +29,8 @@
                 <input type="number" class="form-control" name="discount" required>
             </div>
             <div class="mb-3">
-                <label class="form-label">Coupon Code</label>
-                <input type="text" class="form-control" name="coupon" required>
-            </div>
-            <div class="mb-3">
                 <label class="form-label">Expiry Date</label>
-                <input type="date" class="form-control" name="expiryDate" required>
+                <input type="date" value="{{now()}}" class="form-control" name="expiryDate" required>
             </div>
             <button type="submit" class="btn btn-primary">Send Offer Mail</button>
         </form>

@@ -19,7 +19,6 @@ class OfferController extends Controller
         try {
             $request->validate([
                 'discount' => 'required|numeric',
-                'coupon' => 'required|string',
                 'expiryDate' => 'required|date',
             ]);
 
@@ -32,7 +31,7 @@ class OfferController extends Controller
                     Mail::to($user->email)->send(new OfferMail(
                         $user->name,
                         $request->discount,
-                        $request->coupon,
+                        '57527',
                         $request->expiryDate,
                         url('/')
                     ));
