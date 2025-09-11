@@ -51,7 +51,7 @@ class WebHooksController extends Controller
 
             if ($message !== null) {
                 $order->order_note = $message;
-               if ($message == 'ffd'){
+               if ($message == 'Invalid Player ID'){
                    if ($user) {
                        $user->wallet += $order->total;
                        $user->save();
