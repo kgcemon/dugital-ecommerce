@@ -13,13 +13,14 @@ class CronJobController extends Controller
     public function freeFireAutoTopUpJob()
     {
         $orders = Order::where('status', 'processing')->whereNull('order_note')->limit(4)->get();
-        dd($orders);
 
         try {
             foreach ($orders as $order) {
                 DB::beginTransaction();
 
                 $order = Order::lockForUpdate()->find($order->id);
+
+                dd($order);
 
                 if ($order->status !== 'processing' || $order->order_note !== null) {
                     DB::rollBack();
