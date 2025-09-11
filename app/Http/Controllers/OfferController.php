@@ -42,18 +42,10 @@ class OfferController extends Controller
                 }
             }
 
-            return response()->json([
-                'total' => count($users),
-                'success' => $success,
-                'failed' => $failed,
-            ]);
+             return back()->with('status', "✅ মোট {$users->count()} জনকে মেইল পাঠানো হয়েছে।
+            সফল: {$success}, ব্যর্থ: {$failed}");
         }catch (\Exception $exception){
-            return response()->json([
-                'total' => 0,
-                'success' => 0,
-                'failed' => 0,
-                'error' => $exception->getMessage(),
-            ]);
+            return back()->with('error', $exception->getMessage());
         }
     }
 }
