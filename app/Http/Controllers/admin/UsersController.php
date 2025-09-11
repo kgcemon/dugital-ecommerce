@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\MoneyReceivedMail;
 use App\Models\User;
 use App\Models\WalletTransaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
 
 class UsersController extends Controller
@@ -102,6 +104,16 @@ class UsersController extends Controller
                    'description' => 'Admin debit balance',
                    'status'    => 1,
                ]);
+               try {
+                   Mail::to($user->email)->send(new MoneyReceivedMail(
+                       $user->name,
+                       'TXN-' . strtoupper(rand(10000,10000)),
+                       now()->format('d M Y, h:i A'),
+                       $amount,
+                       url('/')
+                   ));
+               }catch (\Exception $exception){}
+
            }else{
                WalletTransaction::create([
                    'user_id'   => $user->id,
@@ -110,6 +122,15 @@ class UsersController extends Controller
                    'description' => 'Admin added menualy your',
                    'status'    => 1,
                ]);
+               try {
+                   Mail::to($user->email)->send(new MoneyReceivedMail(
+                       $user->name,
+                       'TXN-' . strtoupper(rand(10000,10000)),
+                       now()->format('d M Y, h:i A'),
+                       $amount,
+                       url('/')
+                   ));
+               }catch (\Exception $exception){}
            }
         }
 
