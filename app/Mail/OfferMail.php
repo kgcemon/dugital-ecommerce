@@ -28,6 +28,6 @@ class OfferMail extends Mailable
     public function build()
     {
         return $this->subject('🎉 বিশেষ অফার চলছে - ' . $this->discount . '% ছাড়!')
-            ->view('emails.offer');
+            ->view('mail.offer');
     }
 }

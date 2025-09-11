@@ -33,7 +33,7 @@ class OfferController extends Controller
                     $request->discount,
                     $request->coupon,
                     $request->expiryDate,
-                    url('/offers')
+                    url('/')
                 ));
                 $success++;
             } catch (\Exception $e) {
