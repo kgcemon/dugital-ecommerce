@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Order Failed</title>
+    <title>অর্ডার ব্যর্থ হয়েছে</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -65,29 +65,29 @@
 <body>
 <div class="mail-container">
     <div class="header">
-        <h2>⚠️ Order Failed</h2>
+        <h2>⚠️ অর্ডার ব্যর্থ হয়েছে</h2>
     </div>
     <div class="content">
-        <p>Hi <strong>{{ $name }}</strong>,</p>
-        <p>Unfortunately, your order could not be processed. Please check your payment details and try again.</p>
+        <p>প্রিয় <strong>{{ $name }}</strong>,</p>
+        <p>দুঃখিত, আপনার অর্ডারটি সফল হয়নি। পেমেন্ট সম্পন্ন না করায় আপনার অর্ডারটি বাতিল করা হয়েছে।</p>
 
         <div class="order-info">
-            <p><strong>Order ID:</strong> #{{ $orderId }}</p>
-            <p><strong>Date:</strong> {{ $date }}</p>
-            <p><strong>Amount:</strong> {{ number_format($amount, 2) }} Tk</p>
-            <p><strong>Status:</strong> Failed ❌</p>
+            <p><strong>অর্ডার আইডি:</strong> #{{ $orderId }}</p>
+            <p><strong>তারিখ:</strong> {{ $date }}</p>
+            <p><strong>পরিমাণ:</strong> {{ number_format($amount, 2) }} টাকা</p>
+            <p><strong>অবস্থা:</strong> বাতিল ❌</p>
         </div>
 
-        <p>You can retry the payment from your account dashboard.</p>
+        <p>আপনি চাইলে এখনই পুনরায় পেমেন্ট করে আবার অর্ডার করতে পারেন।</p>
 
         <p style="text-align: center;">
-            <a href="{{ $retryUrl }}" class="btn">Retry Payment</a>
+            <a href="{{ $retryUrl }}" class="btn">আবার অর্ডার করুন</a>
         </p>
     </div>
 
     <div class="footer">
-        <p>Thank you for choosing <strong>Gaming Shop</strong>.
-            If you need assistance, please contact our support team.</p>
+        <p><strong>Gaming Shop</strong> ব্যবহার করার জন্য ধন্যবাদ।
+            কোনো সহায়তার প্রয়োজন হলে আমাদের সাপোর্ট টিমের সাথে যোগাযোগ করুন।</p>
     </div>
 </div>
 </body>
