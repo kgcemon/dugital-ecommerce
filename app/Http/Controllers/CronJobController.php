@@ -41,7 +41,7 @@ class CronJobController extends Controller
                 $missing = [];
 
                 foreach ($counts as $value => $needed) {
-                    $available = Code::where('denom', $value)
+                    $available = Code::where('denom', $value)->where('order_id', $order->id)
                         ->where('status', 'unused')
                         ->count();
 
@@ -60,7 +60,7 @@ class CronJobController extends Controller
 
                 foreach ($denoms as $d) {
 
-                    $code = Code::where('denom', $d)
+                    $code = Code::where('denom', $d)->where('order_id', $order->id)
                         ->where('status', 'unused')
                         ->lockForUpdate()
                         ->first();

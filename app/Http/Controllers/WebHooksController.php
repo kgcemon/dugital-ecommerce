@@ -64,10 +64,18 @@ class WebHooksController extends Controller
                            'description' => 'Refund to Wallet Order id: ' . $order->id,
                            'status'    => 1,
                        ]);
-                       Code::where('order_id', $order->id)->where('denom',$order->item->denom)->update([
-                           'order_id' => null,
-                           'status'  => "unused",
-                       ]);
+
+                       $denom = (string) $order->item->denom ?? '';
+
+                       $denoms = explode(',', $denom);
+
+                       foreach ($denoms as $denom) {
+                           Code::where('denom', $denom)->where('order_id', $order->id)
+                               ->where('status', 'unused')
+                               ->lockForUpdate()
+                               ->first();
+                       }
+
                        try {
                            Mail::to($user->email)->send(new OrderRefundMail(
                                $user->name,
