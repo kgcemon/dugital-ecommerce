@@ -96,21 +96,20 @@ class OrdersController extends Controller
                 }
             }
 
-            try {
-                if ($validated['status'] === 'delivered') {
-                    if ($user){
-                        Mail::to($user->email)->send(new OrderDeliveredMail(
-                            $user->name,
-                            $order->id,
-                            now(),
-                            $order->total,
-                            url('/thank-you/'.$order->uid)
-                        ));
-                    }
-                }
-            }catch (\Exception $exception){
-                return back()->with('error', $exception->getMessage())->withInput();
+            if ($validated['status'] === 'delivered' && $user) {
+                try {
+                    Mail::to($user->email)->send(new OrderDeliveredMail(
+                        $user->name,
+                        $order->id,
+                        now(),
+                        $order->total,
+                        url('/thank-you/'.$order->uid),
+                        $order->item->name ?? "",
+                        $order->customer_data ?? "",
+                    ));
+                } catch (\Exception $e) {}
             }
+
 
             // ✅ Save order
             $order->save();

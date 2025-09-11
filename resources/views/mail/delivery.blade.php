@@ -76,7 +76,9 @@
         <div class="order-info">
             <p><strong>Order ID:</strong> #{{ $orderId }}</p>
             <p><strong>Order Date:</strong> {{ $orderDate }}</p>
-            <p><strong>Total Amount:</strong> {{ $orderAmount }}</p>
+            <p><strong>Item:</strong> {{ $orderItem }}</p>
+            <p><strong>Your Address:</strong> {{ $orderAddress }}</p>
+            <p><strong>Total Amount:</strong> {{ $orderAmount }}৳</p>
             <p><strong>Status:</strong> Delivered ✅</p>
         </div>
 
