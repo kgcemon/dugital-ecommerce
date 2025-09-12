@@ -108,6 +108,7 @@
             </div>
 
         </div>
+        <div class="card-body">
         @if(!empty($order->usedCodes))
             <h6 class="mb-3">   Codes Details</h6>
             <div class="table-responsive">
@@ -136,6 +137,7 @@
                 </table>
             </div>
         @endif
+        </div>
     </div>
 
     <!-- Receipt Modal -->
