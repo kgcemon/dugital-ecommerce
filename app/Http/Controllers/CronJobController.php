@@ -83,17 +83,19 @@ class CronJobController extends Controller
                             "webhook"    => "https://codmshop.com/api/auto-webhooks"
                         ]);
 
-                    }catch (\Exception $exception){
-                        $order->order_note = 'server error';
-                    }
+                    }catch (\Exception $exception){$order->order_note = 'server error';}
+
                         $data = $response->json();
-
+                        $uid = $data['uid'] ?? null;
                         $order->status = 'Delivery Running';
-                        $order->order_note = $data['uid'] ?? 'running';
+                        $order->order_note = $uid ?? null;
                         $order->save();
-
                         $code->status = 'used';
+                        $code->uid = $uid ?? null;
                         $code->order_id = $order->id;
+                        if (empty($uid)){
+                            $code->active = false;
+                        }
                         $code->save();
                 }
 
