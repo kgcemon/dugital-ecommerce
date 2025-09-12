@@ -31,7 +31,7 @@
                 <form action="{{ route('admin.orders.bulkAction') }}" method="POST" id="bulkActionForm">
                     @csrf
                     <div class="d-flex mb-3 align-content-center">
-                        <select name="action" class="form-select me-2" style="max-width:200px;" required>
+                        <select name="action" class="form-select me-2" style="max-width:100%;" required>
                             <option value="">Bulk Actions</option>
                             <option value="delivered">Mark as Completed</option>
                             <option value="processing">Mark as Processing</option>
