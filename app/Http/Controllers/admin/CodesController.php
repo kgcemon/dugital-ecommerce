@@ -72,8 +72,8 @@ class CodesController extends Controller
     // Show the edit form
     public function singleCode($id)
     {
-        $codes = Code::where('product_id', $id)->paginate(5);
-        $product = Product::with('items')->orderby('sort')->paginate(10);
+        $codes = Code::where('denom', $id)->paginate(5);
+        $product = Product::with('items')->orderby('sort')->get();
         return view('admin.pages.codes.edit', compact('codes', 'product'));
     }
     public function edit($id)
