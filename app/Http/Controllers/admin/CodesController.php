@@ -73,7 +73,8 @@ class CodesController extends Controller
     public function singleCode($id)
     {
         $codes = Code::where('product_id', $id)->paginate(5);
-        return view('admin.pages.codes.edit', compact('codes'));
+        $products = Product::with('items')->orderby('sort')->paginate(10);
+        return view('admin.pages.codes.edit', compact('codes', 'products'));
     }
     public function edit($id)
     {
