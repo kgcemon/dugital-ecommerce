@@ -78,6 +78,7 @@ class WebHooksController extends Controller
                                'status' => 'unused',
                                'uid' => null,
                                'note' => 'Refund to Wallet Order id: ' . $order->id,
+                               'active' => true,
                            ]);
 
                        try {
