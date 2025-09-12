@@ -79,7 +79,7 @@
                 </table>
 
                 <div class="mt-3">
-                    {{ $orders->links('admin.layouts.partials.__pagination') }}
+                    {{ $data->links('admin.layouts.partials.__pagination') }}
                 </div>
             </div>
         </div>
