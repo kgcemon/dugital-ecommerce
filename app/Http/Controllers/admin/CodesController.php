@@ -64,8 +64,6 @@ class CodesController extends Controller
             ->groupBy('item_id')
             ->with('variant')
             ->get();
-        $codes = Code::where('product_id', $id)->paginate(5);
-        $product = Product::where('id', $id)->first() ?? '';
         return view('admin.pages.codes.codes', compact('codes', 'product','unusedCodesCountPerVariant'));
     }
 
