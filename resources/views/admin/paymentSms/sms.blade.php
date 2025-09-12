@@ -4,10 +4,13 @@
     <div class="container mt-4">
 
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3 gap-2" style="padding: 18px!important;">
-            <div class="d-flex justify-content-between"> <h4>Payment SMS</h4>   <!-- Add SMS Button -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4>Payment SMS</h4>
+                <!-- Add SMS Button -->
                 <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addSmsModal">
                     Add SMS
-                </button></div>
+                </button>
+            </div>
             <div class="d-flex gap-2 flex-wrap">
                 <!-- Status Filter -->
                 <select id="statusFilter" class="form-select">
