@@ -8,11 +8,31 @@ use Illuminate\Http\Request;
 
 class PaymentSMSController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $data = PaymentSms::orderBy('id', 'desc')->paginate(10);
+        $query = PaymentSms::query();
+
+        // Filter by status
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        // Search by sender, number, trxID, or amount
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('sender', 'like', "%{$search}%")
+                    ->orWhere('number', 'like', "%{$search}%")
+                    ->orWhere('trxID', 'like', "%{$search}%")
+                    ->orWhere('amount', 'like', "%{$search}%");
+            });
+        }
+
+        $data = $query->orderBy('id', 'desc')->paginate(10)->withQueryString();
+
         return view('admin.paymentSms.sms', compact('data'));
     }
+
 
     // Add new SMS
     public function addSms(Request $request)

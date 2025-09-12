@@ -74,6 +74,7 @@
                                 <td>{{ $method->created_at->format('Y-m-d H:i') }}</td>
                                 <td>{{ $method->updated_at->format('Y-m-d H:i') }}</td>
                                 <td>
+                                    <div class="d-flex justify-content-center gap-2">
                                     <!-- Edit -->
                                     <button class="btn btn-sm btn-warning"
                                             data-bs-toggle="modal"
@@ -87,6 +88,7 @@
                                             data-bs-target="#deleteMethodModal{{ $method->id }}">
                                         <i class="bi bi-trash">Delete</i>
                                     </button>
+                                    </div>
                                 </td>
                             </tr>
 
