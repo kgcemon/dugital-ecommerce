@@ -104,7 +104,7 @@
                                     <strong class="{{ $row->total_unused < 3 ? 'text-danger' : '' }}">
                                         {{ $row->total_unused }}
                                     </strong>
-                                    unused code{{ $row->total_unused > 1 ? 's' : '' }}
+                                    {{ $row->total_unused > 1 ? 's' : '' }}
                                 </td>
                                 <td>
                                     <a href="/">View</a>
