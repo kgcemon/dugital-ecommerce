@@ -126,11 +126,11 @@
              @foreach($order->usedCodes as $code)
                  <tr>
                      <td>1</td>
-                     <td>{{ $code->usedCodes->code }}</td>
+                     <td>{{ $code->usedCodes }}</td>
                      <td>{{ $order->item->name ??  $order->product->name }}</td>
                      <td>{{ $order->customer_data }}</td>
                      <td>{{ $code->usedCodes->note }}</td>
-                     <td>{{ $code->usedCodes->active }}</td>
+                     <td>{{ $code->usedCodes }}</td>
                  </tr>
              @endforeach
                 </tbody>
