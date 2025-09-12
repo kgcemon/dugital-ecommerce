@@ -7,7 +7,6 @@
                     <thead class="table-dark">
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
                         <th>Code</th>
                         <th>Denom</th>
                         <th>Order Number</th>
@@ -19,7 +18,6 @@
                     @forelse ($codes as $code)
                         <tr>
                             <td>{{ $code->id }}</td>
-                            <td>{{ $code->variant->name }}</td>
                             <td>{{ $code->code }}</td>
                             <td>{{ $code->denom ?? '-' }}</td>
                             <td>{{ $code->order_id ?? '-' }}</td>
@@ -67,57 +65,55 @@
 
 
  <!-- Edit Code Modal -->
-     <div class="modal fade" id="editVariantModal" tabindex="-1" aria-labelledby="editVariantModalLabel" aria-hidden="true">
-         <div class="modal-dialog">
-             <form id="editVariantForm" method="POST">
-                 @csrf
-                 @method('PUT')
-                 <div class="modal-content">
-                     <div class="modal-header">
-                         <h5 class="modal-title" id="editVariantModalLabel">Edit Code</h5>
-                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                     </div>
+{{--     <div class="modal fade" id="editVariantModal" tabindex="-1" aria-labelledby="editVariantModalLabel" aria-hidden="true">--}}
+{{--         <div class="modal-dialog">--}}
+{{--             <form id="editVariantForm" method="POST">--}}
+{{--                 @csrf--}}
+{{--                 @method('PUT')--}}
+{{--                 <div class="modal-content">--}}
+{{--                     <div class="modal-header">--}}
+{{--                         <h5 class="modal-title" id="editVariantModalLabel">Edit Code</h5>--}}
+{{--                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
+{{--                     </div>--}}
 
-                     <div class="modal-body">
-                         <!-- Variant Selector -->
-                         <div class="mb-3">
-                             <label for="editVariantItem" class="form-label">Select Item</label>
-                             <select class="form-select" id="editVariantItem" name="item_id" required>
-                                 @foreach($product->items as $item)
-                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                 @endforeach
-                             </select>
-                         </div>
+{{--                     <div class="modal-body">--}}
+{{--                         <!-- Variant Selector -->--}}
+{{--                         <div class="mb-3">--}}
+{{--                             <label for="editVariantItem" class="form-label">Select Item</label>--}}
+{{--                             <select class="form-select" id="editVariantItem" name="item_id" required>--}}
+{{--                                 @foreach($product->items as $item)--}}
+{{--                                     <option value="{{ $item->id }}">{{ $item->name }}</option>--}}
+{{--                                 @endforeach--}}
+{{--                             </select>--}}
+{{--                         </div>--}}
 
-                         <!-- Code Input -->
-                         <div class="mb-3">
-                             <label for="editCodeText" class="form-label">Code</label>
-                             <input type="text" class="form-control" id="editCodeText" name="code" required>
-                         </div>
-                         <div class="mb-3">
-                             <label for="editCodeText" class="form-label">Denom</label>
-                             <input type="text" class="form-control" id="editCodeDenom" name="denom" required>
-                         </div>
-                         <div class="mb-3">
-                             <label for="editCodestatus" class="form-label">Status</label>
-                             <select class="form-select" id="editCodestatus" name="status" required>
-                                 <option value="used">Used</option>
-                                 <option value="unused">Unused</option>
-                             </select>
-                         </div>
+{{--                         <!-- Code Input -->--}}
+{{--                         <div class="mb-3">--}}
+{{--                             <label for="editCodeText" class="form-label">Code</label>--}}
+{{--                             <input type="text" class="form-control" id="editCodeText" name="code" required>--}}
+{{--                         </div>--}}
+{{--                         <div class="mb-3">--}}
+{{--                             <label for="editCodeText" class="form-label">Denom</label>--}}
+{{--                             <input type="text" class="form-control" id="editCodeDenom" name="denom" required>--}}
+{{--                         </div>--}}
+{{--                         <div class="mb-3">--}}
+{{--                             <label for="editCodestatus" class="form-label">Status</label>--}}
+{{--                             <select class="form-select" id="editCodestatus" name="status" required>--}}
+{{--                                 <option value="used">Used</option>--}}
+{{--                                 <option value="unused">Unused</option>--}}
+{{--                             </select>--}}
+{{--                         </div>--}}
 
-                     </div>
-
-
-                     <div class="modal-footer">
-                         <input type="hidden" name="code_id" value="{{ $code->id }}">
-                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                         <button type="submit" class="btn btn-primary">Update Code</button>
-                     </div>
-                 </div>
-             </form>
-         </div>
-     </div>
+{{--                     </div>--}}
+{{--                     <div class="modal-footer">--}}
+{{--                         <input type="hidden" name="code_id" value="{{ $code->id }}">--}}
+{{--                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>--}}
+{{--                         <button type="submit" class="btn btn-primary">Update Code</button>--}}
+{{--                     </div>--}}
+{{--                 </div>--}}
+{{--             </form>--}}
+{{--         </div>--}}
+{{--     </div>--}}
 
      <!-- Delete Variant Modal -->
      <div class="modal fade" id="deleteVariantModal" tabindex="-1" aria-labelledby="deleteVariantModalLabel"
