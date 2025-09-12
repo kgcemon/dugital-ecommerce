@@ -36,7 +36,7 @@ class CodesController extends Controller
 
         try {
             $lines = preg_split('/\r\n|\r|\n/', $validatedData['codes']);
-            $item = Item::where('product_id', $validatedData['product_id'])->first() ?? null;
+            $item = Item::where('product_id', $validatedData['product_id'])->where('id', $request->input('item_id'))->first();
 
             foreach ($lines as $line) {
                 $code = trim($line);
