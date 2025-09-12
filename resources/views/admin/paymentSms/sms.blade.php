@@ -3,7 +3,7 @@
 @section('content')
     <div class="container mt-4">
 
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3 gap-2">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3 gap-2" style="padding: 18px!important;">
             <h4>Payment SMS</h4>
             <div class="d-flex gap-2 flex-wrap">
                 <!-- Status Filter -->
