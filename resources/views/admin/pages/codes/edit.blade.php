@@ -23,7 +23,6 @@
                             <td>{{ $code->order_id ?? '-' }}</td>
                             <td>{{ $code->status }}</td>
                             <td>
-                                 1. The Edit Button with data-* attributes to hold the row's data
                                 <button
                                     type="button"
                                     class="btn btn-sm btn-primary"
@@ -37,7 +36,6 @@
                                 >Edit</button>
 
 
-                                 Delete Button
                                 <button
                                     type="button"
                                     class="btn btn-sm btn-danger"
