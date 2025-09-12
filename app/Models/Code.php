@@ -23,6 +23,6 @@ class Code extends Model
 
     public function variant()
     {
-        return $this->hasOne(Item::class, 'id', 'item_id')->select('id', 'name');
+        return $this->hasOne(Item::class, 'id', 'item_id')->select('id', 'name','denom');
     }
 }
