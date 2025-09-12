@@ -61,7 +61,7 @@
                             <th>#</th>
                             <th>Product</th>
                             <th>Item</th>
-                            <th>Customer Data</th>
+                            <th>{{$order->product->input_name}}</th>
                             <th>Quantity</th>
                             <th>Total (৳)</th>
                         </tr>
