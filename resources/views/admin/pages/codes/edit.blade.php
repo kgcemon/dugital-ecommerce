@@ -2,62 +2,85 @@
 
 @section('content')
     <div class="card shadow-sm border-0">
-        <div class="card-body table-responsive">
-            <table class="table table-bordered table-striped text-center align-middle">
-                <thead class="table-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Code</th>
-                    <th>Denom</th>
-                    <th>Order Number</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                @forelse ($codes as $code)
-                    <tr>
-                        <td>{{ $code->id }}</td>
-                        <td style="font-size: 5px">{{ $code->code }}</td>
-                        <td>{{ $code->denom ?? '-' }}</td>
-                        <td>{{ $code->order_id ?? '-' }}</td>
-                        <td>{{ $code->status }}</td>
-                        <td>
-                            <div class="d-flex justify-content-center gap-2">
-                                <button
-                                    type="button"
-                                    class="btn btn-sm btn-primary"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#editVariantModal"
-                                    data-id="{{ $code->id }}"
-                                    data-code="{{ $code->code }}"
-                                    data-denom="{{ $code->denom }}"
-                                    data-status="{{ $code->status }}"
-                                    data-item_id="{{ $code->item_id }}"
-                                >Edit</button>
+        <div class="card-body">
 
-                                <button
-                                    type="button"
-                                    class="btn btn-sm btn-danger"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#deleteVariantModal"
-                                    data-id="{{ $code->id }}"
-                                    data-name="{{ $code->code }}"
-                                >
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                @empty
+            <!-- Search & Filter -->
+            <form method="GET" class="row g-2 mb-3">
+                <div class="col-md-6">
+                    <input type="text" name="search" class="form-control" placeholder="Search Code..."
+                           value="{{ request('search') }}">
+                </div>
+                <div class="col-md-4">
+                    <select name="status" class="form-select">
+                        <option value="">All Status</option>
+                        <option value="used" {{ request('status') == 'used' ? 'selected' : '' }}>Used</option>
+                        <option value="unused" {{ request('status') == 'unused' ? 'selected' : '' }}>Unused</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">Filter</button>
+                </div>
+            </form>
+
+            <!-- Codes Table -->
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped text-center align-middle">
+                    <thead class="table-dark">
                     <tr>
-                        <td colspan="6">No codes found.</td>
+                        <th>ID</th>
+                        <th>Code</th>
+                        <th>Denom</th>
+                        <th>Order Number</th>
+                        <th>Status</th>
+                        <th>Actions</th>
                     </tr>
-                @endforelse
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    @forelse ($codes as $code)
+                        <tr>
+                            <td>{{ $code->id }}</td>
+                            <td style="font-size: 5px">{{ $code->code }}</td>
+                            <td>{{ $code->denom ?? '-' }}</td>
+                            <td>{{ $code->order_id ?? '-' }}</td>
+                            <td>{{ $code->status }}</td>
+                            <td>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <button
+                                        type="button"
+                                        class="btn btn-sm btn-primary"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#editVariantModal"
+                                        data-id="{{ $code->id }}"
+                                        data-code="{{ $code->code }}"
+                                        data-denom="{{ $code->denom }}"
+                                        data-status="{{ $code->status }}"
+                                        data-item_id="{{ $code->item_id }}"
+                                    >Edit</button>
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-sm btn-danger"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#deleteVariantModal"
+                                        data-id="{{ $code->id }}"
+                                        data-name="{{ $code->code }}"
+                                    >
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6">No codes found.</td>
+                        </tr>
+                    @endforelse
+                    </tbody>
+                </table>
+            </div>
+
             <div class="mt-3">
-                {{ $codes->links('admin.layouts.partials.__pagination') }}
+                {{ $codes->appends(request()->query())->links('admin.layouts.partials.__pagination') }}
             </div>
         </div>
     </div>
@@ -127,7 +150,6 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-
             // --- EDIT MODAL SCRIPT ---
             const editModal = document.getElementById('editVariantModal');
             editModal.addEventListener('show.bs.modal', function (event) {

@@ -70,12 +70,28 @@ class CodesController extends Controller
 
 
     // Show the edit form
-    public function singleCode($id)
+    public function singleCode(Request $request, $denom)
     {
-        $codes = Code::where('denom', $id)->paginate(5);
-        $product = Product::orderby('sort')->get();
-        return view('admin.pages.codes.edit', compact('codes', 'product'));
+        $query = Code::where('denom', $denom);
+
+        // Search by code
+        if ($request->filled('search')) {
+            $query->where('code', 'like', '%' . $request->search . '%');
+        }
+
+        // Filter by status
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        $codes = $query->orderBy('id', 'desc')->paginate(5)->withQueryString();
+
+        $products = Product::orderBy('sort')->get();
+
+        return view('admin.pages.codes.edit', compact('codes', 'products'));
     }
+
+
     public function edit($id)
     {
 
