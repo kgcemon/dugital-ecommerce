@@ -109,7 +109,7 @@
 
         </div>
         <div class="card-body">
-        @if(!empty($order->usedCodes))
+            @if(count($order->usedCodes) > 0)
             <h6 class="mb-3">   Codes Details</h6>
             <div class="table-responsive">
                 <table class="table table-bordered table-striped">
@@ -125,9 +125,23 @@
                     </thead>
                     <tbody class="text-center">
                     @foreach($order->usedCodes as $code)
+                        @php
+                            $fullCode = $code->code;
+                            $firstPart = substr($fullCode, 0, 4);
+                            $lastPart = substr($fullCode, -4);
+                            $shortCode = $firstPart . '...' . $lastPart;
+                        @endphp
                         <tr>
                             <td>1</td>
-                            <td>{{ $code->code }}</td>
+                            <td>
+                                <span id="code-{{ $code->id }}">{{ $shortCode }}</span>
+                                <button
+                                    type="button"
+                                    class="btn btn-sm btn-outline-primary"
+                                    onclick="copyCode('{{ $fullCode }}')">
+                                    Copy
+                                </button>
+                            </td>
                             <td>{{ $code->note ?? '' }}</td>
                             <td>{{ $code->status }}</td>
                             <td>{{ $code->active == 1 ? 'Complete' : 'Problem Found' }}</td>
@@ -153,7 +167,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="text-center mb-3">
-                        <h4 class="fw-bold">GMPAPA</h4>
+                        <h4 class="fw-bold">Codmshop</h4>
                         <small class="text-muted">Customer Receipt</small>
                         <hr>
                     </div>
@@ -225,6 +239,14 @@
             printWindow.document.write('</body></html>');
             printWindow.document.close();
             printWindow.print();
+        }
+
+        function copyCode(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                alert("Copied: " + text);
+            }, function(err) {
+                alert("Failed to copy: ", err);
+            });
         }
     </script>
 @endsection
