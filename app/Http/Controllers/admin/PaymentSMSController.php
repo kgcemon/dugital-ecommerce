@@ -32,7 +32,7 @@ class PaymentSMSController extends Controller
 
         // AJAX request check
         if ($request->ajax()) {
-            return view('admin.paymentSms.partials.sms_table', compact('data'))->render();
+            return view('admin.paymentSms.sms_table', compact('data'))->render();
         }
 
         return view('admin.paymentSms.sms', compact('data'));
