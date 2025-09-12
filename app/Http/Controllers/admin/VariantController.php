@@ -67,7 +67,7 @@ class  VariantController extends Controller
             'price' => 'required|numeric',
             'sort' => 'sometimes|nullable|numeric',
             'description' => 'sometimes|nullable|string',
-            'denom' => 'sometimes|nullable|numeric',
+            'denom' => 'sometimes|nullable|string',
         ]);
         // Update fields
         $product->update([
