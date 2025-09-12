@@ -129,7 +129,7 @@
                      <td>{{ $code->usedCodes }}</td>
                      <td>{{ $order->item->name ??  $order->product->name }}</td>
                      <td>{{ $order->customer_data }}</td>
-                     <td>{{ $code->usedCodes->note }}</td>
+                     <td>{{ $code->usedCodes }}</td>
                      <td>{{ $code->usedCodes }}</td>
                  </tr>
              @endforeach
