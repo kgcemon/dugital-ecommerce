@@ -15,7 +15,6 @@ class WebHooksController extends Controller
 {
     public function OrderUpdate(Request $request)
     {
-        // Decode JSON as associative array
         $data = $request->input();
 
         if (!$data || !isset($data['uid'])) {
@@ -48,6 +47,12 @@ class WebHooksController extends Controller
                 }
             } else {
                 $order->status = 'Delivery Running';
+                $usedCode = Code::where('uid', $uid)->first();
+                if ($usedCode) {
+                    $usedCode->active = false;
+                    $usedCode->note = $message ?? null;
+                    $usedCode->save();
+                }
             }
 
             if ($message !== null) {

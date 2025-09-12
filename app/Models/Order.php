@@ -33,6 +33,11 @@ class Order extends Model
         });
     }
 
+    public function usedCodes()
+    {
+        return $this->belongsTo(Code::class, 'id', 'order_id');
+    }
+
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id')->select(['id', 'name','image','input_name','input_others','is_auto']);

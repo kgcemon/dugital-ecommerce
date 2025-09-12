@@ -15,7 +15,9 @@ class Code extends Model
         'order_id',
         'status',
         'active',
-        'denom'
+        'denom',
+        'uid',
+        'note'
     ];
 
 
