@@ -3,11 +3,10 @@
 @section('content')
     <div class="container-fluid mt-4">
         <div class="card shadow-sm border-0">
+            <h5 class="mb-0 align-content-center">Manage Orders</h5>
             <div class="card-header bg-light d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">Manage Orders</h5>
-
                 {{-- Search Form --}}
-                <form action="{{ route('admin.orders.index') }}" method="GET" class="d-flex" style="max-width: 300px;">
+                <form action="{{ route('admin.orders.index') }}" method="GET" class="d-flex" style="max-width: 100%">
                     <div class="input-group">
                         <input type="text" name="search" class="form-control" placeholder="Search orders..." value="{{ request('search') }}">
                         <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
