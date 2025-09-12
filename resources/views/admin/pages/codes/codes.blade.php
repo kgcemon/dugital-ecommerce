@@ -26,7 +26,7 @@
                         <thead class="table-dark">
                         <tr>
                             <th>Variant</th>
-                            <th>Unused Codes</th>
+                            <th>Unused</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -40,7 +40,7 @@
                                     </strong>
                                 </td>
                                 <td>
-                                    <a href="/code-details/$">View</a>
+                                    <a href="{{ route('admin.codes.edit', $row->variant->denom) }}">View</a>
                                 </td>
                             </tr>
                         @empty
