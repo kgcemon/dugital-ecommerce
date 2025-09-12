@@ -107,40 +107,42 @@
                 </table>
             </div>
 
-        </div>
 
-        <h6 class="mb-3">Codes Details</h6>
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped">
-                <thead class="table-dark text-center">
-                <tr>
-                    <th>#</th>
-                    <th>Code</th>
-                    <th>Item</th>
-                    <th>Customer Data</th>
-                    <th>Note</th>
-                    <th>Status</th>
-                </tr>
-                </thead>
-                <tbody class="text-center">
-             @foreach($order->usedCodes as $code)
-                 <tr>
-                     <td>1</td>
-                     <td>{{ $code->usedCodes }}</td>
-                     <td>{{ $order->item->name ??  $order->product->name }}</td>
-                     <td>{{ $order->customer_data }}</td>
-                     <td>{{ $code->usedCodes }}</td>
-                     <td>{{ $code->usedCodes }}</td>
-                 </tr>
-             @endforeach
-                </tbody>
-                <tfoot class="text-end fw-bold">
-                <tr>
-                    <td colspan="4" class="text-end">Grand Total:</td>
-                    <td>{{ number_format($order->total, 2) }} ৳</td>
-                </tr>
-                </tfoot>
-            </table>
+            @if(!empty($order->usedCodes))
+                <h6 class="mb-3">Codes Details</h6>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark text-center">
+                        <tr>
+                            <th>#</th>
+                            <th>Code</th>
+                            <th>Note</th>
+                            <th>Status</th>
+                            <th>active</th>
+
+                        </tr>
+                        </thead>
+                        <tbody class="text-center">
+                        @foreach($order->usedCodes as $code)
+                            <tr>
+                                <td>1</td>
+                                <td>{{ $code->code }}</td>
+                                <td>{{ $order->note ?? '' }}</td>
+                                <td>{{ $order->status }}</td>
+                                <td>{{ $code->active }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                        <tfoot class="text-end fw-bold">
+                        <tr>
+                            <td colspan="4" class="text-end">Grand Total:</td>
+                            <td>{{ number_format($order->total, 2) }} ৳</td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            @endif
+
         </div>
 
     </div>
