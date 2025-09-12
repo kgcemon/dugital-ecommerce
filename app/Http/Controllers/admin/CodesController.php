@@ -62,7 +62,7 @@ class CodesController extends Controller
         $unusedCodesCountPerVariant = Code::where('status', 'unused')
             ->selectRaw('item_id, COUNT(*) as total_unused')
             ->groupBy('item_id')
-            ->with('variant') // loads related Item model (id, name)
+            ->with('variant')
             ->get();
         $codes = Code::where('product_id', $id)->paginate(5);
         $product = Product::where('id', $id)->first() ?? '';

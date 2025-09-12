@@ -4,7 +4,7 @@
     <div class="container mt-4">
         {{-- Page Header --}}
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="fw-bold">All Codes for {{ $product->name }}</h4>
+            <h4 class="fw-bold">Codes{{ $product->name }} UniPin</h4>
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addVariantModal">
                 Add New Code
             </button>
@@ -18,73 +18,6 @@
         @endif
 
 
-        {{-- Variants Table --}}
-        <div class="card shadow-sm border-0">
-            <div class="card-body table-responsive">
-                <table class="table table-bordered table-striped text-center align-middle">
-                    <thead class="table-dark">
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Code</th>
-                        <th>Denom</th>
-                        <th>Order Number</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @forelse ($codes as $code)
-                        <tr>
-                            <td>{{ $code->id }}</td>
-                            <td>{{ $code->variant->name }}</td>
-                            <td>{{ $code->code }}</td>
-                            <td>{{ $code->denom ?? '-' }}</td>
-                            <td>{{ $code->order_id ?? '-' }}</td>
-                            <td>{{ $code->status }}</td>
-                            <td>
-                                {{-- 1. The Edit Button with data-* attributes to hold the row's data --}}
-                                <button
-                                    type="button"
-                                    class="btn btn-sm btn-primary"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#editVariantModal"
-                                    data-id="{{ $code->id }}"
-                                    data-code="{{ $code->code }}"
-                                    data-denom="{{ $code->denom }}"
-                                    data-status="{{ $code->status }}"
-                                    data-item_id="{{ $code->item_id }}"
-                                >Edit</button>
-
-
-                                {{-- Delete Button --}}
-                                <button
-                                    type="button"
-                                    class="btn btn-sm btn-danger"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#deleteVariantModal"
-                                    data-id="{{ $code->id }}"
-                                    data-name="{{ $code->code }}"
-                                >
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="4">No variants found for this product.</td>
-                        </tr>
-                    @endforelse
-                    </tbody>
-                </table>
-                <div class="mt-3">
-                    {{ $codes->links('admin.layouts.partials.__pagination') }}
-                </div>
-            </div>
-        </div>
-
-
-
         <div class="container py-1">
             <div class="card shadow-sm border-0">
                 <div class="card-body table-responsive">
@@ -93,6 +26,7 @@
                         <tr>
                             <th>Variant</th>
                             <th>Unused Codes</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -104,6 +38,9 @@
                                         {{ $row->total_unused }}
                                     </strong>
                                     unused code{{ $row->total_unused > 1 ? 's' : '' }}
+                                </td>
+                                <td>
+                                    <a href="/">ViewCode</a>
                                 </td>
                             </tr>
                         @empty
