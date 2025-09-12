@@ -70,10 +70,14 @@ class CodesController extends Controller
 
 
     // Show the edit form
-    public function edit($id)
+    public function singleCode($id)
     {
         $codes = Code::where('product_id', $id)->paginate(5);
         return view('admin.pages.edit', compact('codes'));
+    }
+    public function edit($id)
+    {
+
     }
 
     // Update the product
