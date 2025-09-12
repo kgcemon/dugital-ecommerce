@@ -109,27 +109,29 @@
                             </td>
                             <td>{{ $category->name }}</td>
                             <td>
-                                <!-- Edit Button with Data Attributes -->
-                                <button class="btn btn-sm btn-outline-info me-2 edit-btn"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#editModal"
-                                        data-id="{{ $category->id }}"
-                                        data-name="{{ $category->name }}"
-                                        data-description="{{ $category->description }}"
-                                        data-sort="{{ $category->sort }}"
-                                        data-thumbnail="{{ $category->thumbnail ? asset('storage/' . $category->thumbnail) : '' }}"
-                                        data-action="{{ route('admin.categories.update', $category->id) }}">
-                                    <i class="fas fa-edit me-1"></i> Edit
-                                </button>
-
-                                <!-- Delete Form -->
-                                <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this category?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-outline-danger">
-                                        <i class="fas fa-trash-alt me-1"></i> Delete
+                                <div class="d-flex justify-content-center gap-2">
+                                    <!-- Edit Button -->
+                                    <button class="btn btn-sm btn-outline-info edit-btn"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#editModal"
+                                            data-id="{{ $category->id }}"
+                                            data-name="{{ $category->name }}"
+                                            data-description="{{ $category->description }}"
+                                            data-sort="{{ $category->sort }}"
+                                            data-thumbnail="{{ $category->thumbnail ? asset('storage/' . $category->thumbnail) : '' }}"
+                                            data-action="{{ route('admin.categories.update', $category->id) }}">
+                                        <i class="fas fa-edit me-1"></i> Edit
                                     </button>
-                                </form>
+
+                                    <!-- Delete Form -->
+                                    <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this category?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">
+                                            <i class="fas fa-trash-alt me-1"></i> Delete
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @empty
