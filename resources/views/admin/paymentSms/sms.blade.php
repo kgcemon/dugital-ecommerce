@@ -42,6 +42,7 @@
                             </td>
                             <td>{{ $sms->created_at ? $sms->created_at->format('d M Y, h:i A') : 'N/A' }}</td>
                             <td>
+                                <div class="d-flex justify-content-center gap-2">
                                 <!-- Edit Status Button -->
                                 <button class="btn btn-sm btn-primary edit-btn"
                                         data-id="{{ $sms->id }}"
@@ -59,6 +60,7 @@
                                         Delete
                                     </button>
                                 </form>
+                                </div>
                             </td>
                         </tr>
                     @empty
