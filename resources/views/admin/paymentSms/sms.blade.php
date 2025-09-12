@@ -47,7 +47,7 @@
                 const status = statusFilter.value;
                 const search = searchInput.value;
 
-                fetch(`{{ route('sms.index') }}?status=${status}&search=${search}`, {
+                fetch(`{{ route('admin.sms.index') }}?status=${status}&search=${search}`, {
                     headers: { 'X-Requested-With': 'XMLHttpRequest' }
                 })
                     .then(response => response.text())
