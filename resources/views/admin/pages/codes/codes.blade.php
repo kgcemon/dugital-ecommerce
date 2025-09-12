@@ -40,7 +40,7 @@
                                     </strong>
                                 </td>
                                 <td>
-                                    <a href="{{ route('admin.codes.edit', $row->variant->denom) }}">View</a>
+                                    <a href="{{ route('codes.edit', $row->id) }}">View</a>
                                 </td>
                             </tr>
                         @empty
