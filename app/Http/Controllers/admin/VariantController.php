@@ -14,7 +14,7 @@ class  VariantController extends Controller
     // Show all products
     public function index()
     {
-        $products = Product::with('items')->orderby('sort')->paginate(15);
+        $products = Product::where('name', '!=', 'Wallet')->with('items')->orderby('sort')->paginate(15);
         return view('admin.pages.variant.index', compact('products'));
     }
 
