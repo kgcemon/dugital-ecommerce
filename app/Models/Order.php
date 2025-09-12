@@ -35,7 +35,7 @@ class Order extends Model
 
     public function usedCodes()
     {
-        return $this->belongsTo(Code::class, 'id', 'order_id');
+        return $this->hasMany(Code::class, 'order_id', 'id');
     }
 
     public function product()
