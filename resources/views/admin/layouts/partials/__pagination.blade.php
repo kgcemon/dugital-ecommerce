@@ -9,24 +9,17 @@
                 </a>
             </li>
 
-            {{-- Pagination Elements --}}
-            @foreach ($elements as $element)
-                {{-- "Three Dots" Separator --}}
-                @if (is_string($element))
-                    <li class="page-item disabled">
-                        <span class="page-link">{{ $element }}</span>
-                    </li>
-                @endif
+            {{-- Display limited page numbers --}}
+            @php
+                $start = max($paginator->currentPage() - 1, 1);
+                $end = min($start + 2, $paginator->lastPage());
+            @endphp
 
-                {{-- Array Of Links --}}
-                @if (is_array($element))
-                    @foreach ($element as $page => $url)
-                        <li class="page-item {{ $page == $paginator->currentPage() ? 'active' : '' }}">
-                            <a class="page-link rounded-circle px-3 py-2" href="{{ $url }}">{{ $page }}</a>
-                        </li>
-                    @endforeach
-                @endif
-            @endforeach
+            @for ($page = $start; $page <= $end; $page++)
+                <li class="page-item {{ $page == $paginator->currentPage() ? 'active' : '' }}">
+                    <a class="page-link rounded-circle px-3 py-2" href="{{ $paginator->url($page) }}">{{ $page }}</a>
+                </li>
+            @endfor
 
             {{-- Next Page Link --}}
             <li class="page-item {{ $paginator->hasMorePages() ? '' : 'disabled' }}">
