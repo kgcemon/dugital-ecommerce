@@ -79,14 +79,11 @@
                 </table>
 
                 <div class="mt-3">
-                    {{ $data->withQueryString()->links() }}
+                    {{ $orders->links('admin.layouts.partials.__pagination') }}
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Add SMS & Edit Status Modals remain unchanged -->
-    @include('admin.sms.partials.modals') <!-- Optional: move modal HTML to partial for cleanliness -->
 
 @endsection
 
