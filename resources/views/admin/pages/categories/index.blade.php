@@ -92,17 +92,14 @@
                 <table class="table table-dark table-hover align-middle text-center">
                     <thead>
                     <tr>
-                        <th>#</th>
                         <th>Image</th>
                         <th>Name</th>
-                        <th>Created At</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                     @forelse($categories as $category)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
                             <td>
                                 @if($category->thumbnail)
                                     <img src="{{ url("storage/$category->thumbnail") }}" alt="Thumbnail" class="rounded" width="60" height="60" style="object-fit: cover;">
@@ -111,7 +108,6 @@
                                 @endif
                             </td>
                             <td>{{ $category->name }}</td>
-                            <td>{{ $category->created_at?->diffForHumans() ?? 'N/A' }}</td>
                             <td>
                                 <!-- Edit Button with Data Attributes -->
                                 <button class="btn btn-sm btn-outline-info me-2 edit-btn"
