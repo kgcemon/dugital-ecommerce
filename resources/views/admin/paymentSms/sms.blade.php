@@ -3,7 +3,7 @@
 @section('content')
     <div class="container mt-4">
 
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3 gap-2" style="padding: 18px!important;">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3 gap-2" style="padding: 10px!important;">
             <h4>Payment SMS</h4>
 
             <div class="d-flex gap-2 flex-wrap">
@@ -13,16 +13,11 @@
                         <option value="">All Status</option>
                         <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>Pending</option>
                         <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Completed</option>
-                        <option value="2" {{ request('status') == '2' ? 'selected' : '' }}>Failed</option>
                     </select>
 
                     <input type="text" id="searchInput" class="form-control" placeholder="Search by sender, number, trxID, or amount" value="{{ request('search') }}">
                 </div>
 
-                <!-- Add SMS Button -->
-                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addSmsModal">
-                    Add SMS
-                </button>
             </div>
         </div>
 
