@@ -18,7 +18,7 @@
                     @forelse ($codes as $code)
                         <tr>
                             <td>{{ $code->id }}</td>
-                            <td style="font-size: small">{{ $code->code }}</td>
+                            <td style="font-size: 5px">{{ $code->code }}</td>
                             <td>{{ $code->denom ?? '-' }}</td>
                             <td>{{ $code->order_id ?? '-' }}</td>
                             <td>{{ $code->status }}</td>
