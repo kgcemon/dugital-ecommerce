@@ -107,7 +107,7 @@
                                     unused code{{ $row->total_unused > 1 ? 's' : '' }}
                                 </td>
                                 <td>
-                                    <a href="/">ViewCode</a>
+                                    <a href="/">View</a>
                                 </td>
                             </tr>
                         @empty
