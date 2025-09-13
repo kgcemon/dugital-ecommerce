@@ -60,8 +60,8 @@ class CodesController extends Controller
     public function show($id)
     {
         $unusedCodesCountPerVariant = Code::where('status', 'unused')
-            ->selectRaw('item_id, COUNT(*) as total_unused')
-            ->groupBy('item_id')
+            ->selectRaw('denom, COUNT(*) as total_unused')
+            ->groupBy('denom')
             ->with('variant')
             ->get();
         $product = Product::where('id', $id)->first() ?? '';
