@@ -59,13 +59,14 @@ class CodesController extends Controller
 
     public function show($id)
     {
-        $unusedCodesCountPerVariant = Code::where('status', 'unused')
-            ->selectRaw('denom, COUNT(*) as total_unused')
-            ->groupBy('denom')
+        $codesCountPerVariant = Code::selectRaw("denom,
+        SUM(CASE WHEN status = 'unused' THEN 1 ELSE 0 END) as total_unused,
+        SUM(CASE WHEN status = 'used' THEN 1 ELSE 0 END) as total_used")->groupBy('denom')
             ->with('variant')
             ->get();
+
         $product = Product::where('id', $id)->first() ?? '';
-        return view('admin.pages.codes.codes', compact('product','unusedCodesCountPerVariant'));
+        return view('admin.pages.codes.codes', compact('product','codesCountPerVariant'));
     }
 
 
