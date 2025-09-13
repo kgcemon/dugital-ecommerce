@@ -59,7 +59,11 @@ class CodesController extends Controller
 
     public function show($id)
     {
-        $unusedCodesCountPerVariant = Code::where('status', 'unused')->get();
+        $unusedCodesCountPerVariant = Code::where('status', 'unused')
+            ->selectRaw('item_id, COUNT(*) as total_unused')
+            ->groupBy('item_id')
+            ->with('variant')
+            ->get();
         $product = Product::where('id', $id)->first() ?? '';
         return view('admin.pages.codes.codes', compact('product','unusedCodesCountPerVariant'));
     }
