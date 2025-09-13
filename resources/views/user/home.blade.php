@@ -57,17 +57,14 @@
     <br>
     <br>
 
-    <div class="">
+    <div class="card">
         <a href="/about" class="nav-item">
-            <span class="material-icons">info</span>
             <span class="nav-label">About</span>
         </a>
         <a href="/privacy" class="nav-item">
-            <span class="material-icons">privacy_tip</span>
             <span class="nav-label">Privacy</span>
         </a>
         <a href="/terms" class="nav-item active">
-            <span class="material-icons">gavel</span>
             <span class="nav-label">Terms</span>
         </a>
     </div>
