@@ -14,12 +14,8 @@ class CodesController extends Controller
     // Show all products
     public function index()
     {
-        $codesCountPerVariant = Code::selectRaw("denom,
-        SUM(CASE WHEN status = 'unused' THEN 1 ELSE 0 END) as total_unused,
-        SUM(CASE WHEN status = 'used' THEN 1 ELSE 0 END) as total_used")->groupBy('denom')
-            ->with('variant')
-            ->get();
-        return view('admin.pages.codes.codes', compact('codesCountPerVariant'));
+        $products = Product::with('items')->orderby('sort')->paginate(10);
+        return view('admin.pages.codes.index', compact('products'));
     }
 
     // Show the create form
@@ -61,8 +57,16 @@ class CodesController extends Controller
         return back()->with('success', 'Codes added successfully.');
     }
 
-    public function show()
+    public function show($id)
     {
+        $codesCountPerVariant = Code::selectRaw("denom,
+        SUM(CASE WHEN status = 'unused' THEN 1 ELSE 0 END) as total_unused,
+        SUM(CASE WHEN status = 'used' THEN 1 ELSE 0 END) as total_used")->groupBy('denom')
+            ->with('variant')
+            ->get();
+
+        $product = Product::where('id', $id)->first() ?? '';
+        return view('admin.pages.codes.codes', compact('product','codesCountPerVariant'));
     }
 
 

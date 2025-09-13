@@ -4,7 +4,7 @@
     <div class="container mt-4">
         {{-- Page Header --}}
         <div class="d-flex justify-content-between align-items-center mb-3" style="padding: 15px!important;">
-            <h4 class="fw-bold">UniPin</h4>
+            <h4 class="fw-bold">{{ $product->name}} UniPin</h4>
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addVariantModal">
                 Add New Code
             </button>
