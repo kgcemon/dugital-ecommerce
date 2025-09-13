@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Cache;
 
 class SiteHomeScreenController extends Controller
 {
-
     public function index() {
 
         $products = Cache::remember('home_products', 60 * 24, function () {
@@ -24,6 +23,11 @@ class SiteHomeScreenController extends Controller
         });
 
         return view('user.home', compact('products','images'));
+    }
+
+    public function aboutUs()
+    {
+        return view('user.about');
     }
 
 }

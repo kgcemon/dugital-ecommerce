@@ -114,6 +114,8 @@ Route::middleware('auth:admin')->prefix('admin')->as('admin.')->group(function (
 //});
 
 
+Route::get('about', [SiteHomeScreenController::class, 'aboutUs'])->name('aboutUs');
+
 Route::get('/{any}', function(){
     return view('user.master');
 })->where('any','^(?!css|js|images|manifest\.json|service-worker\.js).*$');
