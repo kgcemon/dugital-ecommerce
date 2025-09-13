@@ -54,8 +54,6 @@
             </p></div>
     </div>
     <br>
-    <br>
-    <br>
 
     <div class="card">
         <a href="/about" class="nav-item">
