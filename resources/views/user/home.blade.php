@@ -55,8 +55,9 @@
     </div>
     <br>
     <br>
+    <br>
 
-    <div class="bottom-nav">
+    <div class="">
         <a href="/about" class="nav-item">
             <span class="material-icons">info</span>
             <span class="nav-label">About</span>
@@ -70,6 +71,9 @@
             <span class="nav-label">Terms</span>
         </a>
     </div>
+    <br><br>
+    <br>
+
 
 
 @endsection
