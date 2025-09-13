@@ -84,6 +84,7 @@ Route::middleware('auth:admin')->prefix('admin')->as('admin.')->group(function (
 
     //codes
     Route::resource('codes', CodesController::class);
+    Route::get('codes/{id}', [CodesController::class, 'code'])->name('code');
     Route::get('code/{id}', [CodesController::class, 'singleCode']);
 
 
