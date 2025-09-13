@@ -21,8 +21,12 @@ class CodesController extends Controller
     // Show the create form
     public function create()
     {
-        $categories = Categorie::all();
-        return view('admin.pages.products.create', compact('categories'));
+        $codesCountPerVariant = Code::selectRaw("denom,
+        SUM(CASE WHEN status = 'unused' THEN 1 ELSE 0 END) as total_unused,
+        SUM(CASE WHEN status = 'used' THEN 1 ELSE 0 END) as total_used")->groupBy('denom')
+            ->with('variant')
+            ->get();
+        return view('admin.pages.codes.codes', compact('codesCountPerVariant'));
     }
 
     // Store the new
@@ -57,16 +61,8 @@ class CodesController extends Controller
         return back()->with('success', 'Codes added successfully.');
     }
 
-    public function show($id)
+    public function show()
     {
-        $codesCountPerVariant = Code::selectRaw("denom,
-        SUM(CASE WHEN status = 'unused' THEN 1 ELSE 0 END) as total_unused,
-        SUM(CASE WHEN status = 'used' THEN 1 ELSE 0 END) as total_used")->groupBy('denom')
-            ->with('variant')
-            ->get();
-
-        $product = Product::where('id', $id)->first() ?? '';
-        return view('admin.pages.codes.codes', compact('product','codesCountPerVariant'));
     }
 
 
