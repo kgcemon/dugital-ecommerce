@@ -29,5 +29,8 @@ class SiteHomeScreenController extends Controller
     {
         return view('user.about');
     }
+    public function privacyPolicy(){
+        return view('user.privacy');
+    }
 
 }

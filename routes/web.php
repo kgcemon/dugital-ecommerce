@@ -115,6 +115,10 @@ Route::middleware('auth:admin')->prefix('admin')->as('admin.')->group(function (
 
 
 Route::get('about', [SiteHomeScreenController::class, 'aboutUs'])->name('aboutUs');
+Route::get('policy', [SiteHomeScreenController::class, 'privacyPolicy'])->name('policy');
+Route::get('terms', function (){
+    return view('user.terms');
+});
 
 Route::get('/{any}', function(){
     return view('user.master');
