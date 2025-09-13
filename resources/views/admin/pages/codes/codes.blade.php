@@ -33,7 +33,7 @@
                         <tbody>
                         @forelse($unusedCodesCountPerVariant as $row)
                             <tr>
-                                <td>{{ $row->variant->name ?? 'Unknown Variant' }}</td>
+                                <td>{{ $row->codeByDenom->name ?? 'Unknown Variant' }}</td>
                                 <td>
                                     <strong class="{{ $row->total_unused < 3 ? 'text-danger' : '' }}">
                                         {{ $row->total_unused }}
