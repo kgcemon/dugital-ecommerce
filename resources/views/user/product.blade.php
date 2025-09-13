@@ -204,13 +204,33 @@
                         description: el.dataset.description
                     };
 
-                 if(selectedPayment.method !== "Wallet"){
-                     document.getElementById("paymentDetails").innerHTML = `
-                <p><strong>${selectedPayment.method}</strong></p>
-                <p><strong>Number:</strong> ${selectedPayment.number}</p>
-                <br><p>${selectedPayment.description}</p><br>
-            `;
-                 }
+                    if(selectedPayment.method !== "Wallet"){
+                        document.getElementById("paymentDetails").innerHTML = `
+        <p><strong>${selectedPayment.method}</strong></p>
+        <p>
+            <strong>Number:</strong>
+            <span id="paymentNumberText">${selectedPayment.number}</span>
+            <button id="copyBtn" style="margin-left:8px; padding:3px 8px; font-size:12px; cursor:pointer;">
+                Copy
+            </button>
+        </p>
+        <br><p>${selectedPayment.description}</p><br>
+    `;
+
+                        // ✅ Copy Button Click Event
+                        setTimeout(() => {
+                            const copyBtn = document.getElementById("copyBtn");
+                            copyBtn.addEventListener("click", () => {
+                                const numberText = document.getElementById("paymentNumberText").textContent;
+                                navigator.clipboard.writeText(numberText).then(() => {
+                                    showToast("success", "📋 নাম্বার কপি হয়েছে!");
+                                }).catch(() => {
+                                    showToast("error", "কপি করা যায়নি!");
+                                });
+                            });
+                        }, 100);
+                    }
+
 
                     if (selectedPayment.method === "Wallet") {
                         document.getElementById("paymentDetails").innerHTML = ``;

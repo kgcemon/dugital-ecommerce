@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="bn-BD">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <!-- Viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="alternate" href="https://codmshop.com/" hreflang="bn-BD" />
+    <link rel="alternate" href="https://codmshop.com/" hreflang="x-default" />
 
     <!-- PWA -->
     <link rel="manifest" href="/manifest.json">
@@ -14,6 +17,11 @@
     <link rel="apple-touch-icon" href="https://codmshop.com/logo.png">
     <meta name="msapplication-navbutton-color" content="#131031">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="geo.region" content="BD">
+    <meta name="geo.placename" content="Bangladesh">
+    <meta name="geo.position" content="23.6850;90.3563">
+
 
     <!-- Dynamic SEO -->
     <title>@yield('title', config('app.name', 'Codmshop'))</title>
