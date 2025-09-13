@@ -14,19 +14,19 @@ class CodesController extends Controller
     // Show all products
     public function index()
     {
-        $products = Product::with('items')->orderby('sort')->paginate(10);
-        return view('admin.pages.codes.index', compact('products'));
-    }
-
-    // Show the create form
-    public function create()
-    {
         $codesCountPerVariant = Code::selectRaw("denom,
         SUM(CASE WHEN status = 'unused' THEN 1 ELSE 0 END) as total_unused,
         SUM(CASE WHEN status = 'used' THEN 1 ELSE 0 END) as total_used")->groupBy('denom')
             ->with('variant')
             ->get();
         return view('admin.pages.codes.codes', compact('codesCountPerVariant'));
+    }
+
+    // Show the create form
+    public function create()
+    {
+        $categories = Categorie::all();
+        return view('admin.pages.products.create', compact('categories'));
     }
 
     // Store the new
