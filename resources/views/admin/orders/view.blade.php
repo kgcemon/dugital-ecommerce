@@ -107,7 +107,7 @@
                 </table>
             </div>
 
-        </div>
+
         <div class="card-body">
             @if(count($order->usedCodes) > 0)
             <h6 class="mb-3">   Codes Details</h6>
@@ -118,6 +118,7 @@
                         <th>#</th>
                         <th>Code</th>
                         <th>Note</th>
+                        <th>Items</th>
                         <th>Status</th>
                         <th>active</th>
 
@@ -143,6 +144,7 @@
                                 </button>
                             </td>
                             <td>{{ $code->note ?? '' }}</td>
+                            <td>{{ $code->codeByDenom->name ?? '' }}</td>
                             <td>{{ $code->status }}</td>
                             <td>{{ $code->active == 1 ? 'Complete' : 'Problem Found' }}</td>
                         </tr>
@@ -152,6 +154,7 @@
             </div>
         @endif
         </div>
+    </div>
     </div>
 
     <!-- Receipt Modal -->
