@@ -77,7 +77,7 @@ class WebHooksController extends Controller
                        $denoms = explode(',', $denom);
 
                        foreach ($denoms as $d) {
-                           Code::where('uid', $uid)
+                           Code::where('order_id', $order->id)
                                ->where('denom', $d)->update(['status' => 'unused']);
                        }
                          try {
