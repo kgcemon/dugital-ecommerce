@@ -9,7 +9,10 @@ use App\Models\Order;
 use App\Models\User;
 use App\Models\WalletTransaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class WebHooksController extends Controller
 {
@@ -71,26 +74,23 @@ class WebHooksController extends Controller
                        ]);
 
                        $denom = $order->item->denom ?? '';
+                       $denoms = explode(',', $denom);
 
-                       Code::whereIn('denom', array_map('trim', explode(',', $denom)))
-                           ->where('uid', $uid)
-                           ->update([
-                               'status' => 'unused',
-                               'uid' => null,
-                               'note' => 'Refund to Wallet Order id: ' . $order->id,
-                               'active' => true,
-                           ]);
+                       foreach ($denoms as $d) {
+                           Code::where('uid', $uid)
+                               ->where('denom', $d)->update(['status' => 'unused']);
+                       }
+                         try {
+                             Mail::to($user->email)->send(new OrderRefundMail(
+                                 $user->name,
+                                 $order->id,
+                                 now()->format('d M Y, h:i A'),
+                                 $order->total,
+                                 url('/order/'.$order->uid)
+                             ));
 
-                       try {
-                           Mail::to($user->email)->send(new OrderRefundMail(
-                               $user->name,
-                               $order->id,
-                               now()->format('d M Y, h:i A'),
-                               $order->total,
-                               url('/order/'.$order->uid)
-                           ));
+                         }catch (\Exception $e) {}
 
-                       }catch (\Exception $e) {}
                    }
                }
             }
