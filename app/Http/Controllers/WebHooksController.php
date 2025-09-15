@@ -16,7 +16,7 @@ use Illuminate\Support\Str;
 
 class WebHooksController extends Controller
 {
-    public function OrderUpdate(Request $request)
+    public function OrderUpdate(Request $request): \Illuminate\Http\JsonResponse
     {
         $data = $request->input();
 
