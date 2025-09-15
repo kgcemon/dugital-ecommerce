@@ -249,7 +249,7 @@
                 const payNumber = paymentNumberInput.value.trim();
                 let valid = true;
 
-                if (!(pid.length >= 6 && pid.length <= 13)) {
+                if (!(pid.length >= 6)) {
                     showToast("error","Player ID must be 6-13 digits!");
                     playerIdInput.focus();
                     valid = false;
