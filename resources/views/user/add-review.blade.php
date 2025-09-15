@@ -347,16 +347,24 @@
         const ratingInput = document.getElementById('rating');
         stars.forEach(star => {
             star.addEventListener('mouseover', () => {
-                stars.forEach(s => s.classList.remove('hover'));
-                star.classList.add('hover');
+                const value = parseInt(star.dataset.value);
+                stars.forEach(s => {
+                    s.classList.toggle('hover', parseInt(s.dataset.value) <= value);
+                });
             });
+
+            star.addEventListener('mouseout', () => {
+                stars.forEach(s => s.classList.remove('hover'));
+            });
+
             star.addEventListener('click', () => {
-                stars.forEach(s => s.classList.remove('selected'));
-                star.classList.add('selected');
-                ratingInput.value = star.dataset.value;
+                const value = parseInt(star.dataset.value);
+                stars.forEach(s => {
+                    s.classList.toggle('selected', parseInt(s.dataset.value) <= value);
+                });
+                ratingInput.value = value;
             });
         });
-
         // Submit Review
         document.getElementById('submitReview').addEventListener('click', async () => {
             const review = document.getElementById('review').value.trim();
