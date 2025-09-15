@@ -35,8 +35,8 @@
         <!-- Step 1: Player ID -->
         <div class="selection-panel" data-step="1" id="step1">
             <div class="player-id-box">
-                <h2 class="selection-title">Player ID লিখুন</h2>
-                <input type="text" id="playerId" placeholder="Enter your Player ID">
+                <h2 class="selection-title">{{$product->input_name}} লিখুন</h2>
+                <input type="text" id="playerId" placeholder="Enter your {{$product->input_name}}">
             </div>
         </div>
 
