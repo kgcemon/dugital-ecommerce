@@ -5,8 +5,8 @@
 @section('content')
     <main style="padding: 30px 15px;">
         @guest()
-            <div id="loginModal" class="google-login ">
-                <div class="card" style="background: black; padding: 10px">
+
+                <div class="card" style="background: black; padding: 10px; align-content: center">
                     লগ-ইন করুন
                     <a href="{{ url('/auth/google/redirect') }}" class="btn-google-login">
                         <svg class="google-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 533.5 544.3" width="20" height="20">
@@ -19,7 +19,6 @@
                     </a>
                     <span id="closeModal" class="close-btn">&times;</span>
                 </div>
-            </div>
         @endguest
 
         @auth()
