@@ -8,7 +8,7 @@
             <h2 style="margin-bottom:20px;">Player Information</h2>
 
             <!-- Response Message -->
-            <div id="responseMessage" style="display:none; margin-bottom:15px; padding:15px; border-radius:12px; font-weight:600; text-align:left;"></div>
+            <div id="responseMessage" style="display:none; margin-bottom:15px;"></div>
 
             <!-- Loader -->
             <div id="loader" style="display:none; position:absolute; top:0; left:0; right:0; bottom:0;
@@ -35,9 +35,8 @@
                     <select id="region" name="region" required
                             style="width:100%;padding:10px;border-radius:8px;border:none;outline:none;margin-top:5px;">
                         <option value="">-- Choose Region --</option>
+                        <option value="sg">BD</option>
                         <option value="me">ME</option>
-                        <option value="sg">SG</option>
-                        <option value="bd">BD</option>
                         <option value="th">TH</option>
                         <option value="vn">VN</option>
                         <option value="us">US</option>
@@ -56,7 +55,7 @@
         </div>
     </main>
 
-    <!-- Loader Animation -->
+    <!-- Loader & Animations -->
     <style>
         @keyframes spin {
             0% { transform: rotate(0deg);}
@@ -69,24 +68,45 @@
         }
         #loadingCount { animation: pulse 1s infinite; }
 
-        /* Response box styles */
-        #responseMessage {
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            transition: all 0.4s ease;
-            line-height:1.5;
-        }
-        #responseMessage.success {
-            background: linear-gradient(145deg, #28a745, #20c997);
+        /* Response card styles */
+        #responseMessage .card {
+            width: 100%;
+            border-radius: 20px;
+            padding: 20px;
+            background: linear-gradient(145deg,#28a745,#20c997);
             color: #fff;
-            border: 1px solid rgba(255,255,255,0.2);
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            font-family: 'Arial', sans-serif;
+            position: relative;
         }
-        #responseMessage.failed {
-            background: linear-gradient(145deg, #dc3545, #ff6b6b);
+        #responseMessage .card.failed {
+            background: linear-gradient(145deg,#dc3545,#ff6b6b);
+        }
+        #responseMessage .card .site-brand {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 15px;
             color: #fff;
-            border: 1px solid rgba(0,0,0,0.2);
+            display: block;
+            text-align: center;
+        }
+        #responseMessage .card .player-info {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        #responseMessage .card .likes {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+        #responseMessage .card .footer {
+            margin-top: 10px;
+            font-size: 12px;
+            opacity: 0.8;
+            text-align: center;
         }
     </style>
 
@@ -102,14 +122,13 @@
             let responseMessage = document.getElementById("responseMessage");
             let loadingCount = document.getElementById("loadingCount");
 
-            // Validation: only numbers + length check
             let playerId = form.player_id.value.trim();
             if (!/^[0-9]+$/.test(playerId)) {
-                showMessage("⚠️ Player ID অবশ্যই শুধু সংখ্যা হবে!", "failed");
+                showMessage("Player ID অবশ্যই শুধু সংখ্যা হবে!", true);
                 return;
             }
             if (playerId.length < 5 || playerId.length > 13) {
-                showMessage("⚠️ Player ID কমপক্ষে 5 digit এবং সর্বোচ্চ 13 digit হতে হবে!", "failed");
+                showMessage("Player ID কমপক্ষে 5 digit এবং সর্বোচ্চ 13 digit হতে হবে!", true);
                 return;
             }
 
@@ -118,7 +137,6 @@
             loader.style.display = "flex";
             responseMessage.style.display = "none";
 
-            // start counter
             countInterval = setInterval(() => {
                 counter++;
                 loadingCount.textContent = counter;
@@ -143,43 +161,45 @@
 
                     if (data.success && data.data) {
                         let d = data.data;
-                        // failed_likes check
-                        if (d.failed_likes === 0) {
-                            showMessage("❌ আপনি আজকে আর লাইক নিতে পারবেন না, আগামিকাল চেষ্টা করুন ধন্যবাদ।", "failed");
-                        } else if (typeof d.likes_added !== "undefined") {
-                            // Calculate added
-                            let added = d.likes_after - d.likes_before;
-                            let nextTry = "আগামীকাল চেষ্টা করুন"; // static, could be dynamic based on server
 
-                            showMessage(`
-                    ✅ <strong>Success!</strong><br>
-                    Name: ${d.name}<br>
-                    Region: ${d.region}<br>
-                    Level: ${d.level}<br>
-                    Likes Before: ${d.likes_before}<br>
-                    Likes Added: ${added}<br>
-                    Likes After: ${d.likes_after}<br>
-                    ${added === 0 ? "⚠️ আজ কোনো লাইক যোগ হয়নি।" : ""}<br>
-                    <em>${nextTry}</em>
-                `, "success");
+                        // failed case
+                        if (d.failed_likes === 0) {
+                            showMessage("আপনি আজকে আর লাইক নিতে পারবেন না, আগামিকাল চেষ্টা করুন ধন্যবাদ।", true);
+                        }
+                        // success card
+                        else if (typeof d.likes_added !== "undefined") {
+                            let added = d.likes_after - d.likes_before;
+                            let nextTry = "আগামীকাল চেষ্টা করুন";
+
+                            let html = `
+                <div class="card">
+                    <span class="site-brand">Codmshop.Com</span>
+                    <div class="player-info"><strong>Name:</strong> ${d.name}</div>
+                    <div class="player-info"><strong>Region:</strong> ${d.region}</div>
+                    <div class="player-info"><strong>Level:</strong> ${d.level}</div>
+                    <div class="likes"><strong>Likes Before:</strong> ${d.likes_before}</div>
+                    <div class="likes"><strong>Likes Added:</strong> ${added}</div>
+                    <div class="likes"><strong>Likes After:</strong> ${d.likes_after}</div>
+                    <div class="footer">${added === 0 ? "⚠️ আজ কোনো লাইক যোগ হয়নি।" : ""} ${nextTry}</div>
+                </div>
+                `;
+                            showMessage(html, false);
                         } else {
-                            showMessage("⚠️ Server error, please try again.", "failed");
+                            showMessage("Server error, please try again.", true);
                         }
                     } else {
-                        showMessage("❌ Something went wrong!", "failed");
+                        showMessage("Something went wrong!", true);
                     }
                 })
                 .catch(err => {
                     loader.style.display = "none";
                     clearInterval(countInterval);
-                    showMessage("⚠️ Server error, please try again.", "failed");
+                    showMessage("Server error, please try again.", true);
                 });
 
-            function showMessage(msg, type){
+            function showMessage(msg, failed){
                 responseMessage.style.display = "block";
-                responseMessage.className = "";
-                responseMessage.classList.add(type);
-                responseMessage.innerHTML = msg;
+                responseMessage.innerHTML = failed ? `<div class="card failed">${msg}</div>` : msg;
             }
         });
     </script>
