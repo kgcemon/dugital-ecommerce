@@ -4,17 +4,17 @@
 
 @section('content')
     <main style="padding: 30px 15px;">
-        <div class="panelData" style="max-width: 400px; margin: auto; position: relative;">
+        <div class="panelData" style="max-width: 450px; margin: auto; position: relative;">
             <h2 style="margin-bottom:20px;">Player Information</h2>
 
             <!-- Response Message -->
-            <div id="responseMessage" style="display:none; margin-bottom:15px; padding:10px; border-radius:6px; font-weight:600;"></div>
+            <div id="responseMessage" style="display:none; margin-bottom:15px; padding:15px; border-radius:12px; font-weight:600; text-align:left;"></div>
 
             <!-- Loader -->
             <div id="loader" style="display:none; position:absolute; top:0; left:0; right:0; bottom:0;
-             background:rgba(0,0,0,0.6); border-radius:8px; align-items:center; justify-content:center; flex-direction:column; z-index:10; color:#fff; font-weight:600; font-size:14px;">
+             background:rgba(0,0,0,0.6); border-radius:12px; align-items:center; justify-content:center; flex-direction:column; z-index:10; color:#fff; font-weight:600; font-size:14px;">
                 <div class="spinner" style="border:4px solid rgba(255,255,255,0.2); border-top:4px solid #00d4ff;
-                     border-radius:50%; width:40px; height:40px; animation:spin 1s linear infinite; margin-bottom:10px;">
+                 border-radius:50%; width:40px; height:40px; animation:spin 1s linear infinite; margin-bottom:10px;">
                 </div>
                 <div>Loading... <span id="loadingCount">0</span></div>
             </div>
@@ -49,7 +49,7 @@
                 <!-- Submit -->
                 <button type="submit"
                         style="width:100%;padding:12px;background:linear-gradient(135deg,#00c6ff,#0072ff);
-                    border:none;border-radius:8px;color:white;font-weight:600;cursor:pointer;transition:.3s;">
+                border:none;border-radius:8px;color:white;font-weight:600;cursor:pointer;transition:.3s;">
                     Submit
                 </button>
             </form>
@@ -68,6 +68,26 @@
             100% { transform: scale(1); opacity: 0.8; }
         }
         #loadingCount { animation: pulse 1s infinite; }
+
+        /* Response box styles */
+        #responseMessage {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: all 0.4s ease;
+            line-height:1.5;
+        }
+        #responseMessage.success {
+            background: linear-gradient(145deg, #28a745, #20c997);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.2);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+        #responseMessage.failed {
+            background: linear-gradient(145deg, #dc3545, #ff6b6b);
+            color: #fff;
+            border: 1px solid rgba(0,0,0,0.2);
+        }
     </style>
 
     <!-- JS Script -->
@@ -85,17 +105,11 @@
             // Validation: only numbers + length check
             let playerId = form.player_id.value.trim();
             if (!/^[0-9]+$/.test(playerId)) {
-                responseMessage.style.display = "block";
-                responseMessage.style.background = "rgba(220,53,69,0.85)";
-                responseMessage.style.color = "#fff";
-                responseMessage.innerHTML = "⚠️ Player ID অবশ্যই শুধু সংখ্যা হবে!";
+                showMessage("⚠️ Player ID অবশ্যই শুধু সংখ্যা হবে!", "failed");
                 return;
             }
             if (playerId.length < 5 || playerId.length > 13) {
-                responseMessage.style.display = "block";
-                responseMessage.style.background = "rgba(220,53,69,0.85)";
-                responseMessage.style.color = "#fff";
-                responseMessage.innerHTML = "⚠️ Player ID কমপক্ষে 5 digit এবং সর্বোচ্চ 13 digit হতে হবে!";
+                showMessage("⚠️ Player ID কমপক্ষে 5 digit এবং সর্বোচ্চ 13 digit হতে হবে!", "failed");
                 return;
             }
 
@@ -127,49 +141,46 @@
                     loader.style.display = "none";
                     clearInterval(countInterval);
 
-                    // ✅ Response handling
-                    if (data.success) {
-                        // Case 1: failed_likes === 0
-                        if (typeof data.data.failed_likes !== "undefined" && data.data.failed_likes === 0) {
-                            responseMessage.style.display = "block";
-                            responseMessage.style.background = "rgba(220,53,69,0.85)";
-                            responseMessage.style.color = "#fff";
-                            responseMessage.innerHTML = "❌ আপনি আজকে আর লাইক নিতে পারবেন না, আগামিকাল চেষ্টা করুন ধন্যবাদ।";
-                        }
-                        // Case 2: likes_added পাওয়া গেছে
-                        else if (typeof data.data.likes_added !== "undefined") {
-                            responseMessage.style.display = "block";
-                            responseMessage.style.background = "rgba(40,167,69,0.7)";
-                            responseMessage.style.color = "#fff";
-                            responseMessage.innerHTML = `
-                                ✅ Success!<br>
-                                Name: ${data.data.name ?? "-"}<br>
-                                Likes Added: ${data.data.likes_added}
-                            `;
-                        }
-                        // Case 3: Unexpected
-                        else {
-                            responseMessage.style.display = "block";
-                            responseMessage.style.background = "rgba(220,53,69,0.85)";
-                            responseMessage.style.color = "#fff";
-                            responseMessage.innerHTML = "⚠️ Server error, please try again.";
+                    if (data.success && data.data) {
+                        let d = data.data;
+                        // failed_likes check
+                        if (d.failed_likes === 0) {
+                            showMessage("❌ আপনি আজকে আর লাইক নিতে পারবেন না, আগামিকাল চেষ্টা করুন ধন্যবাদ।", "failed");
+                        } else if (typeof d.likes_added !== "undefined") {
+                            // Calculate added
+                            let added = d.likes_after - d.likes_before;
+                            let nextTry = "আগামীকাল চেষ্টা করুন"; // static, could be dynamic based on server
+
+                            showMessage(`
+                    ✅ <strong>Success!</strong><br>
+                    Name: ${d.name}<br>
+                    Region: ${d.region}<br>
+                    Level: ${d.level}<br>
+                    Likes Before: ${d.likes_before}<br>
+                    Likes Added: ${added}<br>
+                    Likes After: ${d.likes_after}<br>
+                    ${added === 0 ? "⚠️ আজ কোনো লাইক যোগ হয়নি।" : ""}<br>
+                    <em>${nextTry}</em>
+                `, "success");
+                        } else {
+                            showMessage("⚠️ Server error, please try again.", "failed");
                         }
                     } else {
-                        responseMessage.style.display = "block";
-                        responseMessage.style.background = "rgba(220,53,69,0.85)";
-                        responseMessage.style.color = "#fff";
-                        responseMessage.innerHTML = "❌ Something went wrong!";
+                        showMessage("❌ Something went wrong!", "failed");
                     }
                 })
                 .catch(err => {
                     loader.style.display = "none";
                     clearInterval(countInterval);
-
-                    responseMessage.style.display = "block";
-                    responseMessage.style.background = "rgba(220,53,69,0.85)";
-                    responseMessage.style.color = "#fff";
-                    responseMessage.innerHTML = "⚠️ Server error, please try again.";
+                    showMessage("⚠️ Server error, please try again.", "failed");
                 });
+
+            function showMessage(msg, type){
+                responseMessage.style.display = "block";
+                responseMessage.className = "";
+                responseMessage.classList.add(type);
+                responseMessage.innerHTML = msg;
+            }
         });
     </script>
 @endsection
