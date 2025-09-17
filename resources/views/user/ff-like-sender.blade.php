@@ -1,6 +1,9 @@
 @extends('user.master')
 
-@section('title', "Deposit")
+@section('title', "Free Fire Free Like daily 100 | Codmshop")
+
+@section('meta_description', 'Free Fire Like daily 100 full free use codmshop no need any payment use full free with 100 ff Like')
+@section('meta_keywords', 'codmshop,ff like')
 
 @section('content')
     <main style="padding: 30px 15px;">
@@ -20,7 +23,7 @@
 
         @auth()
                 <div class="panelData" style="max-width: 450px; margin: auto; position: relative;">
-                    <h2 style="margin-bottom:20px; text-align:center;">Player Information</h2>
+                    <h2 style="margin-bottom:20px; text-align:center;">ফ্রি ফায়ার ১০০ লাইক প্রতিদিন</h2>
 
                     <!-- Response Message -->
                     <div id="responseMessage" style="display:none; margin-bottom:15px;"></div>
