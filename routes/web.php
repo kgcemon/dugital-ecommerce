@@ -118,7 +118,7 @@ Route::middleware('auth:admin')->prefix('admin')->as('admin.')->group(function (
 Route::get('about', [SiteHomeScreenController::class, 'aboutUs'])->name('aboutUs');
 Route::get('privacy', [SiteHomeScreenController::class, 'privacyPolicy'])->name('policy');
 Route::get('free-fire-free-like-daily',[FreeFireLikeController::class,'index'])->name('freeFireLikeDaily');
-Route::post('send-like',[FreeFireLikeController::class,'index'])->name('player.submit');
+Route::post('send-like',[FreeFireLikeController::class,'sendLike'])->name('player.submit');
 Route::get('terms', function (){
     return view('user.terms');
 });
