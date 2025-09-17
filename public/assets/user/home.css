@@ -128,7 +128,7 @@
      display: flex;
      background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
      border-radius: 12px;
-     padding: 15px;
+     padding: 15px!important;
      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
      margin-bottom: 15px;
      transition: transform 0.2s;
@@ -160,6 +160,6 @@
 
 .like-card-subtitle {
     font-size: 13px;
-    color: #555;
+    color: white;
     margin: 0;
 }
