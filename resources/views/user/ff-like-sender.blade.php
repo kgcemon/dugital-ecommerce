@@ -35,15 +35,14 @@
                     <select id="region" name="region" required
                             style="width:100%;padding:10px;border-radius:8px;border:none;outline:none;margin-top:5px;">
                         <option value="">-- Choose Region --</option>
-                        <option value="ME">ME</option>
-                        <option value="SG">SG</option>
-                        <option value="BD">BD</option>
-                        <option value="TH">TH</option>
-                        <option value="VN">VN</option>
-                        <option value="US">US</option>
-                        <option value="BR">BR</option>
-                        <option value="SAC">SAC</option>
-                        <option value="NA">NA</option>
+                        <option value="me">ME</option>
+                        <option value="sg">SG</option>
+                        <option value="sg">BD</option>
+                        <option value="th">TH</option>
+                        <option value="vn">VN</option>
+                        <option value="us">US</option>
+                        <option value="br">BR</option>
+                        <option value="sac">SAC</option>
                     </select>
                 </div>
 
@@ -56,22 +55,6 @@
             </form>
         </div>
     </main>
-
-    <!-- Bottom Navigation -->
-    <div class="bottom-nav">
-        <a href="#" class="nav-item">
-            <span class="material-icons">home</span>
-            <span class="nav-label">Home</span>
-        </a>
-        <a href="#" class="nav-item">
-            <span class="material-icons">person</span>
-            <span class="nav-label">Account</span>
-        </a>
-        <a href="#" class="nav-item">
-            <span class="material-icons">shopping_cart</span>
-            <span class="nav-label">Orders</span>
-        </a>
-    </div>
 
     <!-- Loader Animation -->
     <style>
