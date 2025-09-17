@@ -36,7 +36,7 @@
         <h3 class="header-title">Free Tools</h3>
     </div>
     <div class="container">
-            <a href="{{ url('/free-fire-free-like-daily'}}">
+            <a href="/free-fire-free-like-daily">
                 <div class="card">
                     <img src="https://codmshop.com/storage/products/Zywt6cTciQTBE4BWUqDzaf0UVIwfqYxdtwhuUEWy.webp" alt="ff like image">
                     <div class="card-title">Free Like Free Fire</div>
