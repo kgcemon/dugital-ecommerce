@@ -11,13 +11,13 @@
             <div id="responseMessage" style="display:none; margin-bottom:15px; padding:10px; border-radius:6px; font-weight:600;"></div>
 
             <!-- Loader -->
-            <!-- Loader -->
             <div id="loader" style="display:none; position:absolute; top:0; left:0; right:0; bottom:0;
- background:rgba(0,0,0,0.6); border-radius:8px; align-items:center; justify-content:center; z-index:10;">
+             background:rgba(0,0,0,0.6); border-radius:8px; align-items:center; justify-content:center; flex-direction:column; z-index:10; color:#fff; font-weight:600; font-size:14px;">
                 <div class="spinner" style="border:4px solid rgba(255,255,255,0.2); border-top:4px solid #00d4ff;
-     border-radius:50%; width:40px; height:40px; animation:spin 1s linear infinite;"></div>
+                     border-radius:50%; width:40px; height:40px; animation:spin 1s linear infinite; margin-bottom:10px;">
+                </div>
+                <div>Loading... <span id="loadingCount">0</span></div>
             </div>
-
 
             <form id="likeForm" method="POST">
                 @csrf
@@ -37,7 +37,7 @@
                         <option value="">-- Choose Region --</option>
                         <option value="me">ME</option>
                         <option value="sg">SG</option>
-                        <option value="sg">BD</option>
+                        <option value="bd">BD</option>
                         <option value="th">TH</option>
                         <option value="vn">VN</option>
                         <option value="us">US</option>
@@ -66,15 +66,26 @@
 
     <!-- JS Script -->
     <script>
+        let countInterval;
+
         document.getElementById("likeForm").addEventListener("submit", function(e) {
             e.preventDefault();
 
             let form = this;
             let loader = document.getElementById("loader");
             let responseMessage = document.getElementById("responseMessage");
+            let loadingCount = document.getElementById("loadingCount");
 
+            let counter = 0;
+            loadingCount.textContent = counter;
             loader.style.display = "flex";
             responseMessage.style.display = "none";
+
+            // start counter
+            countInterval = setInterval(() => {
+                counter++;
+                loadingCount.textContent = counter;
+            }, 1000);
 
             fetch("{{ route('player.submit') }}", {
                 method: "POST",
@@ -91,28 +102,31 @@
                 .then(res => res.json())
                 .then(data => {
                     loader.style.display = "none";
+                    clearInterval(countInterval);
 
                     if (data.success) {
                         responseMessage.style.display = "block";
-                        responseMessage.style.background = "rgba(40,167,69,0.9)"; // green
+                        responseMessage.style.background = "rgba(40,167,69,0.7)"; // softer green
                         responseMessage.style.color = "#fff";
                         responseMessage.innerHTML = `
-                ✅ Success!<br>
-                Name: ${data.data.name}<br>
-                Likes Before: ${data.data.likes_before}<br>
-                Likes After: ${data.data.likes_after}
-            `;
+                            ✅ Success!<br>
+                            Name: ${data.data.name}<br>
+                            Likes Before: ${data.data.likes_before}<br>
+                            Likes After: ${data.data.likes_after}
+                        `;
                     } else {
                         responseMessage.style.display = "block";
-                        responseMessage.style.background = "rgba(220,53,69,0.9)"; // red
+                        responseMessage.style.background = "rgba(220,53,69,0.85)"; // red
                         responseMessage.style.color = "#fff";
                         responseMessage.innerHTML = "❌ Something went wrong!";
                     }
                 })
                 .catch(err => {
                     loader.style.display = "none";
+                    clearInterval(countInterval);
+
                     responseMessage.style.display = "block";
-                    responseMessage.style.background = "rgba(220,53,69,0.9)";
+                    responseMessage.style.background = "rgba(220,53,69,0.85)";
                     responseMessage.style.color = "#fff";
                     responseMessage.innerHTML = "⚠️ Server error, please try again.";
                 });
