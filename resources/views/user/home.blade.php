@@ -33,16 +33,15 @@
 
 
     <div class="header">
-        <h1 class="header-title">Free Tools</h1>
+        <h3 class="header-title">Free Tools</h3>
     </div>
-
-
-    <div class="like-card-row">
-        <img src="https://codmshop.com/storage/products/Zywt6cTciQTBE4BWUqDzaf0UVIwfqYxdtwhuUEWy.webp" alt="Free Fire Like" class="like-card-img">
-        <div class="like-card-text">
-            <h3 class="like-card-title">Free Fire Like</h3>
-            <p class="like-card-subtitle">প্রতিদিন ১০০ করে লাইক নিন সম্পুর্ণ ফ্রি</p>
-        </div>
+    <div class="container">
+            <a href="{{ url('/product/'}}">
+                <div class="card">
+                    <img src="https://codmshop.com/storage/products/Zywt6cTciQTBE4BWUqDzaf0UVIwfqYxdtwhuUEWy.webp" alt="ff like image">
+                    <div class="card-title">Free Like Free Fire</div>
+                </div>
+            </a>
     </div>
 
 
