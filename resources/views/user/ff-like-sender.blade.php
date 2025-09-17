@@ -12,9 +12,9 @@
 
             <!-- Loader -->
             <div id="loader" style="display:none; position:absolute; top:0; left:0; right:0; bottom:0;
-             background:rgba(0,0,0,0.6); border-radius:12px; align-items:center; justify-content:center; flex-direction:column; z-index:10; color:#fff; font-weight:600; font-size:14px;">
+         background:rgba(0,0,0,0.6); border-radius:12px; align-items:center; justify-content:center; flex-direction:column; z-index:10; color:#fff; font-weight:600; font-size:14px;">
                 <div class="spinner" style="border:4px solid rgba(255,255,255,0.2); border-top:4px solid #00d4ff;
-                 border-radius:50%; width:40px; height:40px; animation:spin 1s linear infinite; margin-bottom:10px;">
+             border-radius:50%; width:40px; height:40px; animation:spin 1s linear infinite; margin-bottom:10px;">
                 </div>
                 <div>Loading... <span id="loadingCount">0</span></div>
             </div>
@@ -45,7 +45,7 @@
 
                 <button type="submit"
                         style="width:100%;padding:12px;background:linear-gradient(135deg,#00c6ff,#0072ff);
-                border:none;border-radius:8px;color:white;font-weight:600;cursor:pointer;transition:.3s;">
+            border:none;border-radius:8px;color:white;font-weight:600;cursor:pointer;transition:.3s;">
                     Submit
                 </button>
             </form>
@@ -70,29 +70,32 @@
             width: 100%;
             border-radius: 20px;
             padding: 25px;
-            background: rgba(40, 167, 69, 0.9);
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
             color: #fff;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.4);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             font-family: 'Arial', sans-serif;
             position: relative;
             overflow: hidden;
+            animation: glow 2s ease-in-out infinite alternate;
         }
         #responseMessage .card.failed {
-            background: rgba(220, 53, 69, 0.9);
+            background: linear-gradient(135deg, #ff4e50, #f9d423);
         }
         #responseMessage .card .site-brand {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 20px;
             text-align: center;
+            color: #ffe600; /* Highlight Codmshop.Com */
+            text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
             letter-spacing: 1px;
         }
         #responseMessage .card .player-info {
             margin-bottom: 10px;
-            font-size: 14px;
+            font-size: 15px;
         }
         #responseMessage .card .likes {
             font-size: 16px;
@@ -101,32 +104,70 @@
         }
         #responseMessage .card .footer {
             margin-top: 15px;
-            font-size: 12px;
-            opacity: 0.8;
+            font-size: 13px;
+            opacity: 0.85;
             text-align: center;
         }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.2), 0 0 40px rgba(255, 255, 255, 0.1); }
+            100% { box-shadow: 0 0 35px rgba(255, 255, 255, 0.5), 0 0 60px rgba(255, 255, 255, 0.3); }
+        }
+
+        /* Sparkles */
+        #responseMessage .sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #fff;
+            border-radius: 50%;
+            animation: sparkleAnim 2s linear infinite;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+        @keyframes sparkleAnim {
+            0% { transform: translate(0,0) scale(1); opacity:0.8;}
+            50% { transform: translate(10px, -10px) scale(1.5); opacity:1;}
+            100% { transform: translate(0,0) scale(1); opacity:0.8;}
+        }
+
         /* Share/Download buttons */
         .share-download {
             display: flex;
             justify-content: center;
             gap: 15px;
-            margin-top: 15px;
+            margin-top: 20px;
         }
+
         .share-download button {
-            padding: 8px 15px;
+            padding: 10px 18px;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
-            font-weight: 600;
-            transition: 0.3s;
+            font-weight: 700;
+            transition: all 0.3s ease;
         }
+
         .share-download .download {
-            background: #00d4ff;
+            background: linear-gradient(135deg,#00f2fe,#4facfe);
             color: #fff;
+            box-shadow: 0 5px 15px rgba(0,244,254,0.4);
         }
+
+        .share-download .download:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,244,254,0.6);
+        }
+
         .share-download .share {
-            background: #20c997;
+            background: linear-gradient(135deg,#f093fb,#f5576c);
             color: #fff;
+            box-shadow: 0 5px 15px rgba(240,147,251,0.4);
+        }
+
+        .share-download .share:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(240,147,251,0.6);
         }
     </style>
 
@@ -189,27 +230,35 @@
                         }
                         else if (typeof d.likes_added !== "undefined") {
                             let added = d.likes_after - d.likes_before;
-                            let nextTry = "আগামীকাল চেষ্টা করুন";
 
                             let html = `
-                    <div class="card" id="successCard">
-                        <span class="site-brand">Codmshop.Com</span>
-                        <div class="player-info"><strong>Name:</strong> ${d.name}</div>
-                        <div class="player-info"><strong>Region:</strong> ${d.region}</div>
-                        <div class="player-info"><strong>Level:</strong> ${d.level}</div>
-                        <div class="likes"><strong>Likes Before:</strong> ${d.likes_before}</div>
-                        <div class="likes"><strong>Likes Added:</strong> ${added}</div>
-                        <div class="likes"><strong>Likes After:</strong> ${d.likes_after}</div>
-                        <div class="footer">${added === 0 ? "⚠️ আজ কোনো লাইক যোগ হয়নি।" : ""} ${nextTry}</div>
-                        <div class="share-download">
-                            <button class="download">Download PNG</button>
-                            <button class="share">Share</button>
-                        </div>
+                <div class="card" id="successCard">
+                    <span class="site-brand">Codmshop.Com</span>
+                    <div class="player-info"><strong>Name:</strong> ${d.name}</div>
+                    <div class="player-info"><strong>Region:</strong> ${d.region}</div>
+                    <div class="player-info"><strong>Level:</strong> ${d.level}</div>
+                    <div class="likes"><strong>Likes Before:</strong> ${d.likes_before}</div>
+                    <div class="likes"><strong>Likes Added:</strong> ${added}</div>
+                    <div class="likes"><strong>Likes After:</strong> ${d.likes_after}</div>
+                    <div class="footer">${added === 0 ? "⚠️ আজ কোনো লাইক যোগ হয়নি।" : ""}</div>
+                    <div class="share-download">
+                        <button class="download">Download</button>
+                        <button class="share">Share</button>
                     </div>
+                </div>
                 `;
                             showMessage(html, false);
 
-                            // Add download functionality
+                            // Add sparkles
+                            for (let i = 0; i < 12; i++) {
+                                let sparkle = document.createElement('div');
+                                sparkle.classList.add('sparkle');
+                                sparkle.style.top = Math.random() * 90 + '%';
+                                sparkle.style.left = Math.random() * 90 + '%';
+                                document.getElementById('successCard').appendChild(sparkle);
+                            }
+
+                            // Download
                             document.querySelector('#successCard .download').addEventListener('click', () => {
                                 html2canvas(document.getElementById('successCard')).then(canvas => {
                                     let link = document.createElement('a');
@@ -219,7 +268,7 @@
                                 });
                             });
 
-                            // Simple share functionality
+                            // Share
                             document.querySelector('#successCard .share').addEventListener('click', () => {
                                 if (navigator.share) {
                                     html2canvas(document.getElementById('successCard')).then(canvas => {
@@ -236,6 +285,7 @@
                                     alert("Your browser does not support sharing.");
                                 }
                             });
+
                         } else {
                             showMessage("Server error, please try again.", true);
                         }
