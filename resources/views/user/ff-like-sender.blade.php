@@ -62,6 +62,12 @@
             0% { transform: rotate(0deg);}
             100% { transform: rotate(360deg);}
         }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+        #loadingCount { animation: pulse 1s infinite; }
     </style>
 
     <!-- JS Script -->
@@ -75,6 +81,23 @@
             let loader = document.getElementById("loader");
             let responseMessage = document.getElementById("responseMessage");
             let loadingCount = document.getElementById("loadingCount");
+
+            // Validation: only numbers + length check
+            let playerId = form.player_id.value.trim();
+            if (!/^[0-9]+$/.test(playerId)) {
+                responseMessage.style.display = "block";
+                responseMessage.style.background = "rgba(220,53,69,0.85)";
+                responseMessage.style.color = "#fff";
+                responseMessage.innerHTML = "⚠️ Player ID অবশ্যই শুধু সংখ্যা হবে!";
+                return;
+            }
+            if (playerId.length < 5 || playerId.length > 13) {
+                responseMessage.style.display = "block";
+                responseMessage.style.background = "rgba(220,53,69,0.85)";
+                responseMessage.style.color = "#fff";
+                responseMessage.innerHTML = "⚠️ Player ID কমপক্ষে 5 digit এবং সর্বোচ্চ 13 digit হতে হবে!";
+                return;
+            }
 
             let counter = 0;
             loadingCount.textContent = counter;
@@ -95,7 +118,7 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    player_id: form.player_id.value,
+                    player_id: playerId,
                     region: form.region.value
                 })
             })
@@ -104,19 +127,36 @@
                     loader.style.display = "none";
                     clearInterval(countInterval);
 
+                    // ✅ Response handling
                     if (data.success) {
-                        responseMessage.style.display = "block";
-                        responseMessage.style.background = "rgba(40,167,69,0.7)"; // softer green
-                        responseMessage.style.color = "#fff";
-                        responseMessage.innerHTML = `
-                            ✅ Success!<br>
-                            Name: ${data.data.name}<br>
-                            Likes Before: ${data.data.likes_before}<br>
-                            Likes After: ${data.data.likes_after}
-                        `;
+                        // Case 1: failed_likes === 0
+                        if (typeof data.data.failed_likes !== "undefined" && data.data.failed_likes === 0) {
+                            responseMessage.style.display = "block";
+                            responseMessage.style.background = "rgba(220,53,69,0.85)";
+                            responseMessage.style.color = "#fff";
+                            responseMessage.innerHTML = "❌ আপনি আজকে আর লাইক নিতে পারবেন না, আগামিকাল চেষ্টা করুন ধন্যবাদ।";
+                        }
+                        // Case 2: likes_added পাওয়া গেছে
+                        else if (typeof data.data.likes_added !== "undefined") {
+                            responseMessage.style.display = "block";
+                            responseMessage.style.background = "rgba(40,167,69,0.7)";
+                            responseMessage.style.color = "#fff";
+                            responseMessage.innerHTML = `
+                                ✅ Success!<br>
+                                Name: ${data.data.name ?? "-"}<br>
+                                Likes Added: ${data.data.likes_added}
+                            `;
+                        }
+                        // Case 3: Unexpected
+                        else {
+                            responseMessage.style.display = "block";
+                            responseMessage.style.background = "rgba(220,53,69,0.85)";
+                            responseMessage.style.color = "#fff";
+                            responseMessage.innerHTML = "⚠️ Server error, please try again.";
+                        }
                     } else {
                         responseMessage.style.display = "block";
-                        responseMessage.style.background = "rgba(220,53,69,0.85)"; // red
+                        responseMessage.style.background = "rgba(220,53,69,0.85)";
                         responseMessage.style.color = "#fff";
                         responseMessage.innerHTML = "❌ Something went wrong!";
                     }
