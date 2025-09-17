@@ -13,6 +13,14 @@
        </a>
     </div>
 
+    <div class="card">
+        <img src="https://codmshop.com/storage/products/Zywt6cTciQTBE4BWUqDzaf0UVIwfqYxdtwhuUEWy.webp" alt="Free Fire Like" class="like-card-img">
+        <div class="like-card-text">
+            <h3 class="like-card-title">Free Fire Like</h3>
+            <p class="like-card-subtitle">প্রতিদিন ১০০ করে লাইক নিন সম্পুর্ণ ফ্রি</p>
+        </div>
+    </div>
+
     @foreach ($products as $category)
         @if(count($category['products']) > 0)
             <div class="header">
