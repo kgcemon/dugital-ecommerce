@@ -6,7 +6,6 @@
     <main style="padding: 30px 15px;">
         @guest()
 
-                <div class="" style="background: black; padding: 10px; align-content: center!important;">
                     <a href="{{ url('/auth/google/redirect') }}" class="btn-google-login">
                         <svg class="google-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 533.5 544.3" width="20" height="20">
                             <path fill="#4285F4" d="M533.5 278.4c0-18.4-1.5-36.1-4.3-53.4H272v101h146.9c-6.4 34.5-25.3 63.8-54 83.5v69.4h87.1c50.8-46.8 80.5-115.9 80.5-200.5z"/>
@@ -16,8 +15,7 @@
                         </svg>
                         Login with Google
                     </a>
-                    <span id="closeModal" class="close-btn">&times;</span>
-                </div>
+
         @endguest
 
         @auth()
