@@ -14,6 +14,7 @@ use App\Http\Controllers\CronJobController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\user\DepositController;
+use App\Http\Controllers\user\FreeFireLikeController;
 use App\Http\Controllers\user\OrderController;
 use App\Http\Controllers\user\ReviewController;
 use App\Http\Controllers\user\SiteHomeScreenController;
@@ -116,6 +117,7 @@ Route::middleware('auth:admin')->prefix('admin')->as('admin.')->group(function (
 
 Route::get('about', [SiteHomeScreenController::class, 'aboutUs'])->name('aboutUs');
 Route::get('privacy', [SiteHomeScreenController::class, 'privacyPolicy'])->name('policy');
+Route::get('free-fire-free-like-daily',[FreeFireLikeController::class,'index'])->name('freeFireLikeDaily');
 Route::get('terms', function (){
     return view('user.terms');
 });
