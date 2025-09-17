@@ -124,3 +124,43 @@
     .header-title { font-size: 1.4rem; }
     .header-desc { font-size: 0.85rem; }
 }
+ .like-card-row {
+     display: flex;
+     align-items: center;
+     background: #fff;
+     border-radius: 12px;
+     padding: 15px;
+     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+     margin-bottom: 15px;
+     transition: transform 0.2s;
+     cursor: pointer;
+ }
+.like-card-row:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.like-card-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 15px;
+}
+
+.like-card-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.like-card-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 5px 0;
+}
+
+.like-card-subtitle {
+    font-size: 13px;
+    color: #555;
+    margin: 0;
+}

@@ -280,7 +280,7 @@
 
 
 @if (Request::is('/'))
-        <link rel="stylesheet" href="{{ asset('assets/user/home.css?v=133') }}">
+        <link rel="stylesheet" href="{{ asset('assets/user/home.css?v=135') }}">
     @endif
 
     @if (Request::is('product*') || Request::is('thank-you*') || Request::is('deposit*'))

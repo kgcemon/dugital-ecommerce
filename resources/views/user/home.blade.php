@@ -31,6 +31,21 @@
         @endif
     @endforeach
 
+
+    <div class="header">
+        <h1 class="header-title">Free Tools</h1>
+    </div>
+
+
+    <div class="like-card-row">
+        <img src="https://example.com/freefire.png" alt="Free Fire Like" class="like-card-img">
+        <div class="like-card-text">
+            <h3 class="like-card-title">Free Fire Like</h3>
+            <p class="like-card-subtitle">প্রতিদিন ১০০ করে লাইক নিন সম্পুর্ণ ফ্রি</p>
+        </div>
+    </div>
+
+
     <div class="card" style="margin: 15px">
         <h1>Why choice top up use Codmshop?</h1>
         <div class="card-title"><p>
