@@ -13,7 +13,14 @@
        </a>
     </div>
 
-    <div class="card">
+    <div class="card" style=" display: flex;
+    align-items: center;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin-bottom: 15px;
+    transition: transform 0.2s;
+    cursor: pointer;">
         <img src="https://codmshop.com/storage/products/Zywt6cTciQTBE4BWUqDzaf0UVIwfqYxdtwhuUEWy.webp" alt="Free Fire Like" class="like-card-img">
         <div class="like-card-text">
             <h3 class="like-card-title">Free Fire Like</h3>
