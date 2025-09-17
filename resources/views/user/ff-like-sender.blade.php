@@ -5,7 +5,7 @@
 @section('content')
     <main style="padding: 30px 15px;">
         <div class="panelData" style="max-width: 450px; margin: auto; position: relative;">
-            <h2 style="margin-bottom:20px;">Player Information</h2>
+            <h2 style="margin-bottom:20px; text-align:center;">Player Information</h2>
 
             <!-- Response Message -->
             <div id="responseMessage" style="display:none; margin-bottom:15px;"></div>
@@ -21,7 +21,6 @@
 
             <form id="likeForm" method="POST">
                 @csrf
-                <!-- Player ID -->
                 <div style="margin-bottom: 15px; text-align: left;">
                     <label for="player_id" style="font-weight:600;">Player ID</label>
                     <input type="text" id="player_id" name="player_id" class="form-control"
@@ -29,7 +28,6 @@
                            style="width:100%;padding:10px;border-radius:8px;border:none;outline:none;margin-top:5px;">
                 </div>
 
-                <!-- Region -->
                 <div style="margin-bottom: 15px; text-align: left;">
                     <label for="region" style="font-weight:600;">Select Region</label>
                     <select id="region" name="region" required
@@ -45,7 +43,6 @@
                     </select>
                 </div>
 
-                <!-- Submit -->
                 <button type="submit"
                         style="width:100%;padding:12px;background:linear-gradient(135deg,#00c6ff,#0072ff);
                 border:none;border-radius:8px;color:white;font-weight:600;cursor:pointer;transition:.3s;">
@@ -72,26 +69,26 @@
         #responseMessage .card {
             width: 100%;
             border-radius: 20px;
-            padding: 20px;
-            background: linear-gradient(145deg,#28a745,#20c997);
+            padding: 25px;
+            background: rgba(40, 167, 69, 0.9);
             color: #fff;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             font-family: 'Arial', sans-serif;
             position: relative;
+            overflow: hidden;
         }
         #responseMessage .card.failed {
-            background: linear-gradient(145deg,#dc3545,#ff6b6b);
+            background: rgba(220, 53, 69, 0.9);
         }
         #responseMessage .card .site-brand {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
             margin-bottom: 15px;
-            color: #fff;
-            display: block;
             text-align: center;
+            letter-spacing: 1px;
         }
         #responseMessage .card .player-info {
             margin-bottom: 10px;
@@ -103,14 +100,39 @@
             margin: 10px 0;
         }
         #responseMessage .card .footer {
-            margin-top: 10px;
+            margin-top: 15px;
             font-size: 12px;
             opacity: 0.8;
             text-align: center;
         }
+        /* Share/Download buttons */
+        .share-download {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .share-download button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .share-download .download {
+            background: #00d4ff;
+            color: #fff;
+        }
+        .share-download .share {
+            background: #20c997;
+            color: #fff;
+        }
     </style>
 
-    <!-- JS Script -->
+    <!-- Include html2canvas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
     <script>
         let countInterval;
 
@@ -162,28 +184,58 @@
                     if (data.success && data.data) {
                         let d = data.data;
 
-                        // failed case
                         if (d.failed_likes === 0) {
                             showMessage("আপনি আজকে আর লাইক নিতে পারবেন না, আগামিকাল চেষ্টা করুন ধন্যবাদ।", true);
                         }
-                        // success card
                         else if (typeof d.likes_added !== "undefined") {
                             let added = d.likes_after - d.likes_before;
                             let nextTry = "আগামীকাল চেষ্টা করুন";
 
                             let html = `
-                <div class="card">
-                    <span class="site-brand">Codmshop.Com</span>
-                    <div class="player-info"><strong>Name:</strong> ${d.name}</div>
-                    <div class="player-info"><strong>Region:</strong> ${d.region}</div>
-                    <div class="player-info"><strong>Level:</strong> ${d.level}</div>
-                    <div class="likes"><strong>Likes Before:</strong> ${d.likes_before}</div>
-                    <div class="likes"><strong>Likes Added:</strong> ${added}</div>
-                    <div class="likes"><strong>Likes After:</strong> ${d.likes_after}</div>
-                    <div class="footer">${added === 0 ? "⚠️ আজ কোনো লাইক যোগ হয়নি।" : ""} ${nextTry}</div>
-                </div>
+                    <div class="card" id="successCard">
+                        <span class="site-brand">Codmshop.Com</span>
+                        <div class="player-info"><strong>Name:</strong> ${d.name}</div>
+                        <div class="player-info"><strong>Region:</strong> ${d.region}</div>
+                        <div class="player-info"><strong>Level:</strong> ${d.level}</div>
+                        <div class="likes"><strong>Likes Before:</strong> ${d.likes_before}</div>
+                        <div class="likes"><strong>Likes Added:</strong> ${added}</div>
+                        <div class="likes"><strong>Likes After:</strong> ${d.likes_after}</div>
+                        <div class="footer">${added === 0 ? "⚠️ আজ কোনো লাইক যোগ হয়নি।" : ""} ${nextTry}</div>
+                        <div class="share-download">
+                            <button class="download">Download PNG</button>
+                            <button class="share">Share</button>
+                        </div>
+                    </div>
                 `;
                             showMessage(html, false);
+
+                            // Add download functionality
+                            document.querySelector('#successCard .download').addEventListener('click', () => {
+                                html2canvas(document.getElementById('successCard')).then(canvas => {
+                                    let link = document.createElement('a');
+                                    link.download = `player_${d.player_id}.png`;
+                                    link.href = canvas.toDataURL("image/png");
+                                    link.click();
+                                });
+                            });
+
+                            // Simple share functionality
+                            document.querySelector('#successCard .share').addEventListener('click', () => {
+                                if (navigator.share) {
+                                    html2canvas(document.getElementById('successCard')).then(canvas => {
+                                        canvas.toBlob(blob => {
+                                            const file = new File([blob], `player_${d.player_id}.png`, {type: 'image/png'});
+                                            navigator.share({
+                                                files: [file],
+                                                title: 'My Player Info',
+                                                text: 'Check out my player stats!',
+                                            });
+                                        });
+                                    });
+                                } else {
+                                    alert("Your browser does not support sharing.");
+                                }
+                            });
                         } else {
                             showMessage("Server error, please try again.", true);
                         }
