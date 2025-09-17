@@ -23,7 +23,7 @@ class FreeFireLikeController extends Controller
         $player_id = $validatedData['player_id'];
 
         try {
-            $response = Http::get("https://likes-api-lkteam-v3.onrender.com/like?uid='$player_id'&region='$region&count=100");
+            $response = Http::get("https://likes-api-lkteam-v3.onrender.com/like?uid=$player_id&region=$region&count=100");
             //reponse example
 //            {
 //                "failed_likes": 0,
