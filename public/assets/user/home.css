@@ -126,8 +126,7 @@
 }
  .like-card-row {
      display: flex;
-     align-items: center;
-     background: #fff;
+     background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
      border-radius: 12px;
      padding: 15px;
      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
