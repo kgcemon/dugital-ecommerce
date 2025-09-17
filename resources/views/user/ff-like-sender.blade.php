@@ -4,52 +4,72 @@
 
 @section('content')
     <main style="padding: 30px 15px;">
-        <div class="panelData" style="max-width: 450px; margin: auto; position: relative;">
-            <h2 style="margin-bottom:20px; text-align:center;">Player Information</h2>
-
-            <!-- Response Message -->
-            <div id="responseMessage" style="display:none; margin-bottom:15px;"></div>
-
-            <!-- Loader -->
-            <div id="loader" style="display:none; position:absolute; top:0; left:0; right:0; bottom:0;
-             background:rgba(0,0,0,0.6); border-radius:12px; align-items:center; justify-content:center; flex-direction:column; z-index:10; color:#fff; font-weight:600; font-size:14px;">
-                <div class="spinner" style="border:4px solid rgba(255,255,255,0.2); border-top:4px solid #00d4ff;
-                 border-radius:50%; width:40px; height:40px; animation:spin 1s linear infinite; margin-bottom:10px;">
+        @guest()
+            <div id="loginModal" class="google-login ">
+                <div class="card" style="background: black; padding: 10px">
+                    লগ-ইন করুন
+                    <a href="{{ url('/auth/google/redirect') }}" class="btn-google-login">
+                        <svg class="google-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 533.5 544.3" width="20" height="20">
+                            <path fill="#4285F4" d="M533.5 278.4c0-18.4-1.5-36.1-4.3-53.4H272v101h146.9c-6.4 34.5-25.3 63.8-54 83.5v69.4h87.1c50.8-46.8 80.5-115.9 80.5-200.5z"/>
+                            <path fill="#34A853" d="M272 544.3c73.3 0 134.9-24.2 179.8-65.7l-87.1-69.4c-24.2 16.2-55.1 25.7-92.7 25.7-71 0-131-47.9-152.3-112.3H30.9v70.9C75.7 485.3 167.2 544.3 272 544.3z"/>
+                            <path fill="#FBBC05" d="M119.7 320.6c-10.6-31.3-10.6-64.6 0-95.9V153.8H30.9c-43.7 87.2-43.7 190.1 0 277.3l88.8-70.5z"/>
+                            <path fill="#EA4335" d="M272 107.7c39.9-.6 77.8 14 106.7 40.4l80.1-80.1C406.8 24.7 345.3 0 272 0 167.2 0 75.7 58.9 30.9 153.8l88.8 70.9c21.3-64.4 81.3-112.3 152.3-116.9z"/>
+                        </svg>
+                        Login with Google
+                    </a>
+                    <span id="closeModal" class="close-btn">&times;</span>
                 </div>
-                <div>Loading... <span id="loadingCount">0</span></div>
             </div>
+        @endguest
 
-            <form id="likeForm" method="POST">
-                @csrf
-                <div style="margin-bottom: 15px; text-align: left;">
-                    <label for="player_id" style="font-weight:600;">Player ID</label>
-                    <input type="text" id="player_id" name="player_id" class="form-control"
-                           placeholder="Enter your Player ID" required
-                           style="width:100%;padding:10px;border-radius:8px;border:none;outline:none;margin-top:5px;">
-                </div>
+        @auth()
+                <div class="panelData" style="max-width: 450px; margin: auto; position: relative;">
+                    <h2 style="margin-bottom:20px; text-align:center;">Player Information</h2>
 
-                <div style="margin-bottom: 15px; text-align: left;">
-                    <label for="region" style="font-weight:600;">Select Region</label>
-                    <select id="region" name="region" required
-                            style="width:100%;padding:10px;border-radius:8px;border:none;outline:none;margin-top:5px;">
-                        <option value="">-- Choose Region --</option>
-                        <option value="sg">BD</option>
-                        <option value="me">ME</option>
-                        <option value="th">TH</option>
-                        <option value="vn">VN</option>
-                        <option value="us">US</option>
-                        <option value="br">BR</option>
-                        <option value="sac">SAC</option>
-                    </select>
-                </div>
+                    <!-- Response Message -->
+                    <div id="responseMessage" style="display:none; margin-bottom:15px;"></div>
 
-                <button type="submit"
-                        style="width:100%;padding:12px;background:linear-gradient(135deg,#00c6ff,#0072ff);
+                    <!-- Loader -->
+                    <div id="loader" style="display:none; position:absolute; top:0; left:0; right:0; bottom:0;
+             background:rgba(0,0,0,0.6); border-radius:12px; align-items:center; justify-content:center; flex-direction:column; z-index:10; color:#fff; font-weight:600; font-size:14px;">
+                        <div class="spinner" style="border:4px solid rgba(255,255,255,0.2); border-top:4px solid #00d4ff;
+                 border-radius:50%; width:40px; height:40px; animation:spin 1s linear infinite; margin-bottom:10px;">
+                        </div>
+                        <div>Loading... <span id="loadingCount">0</span></div>
+                    </div>
+
+                    <form id="likeForm" method="POST">
+                        @csrf
+                        <div style="margin-bottom: 15px; text-align: left;">
+                            <label for="player_id" style="font-weight:600;">Player ID</label>
+                            <input type="text" id="player_id" name="player_id" class="form-control"
+                                   placeholder="Enter your Player ID" required
+                                   style="width:100%;padding:10px;border-radius:8px;border:none;outline:none;margin-top:5px;">
+                        </div>
+
+                        <div style="margin-bottom: 15px; text-align: left;">
+                            <label for="region" style="font-weight:600;">Select Region</label>
+                            <select id="region" name="region" required
+                                    style="width:100%;padding:10px;border-radius:8px;border:none;outline:none;margin-top:5px;">
+                                <option value="">-- Choose Region --</option>
+                                <option value="sg">BD</option>
+                                <option value="me">ME</option>
+                                <option value="th">TH</option>
+                                <option value="vn">VN</option>
+                                <option value="us">US</option>
+                                <option value="br">BR</option>
+                                <option value="sac">SAC</option>
+                            </select>
+                        </div>
+
+                        <button type="submit"
+                                style="width:100%;padding:12px;background:linear-gradient(135deg,#00c6ff,#0072ff);
                 border:none;border-radius:8px;color:white;font-weight:600;cursor:pointer;transition:.3s;">
-                    Submit
-                </button>
-            </form>
-        </div>
+                            Submit
+                        </button>
+                    </form>
+                </div>
+            @endauth
     </main>
 
     <!-- Loader & Animations -->
@@ -189,11 +209,11 @@
                         }
                         else if (typeof d.likes_added !== "undefined") {
                             let added = d.likes_after - d.likes_before;
-                            let nextTry = "";
+                            let nextTry = "ফ্রি ফায়ার ডায়মন্ড টপ আপ করতে এখনি ভিজিট করুন Codmshop.com";
 
                             let html = `
                     <div class="card" id="successCard">
-                        <span class="site-brand" style="color: deeppink;">Codmshop.Com</span>
+                        <span class="site-brand" style="">Codmshop.Com</span>
                         <div class="player-info"><strong>Name:</strong> ${d.name}</div>
                         <div class="player-info"><strong>Region:</strong> ${d.region}</div>
                         <div class="player-info"><strong>Level:</strong> ${d.level}</div>
