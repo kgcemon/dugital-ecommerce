@@ -7,9 +7,6 @@
     <!-- Viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="alternate" href="https://codmshop.com/" hreflang="bn-BD" />
-    <link rel="alternate" href="https://codmshop.com/" hreflang="x-default" />
-
     <!-- PWA -->
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#131031">
@@ -34,7 +31,7 @@
     <!-- Open Graph (Facebook / Social Sharing) -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="@yield('og_title', config('app.name', 'Codmshop'))">
-    <meta property="og:description" content="@yield('og_description', 'Fast & Secure Free Fire Diamond Top Up in Bangladesh')">
+    <meta property="og:description" content="@yield('og_description', 'Fast & Secure FF Diamonds Top Up in Bangladesh')">
     <meta property="og:image" content="@yield('og_image', asset('assets/images/og-default.png'))">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:site_name" content="{{ config('app.name', 'Codmshop') }}">
@@ -43,7 +40,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="@yield('twitter_title', config('app.name', 'Codmshop'))">
     <meta name="twitter:description" content="@yield('twitter_description', 'Buy Free Fire Diamonds & Game Credits use Codmshop')">
-    <meta name="twitter:image" content="@yield('twitter_image', asset('assets/images/twitter-default.png'))">
+    <meta name="twitter:image" content="@yield('twitter_image', asset('assets/images/og-default.png'))">
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('/logo.png') }}" type="image/x-icon">
