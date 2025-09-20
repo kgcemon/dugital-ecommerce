@@ -29,7 +29,7 @@ class SitemapController extends Controller
             url('/sitemap-products.xml'),
         ];
 
-        $content = view('sitemap-index', compact('urls', 'sitemaps'));
+        $content = view('sitemap', compact('urls', 'sitemaps'));
 
         return response($content, 200)
             ->header('Content-Type', 'application/xml');
