@@ -32,19 +32,6 @@
     @endforeach
 
 
-    <div class="header">
-        <h3 class="header-title">Free Tools</h3>
-    </div>
-    <div class="container">
-            <a href="/free-fire-free-like-daily">
-                <div class="card">
-                    <img src="https://Codzshop.com/storage/products/Zywt6cTciQTBE4BWUqDzaf0UVIwfqYxdtwhuUEWy.webp" alt="ff like image">
-                    <div class="card-title">Free Like Free Fire</div>
-                </div>
-            </a>
-    </div>
-
-
     <div class="card" style="margin: 15px">
         <h1>Why choice top up use Codzshop?</h1>
         <div class="card-title"><p>
