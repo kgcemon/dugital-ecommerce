@@ -9,15 +9,32 @@ class SitemapController extends Controller
 {
     public function index()
     {
+        $urls = [
+            [
+                'loc' => url('/'),
+                'lastmod' => now()->toAtomString(),
+                'changefreq' => 'daily',
+                'priority' => '1.0'
+            ],
+            [
+                'loc' => url('/about'),
+                'lastmod' => now()->toAtomString(),
+                'changefreq' => 'monthly',
+                'priority' => '0.8'
+            ],
+        ];
+
+        // child sitemap link
         $sitemaps = [
             url('/sitemap-products.xml'),
         ];
 
-        $content = view('sitemap-index', compact('sitemaps'));
+        $content = view('sitemap-index', compact('urls', 'sitemaps'));
 
         return response($content, 200)
             ->header('Content-Type', 'application/xml');
     }
+
 
     public function products()
     {
