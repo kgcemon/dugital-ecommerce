@@ -1,13 +1,13 @@
 @extends('user.master')
 
-@section('title', "Privacy Policy Codmshop")
+@section('title', "Privacy Policy Codzshop")
 
 @section('content')
 <main style="padding: 20px; padding-bottom: 80px;">
     <div class="panelData">
         <h1>Privacy Policy</h1>
         <p style="margin-top: 15px; line-height: 1.6;">
-            At <strong>Codmshop.com</strong>, your privacy is very important to us. This Privacy Policy outlines how we collect, use, and protect your personal information when you use our Free Fire Diamonds auto delivery services.
+            At <strong>Codzshop.com</strong>, your privacy is very important to us. This Privacy Policy outlines how we collect, use, and protect your personal information when you use our Free Fire Diamonds auto delivery services.
         </p>
 
         <h2 style="margin-top: 20px;">Information We Collect</h2>
@@ -40,7 +40,7 @@
         </p>
 
         <p style="margin-top: 15px; line-height: 1.6;">
-            By using Codmshop.com, you agree to the terms of this Privacy Policy.
+            By using Codzshop.com, you agree to the terms of this Privacy Policy.
         </p>
     </div>
 </main>

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'codmshop-cache-v2';
+const CACHE_NAME = 'Codzshop-cache-v2';
 const ASSETS = [
     '/',
     '/assets/user/product.css',

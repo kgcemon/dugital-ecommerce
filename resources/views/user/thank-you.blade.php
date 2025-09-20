@@ -71,7 +71,7 @@
             <h2>Support</h2>
             <div class="card-title"><p>
                     Call: 01828861788 <br>
-                    facebook : <a href="https://m.me/codmshop">Codmshop</a>
+                    facebook : <a href="https://m.me/Codzshop">Codzshop</a>
                 </p></div>
         </div>
     </div>

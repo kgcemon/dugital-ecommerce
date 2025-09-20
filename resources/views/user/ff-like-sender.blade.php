@@ -1,9 +1,9 @@
 @extends('user.master')
 
-@section('title', "Free Fire Free Like daily 100 | Codmshop")
+@section('title', "Free Fire Free Like daily 100 | Codzshop")
 
-@section('meta_description', 'Free Fire Like daily 100 full free use codmshop no need any payment use full free with 100 ff Like')
-@section('meta_keywords', 'codmshop,ff like')
+@section('meta_description', 'Free Fire Like daily 100 full free use Codzshop no need any payment use full free with 100 ff Like')
+@section('meta_keywords', 'Codzshop,ff like')
 
 @section('content')
     <main style="padding: 30px 15px;">
@@ -194,11 +194,11 @@
                         }
                         else if (typeof d.likes_added !== "undefined") {
                             let added = d.likes_after - d.likes_before;
-                            let nextTry = "ফ্রি ফায়ার ডায়মন্ড টপ আপ করতে এখনি ভিজিট করুন Codmshop.com";
+                            let nextTry = "ফ্রি ফায়ার ডায়মন্ড টপ আপ করতে এখনি ভিজিট করুন Codzshop.com";
 
                             let html = `
                     <div class="card" id="successCard">
-                        <span class="site-brand" style="">Codmshop.Com</span>
+                        <span class="site-brand" style="">Codzshop.Com</span>
                         <div class="player-info"><strong>Name:</strong> ${d.name}</div>
                         <div class="player-info"><strong>Region:</strong> ${d.region}</div>
                         <div class="player-info"><strong>Level:</strong> ${d.level}</div>
