@@ -46,6 +46,12 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        #nickname-box {
+            display: flex !important;
+            align-items: center;
+            gap: 15px;
+        }
+
     </style>
 
     <div class="container">
