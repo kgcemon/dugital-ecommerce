@@ -8,6 +8,7 @@ use App\Http\Controllers\api\HomePageController;
 use App\Http\Controllers\api\OrdersController;
 use App\Http\Controllers\api\PaymentMethodController;
 use App\Http\Controllers\api\ProductsController;
+use App\Http\Controllers\OfferController;
 use App\Http\Controllers\WebHooksController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -51,3 +52,5 @@ Route::post('auto-webhooks',[WebHooksController::class,'OrderUpdate']);
 
 //receiveSMSWhook
 Route::post('store-sms',[PaymentSMSController::class,'SmsWhooks']);
+
+Route::get('/player-info/{uid}', [OfferController::class, 'getPlayerInfo']);
