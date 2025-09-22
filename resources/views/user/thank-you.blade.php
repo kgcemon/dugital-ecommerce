@@ -71,7 +71,7 @@
 
         {{-- Nickname Card (Dynamic) --}}
         <div id="nickname-box" class="summary-row selection-panel completed" style="display:none;">
-            <img src="https://raw.githubusercontent.com/ashqking/FF-Items/main/ICONS/102000007.png" height="60" width="60">
+            <img src="https://raw.githubusercontent.com/ashqking/FF-Items/main/ICONS/{avatarId}.png" height="60" width="60">
             <div class="summary-info" id="nickname-card">
                 <p><strong>🎮 Player:</strong><span id="nickname-text">--</span></p>
                 <p><strong>⭐ Level:</strong> <span id="level-text">--</span> <strong>🏆 Rank: </strong> <span id="rank-text">--</span></p>
@@ -117,14 +117,24 @@
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById("loading-box").style.display = "none"; // hide loader
+
                     if (data && data.basicInfo) {
+                        // nickname, level, rank
                         document.getElementById("nickname-text").textContent = data.basicInfo.nickname || "Unknown";
                         document.getElementById("level-text").textContent = data.basicInfo.level || "--";
                         document.getElementById("rank-text").textContent = data.basicInfo.rank || "--";
-                        document.getElementById("nickname-box").style.display = "block";
+
+                        // avatar image dynamic
+                        if (data.profileInfo && data.profileInfo.avatarId) {
+                            const avatarId = data.profileInfo.avatarId;
+                            const avatarUrl = `https://raw.githubusercontent.com/ashqking/FF-Items/main/ICONS/${avatarId}.png`;
+                            document.querySelector("#nickname-box img").src = avatarUrl;
+                        }
+
+                        document.getElementById("nickname-box").style.display = "flex";
                     } else {
                         document.getElementById("nickname-text").textContent = "Not Found";
-                        document.getElementById("nickname-box").style.display = "block";
+                        document.getElementById("nickname-box").style.display = "flex";
                     }
                 })
                 .catch(error => {
@@ -135,5 +145,6 @@
                 });
         });
     </script>
+
 
 @endsection
