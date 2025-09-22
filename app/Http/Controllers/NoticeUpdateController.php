@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\NoticeUpdate;
+use App\Models\UpdateNotice;
 
 class NoticeUpdateController extends Controller
 {
     public function index()
     {
-        $notice = NoticeUpdate::latest()->first();
+        $notice = UpdateNotice::latest()->first();
         return view('admin.pages.notice.index', compact('notice'));
     }
 
@@ -20,9 +20,9 @@ class NoticeUpdateController extends Controller
         ]);
 
         // পুরাতন notice ডিলিট করে নতুন save করা
-        NoticeUpdate::truncate();
+        UpdateNotice::truncate();
 
-        $notice = NoticeUpdate::create([
+        $notice = UpdateNotice::create([
             'notice' => $request->notice,
             'status' => true,
         ]);
@@ -32,7 +32,7 @@ class NoticeUpdateController extends Controller
 
     public function destroy($id)
     {
-        $notice = NoticeUpdate::findOrFail($id);
+        $notice = UpdateNotice::findOrFail($id);
         $notice->delete();
 
         return response()->json(['success' => true]);
