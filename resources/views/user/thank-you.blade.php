@@ -5,10 +5,6 @@
 @section('content')
 
     <style>
-        body {
-            background: #0d0d0d; /* dark background */
-            color: #fff;
-        }
         .summary-row {
             display: flex;
             align-items: center;
