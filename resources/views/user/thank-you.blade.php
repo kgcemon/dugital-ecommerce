@@ -5,6 +5,10 @@
 @section('content')
 
     <style>
+        body {
+            background: #0d0d0d; /* dark background */
+            color: #fff;
+        }
         .summary-row {
             display: flex;
             align-items: center;
@@ -21,31 +25,45 @@
         .summary-info p {
             margin: 4px 0;
             font-size: 15px;
-            color: white;
+            color: #ddd;
         }
         .summary-info strong {
-            color: white;
+            color: #fff;
         }
         .selection-title h3 {
             text-align: center;
             font-size: 22px;
             margin-bottom: 18px;
-            color: white;
+            color: #fff;
         }
         /* Nickname Card */
         #nickname-card {
             display:inline-block;
-            background: linear-gradient(135deg, #4e54c8, #8f94fb);
-            padding: 15px 25px;
+            background: linear-gradient(135deg, #1e1e2f, #292945);
+            padding: 20px 30px;
             border-radius: 15px;
-            color: white;
+            color: #fff;
             font-size: 20px;
             font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
             text-align: center;
         }
         #nickname-card p {
             margin: 5px 0;
+        }
+        /* Loader */
+        .loader {
+            border: 4px solid #333;
+            border-top: 4px solid #4e54c8;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 
@@ -64,10 +82,16 @@
             </div>
         </div>
 
+        {{-- Loading Spinner --}}
+        <div id="loading-box" style="text-align:center; margin:20px 0;">
+            <div class="loader"></div>
+            <p style="color:#aaa;">Fetching player info...</p>
+        </div>
+
         {{-- Nickname Card (Dynamic) --}}
         <div id="nickname-box" class="selection-panel completed" style="text-align:center; margin:20px 0; display:none;">
             <div id="nickname-card">
-                <p>🎮 Player: <span id="nickname-text">Loading...</span></p>
+                <p>🎮 Player: <span id="nickname-text">--</span></p>
                 <p>⭐ Level: <span id="level-text">--</span></p>
                 <p>🏆 Rank: <span id="rank-text">--</span></p>
             </div>
@@ -111,6 +135,7 @@
             fetch(apiUrl)
                 .then(response => response.json())
                 .then(data => {
+                    document.getElementById("loading-box").style.display = "none"; // hide loader
                     if (data && data.basicInfo) {
                         document.getElementById("nickname-text").textContent = data.basicInfo.nickname || "Unknown";
                         document.getElementById("level-text").textContent = data.basicInfo.level || "--";
@@ -123,6 +148,7 @@
                 })
                 .catch(error => {
                     console.error("Error fetching nickname:", error);
+                    document.getElementById("loading-box").style.display = "none"; // hide loader
                     document.getElementById("nickname-text").textContent = "Error loading";
                     document.getElementById("nickname-box").style.display = "block";
                 });
