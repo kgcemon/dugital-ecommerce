@@ -74,8 +74,7 @@
             <img src="https://raw.githubusercontent.com/ashqking/FF-Items/main/ICONS/102000007.png" height="60" width="60">
             <div class="summary-info" id="nickname-card">
                 <p><strong>🎮 Player:</strong><span id="nickname-text">--</span></p>
-                <p><strong>⭐ Level:</strong> <span id="level-text">--</span></p>
-                <p><strong>🏆 Rank: </strong> <span id="rank-text">--</span></p>
+                <p><strong>⭐ Level:</strong> <span id="level-text">--</span> <strong>🏆 Rank: </strong> <span id="rank-text">--</span></p>
             </div>
         </div>
 
