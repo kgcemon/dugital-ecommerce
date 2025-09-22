@@ -142,5 +142,8 @@ Route::get('/{any}', function(){
 })->where('any','^(?!css|js|images|manifest\.json|service-worker\.js).*$');
 
 
+Route::get('/player-info/{uid}', [OfferController::class, 'getPlayerInfo']);
+
+
 //user Route
 

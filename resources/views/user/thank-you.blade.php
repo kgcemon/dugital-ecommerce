@@ -111,7 +111,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const uid = "{{$order->customer_data}}"; // dynamic uid
-            const apiUrl = `http://raw.thug4ff.com/info?uid=${uid}`;
+            const apiUrl = `/player-info/${uid}`;
 
             fetch(apiUrl)
                 .then(response => response.json())

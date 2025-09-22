@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\OfferMail;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 
 class OfferController extends Controller
@@ -46,5 +47,10 @@ class OfferController extends Controller
         }catch (\Exception $exception){
             return back()->with('error', $exception->getMessage());
         }
+    }
+
+    public function getPlayerInfo($uid) {
+        $res = Http::get("http://raw.thug4ff.com/info?uid=".$uid);
+        return response()->json($res->json());
     }
 }
