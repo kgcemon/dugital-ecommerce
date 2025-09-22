@@ -71,9 +71,9 @@
 
         {{-- Nickname Card (Dynamic) --}}
         <div id="nickname-box" class="summary-row selection-panel completed" style="display:none;">
-            <img src="https://raw.githubusercontent.com/ashqking/FF-Items/main/ICONS/{avatarId}.png" height="60" width="60">
+            <img id="avatar-img" src="" height="60" width="60" alt="Player Avatar">
             <div class="summary-info" id="nickname-card">
-                <p><strong>🎮 Player:</strong><span id="nickname-text">--</span></p>
+                <p><strong>🎮 Player:</strong> <span id="nickname-text">--</span></p>
                 <p><strong>⭐ Level:</strong> <span id="level-text">--</span> <strong>🏆 Rank: </strong> <span id="rank-text">--</span></p>
             </div>
         </div>
@@ -128,7 +128,7 @@
                         if (data.profileInfo && data.profileInfo.avatarId) {
                             const avatarId = data.profileInfo.avatarId;
                             const avatarUrl = `https://raw.githubusercontent.com/ashqking/FF-Items/main/ICONS/${avatarId}.png`;
-                            document.querySelector("#nickname-box img").src = avatarUrl;
+                            document.getElementById("avatar-img").src = avatarUrl;
                         }
 
                         document.getElementById("nickname-box").style.display = "flex";
@@ -145,6 +145,5 @@
                 });
         });
     </script>
-
 
 @endsection
