@@ -38,7 +38,6 @@ class SitemapController extends Controller
 
     public function products()
     {
-        // 2 দিনের জন্য cache করা
         $urls = Cache::remember('sitemap_products', now()->addDays(2), function () {
             return Product::where('name', '!=', 'Wallet')
                 ->get()

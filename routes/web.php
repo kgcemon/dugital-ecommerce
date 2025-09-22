@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\ApiController;
 use App\Http\Controllers\admin\CategoriesController;
 use App\Http\Controllers\admin\CodesController;
 use App\Http\Controllers\admin\PaymentMethodSettingController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\admin\VariantController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\CronJobController;
+use App\Http\Controllers\NoticeUpdateController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\user\DepositController;
@@ -106,6 +108,17 @@ Route::middleware('auth:admin')->prefix('admin')->as('admin.')->group(function (
     //offer
     Route::get('/send-offer', [OfferController::class, 'index'])->name('offer.index');
     Route::post('/send-offer', [OfferController::class, 'send'])->name('offer.sends');
+
+    //notice update
+    Route::get('/notice', [NoticeUpdateController::class, 'index'])->name('notice.index');
+    Route::post('/notice/store', [NoticeUpdateController::class, 'store'])->name('notice.store');
+    Route::delete('/notice/{id}', [NoticeUpdateController::class, 'destroy'])->name('notice.destroy');
+
+    //apis
+    Route::get('/apis', [ApiController::class, 'index'])->name('apis.index');       // List APIs
+    Route::post('/apis', [ApiController::class, 'store'])->name('apis.store');      // Add API
+    Route::put('/apis/{api}', [ApiController::class, 'update'])->name('apis.update'); // Update API
+    Route::delete('/apis/{api}', [ApiController::class, 'destroy'])->name('apis.destroy');
 
 
 });
