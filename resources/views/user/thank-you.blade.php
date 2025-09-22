@@ -70,8 +70,9 @@
         </div>
 
         {{-- Nickname Card (Dynamic) --}}
-        <div id="nickname-box" class="selection-panel completed" style="text-align:center; margin:20px 0; display:none;">
+        <div id="nickname-box" class="summary-row selection-panel completed" style="text-align:center; margin:20px 0; display:none;">
             <div id="nickname-card">
+                <img src="https://raw.githubusercontent.com/ashqking/FF-Items/main/ICONS/102000007.png" alt="{{$order->paymentMethod->method}}">
                 <p>🎮 Player: <span id="nickname-text">--</span></p>
                 <p>⭐ Level: <span id="level-text">--</span></p>
                 <p>🏆 Rank: <span id="rank-text">--</span></p>
