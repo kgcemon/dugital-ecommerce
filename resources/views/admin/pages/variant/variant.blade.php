@@ -37,7 +37,7 @@
                             <td>{{ $variant->sort }}</td>
                             <td>{{ $variant->denom }}</td>
                             <td>
-
+                                <div class="d-flex justify-content-center gap-2">
                                 <button
                                     type="button"
                                     class="btn btn-sm btn-primary"
@@ -61,6 +61,7 @@
                                 >
                                     <i class="bi bi-trash"></i>
                                 </button>
+                                </div>
                             </td>
                         </tr>
                     @empty

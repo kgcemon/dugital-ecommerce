@@ -39,8 +39,10 @@
                             @endif
                         </td>
                         <td>
+                            <div class="d-flex justify-content-center gap-2">
                             <button class="btn btn-warning btn-sm editBtn" data-id="{{ $api->id }}" data-bs-toggle="modal" data-bs-target="#editModal{{ $api->id }}">Edit</button>
                             <button class="btn btn-danger btn-sm deleteBtn" data-id="{{ $api->id }}">Delete</button>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
