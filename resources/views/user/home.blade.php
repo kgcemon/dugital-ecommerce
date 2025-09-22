@@ -8,7 +8,7 @@
 
     <div class="banner">
        <a href="{{$images->link ?? ''}}">
-           <img src="/{{$images->images_url ?? ''}}" width="1200" height="400"
+           <img src="/storage/{{$images->images_url ?? ''}}" width="1200" height="400"
                 alt="Premium Banner">
        </a>
     </div>
