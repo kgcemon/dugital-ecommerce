@@ -4,6 +4,53 @@
 
 @section('content')
 
+    <style>
+        body {
+            background: #0d0d0d; /* dark background */
+            color: #fff;
+        }
+        .summary-row {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-bottom: 18px;
+            gap: 15px;
+        }
+        .summary-row img {
+            border-radius: 10px;
+            max-width: 90px;
+            max-height: 90px;
+            object-fit: cover;
+        }
+        .summary-info p {
+            margin: 4px 0;
+            font-size: 15px;
+            color: #ddd;
+        }
+        .summary-info strong {
+            color: #fff;
+        }
+        .selection-title h3 {
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 18px;
+            color: #fff;
+        }
+        /* Loader */
+        .loader {
+            border: 4px solid #333;
+            border-top: 4px solid #4e54c8;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 
     <div class="container">
         <div class="selection-title">
