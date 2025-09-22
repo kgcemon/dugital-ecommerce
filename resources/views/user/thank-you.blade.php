@@ -112,7 +112,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const uid = "{{$order->customer_data}}"; // dynamic uid
-            const apiUrl = `https://ff-eight-eta.vercel.app/api/account?uid=${uid}&region=ru`;
+            const apiUrl = `https://ff-eight-eta.vercel.app/api/account?uid=${uid}&region=sg`;
 
             fetch(apiUrl)
                 .then(response => response.json())
@@ -132,7 +132,7 @@
                     console.error("Error fetching nickname:", error);
                     document.getElementById("loading-box").style.display = "none"; // hide loader
                     document.getElementById("nickname-text").textContent = "Error loading";
-                    document.getElementById("nickname-box").style.display = "block";
+                    document.getElementById("nickname-box").style.display = "flex";
                 });
         });
     </script>
