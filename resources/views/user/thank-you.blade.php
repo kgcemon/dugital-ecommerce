@@ -111,7 +111,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const uid = "{{$order->customer_data}}"; // dynamic uid
-            const apiUrl = `https://ff-eight-eta.vercel.app/api/account?uid=${uid}&region=ru`;
+            const apiUrl = `http://raw.thug4ff.com/info?uid=${uid}`;
 
             fetch(apiUrl)
                 .then(response => response.json())
