@@ -98,7 +98,7 @@ class CronJobController extends Controller
                                 "denom"      => $d,
                                 "type"       => $type,
                                 "voucherCode"=> $code->code,
-                                "webhook"    => "https://admin.gmpapa.com/api/auto-webhooks"
+                                "webhook"    => "https://Codzshop.com/api/auto-webhooks"
                             ]);
 
                         }catch (\Exception $exception){$order->order_note = 'server error';}
