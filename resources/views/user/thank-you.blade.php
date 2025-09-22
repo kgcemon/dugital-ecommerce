@@ -32,6 +32,21 @@
             margin-bottom: 18px;
             color: white;
         }
+        /* Nickname Card */
+        #nickname-card {
+            display:inline-block;
+            background: linear-gradient(135deg, #4e54c8, #8f94fb);
+            padding: 15px 25px;
+            border-radius: 15px;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        #nickname-card p {
+            margin: 5px 0;
+        }
     </style>
 
     <div class="container">
@@ -46,6 +61,15 @@
                 <p><strong>Order ID:</strong> {{$order->id}}</p>
                 <p><strong>Items:</strong> {{$order->item->name ?? $order->product->name}}</p>
                 <p><strong>Total:</strong> {{$order->total}}৳</p>
+            </div>
+        </div>
+
+        {{-- Nickname Card (Dynamic) --}}
+        <div id="nickname-box" class="selection-panel completed" style="text-align:center; margin:20px 0; display:none;">
+            <div id="nickname-card">
+                <p>🎮 Player: <span id="nickname-text">Loading...</span></p>
+                <p>⭐ Level: <span id="level-text">--</span></p>
+                <p>🏆 Rank: <span id="rank-text">--</span></p>
             </div>
         </div>
 
@@ -67,6 +91,8 @@
                 @endif
             </div>
         </div>
+
+        {{-- Support Info --}}
         <div class="selection-panel">
             <h2>Support</h2>
             <div class="card-title"><p>
@@ -75,5 +101,32 @@
                 </p></div>
         </div>
     </div>
+
+    {{-- JS Fetch --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const uid = "{{$order->customer_data}}"; // dynamic uid
+            const apiUrl = `https://ff-eight-eta.vercel.app/api/account?uid=${uid}&region=sg`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.basicInfo) {
+                        document.getElementById("nickname-text").textContent = data.basicInfo.nickname || "Unknown";
+                        document.getElementById("level-text").textContent = data.basicInfo.level || "--";
+                        document.getElementById("rank-text").textContent = data.basicInfo.rank || "--";
+                        document.getElementById("nickname-box").style.display = "block";
+                    } else {
+                        document.getElementById("nickname-text").textContent = "Not Found";
+                        document.getElementById("nickname-box").style.display = "block";
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching nickname:", error);
+                    document.getElementById("nickname-text").textContent = "Error loading";
+                    document.getElementById("nickname-box").style.display = "block";
+                });
+        });
+    </script>
 
 @endsection
