@@ -112,7 +112,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const uid = "{{$order->customer_data}}"; // dynamic uid
-            const apiUrl = `https://ff-eight-eta.vercel.app/api/account?uid=${uid}&region=sg`;
+            const apiUrl = `https://ff-eight-eta.vercel.app/api/account?uid=${uid}&region=ru`;
 
             fetch(apiUrl)
                 .then(response => response.json())
