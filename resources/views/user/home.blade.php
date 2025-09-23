@@ -1,7 +1,7 @@
 @extends('user.master')
 
 @section('title', "Codzshop | Free Fire Top Up in Bangladesh ")
-@section('meta_description', 'Codzshop is a gaming credit top up system website from bangladesh top up popular games Like Free Fire Diamonds use bkash')
+@section('meta_description', 'Codzshop is a trusted Free Fire Diamond top up website in Bangladesh. Here you can easily recharge your favorite games like Free Fire Diamonds and more. We provide fast and secure gaming credits using bKash, Nagad, Rocket and other local payment methods.')
 @section('meta_keywords', 'Codzshop,ff top up, top up, codm shop bd')
 
 @section('content')
@@ -35,7 +35,7 @@
     <div class="card" style="margin: 15px">
         <h1>Why choice top up use Codzshop?</h1>
         <div class="card-title"><p>
-                <strong>Codzshop</strong> is a must old and popular rop up shop in bangladesh we have many customers review in social media & we sell bangladesh best low prices Free Fire <strong>Diamonds</strong>
+                <strong>Codzshop</strong> is a trusted Free Fire Diamond top up website in Bangladesh. Here you can easily recharge your favorite games like Free Fire Diamonds and more. We provide fast and secure gaming credits using bKash, Nagad, Rocket and other local payment methods. <strong>Diamonds</strong>
             </p></div>
     </div>
 
@@ -75,5 +75,5 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('assets/user/pwaAppV1.js') }}" defer></script>
+    <script src="{{ asset('assets/user/pwaAppV2.js') }}" defer></script>
 @endpush

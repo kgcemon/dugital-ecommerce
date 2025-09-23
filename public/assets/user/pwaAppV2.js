@@ -1,6 +1,6 @@
 let deferredPrompt;
 
-    window.addEventListener('beforeinstallprompt', (e) => {
+window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
 
@@ -49,6 +49,12 @@ let deferredPrompt;
                     font-weight: 600;
                     color: #00d4ff;
                 ">Install</span>
+                <span id="closeBtn" style="
+                    cursor: pointer;
+                    font-size: 0.85rem;
+                    font-weight: 500;
+                    color: #ff4d4d;
+                ">Cancel</span>
             </div>
         </div>
 
@@ -63,16 +69,16 @@ let deferredPrompt;
 
     // Install button click
     document.getElementById('installBtn').addEventListener('click', async () => {
-    popup.remove();
-    deferredPrompt.prompt();
-    const choice = await deferredPrompt.userChoice;
-    console.log('User choice:', choice.outcome);
-    deferredPrompt = null;
-});
+        popup.remove();
+        deferredPrompt.prompt();
+        const choice = await deferredPrompt.userChoice;
+        console.log('User choice:', choice.outcome);
+        deferredPrompt = null;
+    });
 
-    // Close button click
+    // Cancel button click
     document.getElementById('closeBtn').addEventListener('click', () => {
-    popup.remove();
+        popup.remove();
+        deferredPrompt = null; // cancel করলে reset হবে
+    });
 });
-});
-
