@@ -29,6 +29,7 @@
     <meta name="robots" content="@yield('meta_robots', 'index, follow')">
 
     <!-- Open Graph (Facebook / Social Sharing) -->
+    <meta property="fb:app_id" content="761644065407232" />
     <meta property="og:type" content="website">
     <meta property="og:title" content="@yield('og_title', config('app.name', 'Codzshop'))">
     <meta property="og:description" content="@yield('og_description', 'Fast & Secure FF Diamonds Top Up in Bangladesh')">
