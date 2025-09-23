@@ -1,7 +1,7 @@
 @extends('user.master')
 
 @section('title', "Codzshop | Free Fire Top Up in Bangladesh ")
-@section('meta_description', 'Codzshop is a trusted Free Fire Diamond top up website in Bangladesh. Here you can easily recharge your favorite games like Free Fire Diamonds and more. We provide fast and secure gaming credits using bKash, Nagad, Rocket and other local payment methods.')
+@section('meta_description', 'Codzshop is a trusted Free Fire Diamond top up website in Bangladesh. Here you can easily recharge your favorite games like Free Fire Diamonds and more')
 @section('meta_keywords', 'Codzshop,ff top up, top up, codm shop bd')
 
 @section('content')
