@@ -137,10 +137,10 @@ Route::get('terms', function (){
     return view('user.terms');
 });
 
-Route::get('/{any}', function(){
+Route::get('/{any}', function($any = null) {
+    if(!in_array(request()->path(), ['css', 'js', 'images', 'manifest.json', 'service-worker.js'])) {
+        abort(404); // Laravel Blade 404 trigger হবে
+    }
     return view('user.master');
-})->where('any','^(?!css|js|images|manifest\.json|service-worker\.js).*$');
-
-
-//user Route
+})->where('any', '.*');
 
