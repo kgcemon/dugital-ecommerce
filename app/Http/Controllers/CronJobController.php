@@ -218,7 +218,7 @@ class CronJobController extends Controller
                 "pacakge" => "$denom",
                 "code" => "shell",
                 "orderid" => $order->id,
-                "url" => "https://Codzshop.com/api/auto-webhooks",
+                "url" => "https://webhook.site/278fee15-8c16-4e03-bb84-46ab16281aa9",
                 "username" => "557802954",
                 "password" => "Shofi77007@",
                 "autocode" => "CA2QWBE463PM36YD",
