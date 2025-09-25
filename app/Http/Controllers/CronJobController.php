@@ -16,10 +16,21 @@ class CronJobController extends Controller
     public function freeFireAutoTopUpJob()
     {
             $orders = Order::where('status', 'processing')->whereNull('order_note')->limit(4)->get();
+            $denomsForShell = ["108593", "108592", "108591", "108590", "108589", "108588", "LITE", "3D", "7D", "30D"];
 
             try {
                 foreach ($orders as $order) {
                     DB::beginTransaction();
+
+                    if (in_array($order->item->denom, $denomsForShell)) {
+                        $success = $this->shellsTopUp($order);
+                        if ($success) {
+                            DB::commit();
+                        } else {
+                            DB::rollBack();
+                        }
+                        continue;
+                    }
 
                     if ($order->item->denom === "2000") {
                         $success = $this->sendGiftCard($order);
@@ -192,6 +203,37 @@ class CronJobController extends Controller
             DB::rollBack();
             return false;
         }
+    }
+
+
+    public function shellsTopUp($order): bool
+    {
+        $denom = (string) $order->item->denom ?? '';
+        try {
+            $response = Http::withHeaders([
+                'Content-Type' => 'application/json',
+            ],)->post('',[
+                "playerid" => "$order->customer_data",
+                "pacakge" => "$denom",
+                "code" => "shell",
+                "orderid" => $order->id,
+                "url" => "https://Codzshop.com/api/auto-webhooks",
+                "username" => "557802954",
+                "password" => "Shofi77007@",
+                "autocode" => "CA2QWBE463PM36YD",
+                "tgbotid" => "701657976",
+                "shell_balance" => 28,
+                "ourstock" => 1
+            ]);
+        }catch (\Exception $exception){
+            return false;
+        }
+        if ($response->successful()) {
+            $order->order_note = $order->id;
+            $order->save();
+            return true;
+        }
+        return false;
     }
 
 

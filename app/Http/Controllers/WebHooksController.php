@@ -20,13 +20,17 @@ class WebHooksController extends Controller
     {
         $data = $request->input();
 
-        if (!$data || !isset($data['uid'])) {
+        if (!$data || !isset($data['uid']) || !isset($data['orderid'])) {
             return response()->json(['status' => false, 'message' => 'Invalid data'], 400);
         }
 
         $status = $data['status'] ?? null;
         $message = $data['message'] ?? null;
-        $uid = $data['uid'];
+        $uid = $data['uid'] ?? null;
+        if (!$uid){
+            $uid = $data["orderid"];
+            $message = $data["content"];
+        }
 
         $order = Order::where('order_note', $uid)->first();
         $user = $order ? User::find($order->user_id) : null;
