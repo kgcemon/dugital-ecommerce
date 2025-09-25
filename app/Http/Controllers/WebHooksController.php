@@ -26,10 +26,11 @@ class WebHooksController extends Controller
 
         $status = $data['status'] ?? null;
         $message = $data['message'] ?? null;
-        $uid = $data['uid'] ?? null;
-        if (!$uid){
+        $uid = $data['uid'] == null ? null : $data['uid'];
+        if (!$uid && $data['orderid'] != null) {
             $uid = $data["orderid"];
             $message = $data["content"];
+            $status = $data['status'] == 'success' ? 'true' : 'false';
         }
 
         $order = Order::where('order_note', $uid)->first();
