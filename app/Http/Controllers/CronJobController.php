@@ -209,10 +209,11 @@ class CronJobController extends Controller
     public function shellsTopUp($order): bool
     {
         $denom = (string) $order->item->denom ?? '';
+        $url = 'http://15.235.147.112:3333/complete';
         try {
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json',
-            ],)->post('',[
+            ],)->post($url,[
                 "playerid" => "$order->customer_data",
                 "pacakge" => "$denom",
                 "code" => "shell",
