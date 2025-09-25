@@ -231,6 +231,7 @@ class CronJobController extends Controller
         }
         if ($response->successful()) {
             $order->order_note = $order->id;
+            $order->status = 'Delivery Running';
             $order->save();
             return true;
         }
