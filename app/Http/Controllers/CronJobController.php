@@ -16,7 +16,7 @@ class CronJobController extends Controller
     public function freeFireAutoTopUpJob()
     {
             $orders = Order::where('status', 'processing')->whereNull('order_note')->limit(4)->get();
-            $denomsForShell = ["108593", "108592", "108591", "108590", "108589", "108588", "LITE", "3D", "7D", "30D"];
+            $denomsForShell = ["108593", "108592", "108591", "108590", "108589", "108588", "LITE", "3D", "7D", "30D", "LITE"];
 
             try {
                 foreach ($orders as $order) {
