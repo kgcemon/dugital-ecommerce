@@ -10,14 +10,13 @@
 
                 {{-- Search Form --}}
                 <form action="{{ route('admin.users.index') }}" method="GET" class="w-100 w-md-auto">
-                    <div class="input-group shadow-sm">
+
                         <input type="text" name="search" class="form-control rounded-start-pill"
                                placeholder="Search by name or email..."
                                value="{{ request('search') }}">
                         <button class="btn btn-primary rounded-end-pill px-3" type="submit">
                             <i class="fas fa-search"></i>
                         </button>
-                    </div>
                 </form>
             </div>
 

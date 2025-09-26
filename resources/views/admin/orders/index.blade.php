@@ -9,7 +9,7 @@
                 <form action="{{ route('admin.orders.index') }}" method="GET" class="d-flex" style="max-width: 100%">
                     <div class="input-group">
                         <input type="text" name="search" class="form-control" placeholder="Search orders..." value="{{ request('search') }}">
-                        <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
+                        <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
                     </div>
                 </form>
             </div>
