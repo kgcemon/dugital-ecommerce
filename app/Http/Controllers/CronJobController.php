@@ -209,7 +209,12 @@ class CronJobController extends Controller
     public function shellsTopUp($order): bool
     {
         $denom = (string) $order->item->denom ?? '';
-        $url = 'http://15.235.147.112:3333/complete';
+        $apiData = Api::where('type', 'shell')->where('status', 1)->first();
+        if (!$apiData) {
+            DB::rollBack();
+            return false;
+        }
+        $url =  $apiData->url;
         try {
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json',
