@@ -87,11 +87,14 @@
 
                 {{-- Payment & Transaction Info --}}
                 <h6 class="mt-4 mb-3">Payment Information</h6>
-                <table class="table table-borderless table-sm w-50">
-                    <tr>
-                        <th>Payment Method:</th>
-                        <td>{{ $order->paymentMethod->method ?? '-' }}</td>
-                    </tr>
+                @if($order->paymentMethod->method == 'Wallet')
+                    <table class="table table-borderless table-sm w-50">
+                        <tr>
+                            <th>Payment Method:</th>
+                            <td>{{ $order->paymentMethod->method ?? '-' }}</td>
+                        </tr>
+                    </table>
+                @else
                     <tr>
                         <th>Payment Number:</th>
                         <td>{{ $order->number ?? '-' }}</td>
@@ -100,11 +103,11 @@
                         <th>Transaction ID:</th>
                         <td>{{ $order->transaction_id ?? '-' }}</td>
                     </tr>
-                    <tr>
-                        <th>Order Note:</th>
-                        <td>{{ $order->order_note ?? '-' }}</td>
-                    </tr>
-                </table>
+                @endif
+                <tr>
+                    <th>Order Note:</th>
+                    <td>{{ $order->order_note ?? '-' }}</td>
+                </tr>
             </div>
 
 
