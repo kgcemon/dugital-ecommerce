@@ -1,4 +1,21 @@
 @extends('admin.layouts.app')
+    <style>
+        .hover-row:hover {
+            background-color: #f8f9fa !important;
+            transition: 0.2s ease-in-out;
+        }
+        .table thead th {
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .btn {
+            transition: all 0.2s ease-in-out;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+
 
 @section('content')
     <div class="container mt-4">
