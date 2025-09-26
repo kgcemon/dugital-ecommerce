@@ -6,8 +6,10 @@
             <tr>
                 <th>Amount</th>
                 <th>Sender</th>
+                <th>Number</th>
                 <th>Transaction</th>
                 <th>Status</th>
+                <th>Created At</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -15,8 +17,9 @@
             @forelse($data as $sms)
                 <tr class="hover-row">
                     <td class="fw-bold text-success">{{ $sms->amount }}৳</td>
-                    <td>{{ $sms->sender }} <br> {{ $sms->number  }}</td>
-                    <td>{{ $sms->trxID }} <br> {{ $sms->created_at ? $sms->created_at->format('d M Y, h:i A') : 'N/A' }}</td>
+                    <td>{{ $sms->sender }}</td>
+                    <td>{{ $sms->number }}</td>
+                    <td class="text-muted small">{{ $sms->trxID }}</td>
                     <td>
                         @php
                             $statusText = $sms->status == 0 ? 'Pending' : ($sms->status == 1 ? 'Completed' : 'Failed');
@@ -26,6 +29,7 @@
                             {{ $statusText }}
                         </span>
                     </td>
+                    <td class="text-muted small">{{ $sms->created_at ? $sms->created_at->format('d M Y, h:i A') : 'N/A' }}</td>
                     <td>
                         <div class="d-flex justify-content-center gap-2 flex-wrap">
 
