@@ -78,7 +78,7 @@
                                             data-name="{{ $user->name }}"
                                             data-email="{{ $user->email }}"
                                             data-wallet="{{ $user->wallet ?? 0 }}">
-                                        <i class="bi bi-pencil-square"></i> Edit
+                                        <i class="fas fa-edit"></i>
                                     </button>
                                 </td>
                             </tr>
