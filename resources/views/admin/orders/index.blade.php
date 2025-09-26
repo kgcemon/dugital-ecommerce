@@ -4,8 +4,6 @@
     <div class="container-fluid mt-4">
         <div class="card shadow-sm border-0">
             <div class="card-header bg-light d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">Orders</h5>
-                {{-- Search Form --}}
                 <form action="{{ route('admin.orders.index') }}" method="GET" class="d-flex" style="max-width: 100%">
                     <div class="input-group">
                         <input type="text" name="search" class="form-control" placeholder="Search orders..." value="{{ request('search') }}">
