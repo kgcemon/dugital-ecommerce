@@ -34,13 +34,6 @@
                     <td class="text-muted small">{{ $sms->created_at ? $sms->created_at->format('d M Y, h:i A') : 'N/A' }}</td>
                     <td>
                         <div class="d-flex justify-content-center gap-2 flex-wrap">
-                            <button class="btn btn-sm btn-outline-primary rounded-pill px-3 edit-btn shadow-sm"
-                                    data-id="{{ $sms->id }}"
-                                    data-status="{{ $sms->status }}"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#editStatusModal">
-                                <i class="bi bi-pencil-square me-1"></i>Edit
-                            </button>
 
                             <form action="{{ route('admin.sms.delete', $sms->id) }}" method="POST" class="d-inline-block">
                                 @csrf
