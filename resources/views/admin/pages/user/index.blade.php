@@ -15,7 +15,7 @@
                                placeholder="Search by name or email..."
                                value="{{ request('search') }}">
                         <button class="btn btn-primary rounded-end-pill px-3" type="submit">
-                            <i class="bi bi-search"></i>
+                            <i class="fas fa-search"></i>
                         </button>
                     </div>
                 </form>
