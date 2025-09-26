@@ -93,21 +93,22 @@
                             <th>Payment Method:</th>
                             <td>{{ $order->paymentMethod->method ?? '-' }}</td>
                         </tr>
+                        <tr>
+                            <th>Payment Number:</th>
+                            <td>{{ $order->number ?? '-' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Transaction ID:</th>
+                            <td>{{ $order->transaction_id ?? '-' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Order Note:</th>
+                            <td>{{ $order->order_note ?? '-' }}</td>
+                        </tr>
                     </table>
                 @else
-                    <tr>
-                        <th>Payment Number:</th>
-                        <td>{{ $order->number ?? '-' }}</td>
-                    </tr>
-                    <tr>
-                        <th>Transaction ID:</th>
-                        <td>{{ $order->transaction_id ?? '-' }}</td>
-                    </tr>
+
                 @endif
-                <tr>
-                    <th>Order Note:</th>
-                    <td>{{ $order->order_note ?? '-' }}</td>
-                </tr>
             </div>
 
 
