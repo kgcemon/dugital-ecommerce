@@ -51,7 +51,6 @@
         <!-- Header & Filters -->
         <div class="mb-4 px-3 py-3 bg-light rounded shadow-sm">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
-                <h4 class="fw-bold mb-0">📩 Payment SMS</h4>
 
                 <div class="filter-bar">
                     <select id="statusFilter" class="form-select shadow-sm">

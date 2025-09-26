@@ -18,7 +18,7 @@
             @forelse($data as $sms)
                 <tr class="hover-row">
                     <td>{{ $loop->iteration + ($data->currentPage() - 1) * $data->perPage() }}</td>
-                    <td class="fw-bold text-success">{{ $sms->amount }}</td>
+                    <td class="fw-bold text-success">{{ $sms->amount }}৳</td>
                     <td>{{ $sms->sender }}</td>
                     <td>{{ $sms->number }}</td>
                     <td class="text-muted small">{{ $sms->trxID }}</td>
