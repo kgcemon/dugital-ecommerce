@@ -20,26 +20,51 @@
     .form-select, .form-control {
         border-radius: 8px;
     }
+
+    /* Mobile-friendly filter bar */
+    .filter-bar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        width: 100%;
+    }
+    .filter-bar select,
+    .filter-bar input {
+        flex: 1 1 200px;
+        min-width: 150px;
+    }
+
+    @media (max-width: 576px) {
+        .filter-bar {
+            flex-direction: column;
+        }
+        .filter-bar select,
+        .filter-bar input {
+            width: 100%;
+        }
+    }
 </style>
 
 @section('content')
     <div class="container mt-4">
 
         <!-- Header & Filters -->
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4 px-3 py-2 bg-light rounded shadow-sm">
-            <h4 class="mb-2 mb-md-0 fw-bold">📩 Payment SMS</h4>
+        <div class="mb-4 px-3 py-3 bg-light rounded shadow-sm">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
+                <h4 class="fw-bold mb-0">📩 Payment SMS</h4>
 
-            <div class="d-flex gap-2 flex-wrap">
-                <select id="statusFilter" class="form-select shadow-sm">
-                    <option value="">All Status</option>
-                    <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>Pending</option>
-                    <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Completed</option>
-                </select>
+                <div class="filter-bar">
+                    <select id="statusFilter" class="form-select shadow-sm">
+                        <option value="">All Status</option>
+                        <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>Pending</option>
+                        <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Completed</option>
+                    </select>
 
-                <input type="text" id="searchInput"
-                       class="form-control shadow-sm"
-                       placeholder="🔍 Search by sender, number, trxID, or amount"
-                       value="{{ request('search') }}">
+                    <input type="text" id="searchInput"
+                           class="form-control shadow-sm"
+                           placeholder="🔍 Search by sender, number, trxID, or amount"
+                           value="{{ request('search') }}">
+                </div>
             </div>
         </div>
 
@@ -63,10 +88,10 @@
             // Loader
             function showLoader() {
                 smsTableContainer.innerHTML = `
-            <div class="text-center py-5">
-                <div class="spinner-border text-primary" role="status"></div>
-                <p class="mt-2 fw-semibold">Loading...</p>
-            </div>`;
+        <div class="text-center py-5">
+            <div class="spinner-border text-primary" role="status"></div>
+            <p class="mt-2 fw-semibold">Loading...</p>
+        </div>`;
             }
 
             // Fetch Data
@@ -85,9 +110,9 @@
                     })
                     .catch(error => {
                         smsTableContainer.innerHTML = `
-                <div class="alert alert-danger text-center">
-                    <strong>Error:</strong> Failed to load data.
-                </div>`;
+            <div class="alert alert-danger text-center">
+                <strong>Error:</strong> Failed to load data.
+            </div>`;
                         console.error(error);
                     });
             }
