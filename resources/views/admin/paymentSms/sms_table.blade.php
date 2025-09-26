@@ -51,10 +51,9 @@
             @endforelse
             </tbody>
         </table>
-
-        {{-- Pagination --}}
-        <div class="py-3 d-flex justify-content-center">
-            {{ $data->links('admin.layouts.partials.__pagination') }}
-        </div>
+    </div>
+    {{-- Pagination --}}
+    <div class="py-3 d-flex justify-content-center">
+        {{ $data->links('admin.layouts.partials.__pagination') }}
     </div>
 </div>
