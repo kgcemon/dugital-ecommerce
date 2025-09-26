@@ -53,8 +53,8 @@
         </table>
 
         {{-- Pagination --}}
-        <div class="p-3 d-flex justify-content-center">
-            {{ $data->links('admin.layouts.partials.__pagination') }}
+        <div class="py-3 d-flex justify-content-center">
+            {{ $users->links('admin.layouts.partials.__pagination') }}
         </div>
     </div>
 </div>
