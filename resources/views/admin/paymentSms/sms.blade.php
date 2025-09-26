@@ -30,7 +30,7 @@
     }
     .filter-bar select,
     .filter-bar input {
-        flex: 1 1 200px;
+        flex: 1 1 50px;
         min-width: 150px;
     }
 
@@ -49,7 +49,7 @@
     <div class="container mt-4">
 
         <!-- Header & Filters -->
-        <div class="mb-4 bg-light rounded shadow-sm">
+        <div class="mb-4 px-3 py-3 bg-light rounded shadow-sm">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
                 <h4 class="fw-bold mb-0">📩 Payment SMS</h4>
 
