@@ -3,9 +3,11 @@
 use App\Http\Controllers\admin\ApiController;
 use App\Http\Controllers\admin\CategoriesController;
 use App\Http\Controllers\admin\CodesController;
+use App\Http\Controllers\admin\HelpLineControllers;
 use App\Http\Controllers\admin\PaymentMethodSettingController;
 use App\Http\Controllers\admin\PaymentSMSController;
 use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\admin\ReviewControllers;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\UsersController;
 use App\Http\Controllers\admin\VariantController;
@@ -120,6 +122,11 @@ Route::middleware('auth:admin')->prefix('admin')->as('admin.')->group(function (
     Route::put('/apis/{api}', [ApiController::class, 'update'])->name('apis.update'); // Update API
     Route::delete('/apis/{api}', [ApiController::class, 'destroy'])->name('apis.destroy');
 
+    //review
+    Route::resource('reviews', ReviewControllers::class)->except(['create','show','edit']);
+
+    //helpline
+    Route::resource('helpline', HelpLineControllers::class)->except(['create','show','edit']);
 
 });
 

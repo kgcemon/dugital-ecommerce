@@ -151,6 +151,16 @@
                 </li>
 
 
+                <li class="nav-item {{ Str::contains(request()->path(), 'reviews') ? 'active' : '' }}">
+                    <a href="/admin/reviews" class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="fas fa-star"></i>
+                            <p class="m-0">Reviews</p>
+                        </div>
+                    </a>
+                </li>
+
+
                 <!-- Transactions -->
                 <li class="nav-item {{ request()->is('admin/sliders') ? 'active' : '' }}">
                     <a href="/admin/sliders">
@@ -183,6 +193,7 @@
                             <li><a href="/admin/payment-methods"><span class="sub-item {{ Str::contains(request()->path(), 'payment-methods') ? 'active' : '' }}">Payment Setting</span></a></li>
                             <li><a href="/admin/apis"><span class="sub-item">Api Settings</span></a></li>
                             <li><a href="/admin/notice"><span class="sub-item">Notice Settings</span></a></li>
+                            <li><a href="/admin/helpline"><span class="sub-item">Helpline Settings</span></a></li>
                         </ul>
                     </div>
                 </li>
