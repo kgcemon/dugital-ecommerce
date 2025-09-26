@@ -38,6 +38,7 @@
                         <thead class="table-dark">
                         <tr>
                             <th>#</th>
+                            <th>Image</th> {{-- Added --}}
                             <th>Name</th>
                             <th>Email</th>
                             <th>Wallet Balance</th>
@@ -49,6 +50,22 @@
                         @forelse($users as $user)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
+
+                                {{-- User Image --}}
+                                <td>
+                                    @if($user->image)
+                                        <img src="{{$user->image}}"
+                                             alt="User Image"
+                                             class="rounded-circle"
+                                             width="50" height="50">
+                                    @else
+                                        <img src="{{ asset('default-avatar.png') }}"
+                                             alt="Default Image"
+                                             class="rounded-circle"
+                                             width="50" height="50">
+                                    @endif
+                                </td>
+
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ number_format($user->wallet ?? 0, 2) }} ৳</td>
@@ -68,7 +85,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="text-center py-4">No users found.</td>
+                                <td colspan="7" class="text-center py-4">No users found.</td>
                             </tr>
                         @endforelse
                         </tbody>
