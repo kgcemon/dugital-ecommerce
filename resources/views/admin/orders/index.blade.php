@@ -144,13 +144,8 @@
                                         'delivered' => 'Completed',
                                         'Delivery Running' => 'Delivery Running',
                                         'cancelled' => 'Cancelled',
+                                        'refunded' => 'Refunded',
                                     ];
-
-                                    // যদি user_id থাকে তাহলে refunded যোগ করব
-                                    if (!empty($order->user_id)) {
-                                        $statuses['refunded'] = 'Refunded';
-                                    }
-
                                     $currentStatus = $order->status ?? null;
                                 @endphp
 
