@@ -4,11 +4,9 @@
         <table class="table table-hover align-middle text-center mb-0">
             <thead class="bg-primary text-white">
             <tr>
-                <th>#</th>
                 <th>Amount</th>
                 <th>Sender</th>
-                <th>Number</th>
-                <th>Transaction ID</th>
+                <th>Transaction</th>
                 <th>Status</th>
                 <th>Created At</th>
                 <th>Actions</th>
@@ -17,11 +15,9 @@
             <tbody>
             @forelse($data as $sms)
                 <tr class="hover-row">
-                    <td>{{ $loop->iteration + ($data->currentPage() - 1) * $data->perPage() }}</td>
                     <td class="fw-bold text-success">{{ $sms->amount }}৳</td>
                     <td>{{ $sms->sender }}</td>
-                    <td>{{ $sms->number }}</td>
-                    <td class="text-muted small">{{ $sms->trxID }}</td>
+                    <td>{{ $sms->number }} <br> {{ $sms->trxID }}</td>
                     <td>
                         @php
                             $statusText = $sms->status == 0 ? 'Pending' : ($sms->status == 1 ? 'Completed' : 'Failed');
