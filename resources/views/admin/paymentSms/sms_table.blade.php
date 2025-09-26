@@ -38,7 +38,7 @@
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-outline-danger rounded-pill px-3 shadow-sm"
                                         onclick="return confirm('Are you sure?')">
-                                    <i class="fas fa-trash"></i>Delete
+                                    <i class="fas fa-trash"></i>
                                 </button>
                             </form>
                         </div>
