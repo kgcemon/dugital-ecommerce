@@ -160,7 +160,7 @@ class UsersController extends Controller
             ->paginate(10);
 
         $balance = \App\Models\WalletTransaction::where('user_id', $user->id)
-            ->where('status', 'completed')
+            ->where('status', 1)
             ->sum(function($txn){
                 return $txn->type === 'credit' ? $txn->amount : -$txn->amount;
             });

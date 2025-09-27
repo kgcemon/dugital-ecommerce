@@ -68,7 +68,7 @@
 
                                 <td class="fw-semibold">{{ $user->name }}</td>
                                 <td class="text-muted small">{{ $user->email }}</td>
-                                <td><a href="admin/user-transaction/{{$user->id}}">{{ number_format($user->wallet ?? 0, 2) }}৳</a></td>
+                                <td><a href="user-transaction/{{$user->id}}">{{ number_format($user->wallet ?? 0, 2) }}৳</a></td>
                                 <td class="text-muted small">{{ $user->created_at ? $user->created_at->diffForHumans() : 'N/A' }}</td>
                                 <td>
                                     <button type="button" class="btn btn-sm btn-warning rounded-pill shadow-sm"
