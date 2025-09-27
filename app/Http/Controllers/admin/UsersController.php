@@ -151,9 +151,9 @@ class UsersController extends Controller
         //
     }
 
-    public function walletTransactions()
+    public function walletTransactions($id)
     {
-        $user = auth()->user();
+        $user = User::where('id', $id)->first();
 
         $transactions = \App\Models\WalletTransaction::where('user_id', $user->id)
             ->latest()
