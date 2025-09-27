@@ -28,25 +28,25 @@
                                 <td>{{ $key + 1 }}</td>
                                 <td class="text-nowrap">{{ $txn->created_at->format('d M Y h:i A') }}</td>
                                 <td>
-                                    @if($txn->type === 'credit')
+                                    @if($txn->type == 'credit')
                                         <span class="badge bg-success">Credit</span>
                                     @else
                                         <span class="badge bg-danger">Debit</span>
                                     @endif
                                 </td>
                                 <td>
-                                    @if($txn->type === 'credit')
+                                    @if($txn->type == 'credit')
                                         <span class="text-success fw-bold">+ {{ number_format($txn->amount, 2) }} ৳</span>
                                     @else
                                         <span class="text-danger fw-bold">- {{ number_format($txn->amount, 2) }} ৳</span>
                                     @endif
                                 </td>
                                 <td>
-                                    @if($txn->status === 'pending')
+                                    @if($txn->status == 0)
                                         <span class="badge bg-warning text-dark">Pending</span>
-                                    @elseif($txn->status === 'completed')
+                                    @elseif($txn->status == 1 )
                                         <span class="badge bg-success">Completed</span>
-                                    @elseif($txn->status === 'failed')
+                                    @elseif($txn->status === 2)
                                         <span class="badge bg-danger">Failed</span>
                                     @endif
                                 </td>
