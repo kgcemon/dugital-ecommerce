@@ -128,6 +128,9 @@ Route::middleware('auth:admin')->prefix('admin')->as('admin.')->group(function (
     //helpline
     Route::resource('helpline', HelpLineControllers::class)->except(['create','show','edit']);
 
+    //user transaction
+    Route::get('user-transaction/{id}',[UsersController::class, 'walletTransactions']);
+
 });
 
 // Fallback Route for 404

@@ -150,4 +150,21 @@ class UsersController extends Controller
     {
         //
     }
+
+    public function walletTransactions()
+    {
+        $user = auth()->user();
+
+        $transactions = \App\Models\WalletTransaction::where('user_id', $user->id)
+            ->latest()
+            ->paginate(10);
+
+        $balance = \App\Models\WalletTransaction::where('user_id', $user->id)
+            ->where('status', 'completed')
+            ->sum(function($txn){
+                return $txn->type === 'credit' ? $txn->amount : -$txn->amount;
+            });
+
+        return view('admin.wallet_transactions', compact('transactions', 'balance'));
+    }
 }
