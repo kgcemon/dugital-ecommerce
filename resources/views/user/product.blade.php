@@ -360,14 +360,13 @@
         ]
     ];
 
-    if($product->reviews()->count() > 0){
-        $structuredData['aggregateRating'] = [
-            "@type" => "AggregateRating",
-            "ratingValue" => number_format($product->reviews()->avg('rating'), 1),
-            "reviewCount" => $product->reviews()->count()
-        ];
-    }
-    echo("$structuredData");
+//    if($product->reviews()->count() > 0){
+//        $structuredData['aggregateRating'] = [
+//            "@type" => "AggregateRating",
+//            "ratingValue" => number_format($product->reviews()->avg('rating'), 1),
+//            "reviewCount" => $product->reviews()->count()
+//        ];
+//    }
 @endphp
 
 @push('head')
