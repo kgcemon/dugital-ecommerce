@@ -367,6 +367,7 @@
             "reviewCount" => $product->reviews()->count()
         ];
     }
+    echo("$structuredData");
 @endphp
 
 @push('head')
