@@ -45,6 +45,7 @@
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('/logo.png') }}" type="image/x-icon">
+    @stack('head')
 
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
