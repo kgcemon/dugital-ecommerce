@@ -402,7 +402,7 @@
 
 
 @guest()
-    <script src="{{ asset('assets/user/loginModal1.js') }}" defer></script>
+    <script src="{{ asset('assets/user/loginModal2.js') }}" defer></script>
 @endguest
 
 @auth

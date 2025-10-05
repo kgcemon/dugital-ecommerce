@@ -1,12 +1,4 @@
-let deferredPrompt;
-
-window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-
-    // Custom popup বানানো
-    const popup = document.createElement('div');
-    popup.innerHTML = `
+let deferredPrompt;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault(),deferredPrompt=e;let t=document.createElement("div");t.innerHTML=`
         <div id="pwa-popup" style="
             position: fixed;
             bottom: 70px;
@@ -64,21 +56,4 @@ window.addEventListener('beforeinstallprompt', (e) => {
             to { transform: translate(-50%, 0); opacity: 1; }
         }
         </style>
-    `;
-    document.body.appendChild(popup);
-
-    // Install button click
-    document.getElementById('installBtn').addEventListener('click', async () => {
-        popup.remove();
-        deferredPrompt.prompt();
-        const choice = await deferredPrompt.userChoice;
-        console.log('User choice:', choice.outcome);
-        deferredPrompt = null;
-    });
-
-    // Cancel button click
-    document.getElementById('closeBtn').addEventListener('click', () => {
-        popup.remove();
-        deferredPrompt = null; // cancel করলে reset হবে
-    });
-});
+    `,document.body.appendChild(t),document.getElementById("installBtn").addEventListener("click",async()=>{t.remove(),deferredPrompt.prompt();let e=await deferredPrompt.userChoice;console.log("User choice:",e.outcome),deferredPrompt=null}),document.getElementById("closeBtn").addEventListener("click",()=>{t.remove(),deferredPrompt=null})});

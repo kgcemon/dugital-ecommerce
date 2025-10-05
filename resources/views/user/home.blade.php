@@ -75,7 +75,7 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('assets/user/pwaAppV2.js') }}" defer></script>
+    <script src="{{ asset('assets/user/pwaAppV3.js') }}" defer></script>
 
     @verbatim
         <script type="application/ld+json">
