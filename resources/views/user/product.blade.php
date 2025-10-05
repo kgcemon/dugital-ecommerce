@@ -207,14 +207,33 @@
                     if(selectedPayment.method !== "Wallet"){
                         document.getElementById("paymentDetails").innerHTML = `
         <p><strong>${selectedPayment.method}</strong></p>
-        <p>
-            <strong>Number:</strong>
-            <span id="paymentNumberText">${selectedPayment.number}</span>
-            <button id="copyBtn" style="margin-left:8px; padding:3px 8px; font-size:12px; cursor:pointer;">
-                Copy
-            </button>
-        </p>
-        <br><p>${selectedPayment.description}</p><br>
+<p>
+    <strong>Number:</strong>
+    <span id="paymentNumberText"
+          style="display:inline-block;
+                 border:2px solid #007bff;
+                 background-color:#e7f1ff;
+                 padding:5px 10px;
+                 border-radius:6px;
+                 font-weight:bold;
+                 color:#004085;">
+        ${selectedPayment.number}
+    </span>
+    <button id="copyBtn"
+            style="margin-left:8px;
+                   padding:4px 10px;
+                   font-size:12px;
+                   cursor:pointer;
+                   border:none;
+                   background-color:#007bff;
+                   color:white;
+                   border-radius:4px;">
+        Copy
+    </button>
+</p>
+<br>
+<p>${selectedPayment.description}</p>
+<br>
     `;
 
                         // ✅ Copy Button Click Event
