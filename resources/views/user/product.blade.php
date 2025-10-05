@@ -360,11 +360,10 @@
     "price": "{{ $product->items->first()->price ?? 0 }}",
     "availability": "https://schema.org/{{ $product->in_stock ? 'InStock' : 'OutOfStock' }}",
     "itemCondition": "https://schema.org/NewCondition"
-  },
-        @if($product->reviews()->count() > 0)
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": "{{ number_format($product->reviews()->avg('rating'), 1) }}",
+  }@if($product->reviews()->count() > 0),
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "{{ number_format($product->reviews()->avg('rating'), 1) }}",
     "reviewCount": "{{ $product->reviews()->count() }}"
   }
         @endif
