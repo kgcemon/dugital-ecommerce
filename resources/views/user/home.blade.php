@@ -16,7 +16,7 @@
     @foreach ($products as $category)
         @if(count($category['products']) > 0)
             <div class="header">
-                <h1 class="header-title">{{ strtoupper($category['name']) }}</h1>
+                <h2 class="header-title">{{ strtoupper($category['name']) }}</h2>
             </div>
             <div class="container">
                 @foreach ($category['products'] as $product)
