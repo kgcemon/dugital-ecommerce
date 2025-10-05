@@ -75,6 +75,9 @@
 @endsection
 
 @push('scripts')
+    <script src="{{ asset('assets/user/pwaAppV2.js') }}" defer></script>
+
+
     <script type="application/ld+json">
         {
           "@context": "https://schema.org",
@@ -120,5 +123,6 @@
           }
         }
     </script>
-    <script src="{{ asset('assets/user/pwaAppV2.js') }}" defer></script>
+
+
 @endpush
