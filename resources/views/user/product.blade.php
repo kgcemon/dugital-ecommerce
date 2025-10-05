@@ -366,7 +366,7 @@
             "ratingValue" => number_format($product->reviews()->avg('rating'), 1),
             "reviewCount" => $product->reviews()->count()
         ];
-    dd($structuredData);
+        }
 @endphp
 
 @push('head')
