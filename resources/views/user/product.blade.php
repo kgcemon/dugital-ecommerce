@@ -339,11 +339,12 @@
 @endpush
 
 @push('head')
-    <script type="application/ld+json">
-        {
-          "@context": "https://schema.org/",
-          "@type": "Product",
-          "name": "{{ $product->name }}",
+    @verbatim
+        <script type="application/ld+json">
+            {
+              "@context": "https://schema.org/",
+              "@type": "Product",
+              "name": "{{ $product->name }}",
   "image": [
     "{{ asset($product->image) }}"
   ],
@@ -366,8 +367,9 @@
     "ratingValue": "{{ number_format($product->reviews()->avg('rating'), 1) }}",
     "reviewCount": "{{ $product->reviews()->count() }}"
   }
-        @endif
-        }
-    </script>
+            @endif
+            }
+        </script>
+    @endverbatim
 @endpush
 
