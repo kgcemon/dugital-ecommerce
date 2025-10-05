@@ -338,37 +338,41 @@
     </script>
 @endpush
 
+@php
+    $structuredData = [
+        "@context" => "https://schema.org/",
+        "@type" => "Product",
+        "name" => $product->name,
+        "image" => [ asset($product->image) ],
+        "description" => $product->short_description ?? $product->description,
+        "sku" => $product->sku ?? 'SKU-'.$product->id,
+        "brand" => [
+            "@type" => "Brand",
+            "name" => $product->brand->name ?? 'Default Brand'
+        ],
+        "offers" => [
+            "@type" => "Offer",
+            "url" => url()->current(),
+            "priceCurrency" => $product->currency ?? 'BDT',
+            "price" => $product->items->first()->price ?? 0,
+            "availability" => "https://schema.org/".($product->in_stock ? 'InStock' : 'OutOfStock'),
+            "itemCondition" => "https://schema.org/NewCondition"
+        ]
+    ];
+
+    if($product->reviews()->count() > 0){
+        $structuredData['aggregateRating'] = [
+            "@type" => "AggregateRating",
+            "ratingValue" => number_format($product->reviews()->avg('rating'), 1),
+            "reviewCount" => $product->reviews()->count()
+        ];
+    }
+@endphp
+
 @push('head')
     @verbatim
         <script type="application/ld+json">
-            {
-              "@context": "https://schema.org/",
-              "@type": "Product",
-              "name": "{{ $product->name }}",
-  "image": [
-    "{{ asset($product->image) }}"
-  ],
-  "description": "{{ $product->short_description ?? $product->description }}",
-  "sku": "{{ $product->sku ?? 'SKU-'.$product->id }}",
-  "brand": {
-    "@type": "Brand",
-    "name": "{{ $product->brand->name ?? 'Default Brand' }}"
-  },
-  "offers": {
-    "@type": "Offer",
-    "url": "{{ url()->current() }}",
-    "priceCurrency": "{{ $product->currency ?? 'BDT' }}",
-    "price": "{{ $product->items->first()->price ?? 0 }}",
-    "availability": "https://schema.org/{{ $product->in_stock ? 'InStock' : 'OutOfStock' }}",
-    "itemCondition": "https://schema.org/NewCondition"
-  }@if($product->reviews()->count() > 0),
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "{{ number_format($product->reviews()->avg('rating'), 1) }}",
-    "reviewCount": "{{ $product->reviews()->count() }}"
-  }
-            @endif
-            }
+            {!! json_encode($structuredData, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT) !!}
         </script>
     @endverbatim
 @endpush
