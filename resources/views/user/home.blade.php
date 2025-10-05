@@ -95,34 +95,28 @@
               },
               "telephone": "+8801828861788",
               "email": "support@codzshop.com",
-              "sameAs": [
-                "https://facebook.com/codzshop"
-              ],
+              "sameAs": ["https://facebook.com/codzshop"],
               "priceRange": "৳৳",
-              "makesOffer": {
-                "@type": "OfferCatalog",
-                "name": "Game Top-Up Services",
-                "itemListElement": [
-                  {
-                    "@type": "Offer",
-                    "itemOffered": {
-                      "@type": "Service",
-                      "name": "Free Fire Diamond Top-Up",
-                      "description": "Instant Free Fire diamond recharge in Bangladesh."
-                    },
-                    "priceCurrency": "BDT"
-                  },
-                  {
-                    "@type": "Offer",
-                    "itemOffered": {
-                      "@type": "Service",
-                      "name": "PUBG UC Top-Up",
-                      "description": "Buy PUBG Mobile UC safely and quickly from Codzshop."
-                    },
-                    "priceCurrency": "BDT"
+              "makesOffer": [
+                {
+                  "@type": "Offer",
+                  "priceCurrency": "BDT",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Free Fire Diamond Top-Up",
+                    "description": "Instant Free Fire diamond recharge in Bangladesh."
                   }
-                ]
-              }
+                },
+                {
+                  "@type": "Offer",
+                  "priceCurrency": "BDT",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "PUBG UC Top-Up",
+                    "description": "Buy PUBG Mobile UC safely and quickly from Codzshop."
+                  }
+                }
+              ]
             }
         </script>
     @endverbatim
