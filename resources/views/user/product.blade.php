@@ -370,10 +370,8 @@
 @endphp
 
 @push('head')
-    @verbatim
-        <script type="application/ld+json">
-            {!! json_encode($structuredData, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT) !!}
-        </script>
-    @endverbatim
+    <script type="application/ld+json">
+        {!! json_encode($structuredData, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT) !!}
+    </script>
 @endpush
 
