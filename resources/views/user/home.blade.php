@@ -76,52 +76,54 @@
 
 @push('scripts')
     <script src="{{ asset('assets/user/pwaAppV2.js') }}" defer></script>
-    <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "Store",
-          "name": "Codzshop",
-          "url": "https://codzshop.com",
-          "logo": "https://codzshop.com/logo.png",
-          "image": "https://codzshop.com/assets/banner.webp",
-          "description": "For popular games Free Fire, Codzshop.com is the reliable gaming top-up service in Bangladesh",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Mirpur 2",
-            "addressLocality": "Dhaka",
-            "addressCountry": "Bangladesh"
-          },
-          "telephone": "+8801828861788",
-          "email": "support@codzshop.com",
-          "sameAs": [
-            "https://facebook.com/codzshop"
-          ],
-          "priceRange": "৳৳",
-          "makesOffer": {
-            "@type": "OfferCatalog",
-            "name": "Game Top-Up Services",
-            "itemListElement": [
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Free Fire Diamond Top-Up",
-                  "description": "Instant Free Fire diamond recharge in Bangladesh."
-                },
-                "priceCurrency": "BDT"
-              },
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "PUBG UC Top-Up",
-                  "description": "Buy PUBG Mobile UC safely and quickly from Codzshop."
-                },
-                "priceCurrency": "BDT"
-              }
-            ]
-          }
-        }
-    </script>
 
+    @verbatim
+        <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "Store",
+              "name": "Codzshop",
+              "url": "https://codzshop.com",
+              "logo": "https://codzshop.com/logo.png",
+              "image": "https://codzshop.com/assets/banner.webp",
+              "description": "Codzshop.com is Bangladesh's trusted gaming top-up service for Free Fire, PUBG, MLBB, and other popular games. Fast delivery, secure payment, and 24/7 support.",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Mirpur 2",
+                "addressLocality": "Dhaka",
+                "addressCountry": "Bangladesh"
+              },
+              "telephone": "+8801828861788",
+              "email": "support@codzshop.com",
+              "sameAs": [
+                "https://facebook.com/codzshop"
+              ],
+              "priceRange": "৳৳",
+              "makesOffer": {
+                "@type": "OfferCatalog",
+                "name": "Game Top-Up Services",
+                "itemListElement": [
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "Free Fire Diamond Top-Up",
+                      "description": "Instant Free Fire diamond recharge in Bangladesh."
+                    },
+                    "priceCurrency": "BDT"
+                  },
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "PUBG UC Top-Up",
+                      "description": "Buy PUBG Mobile UC safely and quickly from Codzshop."
+                    },
+                    "priceCurrency": "BDT"
+                  }
+                ]
+              }
+            }
+        </script>
+    @endverbatim
 @endpush
