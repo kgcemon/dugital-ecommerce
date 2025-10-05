@@ -23,7 +23,7 @@
                 <img src="/{{$product->image}}" alt="{{$product->name}}">
             </div>
             <div class="product-details">
-                <h1>{{$product->name}}</h1>
+                <h2>{{$product->name}}</h2>
                 <span class="product-subtitle">{{ "শুধু মাত্র " .$product->support_country. " সার্ভারে"}}</span>
                 <br>
                 <a href="{{ route('review', ['slug' => $product->slug]) }}">
