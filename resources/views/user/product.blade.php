@@ -348,14 +348,14 @@
         "sku" => $product->sku ?? 'SKU-'.$product->id,
         "brand" => [
             "@type" => "Brand",
-            "name" => $product->brand->name ?? 'Default Brand'
+            "name" => 'Garena'
         ],
         "offers" => [
             "@type" => "Offer",
             "url" => url()->current(),
             "priceCurrency" => $product->currency ?? 'BDT',
             "price" => $product->items->first()->price ?? 0,
-            "availability" => "https://schema.org/".($product->in_stock ? 'InStock' : 'OutOfStock'),
+            "availability" => "https://schema.org/".($product->stock ? 'InStock' : 'OutOfStock'),
             "itemCondition" => "https://schema.org/NewCondition"
         ]
     ];
