@@ -59,7 +59,7 @@ class WebHooksController extends Controller
                         ));
                     } catch (\Exception $e) {}
                 }
-                return 'order updated';
+                return 'order updated successfully'. $message;
             } else {
                 $order->status = 'Delivery Running';
                 if ($usedCode) {
