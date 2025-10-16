@@ -41,6 +41,7 @@ class WebHooksController extends Controller
             if ($status == 'true') {
                 $order->status = 'delivered';
                 $usedCode->active = 1;
+                $usedCode->note = $message ?? 'delivered';
                 $usedCode->save();
                 $order->save();
                 if ($user) {
@@ -109,6 +110,7 @@ class WebHooksController extends Controller
         } else {
             if ($status == 'true') {
                 $usedCode->active = true;
+                $usedCode->note = $message ?? null;
                 $usedCode->save();
                 $order = Order::where('id', $usedCode->order_id)->first() ?? null;
                 if ($order) {
