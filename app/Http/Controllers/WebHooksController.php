@@ -35,10 +35,13 @@ class WebHooksController extends Controller
 
         $order = Order::where('order_note', $uid)->first();
         $user = $order ? User::find($order->user_id) : null;
+        $usedCode = Code::where('uid', $uid)->first() ?? null;
 
         if ($order) {
             if ($status == 'true') {
                 $order->status = 'delivered';
+                $usedCode->active = 1;
+                $usedCode->save();
                 $order->save();
                 if ($user) {
                     try {
@@ -53,9 +56,9 @@ class WebHooksController extends Controller
                         ));
                     } catch (\Exception $e) {}
                 }
+                return true;
             } else {
                 $order->status = 'Delivery Running';
-                $usedCode = Code::where('uid', $uid)->first();
                 if ($usedCode) {
                     $usedCode->active = false;
                     $usedCode->note = $message ?? null;
@@ -104,6 +107,16 @@ class WebHooksController extends Controller
 
             return response()->json(['status' => true, 'message' => 'Order updated']);
         } else {
+            if ($status == 'true') {
+                $usedCode->active = true;
+                $usedCode->save();
+                $order = Order::where('id', $usedCode->order_id)->first() ?? null;
+                if ($order) {
+                    $order->status = 'Delivery Running';
+                    $order->save();
+                }
+
+            }
             return response()->json(['status' => false, 'message' => 'Order not found'], 404);
         }
     }

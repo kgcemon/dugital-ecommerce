@@ -122,9 +122,7 @@ class CronJobController extends Controller
                         $code->status = 'used';
                         $code->uid = $uid ?? null;
                         $code->order_id = $order->id;
-                        if (empty($uid)){
-                            $code->active = false;
-                        }
+                        $code->active = 0;
                         $code->save();
                     }
 

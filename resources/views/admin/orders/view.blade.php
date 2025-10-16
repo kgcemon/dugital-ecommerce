@@ -146,7 +146,7 @@
                             <td>{{ $code->note ?? '' }}</td>
                             <td>{{ $code->codeByDenom->name ?? '' }}</td>
                             <td>{{ $code->status }}</td>
-                            <td>{{ $code->active == 1 ? 'Complete' : 'Problem Found' }}</td>
+                            <td>{{ $code->active == 1 ? 'Complete' : 'failed' }}</td>
                         </tr>
                     @endforeach
                     </tbody>
