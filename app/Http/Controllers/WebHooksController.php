@@ -40,9 +40,11 @@ class WebHooksController extends Controller
         if ($order) {
             if ($status == 'true') {
                 $order->status = 'delivered';
-                $usedCode->active = 1;
-                $usedCode->note = $message ?? 'delivered';
-                $usedCode->save();
+                if ($usedCode) {
+                    $usedCode->active = 1;
+                    $usedCode->note = $message ?? 'delivered';
+                    $usedCode->save();
+                }
                 $order->save();
                 if ($user) {
                     try {
@@ -109,14 +111,16 @@ class WebHooksController extends Controller
             return response()->json(['status' => true, 'message' => 'Order updated']);
         } else {
             if ($status == 'true') {
-                $usedCode->active = true;
-                $usedCode->note = $message ?? null;
-                $usedCode->save();
-                $order = Order::where('id', $usedCode->order_id)->first() ?? null;
-                if ($order) {
-                    $order->order_note = $message;
-                    $order->status = 'Delivery Running';
-                    $order->save();
+                if ($usedCode) {
+                    $usedCode->active = true;
+                    $usedCode->note = $message ?? null;
+                    $usedCode->save();
+                    $order = Order::where('id', $usedCode->order_id)->first() ?? null;
+                    if ($order) {
+                        $order->order_note = $message;
+                        $order->status = 'Delivery Running';
+                        $order->save();
+                    }
                 }
 
             }
