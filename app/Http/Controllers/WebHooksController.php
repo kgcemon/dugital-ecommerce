@@ -112,6 +112,7 @@ class WebHooksController extends Controller
                 $usedCode->save();
                 $order = Order::where('id', $usedCode->order_id)->first() ?? null;
                 if ($order) {
+                    $order->order_note = $message;
                     $order->status = 'Delivery Running';
                     $order->save();
                 }
