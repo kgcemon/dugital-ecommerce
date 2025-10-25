@@ -38,7 +38,7 @@ class WebHooksController extends Controller
         $usedCode = Code::where('uid', $uid)->first() ?? null;
 
         if ($order) {
-            if ($status == 'true') {
+            if ($status === 'true' || $status === true) {
                 $order->status = 'delivered';
                 if ($usedCode) {
                     $usedCode->active = 1;
