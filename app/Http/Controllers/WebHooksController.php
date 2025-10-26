@@ -28,17 +28,20 @@ class WebHooksController extends Controller
         $message = $data['message'] ?? null;
         $uid = !isset($data['uid']) ? null : $data['uid'];
         if (!$uid && isset($data['orderid'])) {
-            $uid = $data["orderid"];
+            $uid = $data["orderid"] ?? null;
             $message = $data["nickname"];
+            if ($message == null){
+                $message = $data["content"];
+            }
             $status = $data['status'] == 'success' ? 'true' : 'false';
         }
 
-        $order = Order::where('order_note', $uid)->first();
+        $order = Order::where('order_note', $uid)->first() ?? null;
         $user = $order ? User::find($order->user_id) : null;
         $usedCode = Code::where('uid', $uid)->first() ?? null;
 
         if ($order) {
-            if ($status === 'true' || $status === true) {
+            if ($status == 'true') {
                 $order->status = 'delivered';
                 if ($usedCode) {
                     $usedCode->active = 1;
@@ -112,6 +115,19 @@ class WebHooksController extends Controller
             if ($status == 'true') {
                 if ($usedCode) {
                     $usedCode->active = true;
+                    $usedCode->note = $message ?? null;
+                    $usedCode->save();
+                    $order = Order::where('id', $usedCode->order_id)->first() ?? null;
+                    if ($order) {
+                        $order->order_note = $message;
+                        $order->status = 'delivered';
+                        $order->save();
+                    }
+                }
+
+            }else if ($status == 'false') {
+                if ($usedCode) {
+                    $usedCode->active = false;
                     $usedCode->note = $message ?? null;
                     $usedCode->save();
                     $order = Order::where('id', $usedCode->order_id)->first() ?? null;
