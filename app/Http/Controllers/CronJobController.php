@@ -32,6 +32,16 @@ class CronJobController extends Controller
                         continue;
                     }
 
+                    if ($order->item->denom === "100"){
+                        $success = $this->sendLike($order);
+                        if ($success) {
+                            DB::commit();
+                        } else {
+                            DB::rollBack();
+                        }
+                        continue;
+                    }
+
                     if ($order->item->denom === "2000") {
                         $success = $this->sendGiftCard($order);
                         if ($success) {
@@ -239,6 +249,24 @@ class CronJobController extends Controller
             return true;
         }
         return false;
+    }
+
+
+    private function sendLike($order): bool
+    {
+        $response = Http::get("https://likes.api.freefireofficial.com/api/bd/$order->customer_data?key=Kgcodxs35");
+        $data = $response->json();
+        if ($response->successful() && $data['status'] == 1) {
+            $order->status = 'delivered';
+            $order->order_note = $data['LikesGivenByAPI'];
+            $order->save();
+            return true;
+        }else{
+            $order->status = 'Delivery Running';
+            $order->order_note = $data['message'];
+            $order->save();
+            return false;
+        }
     }
 
 
