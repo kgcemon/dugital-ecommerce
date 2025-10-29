@@ -260,6 +260,7 @@ class CronJobController extends Controller
             $order->status = 'delivered';
             $order->order_note = $data['LikesGivenByAPI'] ?? null;
             $order->save();
+            DB::commit();
             return true;
         } else {
             $order->status = 'Delivery Running';
