@@ -256,14 +256,14 @@ class CronJobController extends Controller
     {
         $response = Http::get("https://likes.api.freefireofficial.com/api/bd/$order->customer_data?key=Kgcodxs35");
         $data = $response->json();
-        if ($response->successful() && $data['status'] == 1) {
+        if ($response->successful() && $data->status == 1) {
             $order->status = 'delivered';
-            $order->order_note = $data['LikesGivenByAPI'];
+            $order->order_note = $data->LikesGivenByAPI;
             $order->save();
             return true;
         }else{
             $order->status = 'Delivery Running';
-            $order->order_note = $data['message'];
+            $order->order_note = $data->message;
             $order->save();
             return false;
         }
