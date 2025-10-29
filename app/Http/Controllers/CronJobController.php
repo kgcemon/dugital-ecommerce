@@ -258,7 +258,7 @@ class CronJobController extends Controller
         $data = $response->json();
         if (isset($data['status']) && $data['status'] == 1) {
             $order->status = 'delivered';
-            $order->order_note = $data['LikesGivenByAPI'] ?? null;
+            $order->order_note = $data['response']['LikesGivenByAPI'] ?? null;
             $order->save();
             DB::commit();
             return true;
