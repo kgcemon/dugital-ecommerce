@@ -254,20 +254,22 @@ class CronJobController extends Controller
 
     private function sendLike($order): bool
     {
-        $response = Http::get("https://likes.api.freefireofficial.com/api/bd/$order->customer_data?key=Kgcodxs35");
+        $response = Http::get("https://likes.api.freefireofficial.com/api/bd/{$order->customer_data}?key=Kgcodxs35");
         $data = $response->json();
-        if ($response->successful() && $data->status == 1) {
+
+        if (isset($data['status']) && $data['status'] == 1) {
             $order->status = 'delivered';
-            $order->order_note = $data->LikesGivenByAPI;
+            $order->order_note = $data['LikesGivenByAPI'] ?? null;
             $order->save();
             return true;
-        }else{
+        } else {
             $order->status = 'Delivery Running';
-            $order->order_note = $data->message;
+            $order->order_note = $data['message'] ?? 'Unknown error';
             $order->save();
             return false;
         }
     }
+
 
 
 }
