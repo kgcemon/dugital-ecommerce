@@ -240,7 +240,7 @@
                         setTimeout(() => {
                             const copyBtn = document.getElementById("copyBtn");
                             copyBtn.addEventListener("click", () => {
-                                const numberText = document.getElementById("paymentNumberText").textContent;
+                                const numberText = document.getElementById("paymentNumberText").textContent.trim();
                                 navigator.clipboard.writeText(numberText).then(() => {
                                     showToast("success", "📋 নাম্বার কপি হয়েছে!");
                                 }).catch(() => {
