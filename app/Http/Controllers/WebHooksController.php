@@ -125,13 +125,13 @@ class WebHooksController extends Controller
                     }
                 }
 
-            }else if ($status == 'false') {
+            }else {
                 if ($usedCode) {
                     $usedCode->active = false;
                     $usedCode->note = $message ?? null;
                     $usedCode->save();
                     $order = Order::where('id', $usedCode->order_id)->first() ?? null;
-                    if ($order) {
+                    if ($order != null) {
                         $order->order_note = $message;
                         $order->status = 'Delivery Running';
                         $order->save();
