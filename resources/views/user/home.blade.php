@@ -1,16 +1,16 @@
 @extends('user.master')
 
-@section('title', "Codzshop | Free Fire Top Up in Bangladesh ")
+@section('title', "Free Fire Diamond Price In Bangladesh | Super Fast Delivery")
 @section('meta_description', 'Codzshop is a trusted Free Fire Diamond top up website in Bangladesh. Here you can easily recharge your favorite games like Free Fire Diamonds and more')
 @section('meta_keywords', 'Codzshop,ff top up, top up, codm shop bd')
 
 @section('content')
 
     <div class="banner">
-       <a href="{{$images->link ?? ''}}">
-           <img src="/storage/{{$images->images_url ?? ''}}" width="1200" height="400"
-                alt="Premium Banner">
-       </a>
+        <a href="{{$images->link ?? ''}}">
+            <img src="/storage/{{$images->images_url ?? ''}}" width="1200" height="400"
+                 alt="Premium Banner">
+        </a>
     </div>
 
     @foreach ($products as $category)
