@@ -92,13 +92,13 @@ class CronJobController extends Controller
                     DB::rollBack();
                     continue;
                 }
-                $apiData = Api::where('type', 'auto')->where('status', 1)->first();
+                $apiData = Api::where('type', 'shell')->where('status', 1)->first();
                 if (!$apiData) {
                     DB::rollBack();
                     continue;
                 }
                 foreach ($denoms as $d) {
-
+                    $uid = bin2hex(random_bytes(21));
                     $code = Code::where('denom', $d)->where('status', 'unused')
                         ->lockForUpdate()
                         ->first();
@@ -115,22 +115,30 @@ class CronJobController extends Controller
                             'Accept' => 'application/json',
                             'RA-SECRET-KEY' => $apiData->key,
                         ])->post($apiData->url, [
-                            "playerId"   => $order->customer_data,
-                            "denom"      => $d,
-                            "type"       => $type,
-                            "voucherCode"=> $code->code,
-                            "webhook"    => "https://Codzshop.com/api/auto-webhooks"
+//                            "playerId"   => $order->customer_data,
+//                            "denom"      => $d,
+//                            "type"       => $type,
+//                            "voucherCode"=> $code->code,
+//                            "webhook"    => "https://Codzshop.com/api/auto-webhooks",
+
+                            "playerid" => "$order->customer_data",
+                            "pacakge" => $this->denomToPkge($denom),
+                            "code" => "$code->code",
+                            "orderid" => $uid,
+                            "url" => "https://Codzshop.com/api/auto-webhooks",
+                            "tgbotid" => "701657976",
+                            "shell_balance" => 28,
+                            "ourstock" => 1
                         ]);
 
                     }catch (\Exception $exception){$order->order_note = 'server error';}
 
                     $data = $response->json();
-                    $uid = $data['uid'] ?? null;
                     $order->status = 'Delivery Running';
-                    $order->order_note = $uid ?? null;
+                    $order->order_note = $uid;
                     $order->save();
                     $code->status = 'used';
-                    $code->uid = $uid ?? null;
+                    $code->uid = $uid;
                     $code->order_id = $order->id;
                     $code->active = 0;
                     $code->save();
@@ -274,6 +282,30 @@ class CronJobController extends Controller
         }
     }
 
+    public function denomToPkge($denom)
+    {
+        if ($denom == 0) {
+            return 25;
+        }
+        if ($denom == 1) {
+            return 50;
+        }elseif ($denom == 2) {
+            return 115;
+        }elseif ($denom == 3) {
+            return 240;
+        }elseif ($denom == 4) {
+            return 610;
+        }elseif ($denom == 5) {
+            return 1240;
+        }elseif ($denom == 6) {
+            return 1625;
+        }elseif ($denom == 7) {
+            return 161;
+        }elseif ($denom == 8) {
+            return 800;
+        }
 
+        return null;
+    }
 
 }
