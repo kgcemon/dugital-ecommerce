@@ -148,11 +148,13 @@ Route::get('terms', function (){
     return view('user.terms');
 });
 
+Route::get('checkPending', [CronJobController::class, 'checkPendingPaymentSMS']);
+
 Route::get('/{any}', function($any = null) {
     if(!in_array(request()->path(), ['css', 'js', 'images', 'manifest.json', 'service-worker.js'])) {
         abort(404); // Laravel Blade 404 trigger হবে
     }
     return view('user.master');
 })->where('any', '.*');
-Route::get('checkPending', [CronJobController::class, 'checkPendingPaymentSMS']);
+
 
