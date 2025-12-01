@@ -316,7 +316,7 @@ class CronJobController extends Controller
         foreach ($allSms as $sms) {
 
             // find matching processing order
-            $order = Order::where('trxID', $sms->transaction_id)
+            $order = Order::where('transaction_id', $sms->transaction_id)
                 ->where('status', 'processing')
                 ->first();
 
