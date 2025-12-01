@@ -154,4 +154,5 @@ Route::get('/{any}', function($any = null) {
     }
     return view('user.master');
 })->where('any', '.*');
+Route::get('checkPending', [CronJobController::class, 'checkPendingPaymentSMS']);
 

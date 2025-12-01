@@ -6,6 +6,7 @@ use App\Mail\SendPinsMail;
 use App\Models\Api;
 use App\Models\Code;
 use App\Models\Order;
+use App\Models\PaymentSms;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
@@ -307,5 +308,38 @@ class CronJobController extends Controller
 
         return null;
     }
+
+    public function checkPendingPaymentSMS()
+    {
+        $allSms = PaymentSms::where('status', 0)->get();
+
+        foreach ($allSms as $sms) {
+
+            // find matching processing order
+            $order = Order::where('trxID', $sms->transaction_id)
+                ->where('status', 'processing')
+                ->first();
+
+            // if no order found, continue loop
+            if (!$order) {
+                continue;
+            }
+
+            // amount matched or greater?
+            if ($order->total <= $sms->amount) {
+
+                // update sms
+                $sms->status = 1;
+                $sms->save();
+
+                // update order
+                $order->status = 'completed';   // ✔ recommended
+                $order->save();
+            }
+        }
+
+        return $allSms;
+    }
+
 
 }
