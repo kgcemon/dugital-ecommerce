@@ -317,7 +317,7 @@ class CronJobController extends Controller
 
             // find matching processing order
             $order = Order::where('transaction_id', $sms->transaction_id)
-                ->where('status', 'processing')
+                ->where('status', 'hold')
                 ->first();
 
             // if no order found, continue loop
