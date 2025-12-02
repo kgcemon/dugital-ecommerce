@@ -316,7 +316,7 @@ class CronJobController extends Controller
         foreach ($allSms as $sms) {
 
             // find matching processing order
-            $order = Order::where('transaction_id', $sms->transaction_id)
+            $order = Order::where('transaction_id', $sms->trxID)
                 ->where('status', 'hold')
                 ->first();
 
@@ -324,7 +324,6 @@ class CronJobController extends Controller
             if (!$order) {
                 continue;
             }
-            dd($sms);
 
             // amount matched or greater?
             if ($order->total <= $sms->amount) {
