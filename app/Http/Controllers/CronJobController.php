@@ -324,10 +324,10 @@ class CronJobController extends Controller
             if (!$order) {
                 continue;
             }
+            dd($sms);
 
             // amount matched or greater?
             if ($order->total <= $sms->amount) {
-                dd($sms);
                 // update sms
                 $sms->status = 1;
                 $sms->save();
