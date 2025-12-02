@@ -333,7 +333,7 @@ class CronJobController extends Controller
                 $sms->save();
 
                 // update order
-                $order->status = 'completed';   // ✔ recommended
+                $order->status = 'processing';   // ✔ recommended
                 $order->save();
             }
         }
