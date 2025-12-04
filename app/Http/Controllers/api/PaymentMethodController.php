@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class PaymentMethodController extends Controller
 {
     public function index(){
-        $payment_methods = PaymentMethod::where('id', '!=', 1)->all();
+        $payment_methods = PaymentMethod::where('id', '!=', 1)->get();
         return response()->json([
             'status' => true,
             'data' => $payment_methods,
