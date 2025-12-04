@@ -10,19 +10,10 @@ use App\Models\PaymentMethod;
 use App\Models\PaymentSms;
 use App\Models\Product;
 use App\Models\WalletTransaction;
-use App\Services\WalletService;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class OrdersController extends Controller
 {
-    protected $walletService;
-
-    public function __construct(WalletService $walletService)
-    {
-        $this->walletService = $walletService;
-    }
 
     public function store(StoreOrderRequest $request)
     {
