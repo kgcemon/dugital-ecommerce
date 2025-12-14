@@ -1,8 +1,8 @@
 @extends('user.master')
 
-@section('title', "Free Fire Diamond Top Up BD bkash | Super Fast Delivery")
-@section('meta_description', 'Codzshop is a trusted Free Fire Diamond top up website in Bangladesh. Here you can easily recharge your favorite games like Free Fire Diamonds and more')
-@section('meta_keywords', 'Codzshop,ff top up, top up, codm shop bd')
+@section('title', "Free Fire Diamond Top Up BD bkash")
+@section('meta_description', 'Free Fire Diamond top up BD Bkash website in Bangladesh. Here you can easily recharge your favorite games like Free Fire Diamonds and more')
+@section('meta_keywords', 'free fire diamond top up bd bkash,free fire diamond top up,Codzshop,ff top up, top up, codm shop bd')
 
 @section('content')
 
@@ -33,9 +33,9 @@
 
 
     <div class="card" style="margin: 15px">
-        <h1>Why choice top up use Codzshop?</h1>
+        <h1>Free Fire Diamond Top Up BD bKash?</h1>
         <div class="card-title"><p>
-                <strong>Codzshop</strong> is a trusted Free Fire Diamond top up website in Bangladesh. Here you can easily recharge your favorite games like Free Fire Diamonds and more. We provide fast and secure gaming credits using bKash, Nagad, Rocket and other local payment methods. <strong>Diamonds</strong>
+                <strong>Free Fire Diamond top up</strong> bd bkash website in Bangladesh. Here you can easily recharge your favorite games like Free Fire Diamonds and more. We provide fast and secure gaming credits using bKash, Nagad, Rocket and other local payment methods. <strong>Diamonds</strong>
             </p></div>
     </div>
 
