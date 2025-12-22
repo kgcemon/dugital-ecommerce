@@ -108,10 +108,10 @@
         <div><br></div>
 
         <!-- Rules -->
-        <div class="des">
-            <h2 class="selection-title">Rules & Conditions</h2>
-            <div class="payment-details"> {!! $product->description !!} </div>
-        </div>
+{{--        <div class="des">--}}
+{{--            <h2 class="selection-title">Rules & Conditions</h2>--}}
+{{--            <div class="payment-details"> {!! $product->description !!} </div>--}}
+{{--        </div>--}}
 
         <div><br><br></div>
 
