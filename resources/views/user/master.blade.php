@@ -337,6 +337,7 @@
     <a href="https://wa.me/8801300300999" target="_blank" class="whatsapp-float">
         <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
     </a>
+
     <style>
         .whatsapp-float{
             position: fixed;

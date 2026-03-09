@@ -108,13 +108,11 @@ class CronJobController extends Controller
                         DB::rollBack();
                         continue;
                     }
-                    $type = (Str::startsWith($code->code, 'UPBD')) ? 2 : ((Str::startsWith($code->code, 'BDMB')) ? 1 : 1);
 
                     try {
                         $response = Http::withHeaders([
                             'Content-Type' => 'application/json',
                             'Accept' => 'application/json',
-                            'RA-SECRET-KEY' => $apiData->key,
                         ])->post($apiData->url, [
 //                            "playerId"   => $order->customer_data,
 //                            "denom"      => $d,
